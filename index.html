@@ -262,6 +262,44 @@
     body.light .panel{box-shadow:0 8px 32px rgba(0,0,0,0.1),0 0 0 1px rgba(0,0,0,0.06);}
 
     /* ════════════════════════════════
+       MOBIEL
+    ════════════════════════════════ */
+    @media (max-width: 480px) {
+      /* Quiz: input en knop onder elkaar */
+      .t-input-wrap{flex-direction:column;gap:8px;}
+      .t-input{width:100%;font-size:16px;}
+      .t-submit{width:100%;padding:13px;font-size:16px;text-align:center;}
+      .t-hint-txt{display:none;}
+
+      /* Invul: tabel compact op mobiel */
+      .t-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+      .t-table{font-size:12px;table-layout:auto;}
+      .t-table th,.t-table td{padding:7px 8px;}
+      .invul-input{font-size:12px;padding:5px 6px;}
+
+      /* Invul toolbar: filterknopjes netjes */
+      .invul-toolbar{gap:8px;}
+      .filter-row{gap:5px;}
+      .filter-btn{font-size:12px;padding:5px 10px;}
+
+      /* Score cards kleiner */
+      .t-score-card{padding:7px 6px;}
+      .t-score-num{font-size:22px;}
+      .t-score-lbl{font-size:9px;}
+
+      /* Level knoppen */
+      .level-selector{gap:6px;}
+      .level-btn{padding:8px 4px;}
+      .lvl-stars{font-size:14px;}
+      .lvl-name{font-size:12px;}
+      .lvl-desc{font-size:9px;}
+
+      /* Panel padding */
+      .panel{padding:1rem 0.8rem;}
+      #app{padding:0.6rem 0.8rem 2rem;}
+    }
+
+    /* ════════════════════════════════
        BEHEER PANEEL
     ════════════════════════════════ */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
