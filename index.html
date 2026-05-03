@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0F0E17" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Leerheld</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Leerheld">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+    :root{
+      --bg:#0F0E17;
+      --surface:#1A1929;
+      --surface2:#221F35;
+      --surface3:#2A2742;
+      --accent:#7C6FFF;
+      --accent2:#FF6B9D;
+      --accent3:#FFD166;
+      --accent4:#06D6A0;
+      --tx:#EEEAF8;
+      --tx2:#9B93C4;
+      --tx3:#6B6491;
+      --ok:#06D6A0;
+      --no:#FF6B9D;
+      --glow:rgba(124,111,255,0.35);
+      --radius:20px;
+      --radius-sm:12px;
+      --tab-accent:#7C6FFF;
+    }
+
+    /* ── Light theme ── */
+    body.light{
+      --bg:#F0EEF8;
+      --surface:#FFFFFF;
+      --surface2:#EAE8F5;
+      --surface3:#D8D4EF;
+      --tx:#1A1730;
+      --tx2:#5A5378;
+      --tx3:#9B93C4;
+      --ok:#0B9E77;
+      --no:#D94F7A;
+    }
+    body.light::before{opacity:0.5;}
+    body.light::after{opacity:0.4;}
+    body[data-hero="vuur"]{--accent:#FF6B35;--accent2:#FFD166;--glow:rgba(255,107,53,0.35);}
+    body[data-hero="ijs"]{--accent:#38BDF8;--accent2:#A5F3FC;--glow:rgba(56,189,248,0.35);}
+    body[data-hero="bliksem"]{--accent:#FFD166;--accent2:#FF9F1C;--glow:rgba(255,209,102,0.35);}
+    body[data-hero="ruimte"]{--accent:#818CF8;--accent2:#C4B5FD;--glow:rgba(129,140,248,0.35);}
+    body[data-hero="draak"]{--accent:#34D399;--accent2:#6EE7B7;--glow:rgba(52,211,153,0.35);}
+    body[data-hero="prinses"]{--accent:#FF6EB4;--accent2:#FFB3D9;--glow:rgba(255,110,180,0.35);}
+    
+
+    body{background:var(--bg);min-height:100vh;font-family:'Nunito',sans-serif;color:var(--tx);transition:--accent 0.4s;}
+    body::before{content:'';position:fixed;top:-20%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,var(--glow) 0%,transparent 65%);pointer-events:none;z-index:0;transition:background 0.6s;}
+    body::after{content:'';position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(255,107,157,0.12) 0%,transparent 65%);pointer-events:none;z-index:0;}
+
+    #ccanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+
+    #app{position:relative;z-index:1;padding:0.8rem 1.5rem 2rem;display:flex;flex-direction:column;align-items:center;min-height:100vh;max-width:900px;margin:0 auto;}
+
+    /* ── Header ── */
+    .logo{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;letter-spacing:0.5px;}
+    .logo-sub{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:2px;text-transform:uppercase;margin-top:-4px;}
+    .header-btns{display:flex;gap:8px;align-items:center;}
+    .icon-btn{width:38px;height:38px;border-radius:50%;border:none;background:var(--surface2);color:var(--tx2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+    .icon-btn:hover{background:var(--surface3);color:var(--tx);}
+    .icon-btn.active{background:var(--accent);color:#fff;}
+    .app-header{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;padding:0 0.2rem;gap:10px;}
+    .header-center{flex:1;display:flex;justify-content:center;}
+    .hero-dropdown{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;background:var(--surface2);color:var(--tx);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:8px 12px;cursor:pointer;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;text-align:center;}
+    .hero-dropdown option{background:var(--surface2);color:var(--tx);}
+    .hero-dropdown:focus{border-color:var(--accent);}
+
+    /* ── Main tabs (Rekenen / Taal) ── */
+    .main-tabs{width:100%;display:flex;gap:6px;margin-bottom:1rem;background:var(--surface);border-radius:var(--radius-sm);padding:4px;}
+    .main-tab{flex:1;font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;border:none;border-radius:10px;background:transparent;color:var(--tx3);cursor:pointer;padding:12px 0;text-align:center;transition:all 0.22s;letter-spacing:0.3px;}
+    .main-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 16px var(--glow);}
+
+    /* ── Panel ── */
+    .panel{background:var(--surface);border-radius:var(--radius);padding:1.4rem;width:100%;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.05);min-height:480px;animation:slideUp 0.28s ease;}
+    @keyframes slideUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+    .sec-lbl{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;margin-top:4px;}
+    .divider{height:1px;background:rgba(255,255,255,0.06);margin:1rem 0;}
+
+    /* ── Hero picker ── */
+    .hero-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:0.3rem;}
+    .hcard{border:2px solid transparent;border-radius:var(--radius-sm);padding:8px 4px 6px;text-align:center;cursor:pointer;background:var(--surface2);transition:all 0.2s;position:relative;overflow:hidden;}
+    .hcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
+    .hcard.on{border-color:var(--accent);box-shadow:0 0 16px var(--glow);}
+    .hcard.on::before{opacity:0.15;}
+    .hcard .ico{font-size:26px;line-height:1;display:block;margin-bottom:3px;position:relative;}
+    .hcard .hname{font-size:9px;font-weight:700;color:var(--tx2);position:relative;letter-spacing:0.5px;}
+    .hcard.on .hname{color:var(--tx);}
+
+    /* ── Mode tabs ── */
+    .mode-tabs{display:flex;gap:8px;margin-bottom:0.3rem;justify-content:flex-start;}
+    .mode-tab{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;border:2px solid transparent;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx2);cursor:pointer;padding:10px 20px;text-align:center;transition:all 0.2s;letter-spacing:0.3px;}
+    .mode-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 4px 16px var(--glow);}
+
+    /* ── Opt buttons ── */
+    .opt-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.3rem;}
+    .opt-btn{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;padding:8px 14px;border-radius:var(--radius-sm);border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.18s;letter-spacing:0.3px;}
+    .opt-btn.on{background:var(--accent);color:#fff;box-shadow:0 4px 12px var(--glow);}
+    .bew-btn{font-size:22px;min-width:56px;padding:8px 10px;}
+
+    /* ── Cijfer grid ── */
+    .cijfer-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:0.3rem;}
+    .cij-btn{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;border:2px solid transparent;border-radius:10px;background:var(--surface2);color:var(--tx2);cursor:pointer;padding:8px 0;text-align:center;transition:all 0.18s;}
+    .cij-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 10px var(--glow);}
+
+    /* ── Start btn ── */
+    .start-btn{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 6px 24px var(--glow);letter-spacing:1px;transition:all 0.18s;position:relative;overflow:hidden;}
+    .start-btn:active{transform:scale(0.98);}
+
+    /* ── Game screen ── */
+    .info-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--tx2);margin-bottom:10px;}
+    .hero-chip{display:flex;align-items:center;gap:6px;background:var(--surface2);border-radius:20px;padding:4px 10px 4px 6px;font-size:12px;font-weight:700;}
+    .streak-badge{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:800;font-family:'Fredoka',sans-serif;}
+    .prog-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--surface3);transition:all 0.2s;}
+    .dot.ok{background:var(--ok);box-shadow:0 0 6px rgba(6,214,160,0.5);}
+    .dot.no{background:var(--no);box-shadow:0 0 6px rgba(255,107,157,0.5);}
+    .dot.cur{background:var(--accent);box-shadow:0 0 8px var(--glow);transform:scale(1.3);}
+    .tbar-wrap{width:100%;height:6px;background:var(--surface3);border-radius:3px;margin-bottom:10px;overflow:hidden;}
+    .tbar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.1s linear;}
+    .streak-bar{display:flex;gap:4px;justify-content:center;margin-bottom:12px;}
+    .streak-pip{width:20px;height:6px;border-radius:3px;background:var(--surface3);transition:all 0.3s;}
+    .streak-pip.lit{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 8px var(--glow);}
+    .q-wrap{background:var(--surface2);border-radius:var(--radius);padding:18px 12px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;}
+    .q-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,0.08),transparent);}
+    .q-text{font-family:'Fredoka',sans-serif;font-size:52px;font-weight:700;color:var(--tx);letter-spacing:2px;line-height:1;position:relative;}
+    .ans-display{font-family:'Fredoka',sans-serif;font-size:40px;font-weight:700;text-align:center;min-height:58px;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);padding:6px 16px;margin:0 auto 12px;width:160px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface3);transition:all 0.15s;}
+    .ans-display.empty{color:var(--tx3);}
+    .ans-display.ok-flash{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
+    .ans-display.no-flash{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
+    .fb{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:600;text-align:center;min-height:30px;margin-bottom:6px;letter-spacing:0.5px;}
+    .fb.ok{color:var(--ok);}.fb.no{color:var(--no);}
+    .auto-bar-wrap{width:100%;height:4px;background:var(--surface3);border-radius:2px;margin-top:6px;overflow:hidden;opacity:0;}
+    .auto-bar-wrap.show{opacity:1;}
+    .auto-bar{height:100%;border-radius:2px;background:var(--accent);width:100%;transition:width 2s linear;}
+    .auto-bar.go{width:0%;}
+    .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;}
+    .nk{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:600;border:none;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:13px 0;text-align:center;transition:all 0.12s;user-select:none;box-shadow:0 4px 0 rgba(0,0,0,0.3);position:relative;}
+    .nk:active{transform:translateY(3px);box-shadow:none;}
+    .nk.del{background:rgba(255,107,157,0.15);color:var(--no);font-size:18px;}
+    .nk.ok-key{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:20px;font-weight:700;box-shadow:0 4px 0 rgba(0,0,0,0.3),0 0 16px var(--glow);}
+    .nk.ok-key:active{box-shadow:none;}
+    .school-timer{font-family:'Fredoka',sans-serif;font-size:52px;font-weight:700;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px;line-height:1;}
+    .school-timer.warning{background:linear-gradient(135deg,var(--no),var(--accent3));-webkit-background-clip:text;background-clip:text;}
+    .school-goal{font-size:12px;font-weight:700;color:var(--tx3);text-align:center;margin-bottom:10px;letter-spacing:0.5px;}
+    .hero-avatar{font-size:64px;text-align:center;display:block;margin-bottom:8px;}
+    .end-title{font-family:'Fredoka',sans-serif;font-size:32px;font-weight:700;text-align:center;margin-bottom:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .stars-row{text-align:center;font-size:32px;letter-spacing:8px;margin-bottom:10px;}
+    .score-card-end{background:var(--surface2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:8px;}
+    .score-line{font-size:13px;color:var(--tx2);font-weight:600;margin-bottom:4px;}
+    .score-big{font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);display:block;}
+    .rank-badge{display:inline-block;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:20px;padding:4px 14px;margin:6px 0;}
+    .again-btn{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 6px 24px var(--glow);letter-spacing:1px;transition:all 0.18s;}
+    .again-btn:active{transform:scale(0.98);}
+    .school-info-box{background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:var(--tx2);line-height:1.6;border-left:3px solid var(--accent);margin-top:4px;}
+
+    /* ════════════════════════════════
+       TAAL STYLES
+    ════════════════════════════════ */
+    .taal-subtabs{display:flex;gap:6px;margin-bottom:1rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
+    .taal-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:9px 0;text-align:center;transition:all 0.2s;}
+    .taal-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+
+    /* Search */
+    .t-search{width:100%;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:16px;font-family:'Nunito',sans-serif;margin-bottom:12px;outline:none;transition:border-color 0.2s;}
+    .t-search:focus{border-color:var(--accent);}
+    .t-search::placeholder{color:var(--tx3);}
+
+    /* Filter pills */
+    .filter-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+    .filter-lbl{font-size:12px;color:var(--tx3);font-weight:600;}
+    .filter-btn{font-family:'Fredoka',sans-serif;font-size:13px;padding:5px 13px;border-radius:20px;border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.15s;}
+    .filter-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--glow);}
+
+    /* Table */
+    .t-table-wrap{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--surface3);margin-bottom:8px;}
+    .t-table{width:100%;border-collapse:collapse;font-size:13px;}
+    .t-table th{background:var(--surface2);color:var(--tx3);font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;padding:11px 14px;text-align:left;border-bottom:1px solid var(--surface3);letter-spacing:0.8px;text-transform:uppercase;}
+    .t-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--tx);font-size:15px;}
+    .t-table tr:last-child td{border-bottom:none;}
+    .t-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+    .t-hint{font-size:12px;color:var(--tx3);text-align:right;margin-top:4px;}
+    .onr-badge{display:inline-block;padding:3px 9px;border-radius:8px;font-size:12px;font-weight:700;background:rgba(124,111,255,0.2);color:var(--accent);margin-left:6px;letter-spacing:0.3px;}
+
+    /* Level selector */
+    .level-selector{display:flex;gap:8px;margin-bottom:12px;}
+    .level-btn{flex:1;padding:10px 6px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);cursor:pointer;text-align:center;transition:all 0.2s;color:var(--tx);}
+    .level-btn.on{border-color:var(--accent);background:var(--surface3);box-shadow:0 0 14px var(--glow);}
+    .lvl-stars{font-size:16px;display:block;margin-bottom:3px;}
+    .lvl-name{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;display:block;color:var(--tx);}
+    .lvl-desc{font-size:10px;color:var(--tx3);display:block;margin-top:2px;}
+
+    /* Score bar */
+    .t-score-row{display:flex;gap:8px;margin-bottom:12px;}
+    .t-score-card{flex:1;background:var(--surface2);border-radius:var(--radius-sm);padding:9px 10px;text-align:center;}
+    .t-score-num{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--tx);}
+    .t-score-lbl{font-size:10px;color:var(--tx3);margin-top:2px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+    .t-streak-card .t-score-num{background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* Quiz card */
+    .t-quiz-card{background:var(--surface2);border-radius:var(--radius);padding:1.2rem;margin-bottom:10px;border:1px solid var(--surface3);}
+    .t-quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+    .t-prog{font-size:12px;color:var(--tx3);font-weight:700;}
+    .t-dir-badge{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--surface3);color:var(--tx2);}
+    .t-context{font-size:12px;color:var(--tx3);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;}
+    .t-word{font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);margin-bottom:6px;line-height:1.2;}
+    .t-question{font-size:15px;color:var(--tx2);margin-bottom:16px;}
+
+    /* Type input */
+    .t-input-wrap{display:flex;gap:8px;align-items:stretch;}
+    .t-input{flex:1;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:18px;font-family:'Nunito',sans-serif;outline:none;transition:all 0.2s;}
+    .t-input:focus{border-color:var(--accent);}
+    .t-input.correct{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
+    .t-input.wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .t-submit{padding:11px 18px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:14px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;}
+    .t-submit:hover{opacity:0.9;}
+    .t-hint-txt{font-size:11px;color:var(--tx3);margin-top:6px;}
+
+    /* Feedback */
+    .t-feedback{margin-top:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;line-height:1.6;}
+    .t-fb-ok{background:rgba(6,214,160,0.12);color:var(--ok);border:1px solid rgba(6,214,160,0.3);}
+    .t-fb-bijna{background:rgba(255,209,102,0.12);color:var(--accent3);border:1px solid rgba(255,209,102,0.3);}
+    .t-fb-no{background:rgba(255,107,157,0.12);color:var(--no);border:1px solid rgba(255,107,157,0.3);}
+    .t-next{margin-top:10px;padding:10px 24px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:15px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 4px 12px var(--glow);}
+
+    /* Invul */
+    .invul-toolbar{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;background:var(--surface2);border-radius:var(--radius-sm);padding:12px;}
+    .invul-input{width:100%;padding:7px 10px;border-radius:8px;border:2px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:15px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
+    .invul-input:focus{border-color:var(--accent);}
+    .invul-input:disabled{cursor:default;opacity:0.9;}
+    .invul-input.inv-correct{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
+    .invul-input.inv-almost{border-color:var(--accent3);background:rgba(255,209,102,0.1);color:var(--accent3);}
+    .invul-input.inv-wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .invul-answer{font-size:10px;color:var(--tx3);margin-top:2px;display:block;font-style:italic;}
+    .invul-score-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+    .invul-pill{padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;font-family:'Fredoka',sans-serif;}
+    .ip-good{background:rgba(6,214,160,0.2);color:var(--ok);}
+    .ip-almost{background:rgba(255,209,102,0.2);color:var(--accent3);}
+    .ip-wrong{background:rgba(255,107,157,0.2);color:var(--no);}
+    .ip-neutral{background:var(--surface2);color:var(--tx3);}
+    .t-count-select{padding:6px 10px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:13px;font-family:'Nunito',sans-serif;}
+    body.light .t-table tr:nth-child(even) td{background:rgba(0,0,0,0.025);}
+    body.light .t-table td{border-bottom-color:rgba(0,0,0,0.07);}
+    body.light .nk{box-shadow:0 4px 0 rgba(0,0,0,0.12);}
+    body.light .q-wrap{background:var(--surface2);}
+    body.light .panel{box-shadow:0 8px 32px rgba(0,0,0,0.1),0 0 0 1px rgba(0,0,0,0.06);}
+
+    /* ════════════════════════════════
+       BEHEER PANEEL
+    ════════════════════════════════ */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+    .modal{background:var(--surface);border-radius:var(--radius);padding:1.5rem;width:100%;max-width:700px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.08);animation:slideUp 0.25s ease;}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+    .modal-title{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .modal-close{background:var(--surface2);border:none;color:var(--tx2);font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+    .modal-close:hover{background:var(--surface3);color:var(--tx);}
+    .admin-tabs{display:flex;gap:6px;margin-bottom:1.2rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
+    .admin-tab{flex:1;font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:8px 4px;text-align:center;transition:all 0.2s;}
+    .admin-tab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+    .admin-section{margin-bottom:1rem;}
+    .admin-row{display:flex;gap:8px;margin-bottom:6px;align-items:stretch;}
+    .admin-input{flex:1;padding:9px 12px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:13px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
+    .admin-input:focus{border-color:var(--accent);}
+    .admin-input.wide{flex:2;}
+    .admin-add-btn{padding:9px 16px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:14px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;white-space:nowrap;transition:opacity 0.2s;}
+    .admin-add-btn:hover{opacity:0.9;}
+    .admin-add-btn.del-btn{background:rgba(255,107,157,0.2);color:var(--no);box-shadow:none;}
+    .admin-add-btn.del-btn:hover{background:rgba(255,107,157,0.35);}
+    .admin-list{max-height:340px;overflow-y:auto;border-radius:var(--radius-sm);border:1px solid var(--surface3);}
+    .admin-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;transition:background 0.15s;}
+    .admin-item:last-child{border-bottom:none;}
+    .admin-item:hover{background:var(--surface2);}
+    .admin-item-text{flex:1;color:var(--tx);min-width:0;}
+    .admin-item-sub{font-size:11px;color:var(--tx3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .admin-item-del{background:none;border:none;color:var(--tx3);font-size:16px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.15s;flex-shrink:0;}
+    .admin-item-del:hover{background:rgba(255,107,157,0.2);color:var(--no);}
+    .admin-item-edit{background:none;border:none;color:var(--tx3);font-size:14px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.15s;flex-shrink:0;}
+    .admin-item-edit:hover{background:rgba(124,111,255,0.2);color:var(--accent);}
+    .pw-input{width:100%;padding:12px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:18px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;margin-bottom:10px;text-align:center;letter-spacing:4px;}
+    .pw-input:focus{border-color:var(--accent);}
+    .pw-btn{width:100%;padding:13px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:18px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 4px 16px var(--glow);}
+    .pw-error{color:var(--no);font-size:13px;text-align:center;margin-top:6px;font-weight:600;}
+    .admin-count{font-size:11px;color:var(--tx3);margin-bottom:8px;font-weight:600;}
+    .admin-reset-btn{font-size:12px;padding:6px 12px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--surface3);color:var(--tx3);cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;}
+    .admin-reset-btn:hover{border-color:var(--no);color:var(--no);}
+    .ww-cols{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;}
+
+    /* ── Multiple choice ── */
+    .mc-option{width:100%;display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);cursor:pointer;text-align:left;font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;transition:all 0.15s;line-height:1.4;}
+    .mc-option:hover:not(:disabled){border-color:var(--accent);background:var(--surface3);}
+    .mc-option:disabled{cursor:default;}
+    .mc-letter{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--accent);background:rgba(124,111,255,0.12);border-radius:8px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .mc-text{flex:1;}
+    .mc-option.mc-correct{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
+    .mc-option.mc-correct .mc-letter{background:rgba(6,214,160,0.2);color:var(--ok);}
+    .mc-option.mc-wrong{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
+    .mc-option.mc-wrong .mc-letter{background:rgba(255,107,157,0.2);color:var(--no);}
+    body.light .mc-option{background:var(--surface2);border-color:var(--surface3);}
+    body.light .mc-option:hover:not(:disabled){border-color:var(--accent);}
+  </style>
+</head>
+<body data-hero="vuur" class="light">
+  <canvas id="ccanvas"></canvas>
+  <div id="app">
+    <div class="app-header">
+      <div onclick="goHome()" style="cursor:pointer;flex-shrink:0">
+        <div class="logo">🎒 Leerheld</div>
+        <div class="logo-sub">Leer &amp; oefen elke dag!</div>
+      </div>
+      <div class="header-center">
+        <select id="hero-select" class="hero-dropdown" onchange="pickHeroDropdown(this.value)">
+          <option value="vuur">🤜 Vuurheld</option>
+          <option value="ijs">🦙 IJskoning</option>
+          <option value="bliksem">⚡ Bliksem</option>
+          <option value="ruimte">🚀 Ruimterijder</option>
+          <option value="draak">🐉 Dragonkid</option>
+          <option value="prinses">👸 Prinses</option>
+        </select>
+      </div>
+      <div class="header-btns">
+        <button class="icon-btn active" id="themebtn" onclick="toggleTheme()" title="Thema">☀️</button>
+        <button class="icon-btn" id="mutebtn" onclick="toggleMute()" title="Geluid">🔊</button>
+        <button class="icon-btn" id="adminbtn" onclick="openAdmin()" title="Beheer">🔒</button>
+      </div>
+    </div>
+
+    <!-- Hoofdtabs -->
+    <div class="main-tabs">
+      <button class="main-tab on" id="tab-rekenen" onclick="switchMain('rekenen')">🔢 Rekenen</button>
+      <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
+    </div>
+
+    <div id="rekenen-root" style="width:100%">
+      <div id="screen"></div>
+    </div>
+
+    <div id="taal-root" style="display:none;width:100%">
+      <div class="panel">
+        <div class="taal-subtabs">
+          <button class="taal-subtab on" id="tst-tabel" onclick="taalTab('tabel')">Werkwoorden</button>
+          <button class="taal-subtab" id="tst-woorden" onclick="taalTab('woorden')">Woordenschat</button>
+          <button class="taal-subtab" id="tst-zegswijzen" onclick="taalTab('zegswijzen')">Zegswijzen</button>
+        </div>
+        <div id="taal-tabel-tab"></div>
+        <div id="taal-woorden-tab" style="display:none"></div>
+        <div id="taal-zegswijzen-tab" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div class="modal-overlay" id="admin-overlay" style="display:none" onclick="if(event.target===this)closeAdmin()">
+    <div class="modal" id="admin-modal">
+      <div class="modal-header">
+        <span class="modal-title" id="admin-modal-title">🔒 Beheer</span>
+        <button class="modal-close" onclick="closeAdmin()">✕</button>
+      </div>
+      <div id="admin-modal-body"></div>
+    </div>
+  </div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// SHARED: CONFETTI & AUDIO
+// ════════════════════════════════════════════════════════
+const cc=document.getElementById('ccanvas'),cx=cc.getContext('2d');
+let cpieces=[],crun=false;
+function boom(){
+  const s=getComputedStyle(document.body);
+  const cols=[s.getPropertyValue('--accent').trim(),s.getPropertyValue('--accent2').trim(),'#FFD166','#06D6A0','#FF6B9D'];
+  cc.width=window.innerWidth;cc.height=window.innerHeight;
+  cpieces=Array.from({length:90},()=>({x:Math.random()*cc.width,y:-10,r:5+Math.random()*8,c:cols[Math.floor(Math.random()*cols.length)],vx:(Math.random()-0.5)*7,vy:3+Math.random()*5,rot:Math.random()*360,rv:(Math.random()-0.5)*12,shape:Math.random()>0.5?'r':'c'}));
+  crun=true;animC();
+}
+function animC(){
+  if(!crun)return;cx.clearRect(0,0,cc.width,cc.height);
+  cpieces.forEach(p=>{cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot*Math.PI/180);cx.fillStyle=p.c;
+    if(p.shape==='r')cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*0.5);
+    else{cx.beginPath();cx.arc(0,0,p.r*0.5,0,Math.PI*2);cx.fill();}
+    cx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;p.vy+=0.18;
+  });
+  cpieces=cpieces.filter(p=>p.y<cc.height+30);
+  if(cpieces.length)requestAnimationFrame(animC);else{crun=false;cx.clearRect(0,0,cc.width,cc.height);}
+}
+
+const AC=window.AudioContext||window.webkitAudioContext;
+let sharedAC=null;
+function getAC(){if(!sharedAC||sharedAC.state==='closed')sharedAC=new AC();if(sharedAC.state==='suspended')sharedAC.resume();return sharedAC;}
+let muted=false;
+function toggleMute(){muted=!muted;const btn=document.getElementById('mutebtn');if(btn){btn.textContent=muted?'🔇':'🔊';btn.classList.toggle('active',muted);}}
+function toggleTheme(){const isLight=document.body.classList.toggle('light');const btn=document.getElementById('themebtn');if(btn){btn.textContent=isLight?'☀️':'🌙';btn.classList.toggle('active',isLight);}}
+function snd(t){
+  if(muted)return;
+  try{const a=getAC(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);
+    if(t==='ok'){o.type='sine';[523,659,784,1047].forEach((f,i)=>o.frequency.setValueAtTime(f,a.currentTime+i*0.09));g.gain.setValueAtTime(0.3,a.currentTime);g.gain.linearRampToValueAtTime(0,a.currentTime+0.55);o.start();o.stop(a.currentTime+0.55);}
+    else if(t==='streak'){o.type='square';[523,659,784,880,1047].forEach((f,i)=>o.frequency.setValueAtTime(f,a.currentTime+i*0.08));g.gain.setValueAtTime(0.2,a.currentTime);g.gain.linearRampToValueAtTime(0,a.currentTime+0.7);o.start();o.stop(a.currentTime+0.7);}
+    else if(t==='tap'){o.type='sine';o.frequency.setValueAtTime(440,a.currentTime);g.gain.setValueAtTime(0.08,a.currentTime);g.gain.linearRampToValueAtTime(0,a.currentTime+0.07);o.start();o.stop(a.currentTime+0.07);}
+    else{o.type='sawtooth';o.frequency.setValueAtTime(220,a.currentTime);o.frequency.linearRampToValueAtTime(100,a.currentTime+0.3);g.gain.setValueAtTime(0.2,a.currentTime);g.gain.linearRampToValueAtTime(0,a.currentTime+0.3);o.start();o.stop(a.currentTime+0.3);}
+  }catch(e){}
+}
+
+// ════════════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════════════
+let mainSection = 'rekenen';
+function switchMain(s){
+  mainSection=s;
+  document.getElementById('rekenen-root').style.display=s==='rekenen'?'':'none';
+  document.getElementById('taal-root').style.display=s==='taal'?'':'none';
+  document.getElementById('tab-rekenen').classList.toggle('on',s==='rekenen');
+  document.getElementById('tab-taal').classList.toggle('on',s==='taal');
+  if(s==='taal') initTaalRoot();
+}
+function goHome(){
+  clearTimeout(st.autoT);clearInterval(st.schoolInterval);
+  loadData();
+showSetup();
+}
+
+// ════════════════════════════════════════════════════════
+// REKENEN
+// ════════════════════════════════════════════════════════
+const HEROES=[
+  {id:'vuur',ico:'🤜',name:'Vuurheld'},{id:'ijs',ico:'🦙',name:'IJskoning'},
+  {id:'bliksem',ico:'⚡',name:'Bliksem'},{id:'ruimte',ico:'🚀',name:'Ruimterijder'},
+  {id:'draak',ico:'🐉',name:'Dragonkid'},{id:'prinses',ico:'👸',name:'Prinses'},
+];
+function applyTheme(id){document.body.setAttribute('data-hero',id);}
+let cfg={hero:HEROES[0],mode:'normaal',bewerkingen:['keer','plus','min','deel'],count:10,timer:0,cijfers:[0,1,2,3,4,5,6,7,8,9,10]};
+let st={sums:[],cur:0,score:0,res:[],streak:0,maxStreak:0,ti:null,tl:0,input:'',locked:false,curAns:0,autoT:null,schoolStart:0,schoolInterval:null,schoolElapsed:0};
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function genSumsForBew(bew,cij,count){
+  if(bew==='keer'){
+    const special=[0,1,10],normal=[],specialPool=[];
+    for(const t of cij)for(let x=0;x<=10;x++){if(special.includes(x)||special.includes(t))specialPool.push({b:'keer',v:[t,x]});else normal.push({b:'keer',v:[t,x]});}
+    shuffle(normal);shuffle(specialPool);
+    const usedSpecial={},filtered=[];
+    for(const p of specialPool){const k=special.find(s=>s===p.v[0]||s===p.v[1]);if(k!==undefined&&!usedSpecial[k]){usedSpecial[k]=true;filtered.push(p);}}
+    return shuffle([...normal,...filtered]).slice(0,count);
+  }
+  if(bew==='plus'){const pool=[];for(const t of cij)for(const x of cij)pool.push({b:'plus',v:[t,x,t+x]});return shuffle(pool).slice(0,count);}
+  if(bew==='min'){const pool=[];for(const t of cij)for(const x of cij)if(x<=t)pool.push({b:'min',v:[t,x,t-x]});return shuffle(pool).slice(0,count);}
+  if(bew==='deel'){const pool=[];for(const t of cij)for(let x=1;x<=10;x++)if(t>0)pool.push({b:'deel',v:[t*x,t,x]});return shuffle(pool).slice(0,count);}
+  return[];
+}
+function genSums(count){
+  const cij=cfg.cijfers.length>0?cfg.cijfers:[0,1,2,3,4,5,6,7,8,9,10];
+  const bews=cfg.mode==='school'?['keer','deel']:cfg.bewerkingen;
+  if(bews.length===1)return genSumsForBew(bews[0],cij,count);
+  const perBew=Math.ceil(count/bews.length);
+  let pool=[];
+  for(const b of bews)pool=[...pool,...genSumsForBew(b,cij,perBew)];
+  return shuffle(pool).slice(0,count);
+}
+function sumToQ(s){
+  const bew=s.b,v=s.v;
+  if(bew==='keer'){const flip=Math.random()>0.5,a=flip?v[0]:v[1],b=flip?v[1]:v[0];return{q:a+' × '+b,ans:a*b};}
+  if(bew==='plus')return{q:v[0]+' + '+v[1],ans:v[2]};
+  if(bew==='min')return{q:v[0]+' − '+v[1],ans:v[2]};
+  if(bew==='deel')return{q:v[0]+' ÷ '+v[1],ans:v[2]};
+  return{q:'?',ans:0};
+}
+
+function showSetup(){
+  clearTimeout(st.autoT);clearInterval(st.schoolInterval);
+  applyTheme(cfg.hero.id);
+  document.getElementById('screen').innerHTML=
+    '<div class="panel">'+
+    
+    '<div class="sec-lbl">Modus</div>'+
+    '<div class="mode-tabs">'+
+    '<button class="mode-tab'+(cfg.mode==='normaal'?' on':'')+'" onclick="pickMode(\'normaal\',this)">⚡ Normaal</button>'+
+    '<button class="mode-tab'+(cfg.mode==='school'?' on':'')+'" onclick="pickMode(\'school\',this)">🏫 School (50)</button>'+
+    '</div><div class="divider"></div>'+
+    '<div class="sec-lbl">Bewerking</div>'+
+    '<div class="opt-row" id="bew">'+
+    [['keer','×'],['plus','+'],['min','−'],['deel','÷']].map(p=>'<button class="opt-btn bew-btn'+(cfg.bewerkingen.includes(p[0])?' on':'')+'" onclick="toggleBew(\''+p[0]+'\',this)">'+p[1]+'</button>').join('')+
+    '</div><div class="divider"></div>'+
+    '<div class="sec-lbl">Tafels / Cijfers</div>'+
+    '<div class="cijfer-grid">'+[0,1,2,3,4,5,6,7,8,9,10].map(n=>'<button class="cij-btn'+(cfg.cijfers.includes(n)?' on':'')+'" onclick="toggleCijfer('+n+',this)">'+n+'</button>').join('')+'</div>'+
+    '<div id="normaalopties" style="'+(cfg.mode==='school'?'display:none':'')+'">'+ 
+    '<div class="divider"></div>'+
+    '<div class="sec-lbl">Aantal sommen</div>'+
+    '<div class="opt-row" id="cnt">'+[5,10,15,20,25].map(n=>'<button class="opt-btn'+(n===cfg.count?' on':'')+'" onclick="pickCnt('+n+',this)">'+n+'</button>').join('')+'</div>'+
+    '<div class="sec-lbl">Tijdlimiet per som</div>'+
+    '<div class="opt-row" id="tmr">'+[[0,'Geen'],[5,'5s'],[10,'10s'],[15,'15s'],[30,'30s']].map(p=>'<button class="opt-btn'+(p[0]===cfg.timer?' on':'')+'" onclick="pickTmr('+p[0]+',this)">'+p[1]+'</button>').join('')+'</div>'+
+    '</div>'+
+    '<div id="schoolinfo" style="'+(cfg.mode==='normaal'?'display:none':'')+'"><div class="school-info-box"><strong>Schoolmodus:</strong> 50 sommen, 10 minuten. Doel: klaar in 4 minuten!</div></div>'+
+    '<button class="start-btn" onclick="startGame()">🚀 Starten!</button>'+
+    '</div>';
+}
+
+function pickHero(id,el){cfg.hero=HEROES.find(h=>h.id===id);applyTheme(id);document.querySelectorAll('.hcard').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+function pickHeroDropdown(id){cfg.hero=HEROES.find(h=>h.id===id)||HEROES[0];applyTheme(cfg.hero.id);const sel=document.getElementById('hero-select');if(sel)sel.value=cfg.hero.id;}
+function pickMode(v,el){cfg.mode=v;document.querySelectorAll('.mode-tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');const no=document.getElementById('normaalopties'),si=document.getElementById('schoolinfo');if(no)no.style.display=v==='school'?'none':'';if(si)si.style.display=v==='school'?'':'none';}
+function toggleBew(v,el){if(cfg.bewerkingen.includes(v)){if(cfg.bewerkingen.length===1)return;cfg.bewerkingen=cfg.bewerkingen.filter(x=>x!==v);el.classList.remove('on');}else{cfg.bewerkingen.push(v);el.classList.add('on');}}
+function pickCnt(v,el){cfg.count=v;document.querySelectorAll('#cnt .opt-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function pickTmr(v,el){cfg.timer=v;document.querySelectorAll('#tmr .opt-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function toggleCijfer(n,el){if(cfg.cijfers.includes(n)){if(cfg.cijfers.length===1)return;cfg.cijfers=cfg.cijfers.filter(x=>x!==n);el.classList.remove('on');}else{cfg.cijfers.push(n);el.classList.add('on');}}
+
+function startGame(){
+  const count=cfg.mode==='school'?50:cfg.count;
+  st.sums=genSums(count);st.cur=0;st.score=0;st.res=[];st.streak=0;st.maxStreak=0;st.schoolElapsed=0;
+  if(cfg.mode==='school'){st.schoolStart=Date.now();showQ();startSchoolTimer();}else{showQ();}
+}
+function startSchoolTimer(){
+  clearInterval(st.schoolInterval);
+  st.schoolInterval=setInterval(()=>{
+    st.schoolElapsed=Math.floor((Date.now()-st.schoolStart)/1000);
+    const el=document.getElementById('school-elapsed');
+    if(el){const m=Math.floor(st.schoolElapsed/60),s=st.schoolElapsed%60;el.textContent=m+':'+(s<10?'0':'')+s;if(st.schoolElapsed>=240)el.className='school-timer warning';}
+    if(st.schoolElapsed>=600){clearInterval(st.schoolInterval);showEnd();}
+  },500);
+}
+function numpadHTML(){
+  const keys=['7','8','9','4','5','6','1','2','3','DEL','0','OK'];
+  return '<div class="numpad">'+keys.map(k=>{
+    if(k==='DEL')return '<button class="nk del" onclick="npDel()">⌫</button>';
+    if(k==='OK')return '<button class="nk ok-key" onclick="npOk()">OK ✓</button>';
+    return '<button class="nk" onclick="npNum(\''+k+'\')">'+k+'</button>';
+  }).join('')+'</div>';
+}
+function showQ(){
+  clearTimeout(st.autoT);
+  const sum=st.sums[st.cur],qdata=sumToQ(sum);
+  st.curAns=qdata.ans;st.input='';st.locked=false;
+  const isSchool=cfg.mode==='school';
+  const tbarHtml=(!isSchool&&cfg.timer>0)?'<div class="tbar-wrap"><div class="tbar" id="tbar" style="width:100%"></div></div>':'';
+  const pips=Array.from({length:5},(_,i)=>'<div class="streak-pip'+(i<st.streak?' lit':'')+'"></div>').join('');
+  let topHtml='';
+  if(isSchool){
+    const m=Math.floor(st.schoolElapsed/60),s2=st.schoolElapsed%60;
+    topHtml='<div id="school-elapsed" class="school-timer'+(st.schoolElapsed>=240?' warning':'')+'">'+m+':'+(s2<10?'0':'')+s2+'</div>'+
+      '<div class="school-goal">🎯 Doel: 4:00 &nbsp;|&nbsp; '+(st.cur+1)+'/50</div>';
+  }else{
+    const sb=st.streak>=3?'<span class="streak-badge">🔥 ×'+st.streak+'</span>':'';
+    topHtml='<div class="info-row"><div class="hero-chip">'+cfg.hero.ico+' '+cfg.hero.name+'</div>'+sb+'<span style="font-size:12px;font-weight:700;color:var(--tx3)" id="ttxt">'+(cfg.timer>0?cfg.timer+'s':'')+'</span></div>'+
+      '<div class="prog-row" id="prog"></div>'+tbarHtml+
+      '<div class="streak-bar">'+pips+'</div>';
+  }
+  document.getElementById('screen').innerHTML=
+    '<div class="panel">'+topHtml+
+    '<div class="q-wrap"><div class="q-text">'+qdata.q+' = ?</div></div>'+
+    '<div class="ans-display empty" id="adisp">?</div>'+
+    numpadHTML()+
+    '<div class="fb" id="fb"></div>'+
+    '<div class="auto-bar-wrap" id="autowrap"><div class="auto-bar" id="autobar"></div></div>'+
+    '</div>';
+  if(!isSchool){renderDots();if(cfg.timer>0)startTimer();}
+}
+function npNum(d){if(st.locked)return;if(st.input.length>=4)return;snd('tap');st.input+=d;updateDisp();}
+function npDel(){if(st.locked)return;snd('tap');st.input=st.input.slice(0,-1);updateDisp();}
+function npOk(){if(st.locked||st.input==='')return;check();}
+function updateDisp(){const d=document.getElementById('adisp');if(!d)return;if(st.input===''){d.textContent='?';d.classList.add('empty');}else{d.textContent=st.input;d.classList.remove('empty');}}
+function startTimer(){
+  st.tl=cfg.timer;clearInterval(st.ti);
+  st.ti=setInterval(()=>{
+    st.tl-=0.1;const pct=Math.max(0,st.tl/cfg.timer*100);
+    const bar=document.getElementById('tbar'),txt=document.getElementById('ttxt');
+    if(bar)bar.style.width=pct+'%';if(txt)txt.textContent=Math.ceil(st.tl)+'s';
+    if(st.tl<=0){clearInterval(st.ti);revealWrong('⏰ Tijd! Antwoord: '+st.curAns);}
+  },100);
+}
+function startAutoNext(){
+  const wrap=document.getElementById('autowrap'),bar=document.getElementById('autobar');
+  if(!wrap||!bar)return;wrap.classList.add('show');void bar.offsetWidth;bar.classList.add('go');
+  st.autoT=setTimeout(nextQ,cfg.mode==='school'?700:2000);
+}
+function check(){clearInterval(st.ti);const v=parseInt(st.input);if(isNaN(v))return;if(v===st.curAns)revealOk();else revealWrong('❌ Fout! Het is '+st.curAns);}
+function revealOk(){
+  st.locked=true;st.res[st.cur]='ok';st.score++;st.streak++;
+  if(st.streak>st.maxStreak)st.maxStreak=st.streak;
+  if(st.streak>=5){snd('streak');boom();}else{snd('ok');if(st.streak>=3)boom();}
+  const msgs=['Wauw! ⭐','Super! 🎉','Top! 🚀','Bravo! 🏆','Yes! 💥','Held! ⚡'];
+  document.getElementById('fb').innerHTML=msgs[Math.floor(Math.random()*msgs.length)];
+  document.getElementById('fb').className='fb ok';
+  const d=document.getElementById('adisp');if(d){d.classList.remove('empty');d.classList.add('ok-flash');}
+  disableNumpad();startAutoNext();
+}
+function revealWrong(msg){
+  st.locked=true;st.res[st.cur]='no';st.streak=0;snd('no');
+  document.getElementById('fb').innerHTML=msg;document.getElementById('fb').className='fb no';
+  const d=document.getElementById('adisp');if(d)d.classList.add('no-flash');
+  disableNumpad();startAutoNext();
+}
+function disableNumpad(){document.querySelectorAll('.nk').forEach(b=>b.style.opacity='0.35');}
+function renderDots(){
+  const r=document.getElementById('prog');if(!r)return;r.innerHTML='';
+  for(let i=0;i<cfg.count;i++){const d=document.createElement('div');d.className='dot'+(st.res[i]==='ok'?' ok':st.res[i]==='no'?' no':i===st.cur?' cur':'');r.appendChild(d);}
+}
+function nextQ(){
+  clearTimeout(st.autoT);
+  const count=cfg.mode==='school'?50:cfg.count;
+  if(st.cur===count-1){showEnd();return;}st.cur++;showQ();
+}
+function showEnd(){
+  clearTimeout(st.autoT);clearInterval(st.schoolInterval);
+  const s=st.score,t=cfg.mode==='school'?50:cfg.count,pct=Math.round(s/t*100);
+  let endHtml='';
+  if(cfg.mode==='school'){
+    const elapsed=st.schoolElapsed,m=Math.floor(elapsed/60),sec=elapsed%60,timeStr=m+':'+(sec<10?'0':'')+sec;
+    const underDoel=elapsed<240;
+    const msg=s===t&&underDoel?'Perfect held! 🏆':s===t?'Alle 50 gedaan!':s/t>=0.7?'Super gedaan!':'Blijf oefenen!';
+    const stars=s===t&&underDoel?'⭐⭐⭐':s===t?'⭐⭐☆':s/t>=0.6?'⭐☆☆':'☆☆☆';
+    if(s===t)boom();
+    endHtml='<div class="hero-avatar">'+cfg.hero.ico+'</div><div class="end-title">'+msg+'</div><div class="stars-row">'+stars+'</div>'+
+      '<div class="score-card-end"><div class="score-line">⏱️ Tijd</div><span class="score-big">'+timeStr+'</span>'+
+      '<div class="score-line" style="margin-top:8px">'+(underDoel?'✅ Doel gehaald!':'❌ Doel nog niet gehaald (4:00)')+'</div></div>'+
+      '<div class="score-card-end"><div class="score-line">Score</div><span class="score-big">'+s+'/'+t+' ('+pct+'%)</span>'+
+      '<div class="score-line" style="margin-top:6px">🔥 Langste reeks: '+st.maxStreak+'</div></div>';
+  }else{
+    const msg=s===t?'Perfect score!':s/t>=0.7?'Super gedaan!':s/t>=0.4?'Goed bezig!':'Blijf oefenen!';
+    const stars=s/t>=0.9?'⭐⭐⭐':s/t>=0.6?'⭐⭐☆':'⭐☆☆';
+    const rank=s/t>=0.9?'Leerlingheld':s/t>=0.7?'Rekenheld':s/t>=0.5?'Tafelheld':'Held in training';
+    if(s===t||s/t>=0.8)boom();
+    endHtml='<div class="hero-avatar">'+cfg.hero.ico+'</div><div class="end-title">'+msg+'</div><div class="stars-row">'+stars+'</div>'+
+      '<div style="text-align:center;margin-bottom:10px"><span class="rank-badge">🏅 '+rank+'</span></div>'+
+      '<div class="score-card-end"><div class="score-line">Score</div><span class="score-big">'+s+'/'+t+' ('+pct+'%)</span>'+
+      '<div class="score-line" style="margin-top:6px">🔥 Langste reeks: '+st.maxStreak+'</div></div>';
+  }
+  document.getElementById('screen').innerHTML='<div class="panel">'+endHtml+
+    '<button class="again-btn" onclick="showSetup()">🔄 Opnieuw spelen</button></div>';
+}
+
+// ════════════════════════════════════════════════════════
+// TAAL DATA
+// ════════════════════════════════════════════════════════
+const W=[["antwoorden","antwoord","antwoordde","geantwoord",false],["ademen","adem","ademde","geademd",false],["blijven","blijf","bleef","gebleven",true],["breien","brei","breide","gebreid",false],["bibberen","bibber","bibberde","gebibberd",false],["babbelen","babbel","babbelde","gebabbeld",false],["branden","brand","brandde","gebrand",false],["bloeden","bloed","bloedde","gebloed",false],["bezoeken","bezoek","bezocht","bezocht",true],["bedenken","bedenk","bedacht","bedacht",true],["beseffen","besef","besefte","beseft",false],["beantwoorden","beantwoord","beantwoordde","beantwoord",false],["boksen","boks","bokste","gebokst",false],["brengen","breng","bracht","gebracht",true],["breken","breek","brak","gebroken",true],["beginnen","begin","begon","begonnen",true],["binden","bind","bond","gebonden",true],["bevelen","beveel","beval","bevolen",true],["bellen","bel","belde","gebeld",false],["bakken","bak","bakte","gebakken",false],["blaten","blaat","blaatte","geblaat",false],["botsen","bots","botste","gebotst",false],["betalen","betaal","betaalde","betaald",false],["bestellen","bestel","bestelde","besteld",false],["boren","boor","boorde","geboord",false],["blazen","blaas","blies","geblazen",true],["drinken","drink","dronk","gedronken",true],["dromen","droom","droomde","gedroomd",false],["durven","durf","durfde","gedurfd",false],["duiken","duik","dook","gedoken",true],["doen","doe","deed","gedaan",true],["denken","denk","dacht","gedacht",true],["drijven","drijf","dreef","gedreven",true],["dansen","dans","danste","gedanst",false],["drummen","drum","drumde","gedrummd",false],["dragen","draag","droeg","gedragen",true],["eten","eet","at","gegeten",true],["fietsen","fiets","fietste","gefietst",false],["filmen","film","filmde","gefilmd",false],["fluiten","fluit","floot","gefloten",true],["gaan","ga","ging","gegaan",true],["goochelen","goochel","goochelde","gegoocheld",false],["groeien","groei","groeide","gegroeid",false],["geeuwen","geeuw","geeuwd","gegeewd",false],["gieten","giet","goot","gegoten",true],["gillen","gil","gilde","gegild",false],["geven","geef","gaf","gegeven",true],["genieten","geniet","genoot","genoten",true],["gebruiken","gebruik","gebruikte","gebruikt",false],["grijpen","grijp","greep","gegrepen",true],["giechelen","giechel","giechelde","gegiecheld",false],["hopen","hoop","hoopte","gehoopt",false],["horen","hoor","hoorde","gehoord",false],["herkennen","herken","herkende","herkend",false],["houden","houd","hield","gehouden",true],["halen","haal","haalde","gehaald",false],["haasten","haast","haastte","gehaast",false],["helpen","help","hielp","geholpen",true],["heten","heet","heette","geheten",false],["haten","haat","haatte","gehaat",false],["hinkelen","hinkel","hinkelde","gehinkeld",false],["huilen","huil","huilde","gehuild",false],["interviewen","interview","interviewde","geïnterviewd",false],["jubelen","jubel","jubelde","gejubeld",false],["jagen","jaag","joeg","gejaagd",true],["janken","jank","jankte","gejankt",false],["juichen","juich","juichte","gejuicht",false],["krijgen","krijg","kreeg","gekregen",true],["kopen","koop","kocht","gekocht",true],["kiezen","kies","koos","gekozen",true],["kammen","kam","kamde","gekamd",false],["kijken","kijk","keek","gekeken",true],["kleden","kleed","kleedde","gekleed",false],["kletsen","klets","kletste","gekletst",false],["koken","kook","kookte","gekookt",false],["klimmen","klim","klom","geklommen",true],["komen","kom","kwam","gekomen",true],["klauteren","klauter","klauterde","geklauterd",false],["klagen","klaag","klaagde","geklaagd",false],["kwetsen","kwets","kwetste","gekwetst",false],["knikkeren","knikkeri","knikerde","geknikerd",false],["kleuren","kleur","kleurde","gekleurd",false],["knippen","knip","knipte","geknipt",false],["krassen","kras","kraste","gekrast",false],["knorren","knor","knorde","geknord",false],["lopen","loop","liep","gelopen",true],["logeren","logeer","logeerde","gelogeerd",false],["leren","leer","leerde","geleerd",false],["leven","leef","leefde","geleefd",false],["lezen","lees","las","gelezen",true],["lusten","lust","lustte","gelust",false],["lachen","lach","lachte","gelachen",false],["luisteren","luister","luisterde","geluisterd",false],["lijden","lijd","leed","geleden",true],["leiden","leid","leidde","geleid",false],["liggen","lig","lag","gelegen",true],["landen","land","landde","geland",false],["leveren","lever","leverde","geleverd",false],["liegen","lieg","loog","gelogen",true],["maaien","maai","maaide","gemaaid",false],["missen","mis","miste","gemist",false],["moeten","moet","moest","gemoeten",true],["maken","maak","maakte","gemaakt",false],["meten","meet","mat","gemeten",true],["mijden","mijd","meed","gemeden",true],["mogen","mag","mocht","gemogen",true],["miauwen","miauw","miauwde","gemiauwd",false],["melden","meld","meldde","gemeld",false],["naaien","naai","naaide","genaaid",false],["nemen","neem","nam","genomen",true],["ontwerpen","ontwerp","ontwierp","ontworpen",true],["opruimen","ruim op","ruimde op","opgeruimd",false],["ontwijken","ontwijkt","ontweek","ontweek",true],["plooien","plooi","plooide","geplooide",false],["plakken","plak","plakte","geplakt",false],["poetsen","poets","poetste","gepoetst",false],["protesteren","protesteer","protesteerde","geprotesteerd",false],["praten","praat","praatte","gepraat",false],["proeven","proef","proefde","geproefd",false],["plannen","plan","plande","gepland",false],["planten","plant","plantte","geplant",false],["roepen","roep","riep","geroepen",true],["ruiken","ruik","rook","geroken",true],["rijden","rijd","reed","gereden",true],["redden","red","redde","gered",false],["roddelen","roddel","roddelde","geroddeld",false],["rusten","rust","rustte","gerust",false],["regenen","regent","regende","geregend",false],["rekenen","reken","rekende","gerekend",false],["rollen","rol","rolde","gerold",false],["spelen","speel","speelde","gespeeld",false],["springen","spring","sprong","gesprongen",true],["slapen","slaap","sliep","geslapen",true],["schreeuwen","schreeuw","schreeuwde","geschreeuwd",false],["snoepen","snoep","snoepte","gesnoept",false],["slenteren","slenter","slenterde","geslenterd",false],["schrijven","schrijf","schreef","geschreven",true],["skeeleren","skeeler","skeelerde","geskeelerd",false],["schitteren","schitter","schitterde","geschitterd",false],["spreken","spreek","sprak","gesproken",true],["snijden","snijd","sneed","gesneden",true],["staan","sta","stond","gestaan",true],["slaan","sla","sloeg","geslagen",true],["stappen","stap","stapte","gestapt",false],["studeren","studeer","studeerde","gestudeerd",false],["schoppen","schop","schopte","geschopt",false],["schrikken","schrik","schrok","geschrokken",true],["sneeuwen","sneeuw","sneeuwde","gesneeuwd",false],["smullen","smul","smulde","gesmuld",false],["sturen","stuur","stuurde","gestuurd",false],["sparen","spaar","spaarde","gespaard",false],["smaken","smaak","smaakte","gesmaakt",false],["soezen","soes","soesde","gesoesd",false],["schaatsen","schaats","schaatste","geschaatst",false],["toeteren","toeter","toetertde","getoeterd",false],["trekken","trek","trok","getrokken",true],["tikken","tik","tikte","getikt",false],["tonen","toon","toonde","getoond",false],["tekenen","teken","tekende","getekend",false],["uitleggen","leg uit","legde uit","uitgelegd",false],["vinden","vind","vond","gevonden",true],["verstaan","versta","verstond","verstaan",true],["vallen","val","viel","gevallen",true],["vergeten","vergeet","vergat","vergeten",true],["vertrekken","vertrek","vertrok","vertrokken",true],["verwennen","verwennen","verwende","verwend",false],["verzorgen","verzorg","verzorgde","verzorgd",false],["vragen","vraag","vroeg","gevraagd",true],["verkleden","verkleed","verkleedde","verkleed",false],["verbranden","verbrand","verbrandde","verbrand",false],["verkopen","verkoop","verkocht","verkocht",true],["vertellen","vertel","vertelde","verteld",false],["verdedigen","verdedig","verdedigde","verdedigd",false],["verdelen","verdeel","verdeelde","verdeeld",false],["vliegen","vlieg","vloog","gevlogen",true],["verstoppen","verstop","verstopte","verstopt",false],["verliezen","verlies","verloor","verloren",true],["verdwalen","verdwaal","verdwaalde","verdwaald",false],["vissen","vis","viste","gevist",false],["verschijnen","verschijn","verscheen","verschenen",true],["verdienen","verdien","verdiende","verdiend",false],["vegen","veeg","veegde","geveegd",false],["vangen","vang","ving","gevangen",true],["verslinden","verslind","verslond","verslonden",true],["verlangen","verlang","verlangde","verlangd",false],["verloten","verloot","verlootte","verloot",false],["vieren","vier","vierde","gevierd",false],["vergroten","vergroot","vergrootte","vergroot",false],["verwachten","verwacht","verwachtte","verwacht",false],["voetballen","voetbal","voetbalde","gevoetbald",false],["verven","verf","verfde","geverfd",false],["verrassen","verrass","verrastte","verrast",false],["verbinden","verbind","verbond","verbonden",true],["verzenden","verzend","verzond","verzonden",true],["versieren","versier","versierde","versierd",false],["vervuilen","vervuil","vervuilde","vervuild",false],["voelen","voel","voelde","gevoeld",false],["vechten","vecht","vocht","gevochten",true],["worden","word","werd","geworden",true],["willen","wil","wilde","gewild",true],["winnen","win","won","gewonnen",true],["wuiven","wuif","wuifde","gewuifd",false],["wandelen","wandel","wandelde","gewandeld",false],["werken","werk","werkte","gewerkt",false],["weigeren","weiger","weigerde","geweigerd",false],["wachten","wacht","wachtte","gewacht",false],["weten","weet","wist","geweten",true],["wrijven","wrijf","wreef","gewreven",true],["wassen","was","waste","gewassen",true],["winkelen","winkel","winkelde","gewinkeld",false],["wonen","woon","woonde","gewoond",false],["zijn","ben","was","geweest",true],["zoeken","zoek","zocht","gezocht",true],["zien","zie","zag","gezien",true],["zoemen","zoem","zoemde","gezoemed",false],["zweten","zweet","zweette","gezweet",false],["zakken","zak","zakte","gezakt",false],["zwaaien","zwaai","zwaaide","gezwaaid",false],["zwemmen","zwem","zwom","gezwommen",true],["zingen","zing","zong","gezongen",true],["zinken","zink","zonk","gezonken",true],["zorgen","zorg","zorgde","gezorgd",false],["zitten","zit","zat","gezeten",true]];
+
+const COL_NAMES=["het werkwoord","de stam (ik T.T.)","de verleden tijd (ik)","het voltooid deelwoord"];
+const COL_SHORT=["werkwoord","stam","verleden tijd","voltooid deelwoord"];
+
+// ════════════════════════════════════════════════════════
+// TAAL STATE
+// ════════════════════════════════════════════════════════
+let taalTabState='tabel', taalFilter='all', taalLevel=1;
+let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null;
+let invulFilter='all', invulData=[];
+let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='zegswijzeBetekenis', zqCurrent=null;
+
+let taalInited=false;
+function initTaalRoot(){
+  if(!taalInited){taalInited=true;taalTab('tabel');}
+}
+
+function taalTab(t){
+  taalTabState=t;
+  ['tabel','woorden','zegswijzen'].forEach(k=>{
+    document.getElementById('taal-'+k+'-tab').style.display=k===t?'':'none';
+    document.getElementById('tst-'+k).classList.toggle('on',k===t);
+  });
+  if(t==='tabel')renderTaalTabel();
+  if(t==='woorden')renderWoordenschat();
+  if(t==='zegswijzen')renderZegswijzen();
+}
+
+// ── Tabel ──
+function setTaalFilter(f){
+  taalFilter=f;
+  ['all','onr','reg'].forEach(k=>{const b=document.getElementById('tf-'+k);if(b)b.classList.toggle('on',k===f);});
+  renderTaalRows();
+}
+function getTaalFiltered(){
+  const q=(document.getElementById('t-search')||{value:''}).value.toLowerCase();
+  return W.filter(r=>{
+    const m=r[0].includes(q)||r[1].includes(q)||r[2].includes(q)||r[3].includes(q);
+    if(!m)return false;
+    if(taalFilter==='onr')return r[4];
+    if(taalFilter==='reg')return !r[4];
+    return true;
+  });
+}
+function renderTaalRows(){
+  const rows=getTaalFiltered();
+  const el=document.getElementById('t-tbody');
+  if(!el)return;
+  el.innerHTML=rows.map(r=>`<tr><td>${r[0]}${r[4]?'<span class="onr-badge">onregelm.</span>':''}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+  const cnt=document.getElementById('t-rowcount');if(cnt)cnt.textContent=rows.length+' werkwoorden';
+}
+// ── Werkwoorden modus state ──
+let wwMode = 'lijst'; // 'lijst' | 'quiz' | 'invul'
+
+function setWwMode(m){
+  wwMode = m;
+  ['lijst','quiz','invul'].forEach((k,i)=>{
+    const b=document.querySelectorAll('#taal-tabel-tab .ww-mode-btn')[i];
+    if(b)b.classList.toggle('on',k===m);
+  });
+  renderWwContent();
+}
+
+function renderTaalTabel(){
+  document.getElementById('taal-tabel-tab').innerHTML=`
+    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+      <button class="filter-btn ww-mode-btn ${wwMode==='lijst'?'on':''}" onclick="setWwMode('lijst')">📋 Lijst</button>
+      <button class="filter-btn ww-mode-btn ${wwMode==='quiz'?'on':''}" onclick="setWwMode('quiz')">🎯 Quiz</button>
+      <button class="filter-btn ww-mode-btn ${wwMode==='invul'?'on':''}" onclick="setWwMode('invul')">📝 Invuloefening</button>
+    </div>
+    <div id="ww-content"></div>`;
+  renderWwContent();
+}
+
+function renderWwContent(){
+  const el=document.getElementById('ww-content');if(!el)return;
+  if(wwMode==='lijst') renderWwLijst(el);
+  else if(wwMode==='quiz') renderWwQuiz(el);
+  else renderWwInvul(el);
+}
+
+function renderWwLijst(el){
+  const q=(document.getElementById('t-search')||{value:''}).value||'';
+  el.innerHTML=`
+    <input class="t-search" type="text" id="t-search" placeholder="🔍 Zoek een werkwoord..." value="${q}" oninput="renderWwLijst(document.getElementById('ww-content'))" />
+    <div class="filter-row">
+      <span class="filter-lbl">Filter:</span>
+      <button class="filter-btn ${taalFilter==='all'?'on':''}" id="tf-all" onclick="setTaalFilter('all')">Alle</button>
+      <button class="filter-btn ${taalFilter==='onr'?'on':''}" id="tf-onr" onclick="setTaalFilter('onr')">Onregelmatig</button>
+      <button class="filter-btn ${taalFilter==='reg'?'on':''}" id="tf-reg" onclick="setTaalFilter('reg')">Regelmatig</button>
+    </div>
+    <div class="t-table-wrap">
+      <table class="t-table">
+        <thead><tr><th>Infinitief</th><th>Stam</th><th>VT (ik)</th><th>Voltooid deelwoord</th></tr></thead>
+        <tbody id="t-tbody"></tbody>
+      </table>
+    </div>
+    <p class="t-hint" id="t-rowcount"></p>`;
+  renderTaalRows();
+}
+
+function renderWwQuiz(el){
+  el.innerHTML=`
+    <div class="level-selector">
+      <button class="level-btn ${taalLevel===1?'on':''}" id="tlvl-1" onclick="setTaalLevel(1)"><span class="lvl-stars">⭐</span><span class="lvl-name">Niveau 1</span><span class="lvl-desc">Regelmatig</span></button>
+      <button class="level-btn ${taalLevel===2?'on':''}" id="tlvl-2" onclick="setTaalLevel(2)"><span class="lvl-stars">⭐⭐</span><span class="lvl-name">Niveau 2</span><span class="lvl-desc">Onregelmatig</span></button>
+      <button class="level-btn ${taalLevel===3?'on':''}" id="tlvl-3" onclick="setTaalLevel(3)"><span class="lvl-stars">⭐⭐⭐</span><span class="lvl-name">Niveau 3</span><span class="lvl-desc">Alles · omgekeerd</span></button>
+    </div>
+    <div class="t-score-row">
+      <div class="t-score-card"><div class="t-score-num" id="tsc-good">${tQScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="tsc-bad">${tQScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="tsc-pct">${(tQScore.good+tQScore.bad)>0?Math.round(tQScore.good/(tQScore.good+tQScore.bad)*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+      <div class="t-score-card t-streak-card"><div class="t-score-num" id="tsc-streak">${tQScore.streak}</div><div class="t-score-lbl">🔥 Reeks</div></div>
+    </div>
+    <div class="t-quiz-card">
+      <div class="t-quiz-meta"><span class="t-prog" id="tqprog">Vraag ${tQTotal||1}</span><span class="t-dir-badge" id="tqdir"></span></div>
+      <div class="t-context" id="tqctx"></div>
+      <div class="t-word" id="tqword"></div>
+      <div class="t-question" id="tqquest"></div>
+      <div id="tqinput"></div>
+      <div id="tqfeedback"></div>
+      <button class="t-next" id="tqnext" style="display:none;" onclick="loadTaalQ()">Volgende vraag →</button>
+    </div>`;
+  loadTaalQ();
+}
+
+function renderWwInvul(el){
+  el.innerHTML=`
+    <div class="invul-toolbar">
+      <div class="filter-row" style="margin-bottom:0">
+        <span class="filter-lbl">Woorden:</span>
+        <button class="filter-btn ${invulFilter==='all'?'on':''}" id="if-all" onclick="setInvulFilter('all')">Alle</button>
+        <button class="filter-btn ${invulFilter==='onr'?'on':''}" id="if-onr" onclick="setInvulFilter('onr')">Onregelmatig</button>
+        <button class="filter-btn ${invulFilter==='reg'?'on':''}" id="if-reg" onclick="setInvulFilter('reg')">Regelmatig</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <span class="filter-lbl">Aantal woorden:</span>
+        <select id="invul-count" class="t-count-select">
+          <option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="50">50</option>
+        </select>
+        <button class="t-submit" onclick="generateInvul()" style="padding:8px 14px;font-size:13px;">Nieuwe oefening</button>
+      </div>
+    </div>
+    <div class="t-table-wrap">
+      <table class="t-table">
+        <thead><tr><th>Infinitief</th><th>Stam</th><th>VT (ik)</th><th>Voltooid deelwoord</th></tr></thead>
+        <tbody id="invul-body"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="t-submit" onclick="checkInvul()">Controleer alles</button>
+      <button class="t-submit" onclick="generateInvul()" style="background:var(--surface2);box-shadow:none;">Nieuwe oefening</button>
+    </div>
+    <div id="invul-feedback" style="margin-top:10px;"></div>`;
+  generateInvul();
+}
+
+// ── Quiz ──
+function levenshtein(a,b){const m=a.length,n=b.length,dp=Array.from({length:m+1},(_,i)=>Array.from({length:n+1},(_,j)=>i===0?j:j===0?i:0));for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return dp[m][n];}
+function dtFeedback(given,correct,stem){const sc='fhkpstx',l=stem.slice(-1).toLowerCase(),et=sc.includes(l),suf=et?'te/t':'de/d',rule=`Stam eindigt op "${l}" → 't kofschip → gebruik "${suf}".`;const ge=given.slice(-2),ce=correct.slice(-2);if((ge==='de'&&ce==='te')||(ge==='te'&&ce==='de')||(given.endsWith('d')&&correct.endsWith('t'))||(given.endsWith('t')&&correct.endsWith('d')))return`<span style="font-size:11px;display:block;margin-top:5px;opacity:0.85;">${rule}</span>`;return'';}
+
+function setTaalLevel(l){
+  taalLevel=l;[1,2,3].forEach(n=>{const b=document.getElementById('tlvl-'+n);if(b)b.classList.toggle('on',n===l);});
+  resetTaalQuiz();
+}
+function resetTaalQuiz(){
+  tQScore={good:0,bad:0,streak:0};tQTotal=0;
+  updateTaalScore();loadTaalQ();
+}
+function updateTaalScore(){
+  const g=document.getElementById('tsc-good'),b=document.getElementById('tsc-bad'),p=document.getElementById('tsc-pct'),s=document.getElementById('tsc-streak');
+  if(g)g.textContent=tQScore.good;if(b)b.textContent=tQScore.bad;
+  const tot=tQScore.good+tQScore.bad;
+  if(p)p.textContent=tot>0?Math.round(tQScore.good/tot*100)+'%':'—';
+  if(s)s.textContent=tQScore.streak;
+}
+function pickTaalQ(){
+  let pool=taalLevel===1?W.filter(w=>!w[4]):taalLevel===2?W.filter(w=>w[4]):W;
+  const row=pool[Math.floor(Math.random()*pool.length)];
+  let givenCol,askCol,reverse=false;
+  if(taalLevel===1){givenCol=0;askCol=[1,2,3][Math.floor(Math.random()*3)];}
+  else if(taalLevel===2){const opts=[[0,2],[0,3],[1,2],[1,3]];[givenCol,askCol]=opts[Math.floor(Math.random()*opts.length)];}
+  else{const r=Math.random();if(r<0.35){givenCol=Math.random()<0.5?2:3;askCol=0;reverse=true;}else if(r<0.6){givenCol=1;askCol=Math.random()<0.5?2:3;}else{givenCol=0;askCol=[1,2,3][Math.floor(Math.random()*3)];}}
+  return{row,givenCol,askCol,reverse};
+}
+function loadTaalQ(){
+  tQAnswered=false;
+  const fb=document.getElementById('tqfeedback'),nx=document.getElementById('tqnext');
+  if(fb)fb.innerHTML='';if(nx)nx.style.display='none';
+  tCurrentQ=pickTaalQ();
+  const{row,givenCol,askCol,reverse}=tCurrentQ;tQTotal++;
+  const prog=document.getElementById('tqprog');if(prog)prog.textContent='Vraag '+tQTotal;
+  const dir=document.getElementById('tqdir');if(dir)dir.textContent=reverse?'← omgekeerd':'→ vooruit';
+  const ctx=document.getElementById('tqctx');if(ctx)ctx.textContent=COL_SHORT[givenCol]+':';
+  const wd=document.getElementById('tqword');if(wd)wd.textContent=row[givenCol];
+  const qq=document.getElementById('tqquest');if(qq)qq.textContent='Geef '+COL_NAMES[askCol]+(askCol===0?' (infinitief).':'.');
+  const ia=document.getElementById('tqinput');
+  if(ia){ia.innerHTML=`<div class="t-input-wrap"><input class="t-input" type="text" id="t-type-ans" placeholder="Typ hier..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><button class="t-submit" onclick="checkTaalQ()">Controleer</button></div><p class="t-hint-txt">Druk op Enter om te controleren.</p>`;
+  const inp=document.getElementById('t-type-ans');if(inp){setTimeout(()=>{if(inp)inp.focus();},50);inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkTaalQ();});}}
+}
+function checkTaalQ(){
+  if(tQAnswered)return;
+  const input=document.getElementById('t-type-ans');
+  if(!input||!input.value.trim())return;
+  const raw=input.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const correct=tCurrentQ.row[tCurrentQ.askCol];
+  const cn=correct.toLowerCase();
+  const ok=raw===cn||raw.replace(/\s/g,'')===cn.replace(/\s/g,'');
+  const dist=ok?0:levenshtein(raw,cn);
+  const bijna=!ok&&dist<=2;
+  tQAnswered=true;input.disabled=true;input.classList.add(ok?'correct':'wrong');
+  if(ok){tQScore.good++;tQScore.streak++;}else{tQScore.bad++;tQScore.streak=0;}
+  updateTaalScore();
+  const r=tCurrentQ.row;
+  const fullRow=`<div style="margin-top:6px;font-size:11px;opacity:0.85;"><em>${r[0]}</em> → stam: <em>${r[1]}</em> · VT: <em>${r[2]}</em> · VD: <em>${r[3]}</em></div>`;
+  let msg,cls;
+  if(ok){cls='t-fb-ok';const ms=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];msg=ms[Math.floor(Math.random()*ms.length)];}
+  else if(bijna){cls='t-fb-bijna';msg=`Bijna! Je schreef <strong>${raw}</strong>, het is <strong>${correct}</strong>.${dtFeedback(raw,correct,r[1])}${fullRow}`;}
+  else{cls='t-fb-no';msg=`Fout. Het antwoord is: <strong>${correct}</strong>${dtFeedback(raw,correct,r[1])}${fullRow}`;}
+  const fb=document.getElementById('tqfeedback');if(fb)fb.innerHTML=`<div class="t-feedback ${cls}">${msg}</div>`;
+  const nx=document.getElementById('tqnext');if(nx)nx.style.display='inline-block';
+  if(ok)snd('ok');else snd('no');
+}
+// renderTaalQuiz en renderTaalInvul zijn vervangen door renderWwQuiz/renderWwInvul
+
+// ── Invul ──
+function setInvulFilter(f){
+  invulFilter=f;
+  ['all','onr','reg'].forEach(k=>document.getElementById('if-'+k).classList.toggle('on',k===f));
+  generateInvul();
+}
+function generateInvul(){
+  let pool=invulFilter==='onr'?W.filter(w=>w[4]):invulFilter==='reg'?W.filter(w=>!w[4]):W;
+  const countEl=document.getElementById('invul-count');
+  const count=Math.min(parseInt(countEl?countEl.value:20),pool.length);
+  const shuffled=[...pool].sort(()=>Math.random()-0.5).slice(0,count);
+  invulData=shuffled.map(row=>{const n=Math.random()<0.5?1:2;const cols=[0,1,2,3].sort(()=>Math.random()-0.5).slice(0,n);return{row,blanks:cols};});
+  renderInvulRows();
+  const fb=document.getElementById('invul-feedback');if(fb)fb.innerHTML='';
+}
+function renderInvulRows(showResults){
+  const body=document.getElementById('invul-body');if(!body)return;
+  body.innerHTML=invulData.map(({row,blanks},ri)=>
+    `<tr>${[0,1,2,3].map(ci=>{
+      const isBlank=blanks.includes(ci);
+      if(!isBlank)return`<td>${row[ci]}</td>`;
+      if(showResults){
+        const inp=document.getElementById(`inv-${ri}-${ci}`);
+        const given=inp?inp.value.trim().toLowerCase().replace(/\s+/g,' '):'';
+        const correct=row[ci].toLowerCase();
+        const ok=given===correct||given.replace(/\s/g,'')===correct.replace(/\s/g,'');
+        const dist=ok?0:levenshtein(given,correct);
+        const bijna=!ok&&dist<=2&&given.length>0;
+        const cls=ok?'inv-correct':bijna?'inv-almost':'inv-wrong';
+        const hint=!ok&&given.length>0?`<span class="invul-answer">✓ ${row[ci]}</span>`:'';
+        const emptyHint=given.length===0?`<span class="invul-answer">✓ ${row[ci]}</span>`:'';
+        return`<td><input class="invul-input ${cls}" id="inv-${ri}-${ci}" value="${inp?inp.value:''}" disabled />${hint}${emptyHint}</td>`;
+      }
+      return`<td><input class="invul-input" id="inv-${ri}-${ci}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="..." /></td>`;
+    }).join('')}</tr>`
+  ).join('');
+}
+function checkInvul(){
+  let good=0,almost=0,wrong=0,empty=0;
+  invulData.forEach(({row,blanks},ri)=>{blanks.forEach(ci=>{const inp=document.getElementById(`inv-${ri}-${ci}`);if(!inp)return;const given=inp.value.trim().toLowerCase().replace(/\s+/g,' ');const correct=row[ci].toLowerCase();if(given.length===0){empty++;return;}const ok=given===correct||given.replace(/\s/g,'')===correct.replace(/\s/g,'');const dist=ok?0:levenshtein(given,correct);const bijna=!ok&&dist<=2;if(ok)good++;else if(bijna)almost++;else wrong++;});});
+  renderInvulRows(true);
+  const total=good+almost+wrong+empty,pct=total>0?Math.round(good/total*100):0;
+  const fb=document.getElementById('invul-feedback');
+  if(fb)fb.innerHTML=`<div class="invul-score-bar"><span class="invul-pill ip-good">✓ ${good} goed</span>${almost>0?`<span class="invul-pill ip-almost">~ ${almost} bijna</span>`:''} ${wrong>0?`<span class="invul-pill ip-wrong">✗ ${wrong} fout</span>`:''} ${empty>0?`<span class="invul-pill ip-neutral">— ${empty} leeg</span>`:''}<span class="invul-pill ip-neutral">${pct}%</span></div><p style="font-size:12px;color:var(--tx3);margin-top:4px;">Juiste antwoorden staan cursief onder de foute vakken.</p>`;
+}
+// ════════════════════════════════════════════════════════
+// WOORDENSCHAT DATA
+// ════════════════════════════════════════════════════════
+const WOORDEN = [
+  ["afwimpelen","wegsturen op een luchtige manier"],
+  ["het feit","iets wat echt gebeurd is"],
+  ["de hashtag","hekje (#) voor een woord of zin om kort weer te geven waar je bericht over gaat"],
+  ["de krantenkop","titel van een krantenartikel die beschrijft waarover het artikel gaat"],
+  ["het nadeel","wat niet goed is aan iets"],
+  ["observeren","heel goed bekijken"],
+  ["de speurneus","iemand die goed kan opsporen"],
+  ["de verslaggever","persoon die het artikel schreef"],
+  ["het vervoermiddel","alle vervoer dat je van de ene naar de andere plek brengt (bv. auto, bus, trein)"],
+  ["het voordeel","wat goed is aan iets"],
+  ["weids","groots, ruim, je kunt ver kijken"],
+  ["het kenmerk","iets waaraan je een persoon, dier of voorwerp herkent"],
+  ["de kieuw","gaatje bij de kop van de vis, waardoor hij ademhaalt"],
+  ["het leefgebied","gebied waarin dieren leven, bv. het oerwoud of de woestijn"],
+  ["levensbedreigend","zo gevaarlijk dat je leven in gevaar is"],
+  ["navigeren","de weg zoeken"],
+  ["ondraaglijk","iets dat zo vervelend is dat je het niet kunt volhouden"],
+  ["overbodig","iets dat je niet nodig hebt"],
+  ["praktisch","handig, iets dat je nodig kunt hebben"],
+  ["de school (vissen)","grote groep vissen"],
+  ["de survivaltocht","overlevingstocht"],
+  ["vuur stoken","vuur maken"],
+  ["zich begeven naar","ergens naartoe gaan"],
+  ["de zwaluw","vogelsoort"],
+  ["bestoken","beschieten"],
+  ["de cyclus","iets dat zich steeds herhaalt"],
+  ["depressief","je gedurende lange tijd niet gelukkig voelen"],
+  ["graaien","grabbelen, met de handen in iets zoeken"],
+  ["grinniken","zachtjes lachen"],
+  ["grissen","snel iets wegnemen"],
+  ["nippen","klein slokje drinken"],
+  ["de onomatopee","woord waarmee een klank wordt nagebootst, bv. 'de bam'"],
+  ["verlept","verwelkt"],
+  ["vervullen","laten uitkomen van een wens of droom"],
+  ["de wastafel","—"],
+  ["wissen","verwijderen"],
+  ["zich inbeelden","zich voorstellen dat iets echt waar is, terwijl het niet zo is"],
+  ["aantrekkelijk","knap, mooi om naar te kijken"],
+  ["de consument","iemand die iets koopt"],
+  ["het doel","wat je probeert te bereiken"],
+  ["evalueren","beoordelen, controleren"],
+  ["de fabrikant","maker van een product"],
+  ["favoriet","iets wat je heel graag hebt of doet"],
+  ["het formulier","papier waarop bepaalde gegevens ingevuld moeten worden"],
+  ["gewichtloos","niets wegen, zwevend"],
+  ["de instructie","opdracht die stap voor stap zegt wat je moet doen"],
+  ["het middel","wat je gebruikt om je doel te bereiken"],
+  ["onzijdig","zonder geslacht, niet mannelijk of vrouwelijk"],
+  ["de presentatie","het aan elkaar praten van onderdelen van een programma"],
+  ["roemen","goede dingen over iemand zeggen"],
+  ["het scharminkel","mager mens of dier"],
+  ["de slogan","korte, krachtige zin (vooral in reclame)"],
+  ["de sloppenwijk","arme buurt in een stad"],
+  ["de verbeelding","fantasie"],
+  ["verdoven","ervoor zorgen dat iemand geen pijn meer voelt"],
+  ["woest","heel boos"],
+  ["de aantekeningen","korte tekst of sleutelwoorden die je opschrijft"],
+  ["de benodigdheden","wat je nodig hebt om iets te doen of te maken"],
+  ["de bereidingswijze","manier waarop je een gerecht klaarmaakt"],
+  ["de bijsluiter","instructie over hoe je een medicijn moet gebruiken"],
+  ["chronologisch","in de juiste volgorde"],
+  ["de gebruiksaanwijzing","instructie over hoe je iets gebruikt"],
+  ["haarscherp","heel scherp of duidelijk"],
+  ["huiveren","rillen omdat je bang bent of koud hebt"],
+  ["(informatie) inwinnen","vragen stellen om informatie te krijgen"],
+  ["de kritiek","wat je niet goed vindt aan iets"],
+  ["het nevenpersonage","minder belangrijk persoon in een verhaal of film"],
+  ["verwittigen","op de hoogte brengen"],
+  ["het vormgedicht","gedicht in de vorm van het onderwerp"],
+  ["de amateur","iemand die iets als hobby doet"],
+  ["de bedenksels","dingen die je verzint"],
+  ["exact","heel precies"],
+  ["gelaten","kalm, je legt je erbij neer"],
+  ["een makkelijk doelwit","iemand die je makkelijk kunt pesten"],
+  ["knarsen","een schurend geluid maken met je tanden"],
+  ["stamelen","niet uit je woorden komen"],
+  ["de stuntelaar","onhandig persoon"],
+  ["de trekpleister","iets waar veel mensen naar komen kijken"],
+  ["de zeebries","wind uit de richting van de zee"],
+  ["de voordracht","spreekbeurt of voordragen voor een groep"],
+  ["afzonderlijk","apart, niet samen"],
+  ["attent","aardig"],
+  ["beknopt","in het kort"],
+  ["de bijzaak","wat minder belangrijk is"],
+  ["gebruikelijk","veel voorkomend, alledaags"],
+  ["de hoofdzaak","wat belangrijk is"],
+  ["inspraak hebben","de kans krijgen om je mening te geven"],
+  ["de larve","jong diertje dat later nog verandert"],
+  ["de lippen tuiten","je mond in 'kusstand' brengen"],
+  ["neuriën","zachtjes zingen met gesloten mond"],
+  ["nors","onvriendelijk"],
+  ["het resultaat","uitslag of gevolg"],
+  ["schraal","koud en droog"],
+  ["de sfeer","bepaald gevoel dat ergens hangt"],
+  ["sociaal","graag en leuk met anderen omgaan"],
+  ["specifiek","kenmerkend"],
+  ["stabiel","vast, evenwichtig"],
+  ["uniek","er is er maar één van"],
+  ["voorgoed","definitief en blijvend, het komt nooit meer terug"],
+  ["voor altijd","eindeloos, voor de eeuwigheid"],
+  ["wanhopig","zonder hoop, niet meer weten wat te doen"],
+  ["zorgzaam","zorg dragen voor iemand anders"],
+  ["arrogant","verwaand, als je op anderen neerkijkt"],
+  ["bevorderen","ervoor zorgen dat iets sneller of beter gaat"],
+  ["flets","met weinig kleur of smaak"],
+  ["geschikt","bruikbaar"],
+  ["ingesloten","aan alle kanten ligt er iets naast (bv. een veld ingesloten door een gracht)"],
+  ["klikken (figuurlijk)","goed met elkaar overeenkomen"],
+  ["de kwaal","ziekte, ongemak"],
+  ["monotoon","eentonig, steeds op dezelfde manier"],
+  ["plannen smeden","plannen verzinnen"],
+  ["de rasp","keukengereedschap om fijne stukjes van voedsel te schrapen"],
+  ["de uitwerking","resultaat, effect"],
+  ["het voornaamste","belangrijkste"],
+  ["voorspellen","zeggen wat je verwacht dat er zal gebeuren"],
+  ["weerspiegelen","de afbeelding van iets in een spiegel zien"],
+  ["weken","iets zacht laten worden door het in een vloeistof te leggen"],
+  ["argwanend","je vertrouwt het niet helemaal"],
+  ["het complex","aantal gebouwen dat bij elkaar hoort"],
+  ["efficiënt","goed en snel"],
+  ["de ervaring","wat je leert door dingen mee te maken"],
+  ["functioneren","werken"],
+  ["inenten","injectie tegen een bepaalde ziekte"],
+  ["de kruin","bovenste deel van een boom"],
+  ["de locatie","plaats"],
+  ["onbepaald","niet precies vastgesteld, nog niet zeker"],
+  ["(de) pitten","1 (ww) slapen / 2 (zn) zaadhuisje voor nieuwe planten"],
+  ["ruisen","zacht, ritselend geluid maken door de wind"],
+  ["de serre","glazen huis voor het kweken van planten"],
+  ["stockeren","opslaan"],
+  ["wantrouwig","iets niet vertrouwen"]
+];
+
+// ════════════════════════════════════════════════════════
+// ZEGSWIJZEN DATA
+// ════════════════════════════════════════════════════════
+const ZEGSWIJZEN = [
+  ["een kei zijn in","heel goed zijn in"],
+  ["vroeg uit de veren","vroeg uit bed"],
+  ["een kijkje nemen","ergens even gaan kijken"],
+  ["in de huid kruipen van","zich inleven in"],
+  ["als een hond in een kegelspel","ongewenst, ongelegen"],
+  ["de kleren maken de man","bij beoordelen kijk je vaak naar uiterlijk"],
+  ["een gat in de lucht springen","heel blij zijn"],
+  ["iets broodnodig hebben","iets is onmisbaar"],
+  ["de hel is losgebroken","de situatie is erg slecht geworden"],
+  ["naar de haaien zijn","voorgoed verloren zijn"],
+  ["zo trots als een pauw","erg trots"],
+  ["de sterren van de hemel spelen","heel goed spelen"],
+  ["geen schijn van kans hebben","helemaal geen kans maken"],
+  ["je mening herzien","van mening veranderen"],
+  ["je stoute schoenen aantrekken","al je moed verzamelen om iets te durven"],
+  ["zich meester maken van iets","in zijn macht krijgen, overmeesteren"],
+  ["een doorn in het oog zijn","iets dat je ergert en waar je jaloers op bent"],
+  ["(als) aan de grond genageld","zeer verbaasd en niet meer kunnen bewegen"],
+  ["je adem stokt in je keel","je kunt niets meer zeggen"],
+  ["tot de nok gevuld","heel vol, tot aan de rand gevuld"]
+];
+
+// ════════════════════════════════════════════════════════
+// WOORDENSCHAT RENDER
+// ════════════════════════════════════════════════════════
+let woordenSearch = '';
+let woordenQuizMode = false;
+let wqCurrent = null, wqAnswered = false, wqScore = {good:0,bad:0}, wqDir = 'woordBetekenis';
+
+function renderWoordenschat(){
+  document.getElementById('taal-woorden-tab').innerHTML = `
+    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+      <button class="filter-btn ${!woordenQuizMode?'on':''}" onclick="setWoordenMode(false)">📋 Lijst</button>
+      <button class="filter-btn ${woordenQuizMode?'on':''}" onclick="setWoordenMode(true)">🎯 Quiz</button>
+    </div>
+    <div id="woorden-content"></div>`;
+  renderWoordenContent();
+}
+function setWoordenMode(quiz){
+  woordenQuizMode=quiz;
+  if(quiz){wqScore={good:0,bad:0};wqAnswered=false;}
+  const btns=document.querySelectorAll('#taal-woorden-tab .filter-btn');
+  if(btns[0])btns[0].classList.toggle('on',!quiz);
+  if(btns[1])btns[1].classList.toggle('on',quiz);
+  renderWoordenContent();
+}
+function renderWoordenContent(){
+  const el=document.getElementById('woorden-content');if(!el)return;
+  if(!woordenQuizMode){
+    const q=(document.getElementById('w-search')||{value:''}).value||woordenSearch;
+    const filtered=WOORDEN.filter(r=>r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase()));
+    el.innerHTML='<input class="t-search" type="text" id="w-search" placeholder="🔍 Zoek een woord of betekenis..." value="'+q+'" oninput="woordenSearch=this.value;renderWoordenContent()" />'+
+      '<div class="t-table-wrap"><table class="t-table">'+
+      '<thead><tr><th>Woord</th><th>Betekenis</th></tr></thead>'+
+      '<tbody>'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
+      '</table></div>'+
+      '<p class="t-hint">'+filtered.length+' woorden</p>';
+  } else {
+    renderWoordenQuiz();
+  }
+}
+function renderWoordenQuiz(){
+  const el=document.getElementById('woorden-content');if(!el)return;
+  const tot=wqScore.good+wqScore.bad;
+  el.innerHTML=`
+    <div class="t-score-row" style="margin-bottom:12px;">
+      <div class="t-score-card"><div class="t-score-num" id="wsc-good">${wqScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="wsc-bad">${wqScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num">${tot>0?Math.round(wqScore.good/tot*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+    </div>
+    <div id="wq-dir-btns" style="display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap;">
+      <span class="filter-lbl">Richting:</span>
+      <button class="filter-btn ${wqDir==='woordBetekenis'?'on':''}" onclick="setWqDir('woordBetekenis')">Woord → Betekenis</button>
+      <button class="filter-btn ${wqDir==='betekenisWoord'?'on':''}" onclick="setWqDir('betekenisWoord')">Betekenis → Woord</button>
+    </div>
+    <div id="wq-card"></div>`;
+  loadWoordenQ();
+}
+function setWqDir(d){
+  wqDir=d;
+  document.querySelectorAll('#wq-dir-btns .filter-btn').forEach((b,i)=>{
+    b.classList.toggle('on',(i===0&&d==='woordBetekenis')||(i===1&&d==='betekenisWoord'));
+  });
+  loadWoordenQ();
+}
+function getWoordenDistractors(correct, col){
+  const pool=WOORDEN.filter(r=>r!==wqCurrent);
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  const distractors=[];
+  for(const r of shuffled){
+    if(distractors.length>=3)break;
+    if(r[col]!==correct)distractors.push(r[col]);
+  }
+  return distractors;
+}
+function loadWoordenQ(){
+  wqAnswered=false;
+  wqCurrent=WOORDEN[Math.floor(Math.random()*WOORDEN.length)];
+  const askCol=wqDir==='woordBetekenis'?1:0;
+  const givenCol=wqDir==='woordBetekenis'?0:1;
+  const correct=wqCurrent[askCol];
+  const distractors=getWoordenDistractors(correct,askCol);
+  const options=[correct,...distractors].sort(()=>Math.random()-0.5);
+  const label=wqDir==='woordBetekenis'?'Wat is de betekenis van:':'Welk woord hoort bij deze betekenis:';
+  const el=document.getElementById('wq-card');if(!el)return;
+  el.innerHTML=`
+    <div class="t-quiz-card">
+      <div class="t-context">${label}</div>
+      <div class="t-word" style="font-size:26px;margin-bottom:14px;">${wqCurrent[givenCol]}</div>
+      <div id="wq-options" style="display:flex;flex-direction:column;gap:8px;">
+        ${options.map((opt,i)=>`
+          <button class="mc-option" data-opt="${i}" onclick="checkWoordenQ(this)">
+            <span class="mc-letter">${['A','B','C','D'][i]}</span>
+            <span class="mc-text">${opt}</span>
+          </button>`).join('')}
+      </div>
+      <div id="wq-feedback"></div>
+    </div>`;
+  const wrap=document.getElementById('wq-options');
+  if(wrap)wrap._options=options;
+  if(wrap)wrap._correct=correct;
+}
+function checkWoordenQ(btn){
+  const wrap=document.getElementById('wq-options');
+  if(!wrap)return;
+  const given=wrap._options[parseInt(btn.dataset.opt)];
+  const correct=wrap._correct;
+  if(wqAnswered)return;
+  wqAnswered=true;
+  const ok=given===correct;
+  if(ok)wqScore.good++;else wqScore.bad++;
+  const tot=wqScore.good+wqScore.bad;
+  const gEl=document.getElementById('wsc-good'),bEl=document.getElementById('wsc-bad');
+  if(gEl)gEl.textContent=wqScore.good;if(bEl)bEl.textContent=wqScore.bad;
+  // Color all buttons
+  document.querySelectorAll('#wq-options .mc-option').forEach(b=>{
+    const bText=b.querySelector('.mc-text').textContent;
+    if(bText===correct){b.classList.add('mc-correct');}
+    else if(b===btn&&!ok){b.classList.add('mc-wrong');}
+    else{b.style.opacity='0.4';}
+    b.disabled=true;
+  });
+  const msgs=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];
+  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is aangeduid.`;
+  const cls=ok?'t-fb-ok':'t-fb-no';
+  const fb=document.getElementById('wq-feedback');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div><button class="t-next" style="margin-top:8px;" onclick="loadWoordenQ()">Volgende →</button>`;
+  if(ok)snd('ok');else snd('no');
+}
+function renderZegswijzen(){
+  document.getElementById('taal-zegswijzen-tab').innerHTML = `
+    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+      <button class="filter-btn ${!zegswijzenQuizMode?'on':''}" onclick="setZegswijzenMode(false)">📋 Lijst</button>
+      <button class="filter-btn ${zegswijzenQuizMode?'on':''}" onclick="setZegswijzenMode(true)">🎯 Quiz</button>
+    </div>
+    <div id="zegswijzen-content"></div>`;
+  renderZegswijzenContent();
+}
+function setZegswijzenMode(quiz){
+  zegswijzenQuizMode=quiz;
+  if(quiz){zqScore={good:0,bad:0};zqAnswered=false;}
+  const btns=document.querySelectorAll('#taal-zegswijzen-tab .filter-btn');
+  if(btns[0])btns[0].classList.toggle('on',!quiz);
+  if(btns[1])btns[1].classList.toggle('on',quiz);
+  renderZegswijzenContent();
+}
+function renderZegswijzenContent(){
+  const el=document.getElementById('zegswijzen-content');if(!el)return;
+  if(!zegswijzenQuizMode){
+    const q=(document.getElementById('z-search')||{value:''}).value||'';
+    const filtered=ZEGSWIJZEN.filter(r=>r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase()));
+    el.innerHTML='<input class="t-search" type="text" id="z-search" placeholder="🔍 Zoek een zegswijze..." value="'+q+'" oninput="renderZegswijzenContent()" />'+
+      '<div class="t-table-wrap"><table class="t-table">'+
+      '<thead><tr><th>Zegswijze</th><th>Betekenis</th></tr></thead>'+
+      '<tbody>'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
+      '</table></div>'+
+      '<p class="t-hint">'+filtered.length+' zegswijzen</p>';
+  } else {
+    renderZegswijzenQuiz();
+  }
+}
+function renderZegswijzenQuiz(){
+  const el=document.getElementById('zegswijzen-content');if(!el)return;
+  const tot=zqScore.good+zqScore.bad;
+  el.innerHTML=`
+    <div class="t-score-row" style="margin-bottom:12px;">
+      <div class="t-score-card"><div class="t-score-num" id="zsc-good">${zqScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="zsc-bad">${zqScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num">${tot>0?Math.round(zqScore.good/tot*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+    </div>
+    <div id="zq-dir-btns" style="display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap;">
+      <span class="filter-lbl">Richting:</span>
+      <button class="filter-btn ${zqDir==='zegswijzeBetekenis'?'on':''}" onclick="setZqDir('zegswijzeBetekenis')">Zegswijze → Betekenis</button>
+      <button class="filter-btn ${zqDir==='betekenisZegswijze'?'on':''}" onclick="setZqDir('betekenisZegswijze')">Betekenis → Zegswijze</button>
+    </div>
+    <div id="zq-card"></div>`;
+  loadZegswijzeQ();
+}
+function setZqDir(d){
+  zqDir=d;
+  document.querySelectorAll('#zq-dir-btns .filter-btn').forEach((b,i)=>{
+    b.classList.toggle('on',(i===0&&d==='zegswijzeBetekenis')||(i===1&&d==='betekenisZegswijze'));
+  });
+  loadZegswijzeQ();
+}
+function getZegswijzenDistractors(correct, col){
+  const pool=ZEGSWIJZEN.filter(r=>r!==zqCurrent);
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  const distractors=[];
+  for(const r of shuffled){
+    if(distractors.length>=3)break;
+    if(r[col]!==correct)distractors.push(r[col]);
+  }
+  return distractors;
+}
+function loadZegswijzeQ(){
+  zqAnswered=false;
+  zqCurrent=ZEGSWIJZEN[Math.floor(Math.random()*ZEGSWIJZEN.length)];
+  const askCol=zqDir==='zegswijzeBetekenis'?1:0;
+  const givenCol=zqDir==='zegswijzeBetekenis'?0:1;
+  const correct=zqCurrent[askCol];
+  const distractors=getZegswijzenDistractors(correct,askCol);
+  const options=[correct,...distractors].sort(()=>Math.random()-0.5);
+  const label=zqDir==='zegswijzeBetekenis'?'Wat betekent deze zegswijze:':'Welke zegswijze hoort bij deze betekenis:';
+  const el=document.getElementById('zq-card');if(!el)return;
+  el.innerHTML=`
+    <div class="t-quiz-card">
+      <div class="t-context">${label}</div>
+      <div class="t-word" style="font-size:22px;margin-bottom:14px;line-height:1.4;">${zqCurrent[givenCol]}</div>
+      <div id="zq-options" style="display:flex;flex-direction:column;gap:8px;">
+        ${options.map((opt,i)=>`
+          <button class="mc-option" data-opt="${i}" onclick="checkZegswijzeQ(this)">
+            <span class="mc-letter">${['A','B','C','D'][i]}</span>
+            <span class="mc-text">${opt}</span>
+          </button>`).join('')}
+      </div>
+      <div id="zq-feedback"></div>
+    </div>`;
+  // Store options on element for safe retrieval
+  const wrap=document.getElementById('zq-options');
+  if(wrap)wrap._options=options;
+  if(wrap)wrap._correct=correct;
+}
+function checkZegswijzeQ(btn){
+  const wrap=document.getElementById('zq-options');
+  if(!wrap)return;
+  const given=wrap._options[parseInt(btn.dataset.opt)];
+  const correct=wrap._correct;
+  if(zqAnswered)return;
+  zqAnswered=true;
+  const ok=given===correct;
+  if(ok)zqScore.good++;else zqScore.bad++;
+  const gEl=document.getElementById('zsc-good'),bEl=document.getElementById('zsc-bad');
+  if(gEl)gEl.textContent=zqScore.good;if(bEl)bEl.textContent=zqScore.bad;
+  document.querySelectorAll('#zq-options .mc-option').forEach(b=>{
+    const bText=b.querySelector('.mc-text').textContent;
+    if(bText===correct){b.classList.add('mc-correct');}
+    else if(b===btn&&!ok){b.classList.add('mc-wrong');}
+    else{b.style.opacity='0.4';}
+    b.disabled=true;
+  });
+  const msgs=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];
+  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is aangeduid.`;
+  const cls=ok?'t-fb-ok':'t-fb-no';
+  const fb=document.getElementById('zq-feedback');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div><button class="t-next" style="margin-top:8px;" onclick="loadZegswijzeQ()">Volgende →</button>`;
+  if(ok)snd('ok');else snd('no');
+}
+// ════════════════════════════════════════════════════════
+// ADMIN / BEHEER
+// ════════════════════════════════════════════════════════
+
+// Storage keys
+const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswijzen'};
+
+// Load custom data from localStorage (falls back to built-in)
+function loadData(){
+  try{
+    const ww=localStorage.getItem(SK.ww);
+    if(ww)W.splice(0,W.length,...JSON.parse(ww));
+    const wd=localStorage.getItem(SK.woorden);
+    if(wd)WOORDEN.splice(0,WOORDEN.length,...JSON.parse(wd));
+    const zg=localStorage.getItem(SK.zegswijzen);
+    if(zg)ZEGSWIJZEN.splice(0,ZEGSWIJZEN.length,...JSON.parse(zg));
+  }catch(e){console.warn('loadData error',e);}
+}
+function saveWW(){localStorage.setItem(SK.ww,JSON.stringify(W));}
+function saveWoorden(){localStorage.setItem(SK.woorden,JSON.stringify(WOORDEN));}
+function saveZegswijzen(){localStorage.setItem(SK.zegswijzen,JSON.stringify(ZEGSWIJZEN));}
+
+// Password
+function getStoredPw(){return localStorage.getItem(SK.pw)||null;}
+function setPw(pw){localStorage.setItem(SK.pw,pw);}
+let adminUnlocked=false;
+
+function openAdmin(){
+  document.getElementById('admin-overlay').style.display='flex';
+  if(!getStoredPw()){renderSetPassword();}
+  else if(!adminUnlocked){renderLoginForm();}
+  else{renderAdminPanel();}
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').style.display='none';
+}
+
+function renderSetPassword(){
+  document.getElementById('admin-modal-title').textContent='🔒 Stel wachtwoord in';
+  document.getElementById('admin-modal-body').innerHTML=`
+    <p style="color:var(--tx2);font-size:14px;margin-bottom:16px;">Stel een wachtwoord in om het beheerderspaneel te beveiligen.</p>
+    <input class="pw-input" type="password" id="pw1" placeholder="Nieuw wachtwoord" />
+    <input class="pw-input" type="password" id="pw2" placeholder="Herhaal wachtwoord" />
+    <button class="pw-btn" onclick="confirmSetPw()">Instellen</button>
+    <div class="pw-error" id="pw-err"></div>`;
+  setTimeout(()=>{const i=document.getElementById('pw1');if(i)i.focus();},50);
+}
+function confirmSetPw(){
+  const p1=document.getElementById('pw1').value;
+  const p2=document.getElementById('pw2').value;
+  if(!p1||p1.length<3){document.getElementById('pw-err').textContent='Wachtwoord moet minstens 3 tekens zijn.';return;}
+  if(p1!==p2){document.getElementById('pw-err').textContent='Wachtwoorden komen niet overeen.';return;}
+  setPw(p1);adminUnlocked=true;renderAdminPanel();
+}
+
+function renderLoginForm(){
+  document.getElementById('admin-modal-title').textContent='🔒 Beheer';
+  document.getElementById('admin-modal-body').innerHTML=`
+    <p style="color:var(--tx2);font-size:14px;margin-bottom:16px;">Voer het wachtwoord in om het beheerderspaneel te openen.</p>
+    <input class="pw-input" type="password" id="pw-login" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')doLogin()" />
+    <button class="pw-btn" onclick="doLogin()">Openen</button>
+    <div class="pw-error" id="pw-err"></div>`;
+  setTimeout(()=>{const i=document.getElementById('pw-login');if(i)i.focus();},50);
+}
+function doLogin(){
+  const val=document.getElementById('pw-login').value;
+  if(val===getStoredPw()){adminUnlocked=true;renderAdminPanel();}
+  else{document.getElementById('pw-err').textContent='Ongeldig wachtwoord.';
+    const i=document.getElementById('pw-login');if(i){i.value='';i.focus();}}
+}
+
+// ── Admin panel ──
+let adminTab='ww';
+function renderAdminPanel(){
+  document.getElementById('admin-modal-title').textContent='⚙️ Beheer';
+  document.getElementById('admin-modal-body').innerHTML=`
+    <div class="admin-tabs">
+      <button class="admin-tab ${adminTab==='ww'?'on':''}" onclick="switchAdminTab('ww')">🔤 Werkwoorden</button>
+      <button class="admin-tab ${adminTab==='woorden'?'on':''}" onclick="switchAdminTab('woorden')">📚 Woordenschat</button>
+      <button class="admin-tab ${adminTab==='zegswijzen'?'on':''}" onclick="switchAdminTab('zegswijzen')">💬 Zegswijzen</button>
+      <button class="admin-tab ${adminTab==='instellingen'?'on':''}" onclick="switchAdminTab('instellingen')">🔧 Instellingen</button>
+    </div>
+    <div id="admin-tab-content"></div>`;
+  renderAdminTab();
+}
+function switchAdminTab(t){adminTab=t;renderAdminPanel();}
+
+function renderAdminTab(){
+  const el=document.getElementById('admin-tab-content');if(!el)return;
+  if(adminTab==='ww')renderAdminWW(el);
+  if(adminTab==='woorden')renderAdminWoorden(el);
+  if(adminTab==='zegswijzen')renderAdminZegswijzen(el);
+  if(adminTab==='instellingen')renderAdminInstellingen(el);
+}
+
+// ── Werkwoorden beheer ──
+function renderAdminWW(el){
+  el.innerHTML=`
+    <p class="admin-count">${W.length} werkwoorden in de lijst</p>
+    <div class="admin-section">
+      <p style="font-size:12px;color:var(--tx3);margin-bottom:6px;">Nieuw werkwoord toevoegen:</p>
+      <div class="ww-cols" style="margin-bottom:6px;">
+        <input class="admin-input" id="ww-inf" placeholder="Infinitief (bv. lopen)" />
+        <input class="admin-input" id="ww-stam" placeholder="Stam (bv. loop)" />
+        <input class="admin-input" id="ww-vt" placeholder="VT (bv. liep)" />
+        <input class="admin-input" id="ww-vd" placeholder="VD (bv. gelopen)" />
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+        <label style="font-size:13px;color:var(--tx2);display:flex;align-items:center;gap:6px;cursor:pointer;">
+          <input type="checkbox" id="ww-onr" style="width:16px;height:16px;cursor:pointer;" /> Onregelmatig
+        </label>
+        <button class="admin-add-btn" onclick="adminAddWW()">+ Toevoegen</button>
+      </div>
+    </div>
+    <div class="admin-list" id="ww-list"></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="admin-reset-btn" onclick="adminResetWW()">↺ Terugzetten naar origineel</button>
+    </div>`;
+  renderWWList();
+}
+function renderWWList(){
+  const el=document.getElementById('ww-list');if(!el)return;
+  const q=(document.getElementById('ww-search')||{value:''}).value||'';
+  const list=W.filter(r=>!q||r[0].includes(q)||r[1].includes(q));
+  el.innerHTML=`<div style="padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--surface3);"><input class="admin-input" id="ww-search" placeholder="🔍 Zoeken..." style="width:100%;padding:6px 10px;" value="${q}" oninput="renderWWList()" /></div>`+
+    list.map((r)=>{
+      const realIdx=W.indexOf(r);
+      return `<div class="admin-item" id="ww-item-${realIdx}">
+        <div class="admin-item-text">
+          <strong>${r[0]}</strong>${r[4]?'<span class="onr-badge" style="font-size:10px;padding:1px 6px;">onr.</span>':''}
+          <div class="admin-item-sub">${r[1]} · ${r[2]} · ${r[3]}</div>
+        </div>
+        <button class="admin-item-edit" onclick="adminEditWW(${realIdx})" title="Bewerken">✏️</button>
+        <button class="admin-item-del" onclick="adminDelWW(${realIdx})" title="Verwijderen">🗑</button>
+      </div>`;
+    }).join('');
+}
+function adminEditWW(i){
+  const r=W[i];
+  const el=document.getElementById('ww-item-'+i);if(!el)return;
+  el.innerHTML=`
+    <div style="width:100%;">
+      <div class="ww-cols" style="margin-bottom:6px;">
+        <input class="admin-input" id="edit-ww-inf-${i}" value="${r[0]}" placeholder="Infinitief" />
+        <input class="admin-input" id="edit-ww-stam-${i}" value="${r[1]}" placeholder="Stam" />
+        <input class="admin-input" id="edit-ww-vt-${i}" value="${r[2]}" placeholder="VT" />
+        <input class="admin-input" id="edit-ww-vd-${i}" value="${r[3]}" placeholder="VD" />
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:5px;cursor:pointer;">
+          <input type="checkbox" id="edit-ww-onr-${i}" ${r[4]?'checked':''} style="width:14px;height:14px;" /> Onregelmatig
+        </label>
+        <button class="admin-add-btn" style="padding:6px 12px;font-size:12px;" onclick="adminSaveWW(${i})">✓ Opslaan</button>
+        <button class="admin-add-btn del-btn" style="padding:6px 12px;font-size:12px;" onclick="renderWWList()">✕ Annuleren</button>
+      </div>
+    </div>`;
+}
+function adminSaveWW(i){
+  const inf=document.getElementById('edit-ww-inf-'+i).value.trim();
+  const stam=document.getElementById('edit-ww-stam-'+i).value.trim();
+  const vt=document.getElementById('edit-ww-vt-'+i).value.trim();
+  const vd=document.getElementById('edit-ww-vd-'+i).value.trim();
+  const onr=document.getElementById('edit-ww-onr-'+i).checked;
+  if(!inf||!stam||!vt||!vd){alert('Vul alle 4 velden in.');return;}
+  W[i]=[inf,stam,vt,vd,onr];
+  W.sort((a,b)=>a[0].localeCompare(b[0]));
+  saveWW();renderAdminTab();
+}
+function adminAddWW(){
+  const inf=document.getElementById('ww-inf').value.trim();
+  const stam=document.getElementById('ww-stam').value.trim();
+  const vt=document.getElementById('ww-vt').value.trim();
+  const vd=document.getElementById('ww-vd').value.trim();
+  const onr=document.getElementById('ww-onr').checked;
+  if(!inf||!stam||!vt||!vd){alert('Vul alle 4 velden in.');return;}
+  W.push([inf,stam,vt,vd,onr]);
+  W.sort((a,b)=>a[0].localeCompare(b[0]));
+  saveWW();
+  ['ww-inf','ww-stam','ww-vt','ww-vd'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('ww-onr').checked=false;
+  renderAdminTab();
+}
+function adminDelWW(i){
+  if(!confirm('Werkwoord "'+W[i][0]+'" verwijderen?'))return;
+  W.splice(i,1);saveWW();renderAdminTab();
+}
+function adminResetWW(){
+  if(!confirm('Alle aanpassingen aan werkwoorden verwijderen en terugzetten naar de originele lijst?'))return;
+  localStorage.removeItem(SK.ww);location.reload();
+}
+
+// ── Woordenschat beheer ──
+function renderAdminWoorden(el){
+  el.innerHTML=`
+    <p class="admin-count">${WOORDEN.length} woorden in de lijst</p>
+    <div class="admin-section">
+      <p style="font-size:12px;color:var(--tx3);margin-bottom:6px;">Nieuw woord toevoegen:</p>
+      <div class="admin-row">
+        <input class="admin-input wide" id="wd-woord" placeholder="Woord (bv. de larve)" />
+        <input class="admin-input wide" id="wd-bet" placeholder="Betekenis" />
+        <button class="admin-add-btn" onclick="adminAddWoord()">+ Toevoegen</button>
+      </div>
+    </div>
+    <div class="admin-list" id="wd-list"></div>
+    <div style="margin-top:10px;">
+      <button class="admin-reset-btn" onclick="adminResetWoorden()">↺ Terugzetten naar origineel</button>
+    </div>`;
+  renderWoordenList();
+}
+function renderWoordenList(){
+  const el=document.getElementById('wd-list');if(!el)return;
+  const q=(document.getElementById('wd-search')||{value:''}).value||'';
+  const list=WOORDEN.filter(r=>!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q));
+  el.innerHTML=`<div style="padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--surface3);"><input class="admin-input" id="wd-search" placeholder="🔍 Zoeken..." style="width:100%;padding:6px 10px;" value="${q}" oninput="renderWoordenList()" /></div>`+
+    list.map(r=>{
+      const realIdx=WOORDEN.indexOf(r);
+      return `<div class="admin-item" id="wd-item-${realIdx}">
+        <div class="admin-item-text">
+          <strong>${r[0]}</strong>
+          <div class="admin-item-sub">${r[1]}</div>
+        </div>
+        <button class="admin-item-edit" onclick="adminEditWoord(${realIdx})" title="Bewerken">✏️</button>
+        <button class="admin-item-del" onclick="adminDelWoord(${realIdx})" title="Verwijderen">🗑</button>
+      </div>`;
+    }).join('');
+}
+function adminEditWoord(i){
+  const r=WOORDEN[i];
+  const el=document.getElementById('wd-item-'+i);if(!el)return;
+  el.innerHTML=`
+    <div style="width:100%;">
+      <div class="admin-row" style="margin-bottom:6px;">
+        <input class="admin-input wide" id="edit-wd-woord-${i}" value="${r[0].replace(/"/g,'&quot;')}" placeholder="Woord" />
+        <input class="admin-input wide" id="edit-wd-bet-${i}" value="${r[1].replace(/"/g,'&quot;')}" placeholder="Betekenis" />
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="admin-add-btn" style="padding:6px 12px;font-size:12px;" onclick="adminSaveWoord(${i})">✓ Opslaan</button>
+        <button class="admin-add-btn del-btn" style="padding:6px 12px;font-size:12px;" onclick="renderWoordenList()">✕ Annuleren</button>
+      </div>
+    </div>`;
+}
+function adminSaveWoord(i){
+  const w=document.getElementById('edit-wd-woord-'+i).value.trim();
+  const b=document.getElementById('edit-wd-bet-'+i).value.trim();
+  if(!w||!b){alert('Vul woord en betekenis in.');return;}
+  WOORDEN[i]=[w,b];
+  WOORDEN.sort((a,b2)=>a[0].localeCompare(b2[0]));
+  saveWoorden();renderAdminTab();
+}
+function adminAddWoord(){
+  const w=document.getElementById('wd-woord').value.trim();
+  const b=document.getElementById('wd-bet').value.trim();
+  if(!w||!b){alert('Vul woord en betekenis in.');return;}
+  WOORDEN.push([w,b]);
+  WOORDEN.sort((a,b2)=>a[0].localeCompare(b2[0]));
+  saveWoorden();
+  document.getElementById('wd-woord').value='';
+  document.getElementById('wd-bet').value='';
+  renderAdminTab();
+}
+function adminDelWoord(i){
+  if(!confirm('"'+WOORDEN[i][0]+'" verwijderen?'))return;
+  WOORDEN.splice(i,1);saveWoorden();renderAdminTab();
+}
+function adminResetWoorden(){
+  if(!confirm('Alle aanpassingen aan woordenschat verwijderen?'))return;
+  localStorage.removeItem(SK.woorden);location.reload();
+}
+
+// ── Zegswijzen beheer ──
+function renderAdminZegswijzen(el){
+  el.innerHTML=`
+    <p class="admin-count">${ZEGSWIJZEN.length} zegswijzen in de lijst</p>
+    <div class="admin-section">
+      <p style="font-size:12px;color:var(--tx3);margin-bottom:6px;">Nieuwe zegswijze toevoegen:</p>
+      <div class="admin-row">
+        <input class="admin-input wide" id="zg-zegswijze" placeholder="Zegswijze (bv. een kei zijn in)" />
+        <input class="admin-input wide" id="zg-bet" placeholder="Betekenis" />
+        <button class="admin-add-btn" onclick="adminAddZegswijze()">+ Toevoegen</button>
+      </div>
+    </div>
+    <div class="admin-list" id="zg-list"></div>
+    <div style="margin-top:10px;">
+      <button class="admin-reset-btn" onclick="adminResetZegswijzen()">↺ Terugzetten naar origineel</button>
+    </div>`;
+  renderZegswijzenList();
+}
+function renderZegswijzenList(){
+  const el=document.getElementById('zg-list');if(!el)return;
+  const q=(document.getElementById('zg-search')||{value:''}).value||'';
+  const list=ZEGSWIJZEN.filter(r=>!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q));
+  el.innerHTML=`<div style="padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--surface3);"><input class="admin-input" id="zg-search" placeholder="🔍 Zoeken..." style="width:100%;padding:6px 10px;" value="${q}" oninput="renderZegswijzenList()" /></div>`+
+    list.map(r=>{
+      const realIdx=ZEGSWIJZEN.indexOf(r);
+      return `<div class="admin-item" id="zg-item-${realIdx}">
+        <div class="admin-item-text">
+          <strong>${r[0]}</strong>
+          <div class="admin-item-sub">${r[1]}</div>
+        </div>
+        <button class="admin-item-edit" onclick="adminEditZegswijze(${realIdx})" title="Bewerken">✏️</button>
+        <button class="admin-item-del" onclick="adminDelZegswijze(${realIdx})" title="Verwijderen">🗑</button>
+      </div>`;
+    }).join('');
+}
+function adminEditZegswijze(i){
+  const r=ZEGSWIJZEN[i];
+  const el=document.getElementById('zg-item-'+i);if(!el)return;
+  el.innerHTML=`
+    <div style="width:100%;">
+      <div class="admin-row" style="margin-bottom:6px;">
+        <input class="admin-input wide" id="edit-zg-z-${i}" value="${r[0].replace(/"/g,'&quot;')}" placeholder="Zegswijze" />
+        <input class="admin-input wide" id="edit-zg-b-${i}" value="${r[1].replace(/"/g,'&quot;')}" placeholder="Betekenis" />
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="admin-add-btn" style="padding:6px 12px;font-size:12px;" onclick="adminSaveZegswijze(${i})">✓ Opslaan</button>
+        <button class="admin-add-btn del-btn" style="padding:6px 12px;font-size:12px;" onclick="renderZegswijzenList()">✕ Annuleren</button>
+      </div>
+    </div>`;
+}
+function adminSaveZegswijze(i){
+  const z=document.getElementById('edit-zg-z-'+i).value.trim();
+  const b=document.getElementById('edit-zg-b-'+i).value.trim();
+  if(!z||!b){alert('Vul zegswijze en betekenis in.');return;}
+  ZEGSWIJZEN[i]=[z,b];
+  saveZegswijzen();renderAdminTab();
+}
+function adminAddZegswijze(){
+  const z=document.getElementById('zg-zegswijze').value.trim();
+  const b=document.getElementById('zg-bet').value.trim();
+  if(!z||!b){alert('Vul zegswijze en betekenis in.');return;}
+  ZEGSWIJZEN.push([z,b]);
+  saveZegswijzen();
+  document.getElementById('zg-zegswijze').value='';
+  document.getElementById('zg-bet').value='';
+  renderAdminTab();
+}
+function adminDelZegswijze(i){
+  if(!confirm('"'+ZEGSWIJZEN[i][0]+'" verwijderen?'))return;
+  ZEGSWIJZEN.splice(i,1);saveZegswijzen();renderAdminTab();
+}
+function adminResetZegswijzen(){
+  if(!confirm('Alle aanpassingen aan zegswijzen verwijderen?'))return;
+  localStorage.removeItem(SK.zegswijzen);location.reload();
+}
+
+// ── Instellingen ──
+function renderAdminInstellingen(el){
+  el.innerHTML=`
+    <div class="admin-section">
+      <p class="sec-lbl" style="margin-bottom:12px;">Wachtwoord wijzigen</p>
+      <input class="pw-input" type="password" id="pw-oud" placeholder="Huidig wachtwoord" style="margin-bottom:8px;" />
+      <input class="pw-input" type="password" id="pw-nieuw1" placeholder="Nieuw wachtwoord" style="margin-bottom:8px;" />
+      <input class="pw-input" type="password" id="pw-nieuw2" placeholder="Herhaal nieuw wachtwoord" style="margin-bottom:8px;" />
+      <button class="pw-btn" onclick="changePw()">Wachtwoord wijzigen</button>
+      <div class="pw-error" id="pw-change-err"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="admin-section">
+      <p class="sec-lbl" style="margin-bottom:8px;">Sessie</p>
+      <button class="admin-reset-btn" onclick="adminLogout()" style="padding:8px 16px;">🔒 Uitloggen uit beheer</button>
+    </div>`;
+}
+function changePw(){
+  const oud=document.getElementById('pw-oud').value;
+  const n1=document.getElementById('pw-nieuw1').value;
+  const n2=document.getElementById('pw-nieuw2').value;
+  const err=document.getElementById('pw-change-err');
+  if(oud!==getStoredPw()){err.textContent='Huidig wachtwoord klopt niet.';return;}
+  if(!n1||n1.length<3){err.textContent='Nieuw wachtwoord moet minstens 3 tekens zijn.';return;}
+  if(n1!==n2){err.textContent='Nieuwe wachtwoorden komen niet overeen.';return;}
+  setPw(n1);err.style.color='var(--ok)';err.textContent='✓ Wachtwoord gewijzigd!';
+}
+function adminLogout(){adminUnlocked=false;closeAdmin();}
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+loadData();
+showSetup();
+</script>
+  <script>
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(r => console.log('SW registered'))
+          .catch(e => console.log('SW error', e));
+      });
+    }
+  </script>
+</body>
+</html>
