@@ -299,9 +299,24 @@
       #app{padding:0.6rem 0.8rem 2rem;}
     }
 
-    /* ════════════════════════════════
-       BEHEER PANEEL
-    ════════════════════════════════ */
+    /* ════ Meetkunde theorie ════ */
+    .mk-sectie-titel{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px;}
+    .mk-uitleg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
+    .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
+    .mk-card{background:var(--surface2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--surface3);}
+    .mk-card-wide{grid-column:span 1;}
+    .mk-card-naam{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:var(--tx);margin:6px 0 4px;}
+    .mk-card-info{list-style:none;padding:0;text-align:left;font-size:12px;color:var(--tx2);line-height:1.8;}
+    .mk-card-info li::before{content:'• ';color:var(--accent);}
+    .mk-formule{font-size:13px;font-weight:600;color:var(--accent);margin:4px 0 2px;font-family:monospace;}
+    .mk-voorbeeld{font-size:12px;color:var(--tx2);}
+    .mk-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    @media(max-width:480px){.mk-grid{grid-template-columns:1fr 1fr;}.mk-mc-grid{grid-template-columns:1fr 1fr;}}
+
+    /* Sticky volgende knop */
+    .sticky-next{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:12px 16px;background:var(--surface);border-top:1px solid var(--surface3);display:flex;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.2);animation:slideUp 0.2s ease;}
+    .sticky-next .t-feedback{margin:0;padding:8px 12px;flex:1;font-size:13px;}
+    .sticky-next .t-next{margin:0;flex-shrink:0;}
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
     .modal{background:var(--surface);border-radius:var(--radius);padding:1.5rem;width:100%;max-width:700px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.08);animation:slideUp 0.25s ease;}
     .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
@@ -382,10 +397,22 @@
     <div class="main-tabs">
       <button class="main-tab on" id="tab-rekenen" onclick="switchMain('rekenen')">🔢 Rekenen</button>
       <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
+      <button class="main-tab" id="tab-meetkunde" onclick="switchMain('meetkunde')">📐 Meetkunde</button>
     </div>
 
     <div id="rekenen-root" style="width:100%">
       <div id="screen"></div>
+    </div>
+
+
+    <div id="meetkunde-root" style="display:none;width:100%">
+      <div class="panel">
+        <div class="taal-subtabs">
+          <button class="taal-subtab on" id="mkt-theorie" onclick="mkTab('theorie')">📖 Theorie</button>
+          <button class="taal-subtab" id="mkt-oefeningen" onclick="mkTab('oefeningen')">🎯 Oefeningen</button>
+        </div>
+        <div id="mk-content"></div>
+      </div>
     </div>
 
     <div id="taal-root" style="display:none;width:100%">
@@ -459,11 +486,15 @@ function snd(t){
 let mainSection = 'rekenen';
 function switchMain(s){
   mainSection=s;
-  document.getElementById('rekenen-root').style.display=s==='rekenen'?'':'none';
-  document.getElementById('taal-root').style.display=s==='taal'?'':'none';
-  document.getElementById('tab-rekenen').classList.toggle('on',s==='rekenen');
-  document.getElementById('tab-taal').classList.toggle('on',s==='taal');
+  ['rekenen','taal','meetkunde'].forEach(k=>{
+    const r=document.getElementById(k+'-root');
+    const t=document.getElementById('tab-'+k);
+    if(r)r.style.display=k===s?'':'none';
+    if(t)t.classList.toggle('on',k===s);
+  });
   if(s==='taal') initTaalRoot();
+  if(s==='meetkunde') mkTab('theorie');
+  removeStickyNext();
 }
 function goHome(){
   clearTimeout(st.autoT);clearInterval(st.schoolInterval);
@@ -1215,6 +1246,19 @@ function loadWoordenQ(){
   if(wrap)wrap._options=options;
   if(wrap)wrap._correct=correct;
 }
+// Sticky "Volgende" knop onderaan scherm
+function showStickyNext(msg, cls, nextFn){
+  removeStickyNext();
+  const div=document.createElement('div');
+  div.className='sticky-next';
+  div.id='sticky-next-bar';
+  div.innerHTML=`<div class="t-feedback ${cls}" style="margin:0;flex:1;font-size:13px;">${msg}</div><button class="t-next" onclick="${nextFn}();removeStickyNext()">Volgende →</button>`;
+  document.body.appendChild(div);
+}
+function removeStickyNext(){
+  const el=document.getElementById('sticky-next-bar');if(el)el.remove();
+}
+
 function checkWoordenQ(btn){
   const wrap=document.getElementById('wq-options');
   if(!wrap)return;
@@ -1239,7 +1283,8 @@ function checkWoordenQ(btn){
   const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is aangeduid.`;
   const cls=ok?'t-fb-ok':'t-fb-no';
   const fb=document.getElementById('wq-feedback');
-  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div><button class="t-next" style="margin-top:8px;" onclick="loadWoordenQ()">Volgende →</button>`;
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
+  showStickyNext(msg, cls, 'loadWoordenQ');
   if(ok)snd('ok');else snd('no');
 }
 function renderZegswijzen(){
@@ -1358,12 +1403,953 @@ function checkZegswijzeQ(btn){
   const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is aangeduid.`;
   const cls=ok?'t-fb-ok':'t-fb-no';
   const fb=document.getElementById('zq-feedback');
-  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div><button class="t-next" style="margin-top:8px;" onclick="loadZegswijzeQ()">Volgende →</button>`;
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
+  showStickyNext(msg, cls, 'loadZegswijzeQ');
   if(ok)snd('ok');else snd('no');
 }
+
 // ════════════════════════════════════════════════════════
-// ADMIN / BEHEER
+// MEETKUNDE
 // ════════════════════════════════════════════════════════
+
+let mkCurrentTab = 'theorie';
+let mkOefTab = 'vormen'; // sub-tab binnen oefeningen
+let mkLevel = 1;
+let mkScore = {good:0, bad:0, streak:0};
+let mkAnswered = false;
+let mkTotal = 0;
+let mkCurrentQ = null;
+let mkQueue = []; // anti-herhaling wachtrij
+
+function mkTab(t){
+  mkCurrentTab = t;
+  ['theorie','oefeningen'].forEach(k=>{
+    const b=document.getElementById('mkt-'+k);
+    if(b)b.classList.toggle('on',k===t);
+  });
+  renderMkContent();
+}
+
+function renderMkContent(){
+  const el=document.getElementById('mk-content');if(!el)return;
+  if(mkCurrentTab==='theorie') renderMkTheorie(el);
+  else renderMkOefeningen(el);
+}
+
+// ══════════════════════════════════════
+// THEORIE
+// ══════════════════════════════════════
+function renderMkTheorie(el){
+  el.innerHTML=`
+  <div class="mk-theorie">
+    <!-- NAV binnen theorie -->
+    <div class="filter-row" style="margin-bottom:14px;flex-wrap:wrap;gap:6px;">
+      <button class="filter-btn on" onclick="showTheorieSection(this,'th-vormen')">Figuren</button>
+      <button class="filter-btn" onclick="showTheorieSection(this,'th-hoeken')">Hoeken</button>
+      <button class="filter-btn" onclick="showTheorieSection(this,'th-omtrek')">Omtrek</button>
+      <button class="filter-btn" onclick="showTheorieSection(this,'th-oppervlakte')">Oppervlakte</button>
+    </div>
+
+    <!-- FIGUREN -->
+    <div id="th-vormen">
+      <h3 class="mk-sectie-titel">📐 Vlakke figuren</h3>
+      <div class="mk-grid">
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75"><rect x="10" y="10" width="80" height="80" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>
+          <div class="mk-card-naam">Vierkant</div>
+          <ul class="mk-card-info">
+            <li>4 gelijke zijden</li>
+            <li>4 rechte hoeken (90°)</li>
+            <li>Tegenoverliggende zijden evenwijdig</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 140 100" width="105" height="75"><rect x="5" y="20" width="125" height="60" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>
+          <div class="mk-card-naam">Rechthoek</div>
+          <ul class="mk-card-info">
+            <li>2 paar gelijke zijden</li>
+            <li>4 rechte hoeken (90°)</li>
+            <li>Tegenoverliggende zijden evenwijdig</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,95 5,95" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
+          <div class="mk-card-naam">Driehoek</div>
+          <ul class="mk-card-info">
+            <li>3 zijden, 3 hoeken</li>
+            <li>Som van hoeken = 180°</li>
+            <li>Gelijkzijdig, gelijkbenig of ongelijkzijdig</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75"><circle cx="60" cy="50" r="45" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/><line x1="60" y1="50" x2="105" y2="50" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4"/><text x="80" y="44" font-size="11" fill="var(--tx2)">r</text></svg>
+          <div class="mk-card-naam">Cirkel</div>
+          <ul class="mk-card-info">
+            <li>Geen hoeken of zijden</li>
+            <li>Middelpunt, straal (r), middellijn (2r)</li>
+            <li>Omtrek = 2 × π × r ≈ 6,28 × r</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,50 60,95 5,50" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
+          <div class="mk-card-naam">Ruit</div>
+          <ul class="mk-card-info">
+            <li>4 gelijke zijden</li>
+            <li>Geen rechte hoeken</li>
+            <li>Diagonalen staan loodrecht op elkaar</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 140 100" width="105" height="75"><polygon points="25,90 115,90 100,10 40,10" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
+          <div class="mk-card-naam">Trapezium</div>
+          <ul class="mk-card-info">
+            <li>4 zijden, 2 evenwijdige zijden</li>
+            <li>Geen gelijke zijden (meestal)</li>
+            <li>Basis boven en onder zijn evenwijdig</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 110" width="90" height="82"><polygon points="60,5 110,32 110,78 60,105 10,78 10,32" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
+          <div class="mk-card-naam">Zeshoek</div>
+          <ul class="mk-card-info">
+            <li>6 gelijke zijden</li>
+            <li>6 gelijke hoeken van 120°</li>
+            <li>Zoals honingraten van bijen</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 115" width="90" height="86"><polygon points="60,5 108,38 90,95 30,95 12,38" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
+          <div class="mk-card-naam">Vijfhoek</div>
+          <ul class="mk-card-info">
+            <li>5 gelijke zijden</li>
+            <li>5 gelijke hoeken van 108°</li>
+            <li>Zoals een ster zonder punten</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HOEKEN -->
+    <div id="th-hoeken" style="display:none">
+      <h3 class="mk-sectie-titel">📐 Soorten hoeken</h3>
+      <div class="mk-grid">
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <line x1="15" y1="85" x2="15" y2="15" stroke="var(--accent)" stroke-width="2.5"/>
+            <line x1="15" y1="85" x2="105" y2="85" stroke="var(--accent)" stroke-width="2.5"/>
+            <rect x="15" y="65" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          </svg>
+          <div class="mk-card-naam">Rechte hoek</div>
+          <ul class="mk-card-info">
+            <li>Precies 90°</li>
+            <li>Aangeduid met een klein vierkantje</li>
+            <li>Zoals een hoek van een blad papier</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <line x1="10" y1="85" x2="110" y2="85" stroke="var(--accent)" stroke-width="2.5"/>
+            <line x1="10" y1="85" x2="75" y2="15" stroke="var(--accent)" stroke-width="2.5"/>
+            <path d="M 32,85 A 22,22 0 0,1 22,65" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="38" y="74" font-size="11" fill="var(--tx2)">45°</text>
+          </svg>
+          <div class="mk-card-naam">Scherpe hoek</div>
+          <ul class="mk-card-info">
+            <li>Kleiner dan 90°</li>
+            <li>Lijkt op een spitse punt</li>
+            <li>Bv. 30°, 45°, 60°</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <line x1="10" y1="75" x2="110" y2="75" stroke="var(--accent)" stroke-width="2.5"/>
+            <line x1="10" y1="75" x2="80" y2="15" stroke="var(--accent)" stroke-width="2.5"/>
+            <path d="M 40,75 A 30,30 0 0,1 22,55" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="44" y="66" font-size="11" fill="var(--tx2)">135°</text>
+          </svg>
+          <div class="mk-card-naam">Stompe hoek</div>
+          <ul class="mk-card-info">
+            <li>Groter dan 90°, kleiner dan 180°</li>
+            <li>Lijkt op een brede opening</li>
+            <li>Bv. 100°, 120°, 150°</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <line x1="10" y1="60" x2="110" y2="60" stroke="var(--accent)" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="5" fill="var(--accent)"/>
+            <path d="M 85,60 A 25,25 0 0,1 35,60" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="52" y="48" font-size="11" fill="var(--tx2)">180°</text>
+          </svg>
+          <div class="mk-card-naam">Gestrekte hoek</div>
+          <ul class="mk-card-info">
+            <li>Precies 180°</li>
+            <li>Is een rechte lijn</li>
+            <li>Een halve draai rond</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <line x1="60" y1="50" x2="110" y2="50" stroke="var(--accent)" stroke-width="2.5"/>
+            <line x1="60" y1="50" x2="60" y2="5" stroke="var(--accent)" stroke-width="2.5"/>
+            <path d="M 85,50 A 25,25 0 0,0 60,25" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="72" y="37" font-size="11" fill="var(--tx2)">270°</text>
+          </svg>
+          <div class="mk-card-naam">Holle hoek</div>
+          <ul class="mk-card-info">
+            <li>Groter dan 180°, kleiner dan 360°</li>
+            <li>Bv. 270°</li>
+            <li>Ook: reflex hoek</li>
+          </ul>
+        </div>
+
+        <div class="mk-card">
+          <svg viewBox="0 0 120 100" width="90" height="75">
+            <circle cx="60" cy="55" r="35" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5"/>
+            <line x1="60" y1="55" x2="95" y2="55" stroke="var(--accent)" stroke-width="2.5"/>
+            <path d="M 80,55 A 20,20 0 1,0 79,55" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="46" y="30" font-size="11" fill="var(--tx2)">360°</text>
+          </svg>
+          <div class="mk-card-naam">Volle hoek</div>
+          <ul class="mk-card-info">
+            <li>Precies 360°</li>
+            <li>Een volledige draai</li>
+            <li>= een cirkel</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- OMTREK -->
+    <div id="th-omtrek" style="display:none">
+      <h3 class="mk-sectie-titel">📏 Omtrek berekenen</h3>
+      <p class="mk-uitleg">De <strong>omtrek</strong> is de totale lengte van de rand van een figuur. Je telt alle zijden op.</p>
+      <div class="mk-grid">
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 150 120" width="110" height="90"><rect x="15" y="15" width="90" height="90" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2"/><text x="55" y="105" text-anchor="middle" font-size="12" fill="var(--tx)">5 cm</text><text x="5" y="62" text-anchor="middle" font-size="12" fill="var(--tx)" transform="rotate(-90,5,62)">5 cm</text></svg>
+          <div class="mk-card-naam">Vierkant</div>
+          <div class="mk-formule">Omtrek = 4 × zijde</div>
+          <div class="mk-voorbeeld">Bv: 4 × 5 = <strong>20 cm</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 160 110" width="120" height="82"><rect x="10" y="25" width="130" height="65" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2"/><text x="75" y="105" text-anchor="middle" font-size="12" fill="var(--tx)">8 cm</text><text x="5" y="60" text-anchor="middle" font-size="12" fill="var(--tx)" transform="rotate(-90,5,60)">4 cm</text></svg>
+          <div class="mk-card-naam">Rechthoek</div>
+          <div class="mk-formule">Omtrek = 2 × (l + b)</div>
+          <div class="mk-voorbeeld">Bv: 2 × (8 + 4) = <strong>24 cm</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 130 110" width="97" height="82"><polygon points="65,10 120,100 10,100" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2"/><text x="65" y="115" text-anchor="middle" font-size="11" fill="var(--tx)">6 cm</text><text x="5" y="60" font-size="11" fill="var(--tx)">5 cm</text><text x="100" y="60" font-size="11" fill="var(--tx)">5 cm</text></svg>
+          <div class="mk-card-naam">Driehoek</div>
+          <div class="mk-formule">Omtrek = z1 + z2 + z3</div>
+          <div class="mk-voorbeeld">Bv: 5 + 5 + 6 = <strong>16 cm</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 130 110" width="97" height="82"><circle cx="65" cy="55" r="48" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2"/><line x1="65" y1="55" x2="113" y2="55" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3"/><text x="85" y="49" font-size="12" fill="var(--tx)">r=3</text></svg>
+          <div class="mk-card-naam">Cirkel</div>
+          <div class="mk-formule">Omtrek = 2 × π × r</div>
+          <div class="mk-voorbeeld">Bv: 2 × 3,14 × 3 ≈ <strong>18,8 cm</strong></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- OPPERVLAKTE -->
+    <div id="th-oppervlakte" style="display:none">
+      <h3 class="mk-sectie-titel">⬛ Oppervlakte berekenen</h3>
+      <p class="mk-uitleg">De <strong>oppervlakte</strong> is de grootte van de vlakte binnenin een figuur. We meten in cm², m², …</p>
+      <div class="mk-grid">
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 120 110" width="90" height="82"><rect x="10" y="10" width="85" height="85" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><text x="52" y="100" text-anchor="middle" font-size="12" fill="var(--tx)">4 cm</text></svg>
+          <div class="mk-card-naam">Vierkant</div>
+          <div class="mk-formule">Opp. = zijde × zijde</div>
+          <div class="mk-voorbeeld">Bv: 4 × 4 = <strong>16 cm²</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 160 110" width="120" height="82"><rect x="10" y="25" width="130" height="65" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><text x="75" y="105" text-anchor="middle" font-size="12" fill="var(--tx)">6 cm</text><text x="5" y="60" text-anchor="middle" font-size="12" fill="var(--tx)" transform="rotate(-90,5,60)">3 cm</text></svg>
+          <div class="mk-card-naam">Rechthoek</div>
+          <div class="mk-formule">Opp. = lengte × breedte</div>
+          <div class="mk-voorbeeld">Bv: 6 × 3 = <strong>18 cm²</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 130 115" width="97" height="86"><polygon points="65,10 120,100 10,100" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><line x1="65" y1="10" x2="65" y2="100" stroke="var(--tx2)" stroke-width="1.5" stroke-dasharray="4"/><text x="68" y="58" font-size="11" fill="var(--tx)">h=6</text><text x="55" y="113" text-anchor="middle" font-size="11" fill="var(--tx)">b=8</text></svg>
+          <div class="mk-card-naam">Driehoek</div>
+          <div class="mk-formule">Opp. = (grondlijn × hoogte) ÷ 2</div>
+          <div class="mk-voorbeeld">Bv: (8 × 6) ÷ 2 = <strong>24 cm²</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 130 110" width="97" height="82"><circle cx="65" cy="55" r="48" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><line x1="65" y1="55" x2="113" y2="55" stroke="white" stroke-width="1.5" stroke-dasharray="3"/><text x="85" y="49" font-size="12" fill="var(--tx)">r=4</text></svg>
+          <div class="mk-card-naam">Cirkel</div>
+          <div class="mk-formule">Opp. = π × r²</div>
+          <div class="mk-voorbeeld">Bv: 3,14 × 4² ≈ <strong>50,2 cm²</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 130 110" width="97" height="82"><polygon points="65,10 115,55 65,100 15,55" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><line x1="15" y1="55" x2="115" y2="55" stroke="white" stroke-width="1.5" stroke-dasharray="3"/><line x1="65" y1="10" x2="65" y2="100" stroke="white" stroke-width="1.5" stroke-dasharray="3"/><text x="68" y="38" font-size="10" fill="var(--tx)">d1=8</text><text x="85" y="52" font-size="10" fill="var(--tx)">d2=10</text></svg>
+          <div class="mk-card-naam">Ruit</div>
+          <div class="mk-formule">Opp. = (d1 × d2) ÷ 2</div>
+          <div class="mk-voorbeeld">Bv: (8 × 10) ÷ 2 = <strong>40 cm²</strong></div>
+        </div>
+
+        <div class="mk-card mk-card-wide">
+          <svg viewBox="0 0 150 110" width="112" height="82"><polygon points="30,90 120,90 105,20 45,20" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="2"/><line x1="75" y1="20" x2="75" y2="90" stroke="white" stroke-width="1.5" stroke-dasharray="4"/><text x="78" y="58" font-size="10" fill="var(--tx)">h=5</text><text x="65" y="15" font-size="10" fill="var(--tx)">b1=6</text><text x="65" y="104" font-size="10" fill="var(--tx)">b2=9</text></svg>
+          <div class="mk-card-naam">Trapezium</div>
+          <div class="mk-formule">Opp. = (b1 + b2) × h ÷ 2</div>
+          <div class="mk-voorbeeld">Bv: (6+9) × 5 ÷ 2 = <strong>37,5 cm²</strong></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>`;
+
+  // Theorie nav click handlers
+  el.querySelectorAll('.filter-row .filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      el.querySelectorAll('.filter-row .filter-btn').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on');
+    });
+  });
+}
+
+function showTheorieSection(btn, id){
+  document.querySelectorAll('#mk-content .mk-theorie > div[id^="th-"]').forEach(d=>d.style.display='none');
+  document.getElementById(id).style.display='';
+  document.querySelectorAll('#mk-content .filter-row .filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ══════════════════════════════════════
+// OEFENINGEN
+// ══════════════════════════════════════
+function renderMkOefeningen(el){
+  el.innerHTML=`
+    <div class="filter-row" style="margin-bottom:10px;flex-wrap:wrap;gap:6px;">
+      <button class="filter-btn ${mkOefTab==='vormen'?'on':''}" onclick="setMkOefTab('vormen')">Vormen</button>
+      <button class="filter-btn ${mkOefTab==='eigenschappen'?'on':''}" onclick="setMkOefTab('eigenschappen')">Eigenschappen</button>
+      <button class="filter-btn ${mkOefTab==='berekenen'?'on':''}" onclick="setMkOefTab('berekenen')">Berekenen</button>
+      <button class="filter-btn ${mkOefTab==='hoeken'?'on':''}" onclick="setMkOefTab('hoeken')">Hoeken</button>
+    </div>
+    <div class="level-selector" style="margin-bottom:12px;">
+      <button class="level-btn ${mkLevel===1?'on':''}" onclick="setMkLevel(1)"><span class="lvl-stars">⭐</span><span class="lvl-name">Niveau 1</span><span class="lvl-desc">Makkelijk</span></button>
+      <button class="level-btn ${mkLevel===2?'on':''}" onclick="setMkLevel(2)"><span class="lvl-stars">⭐⭐</span><span class="lvl-name">Niveau 2</span><span class="lvl-desc">Gemiddeld</span></button>
+      <button class="level-btn ${mkLevel===3?'on':''}" onclick="setMkLevel(3)"><span class="lvl-stars">⭐⭐⭐</span><span class="lvl-name">Niveau 3</span><span class="lvl-desc">Moeilijk</span></button>
+    </div>
+    <div class="t-score-row">
+      <div class="t-score-card"><div class="t-score-num" id="mksc-good">${mkScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="mksc-bad">${mkScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="mksc-pct">${(mkScore.good+mkScore.bad)>0?Math.round(mkScore.good/(mkScore.good+mkScore.bad)*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+      <div class="t-score-card t-streak-card"><div class="t-score-num" id="mksc-streak">${mkScore.streak}</div><div class="t-score-lbl">🔥 Reeks</div></div>
+    </div>
+    <div class="t-quiz-card" id="mk-card"></div>`;
+  mkQueue=[];
+  loadMkQ();
+}
+
+function setMkOefTab(t){
+  mkOefTab=t;
+  mkScore={good:0,bad:0,streak:0}; mkTotal=0; mkQueue=[];
+  renderMkOefeningen(document.getElementById('mk-content'));
+}
+
+function setMkLevel(l){
+  mkLevel=l;
+  mkScore={good:0,bad:0,streak:0}; mkTotal=0; mkQueue=[];
+  renderMkOefeningen(document.getElementById('mk-content'));
+}
+
+function updateMkScore(){
+  ['good','bad','streak'].forEach(k=>{
+    const el=document.getElementById('mksc-'+k); if(el)el.textContent=mkScore[k];
+  });
+  const p=document.getElementById('mksc-pct');
+  const tot=mkScore.good+mkScore.bad;
+  if(p)p.textContent=tot>0?Math.round(mkScore.good/tot*100)+'%':'—';
+}
+
+// ── SVG helpers ──
+const MK_SHAPES = {
+  vierkant:   { svg:(c)=>`<rect x="60" y="30" width="120" height="120" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3" rx="2"/>`, naam:'vierkant', zijden:4, hoeken:4, gelijkZijden:true,  rechteHoeken:true  },
+  rechthoek:  { svg:(c)=>`<rect x="20" y="60" width="200" height="100" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3" rx="2"/>`, naam:'rechthoek', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:true  },
+  driehoek:   { svg:(c)=>`<polygon points="120,20 215,190 25,190" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'driehoek', zijden:3, hoeken:3, gelijkZijden:false, rechteHoeken:false },
+  cirkel:     { svg:(c)=>`<circle cx="120" cy="110" r="88" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'cirkel', zijden:0, hoeken:0, gelijkZijden:false, rechteHoeken:false },
+  ruit:       { svg:(c)=>`<polygon points="120,15 215,110 120,205 25,110" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'ruit', zijden:4, hoeken:4, gelijkZijden:true,  rechteHoeken:false },
+  trapezium:  { svg:(c)=>`<polygon points="50,185 190,185 160,55 80,55" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'trapezium', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:false },
+  vijfhoek:   { svg:(c)=>`<polygon points="120,15 210,75 178,185 62,185 30,75" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'vijfhoek', zijden:5, hoeken:5, gelijkZijden:true,  rechteHoeken:false },
+  zeshoek:    { svg:(c)=>`<polygon points="120,15 205,62 205,158 120,205 35,158 35,62" fill="${c}" fill-opacity="0.22" stroke="${c}" stroke-width="3"/>`, naam:'zeshoek', zijden:6, hoeken:6, gelijkZijden:true,  rechteHoeken:false },
+};
+const MK_KEYS = Object.keys(MK_SHAPES);
+
+function mkSVG(key, extra=''){
+  const col = 'var(--accent)';
+  return `<svg viewBox="0 0 240 220" width="150" height="130" style="display:block;margin:0 auto 8px;">${MK_SHAPES[key].svg(col)}${extra}</svg>`;
+}
+
+function mkMCHTML(opts, correct){
+  return `<div class="mk-mc-grid">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${'ABCD'[i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`;
+}
+
+function shuffleArr(a){return [...a].sort(()=>Math.random()-0.5);}
+function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+
+// Anti-herhaling wachtrij
+function nextFromQueue(pool){
+  if(mkQueue.length===0) mkQueue=shuffleArr([...pool]);
+  return mkQueue.shift();
+}
+
+// ── VRAAG GENERATIE ──
+function loadMkQ(){
+  mkAnswered=false;
+  removeStickyNext();
+  mkTotal++;
+  const card=document.getElementById('mk-card');if(!card)return;
+
+  let q;
+  if(mkOefTab==='vormen')         q=genVormenQ();
+  else if(mkOefTab==='eigenschappen') q=genEigenschappenQ();
+  else if(mkOefTab==='berekenen') q=genBerekeningQ();
+  else                            q=genHoekenQ();
+
+  mkCurrentQ=q;
+  card.innerHTML=`
+    <div class="t-quiz-meta"><span class="t-prog">Vraag ${mkTotal}</span></div>
+    <div style="text-align:center;margin-bottom:4px;">${q.svg||''}</div>
+    <div class="t-question" style="font-size:15px;font-weight:600;margin-bottom:14px;">${q.vraag}</div>
+    <div id="mk-input-area">${q.inputHTML}</div>
+    <div id="mk-feedback"></div>`;
+
+  if(q.type==='type'){
+    const inp=document.getElementById('mk-type-input');
+    if(inp){inp.focus();inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkMkTyped();});}
+  }
+}
+
+// VORMEN
+function genVormenQ(){
+  const pool = mkLevel===1 ? ['vierkant','rechthoek','driehoek','cirkel']
+             : mkLevel===2 ? ['vierkant','rechthoek','driehoek','cirkel','ruit','trapezium']
+             : MK_KEYS;
+  const key = nextFromQueue(pool);
+  const correct = MK_SHAPES[key].naam;
+
+  if(mkLevel<3){
+    const wrongs = pool.filter(k=>k!==key);
+    const opts = shuffleArr([correct, ...shuffleArr(wrongs).slice(0,3).map(k=>MK_SHAPES[k].naam)]);
+    return { svg:mkSVG(key), vraag:'Welke figuur zie je?', type:'mc', correct, inputHTML:mkMCHTML(opts,correct) };
+  }
+  return {
+    svg:mkSVG(key), vraag:'Typ de naam van deze figuur:', type:'type', correct,
+    inputHTML:`<div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..."/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
+  };
+}
+
+// EIGENSCHAPPEN
+function genEigenschappenQ(){
+  const pool = mkLevel===1 ? ['vierkant','rechthoek','driehoek','cirkel']
+             : MK_KEYS;
+  const key = nextFromQueue(pool);
+  const s = MK_SHAPES[key];
+
+  // Bouw een lijst mogelijke vragen, filter ongeldige
+  const vragen = [
+    s.zijden>0 && { v:`Hoeveel zijden heeft een ${s.naam}?`, a:`${s.zijden}`, type:'num' },
+    s.hoeken>0 && { v:`Hoeveel hoeken heeft een ${s.naam}?`, a:`${s.hoeken}`, type:'num' },
+    { v:`Heeft een ${s.naam} gelijke zijden?`, a:s.gelijkZijden?'ja':'nee', type:'janee' },
+    { v:`Heeft een ${s.naam} rechte hoeken (90°)?`, a:s.rechteHoeken?'ja':'nee', type:'janee' },
+  ].filter(Boolean);
+
+  const chosen = vragen[Math.floor(Math.random()*vragen.length)];
+  const correct = chosen.a;
+
+  if(chosen.type==='janee'){
+    return {
+      svg:mkSVG(key), vraag:chosen.v, type:'mc', correct,
+      inputHTML:`<div style="display:flex;gap:12px;justify-content:center;">${['ja','nee'].map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}" style="flex:1;max-width:120px;"><span class="mc-text" style="font-size:18px;">${o}</span></button>`).join('')}</div>`
+    };
+  }
+  const num = parseInt(correct);
+  const wrong = shuffleArr([...new Set([num-1,num+1,num+2,num-2].filter(n=>n>=0&&n!==num))]).slice(0,3);
+  const opts = shuffleArr([correct,...wrong.map(String)]);
+  return { svg:mkSVG(key), vraag:chosen.v, type:'mc', correct, inputHTML:mkMCHTML(opts,correct) };
+}
+
+// BEREKENEN
+function genBerekeningQ(){
+  const scenarios = [
+    // Vierkant omtrek
+    ()=>{ const z=rnd(2,15); return { key:'vierkant', vraag:`Vierkant met zijde ${z} cm. Wat is de omtrek?`, correct:`${4*z}`, eenheid:'cm', hint:`4 × ${z}` }; },
+    // Vierkant opp
+    ()=>{ const z=rnd(2,12); return { key:'vierkant', vraag:`Vierkant met zijde ${z} cm. Wat is de oppervlakte?`, correct:`${z*z}`, eenheid:'cm²', hint:`${z} × ${z}` }; },
+    // Rechthoek omtrek
+    ()=>{ const l=rnd(4,15),b=rnd(2,9); return { key:'rechthoek', vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Wat is de omtrek?`, correct:`${2*(l+b)}`, eenheid:'cm', hint:`2 × (${l} + ${b})` }; },
+    // Rechthoek opp
+    ()=>{ const l=rnd(4,15),b=rnd(2,9); return { key:'rechthoek', vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Wat is de oppervlakte?`, correct:`${l*b}`, eenheid:'cm²', hint:`${l} × ${b}` }; },
+    // Driehoek omtrek
+    ()=>{ const a=rnd(3,10),b2=rnd(3,10),c=rnd(3,10); return { key:'driehoek', vraag:`Driehoek met zijden ${a} cm, ${b2} cm en ${c} cm. Wat is de omtrek?`, correct:`${a+b2+c}`, eenheid:'cm', hint:`${a} + ${b2} + ${c}` }; },
+    // Driehoek opp
+    ()=>{ const g=rnd(4,14),h=rnd(2,10); const opp=g*h/2; return { key:'driehoek', vraag:`Driehoek: grondlijn ${g} cm, hoogte ${h} cm. Wat is de oppervlakte?`, correct:`${opp%1===0?opp:opp.toFixed(1)}`, eenheid:'cm²', hint:`(${g} × ${h}) ÷ 2` }; },
+  ];
+
+  const sc = scenarios[Math.floor(Math.random()*scenarios.length)]();
+  const correct = String(sc.correct);
+
+  if(mkLevel===3){
+    return {
+      svg:mkSVG(sc.key),
+      vraag: sc.vraag + (sc.hint?`<div style="font-size:12px;color:var(--tx2);margin-top:4px;">💡 Tip: ${sc.hint}</div>`:''),
+      type:'type', correct,
+      inputHTML:`<div style="font-size:12px;color:var(--tx2);margin-bottom:6px;">Geef alleen het getal (in ${sc.eenheid})</div><div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" inputmode="decimal" spellcheck="false" placeholder="Typ hier..."/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
+    };
+  }
+  const num = parseFloat(correct);
+  const wrong = shuffleArr([...new Set([num+1,num-1,num+2,num*2].map(n=>n%1===0?n:parseFloat(n.toFixed(1))).filter(n=>n>0&&n!==num))]).slice(0,3);
+  const opts = shuffleArr([correct,...wrong.map(String)]);
+  return {
+    svg:mkSVG(sc.key),
+    vraag: sc.vraag,
+    type:'mc', correct,
+    inputHTML:mkMCHTML(opts.map(o=>`${o} ${sc.eenheid}`),`${correct} ${sc.eenheid}`)
+  };
+}
+
+// HOEKEN
+const MK_HOEKEN = [
+  { naam:'rechte hoek', graden:90,  svg:`<line x1="30" y1="180" x2="30" y2="40" stroke="var(--accent)" stroke-width="3"/><line x1="30" y1="180" x2="200" y2="180" stroke="var(--accent)" stroke-width="3"/><rect x="30" y="155" width="25" height="25" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`, type:'recht' },
+  { naam:'scherpe hoek', graden:45, svg:`<line x1="20" y1="190" x2="220" y2="190" stroke="var(--accent)" stroke-width="3"/><line x1="20" y1="190" x2="140" y2="40" stroke="var(--accent)" stroke-width="3"/><path d="M 60,190 A 40,40 0 0,1 38,155" fill="none" stroke="var(--accent2)" stroke-width="2.5"/>`, type:'scherp' },
+  { naam:'stompe hoek', graden:120, svg:`<line x1="20" y1="170" x2="220" y2="170" stroke="var(--accent)" stroke-width="3"/><line x1="20" y1="170" x2="110" y2="40" stroke="var(--accent)" stroke-width="3"/><path d="M 65,170 A 45,45 0 0,1 32,145" fill="none" stroke="var(--accent2)" stroke-width="2.5"/>`, type:'stomp' },
+  { naam:'gestrekte hoek', graden:180, svg:`<line x1="15" y1="120" x2="225" y2="120" stroke="var(--accent)" stroke-width="3"/><circle cx="120" cy="120" r="6" fill="var(--accent)"/><path d="M 155,120 A 35,35 0 0,1 85,120" fill="none" stroke="var(--accent2)" stroke-width="2.5"/>`, type:'gestrekt' },
+];
+
+function genHoekenQ(){
+  const h = nextFromQueue(MK_HOEKEN.map((_,i)=>i));
+  const hoek = MK_HOEKEN[h];
+  const hsvg = `<svg viewBox="0 0 240 220" width="150" height="130" style="display:block;margin:0 auto 8px;">${hoek.svg}</svg>`;
+
+  if(mkLevel===1){
+    // Herken type naam
+    const opts = shuffleArr(MK_HOEKEN.map(h2=>h2.type));
+    return { svg:hsvg, vraag:'Welk soort hoek is dit?', type:'mc', correct:hoek.type, inputHTML:mkMCHTML(opts,hoek.type) };
+  }
+  if(mkLevel===2){
+    // Hoeveel graden?
+    const allGraden = MK_HOEKEN.map(h2=>String(h2.graden));
+    const opts = shuffleArr([...new Set(allGraden)]);
+    return { svg:hsvg, vraag:'Hoeveel graden heeft deze hoek?', type:'mc', correct:String(hoek.graden), inputHTML:mkMCHTML(opts.map(o=>o+'°'),hoek.graden+'°') };
+  }
+  // Niveau 3: typ de naam
+  return {
+    svg:hsvg, vraag:'Hoe heet dit soort hoek?', type:'type', correct:hoek.type,
+    inputHTML:`<div style="font-size:12px;color:var(--tx2);margin-bottom:6px;">recht / scherp / stomp / gestrekt</div><div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..."/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
+  };
+}
+
+// ── Check functies ──
+function checkMkMC(btn){
+  if(mkAnswered)return;
+  mkAnswered=true;
+  const correct=mkCurrentQ.correct;
+  const given=btn.dataset.val||btn.querySelector('.mc-text').textContent;
+  // strip eenheid voor vergelijking
+  const givenClean=given.replace(/\s*(cm²|cm|°)/g,'').trim();
+  const correctClean=correct.replace(/\s*(cm²|cm|°)/g,'').trim();
+  const ok=givenClean===correctClean;
+  document.querySelectorAll('#mk-input-area .mc-option').forEach(b=>{
+    b.disabled=true;
+    const bVal=(b.dataset.val||b.querySelector('.mc-text').textContent).replace(/\s*(cm²|cm|°)/g,'').trim();
+    if(bVal===correctClean) b.classList.add('mc-correct');
+    else if(b===btn&&!ok) b.classList.add('mc-wrong');
+    else b.style.opacity='0.4';
+  });
+  handleMkResult(ok, correct);
+}
+
+function checkMkTyped(){
+  if(mkAnswered)return;
+  const inp=document.getElementById('mk-type-input');
+  if(!inp||!inp.value.trim())return;
+  mkAnswered=true;
+  const given=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const correct=mkCurrentQ.correct.toLowerCase();
+  const ok=given===correct||given.replace(/[^0-9,.]/g,'').replace(',','.')===correct.replace(/[^0-9.]/g,'');
+  inp.disabled=true;
+  inp.style.borderColor=ok?'var(--green)':'var(--red)';
+  handleMkResult(ok, mkCurrentQ.correct);
+}
+
+function handleMkResult(ok, correct){
+  if(ok){mkScore.good++;mkScore.streak++;}else{mkScore.bad++;mkScore.streak=0;}
+  updateMkScore();
+  const msgs=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];
+  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is: <strong>${correct}</strong>`;
+  const cls=ok?'t-fb-ok':'t-fb-no';
+  const fb=document.getElementById('mk-feedback');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
+  showStickyNext(msg,cls,'loadMkQ');
+  if(ok)snd('ok');else snd('no');
+}
+
+
+
+function mkTab(t){
+  mkCurrentTab = t;
+  ['vormen','eigenschappen','berekenen','hoeken'].forEach(k=>{
+    const b=document.getElementById('mkt-'+k);
+    if(b)b.classList.toggle('on',k===t);
+  });
+  mkScore={good:0,bad:0,streak:0}; mkTotal=0;
+  renderMkContent();
+}
+
+function renderMkContent(){
+  const el=document.getElementById('mk-content');if(!el)return;
+  el.innerHTML=`
+    <div class="level-selector" style="margin-bottom:12px;">
+      <button class="level-btn ${mkLevel===1?'on':''}" onclick="setMkLevel(1)"><span class="lvl-stars">⭐</span><span class="lvl-name">Niveau 1</span><span class="lvl-desc">Herkennen</span></button>
+      <button class="level-btn ${mkLevel===2?'on':''}" onclick="setMkLevel(2)"><span class="lvl-stars">⭐⭐</span><span class="lvl-name">Niveau 2</span><span class="lvl-desc">Eigenschappen</span></button>
+      <button class="level-btn ${mkLevel===3?'on':''}" onclick="setMkLevel(3)"><span class="lvl-stars">⭐⭐⭐</span><span class="lvl-name">Niveau 3</span><span class="lvl-desc">Berekenen</span></button>
+    </div>
+    <div class="t-score-row">
+      <div class="t-score-card"><div class="t-score-num" id="mksc-good">${mkScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="mksc-bad">${mkScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="mksc-pct">${(mkScore.good+mkScore.bad)>0?Math.round(mkScore.good/(mkScore.good+mkScore.bad)*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+      <div class="t-score-card t-streak-card"><div class="t-score-num" id="mksc-streak">${mkScore.streak}</div><div class="t-score-lbl">🔥 Reeks</div></div>
+    </div>
+    <div class="t-quiz-card" id="mk-card"></div>`;
+  loadMkQ();
+}
+
+function setMkLevel(l){
+  mkLevel=l;
+  mkScore={good:0,bad:0,streak:0}; mkTotal=0;
+  renderMkContent();
+}
+
+function updateMkScore(){
+  const g=document.getElementById('mksc-good'),b=document.getElementById('mksc-bad'),
+        p=document.getElementById('mksc-pct'),s=document.getElementById('mksc-streak');
+  if(g)g.textContent=mkScore.good;
+  if(b)b.textContent=mkScore.bad;
+  const tot=mkScore.good+mkScore.bad;
+  if(p)p.textContent=tot>0?Math.round(mkScore.good/tot*100)+'%':'—';
+  if(s)s.textContent=mkScore.streak;
+}
+
+// ── SVG vormen ──
+const SHAPES = {
+  vierkant: {
+    svg: `<rect x="60" y="40" width="120" height="120" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3" rx="2"/>`,
+    label:'vierkant', zijden:4, hoeken:4, gelijkZijden:true, rechteHoeken:true,
+    omtrek: (a)=>4*a, oppervlakte: (a)=>a*a,
+    omtrekFormule:'4 × zijde', oppFormule:'zijde × zijde'
+  },
+  rechthoek: {
+    svg: `<rect x="30" y="60" width="180" height="100" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3" rx="2"/>`,
+    label:'rechthoek', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:true,
+    omtrek: (l,b)=>2*(l+b), oppervlakte:(l,b)=>l*b,
+    omtrekFormule:'2 × (lengte + breedte)', oppFormule:'lengte × breedte'
+  },
+  driehoek: {
+    svg: `<polygon points="120,30 30,190 210,190" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'driehoek', zijden:3, hoeken:3, gelijkZijden:false, rechteHoeken:false,
+    omtrek:(a,b,c)=>a+b+c, oppervlakte:(g,h)=>g*h/2,
+    omtrekFormule:'z1 + z2 + z3', oppFormule:'(grondlijn × hoogte) ÷ 2'
+  },
+  cirkel: {
+    svg: `<circle cx="120" cy="110" r="80" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'cirkel', zijden:0, hoeken:0, gelijkZijden:false, rechteHoeken:false,
+    omtrek:(r)=>Math.round(2*Math.PI*r), oppervlakte:(r)=>Math.round(Math.PI*r*r),
+    omtrekFormule:'2 × π × straal', oppFormule:'π × straal²'
+  },
+  ruit: {
+    svg: `<polygon points="120,20 210,110 120,200 30,110" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'ruit', zijden:4, hoeken:4, gelijkZijden:true, rechteHoeken:false,
+    omtrek:(a)=>4*a, oppervlakte:(d1,d2)=>d1*d2/2,
+    omtrekFormule:'4 × zijde', oppFormule:'(diagonaal1 × diagonaal2) ÷ 2'
+  },
+  trapezium: {
+    svg: `<polygon points="50,180 190,180 160,60 80,60" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'trapezium', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:false,
+    omtrek:(a,b,c,d)=>a+b+c+d, oppervlakte:(a,b,h)=>(a+b)*h/2,
+    omtrekFormule:'z1 + z2 + z3 + z4', oppFormule:'(basis1 + basis2) × hoogte ÷ 2'
+  },
+  vijfhoek: {
+    svg: `<polygon points="120,20 210,80 180,185 60,185 30,80" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'vijfhoek', zijden:5, hoeken:5, gelijkZijden:true, rechteHoeken:false
+  },
+  zeshoek: {
+    svg: `<polygon points="120,20 200,65 200,155 120,200 40,155 40,65" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
+    label:'zeshoek', zijden:6, hoeken:6, gelijkZijden:true, rechteHoeken:false
+  }
+};
+
+const SHAPE_KEYS = Object.keys(SHAPES);
+
+function shapeSVG(key, extraContent=''){
+  return `<svg viewBox="0 0 240 220" width="160" height="140" style="display:block;margin:0 auto 10px;">
+    ${SHAPES[key].svg}${extraContent}
+  </svg>`;
+}
+
+// ── Vraag generatie per tab ──
+function loadMkQ(){
+  mkAnswered=false;
+  removeStickyNext();
+  mkTotal++;
+  const card=document.getElementById('mk-card');if(!card)return;
+
+  const tab=mkCurrentTab;
+  let q;
+  if(tab==='vormen') q=genVormenQ();
+  else if(tab==='eigenschappen') q=genEigenschappenQ();
+  else if(tab==='berekenen') q=genBerekeningQ();
+  else q=genHoekenQ();
+
+  mkCurrentQ=q;
+  card.innerHTML=`
+    <div class="t-quiz-meta"><span class="t-prog">Vraag ${mkTotal}</span></div>
+    <div style="text-align:center;">${q.svg||''}</div>
+    <div class="t-question" style="font-size:16px;font-weight:600;margin-bottom:14px;">${q.vraag}</div>
+    <div id="mk-input-area">${q.inputHTML}</div>
+    <div id="mk-feedback"></div>`;
+
+  if(q.type==='type'){
+    const inp=document.getElementById('mk-type-input');
+    if(inp){inp.focus();inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkMkTyped();});}
+  }
+}
+
+// VORMEN: zie een vorm → noem hem
+function genVormenQ(){
+  const shapeKeys = mkLevel===1
+    ? ['vierkant','rechthoek','driehoek','cirkel']
+    : mkLevel===2
+    ? ['vierkant','rechthoek','driehoek','cirkel','ruit','trapezium']
+    : SHAPE_KEYS;
+
+  const key=shapeKeys[Math.floor(Math.random()*shapeKeys.length)];
+  const correct=SHAPES[key].label;
+
+  if(mkLevel<=2){
+    // Meerkeuze
+    const opts=[correct,...shapeKeys.filter(k=>k!==key).sort(()=>Math.random()-0.5).slice(0,3).map(k=>SHAPES[k].label)].sort(()=>Math.random()-0.5);
+    return {
+      svg: shapeSVG(key),
+      vraag: 'Welke vorm zie je?',
+      type:'mc',
+      correct,
+      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" data-opt="${i}" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
+    };
+  } else {
+    return {
+      svg: shapeSVG(key),
+      vraag: 'Typ de naam van deze vorm:',
+      type:'type',
+      correct,
+      inputHTML:`<div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..."/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
+    };
+  }
+}
+
+// EIGENSCHAPPEN: hoeveel zijden/hoeken? Rechte hoeken? Gelijke zijden?
+function genEigenschappenQ(){
+  const shapeKeys = mkLevel===1
+    ? ['vierkant','rechthoek','driehoek','cirkel']
+    : ['vierkant','rechthoek','driehoek','cirkel','ruit','trapezium','vijfhoek','zeshoek'];
+  const key=shapeKeys[Math.floor(Math.random()*shapeKeys.length)];
+  const s=SHAPES[key];
+
+  const vragen=[
+    {v:`Hoeveel zijden heeft een ${s.label}?`, a:`${s.zijden}`, eenheid:''},
+    {v:`Hoeveel hoeken heeft een ${s.label}?`, a:`${s.hoeken}`, eenheid:''},
+    {v:`Heeft een ${s.label} gelijke zijden?`, a:s.gelijkZijden?'ja':'nee', eenheid:''},
+    {v:`Heeft een ${s.label} rechte hoeken?`, a:s.rechteHoeken?'ja':'nee', eenheid:''},
+  ].filter(q=>q.a!=='undefined');
+
+  const chosen=vragen[Math.floor(Math.random()*vragen.length)];
+  const correct=chosen.a;
+
+  // Ja/nee vragen → meerkeuze knoppen
+  if(correct==='ja'||correct==='nee'){
+    const opts=['ja','nee'];
+    return {
+      svg: shapeSVG(key),
+      vraag: chosen.v,
+      type:'mc', correct,
+      inputHTML:`<div style="display:flex;gap:10px;justify-content:center;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}" style="flex:1;font-size:20px;"><span class="mc-text">${o}</span></button>`).join('')}</div>`
+    };
+  }
+  // Getallen → meerkeuze met foute getallen
+  const num=parseInt(correct);
+  const wrong=[...new Set([num-1,num+1,num+2,num-2].filter(n=>n>=0&&n!==num))].slice(0,3);
+  const opts=[correct,...wrong.map(String)].sort(()=>Math.random()-0.5);
+  return {
+    svg: shapeSVG(key),
+    vraag: chosen.v,
+    type:'mc', correct,
+    inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
+  };
+}
+
+// BEREKENEN: omtrek en oppervlakte
+function genBerekeningQ(){
+  const r=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+  const scenarios=[
+    ()=>{
+      const z=r(3,12);
+      return {key:'vierkant',vraag:`Een vierkant heeft zijde ${z} cm. Wat is de omtrek?`, correct:`${4*z}`, eenheid:'cm',
+        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="14" fill="var(--tx)">${z} cm</text>`};
+    },
+    ()=>{
+      const z=r(3,12);
+      return {key:'vierkant',vraag:`Een vierkant heeft zijde ${z} cm. Wat is de oppervlakte?`, correct:`${z*z}`, eenheid:'cm²',
+        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="14" fill="var(--tx)">${z} cm</text>`};
+    },
+    ()=>{
+      const l=r(4,15),b=r(2,8);
+      return {key:'rechthoek',vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Omtrek?`, correct:`${2*(l+b)}`, eenheid:'cm',
+        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="13" fill="var(--tx)">${l} cm</text><text x="222" y="115" text-anchor="middle" font-size="13" fill="var(--tx)" transform="rotate(90,222,115)">${b} cm</text>`};
+    },
+    ()=>{
+      const l=r(4,15),b=r(2,8);
+      return {key:'rechthoek',vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Oppervlakte?`, correct:`${l*b}`, eenheid:'cm²',
+        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="13" fill="var(--tx)">${l} cm</text>`};
+    },
+    ()=>{
+      const z1=r(3,10),z2=r(3,10),z3=r(3,10);
+      return {key:'driehoek',vraag:`Driehoek met zijden ${z1}, ${z2} en ${z3} cm. Omtrek?`, correct:`${z1+z2+z3}`, eenheid:'cm',
+        extraSVG:`<text x="120" y="210" text-anchor="middle" font-size="13" fill="var(--tx)">${z1} cm</text>`};
+    },
+    ()=>{
+      const g=r(4,14),h=r(3,10);
+      return {key:'driehoek',vraag:`Driehoek: grondlijn ${g} cm, hoogte ${h} cm. Oppervlakte?`, correct:`${g*h/2}`, eenheid:'cm²',
+        extraSVG:`<text x="120" y="210" text-anchor="middle" font-size="13" fill="var(--tx)">${g} cm</text>`};
+    },
+  ];
+
+  const sc=scenarios[Math.floor(Math.random()*scenarios.length)]();
+  const correct=String(sc.correct);
+  const num=parseFloat(correct);
+  // Wrong answers: nearby plausible numbers
+  const wrongs=[...new Set([num+1,num-1,num*2,Math.round(num/2)].filter(n=>n>0&&n!==num))].slice(0,3);
+  const opts=[correct,...wrongs.map(String)].sort(()=>Math.random()-0.5);
+
+  if(mkLevel===3){
+    return {
+      svg: shapeSVG(sc.key, sc.extraSVG||''),
+      vraag: sc.vraag,
+      type:'type', correct,
+      inputHTML:`<div style="margin-bottom:6px;font-size:12px;color:var(--tx2);">Antwoord in ${sc.eenheid} (alleen het getal)</div><div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..." inputmode="decimal"/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
+    };
+  }
+  return {
+    svg: shapeSVG(sc.key, sc.extraSVG||''),
+    vraag: sc.vraag,
+    type:'mc', correct,
+    inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o} ${sc.eenheid}</span></button>`).join('')}</div>`
+  };
+}
+
+// HOEKEN: scherp, stomp, recht
+const HOEK_DATA = [
+  {type:'recht', graden:90, svg:`<line x1="60" y1="160" x2="60" y2="60" stroke="var(--accent)" stroke-width="3"/><line x1="60" y1="160" x2="180" y2="160" stroke="var(--accent)" stroke-width="3"/><rect x="60" y="140" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"/>`, label:'rechte hoek (90°)'},
+  {type:'scherp', graden:45, svg:`<line x1="60" y1="170" x2="180" y2="170" stroke="var(--accent)" stroke-width="3"/><line x1="60" y1="170" x2="140" y2="60" stroke="var(--accent)" stroke-width="3"/>`, label:'scherpe hoek (< 90°)'},
+  {type:'stomp', graden:135, svg:`<line x1="30" y1="160" x2="200" y2="160" stroke="var(--accent)" stroke-width="3"/><line x1="30" y1="160" x2="130" y2="60" stroke="var(--accent)" stroke-width="3"/>`, label:'stompe hoek (> 90°)'},
+  {type:'gestrekt', graden:180, svg:`<line x1="20" y1="120" x2="220" y2="120" stroke="var(--accent)" stroke-width="3"/><circle cx="120" cy="120" r="4" fill="var(--accent)"/>`, label:'gestrekte hoek (180°)'},
+];
+
+function genHoekenQ(){
+  const h=HOEK_DATA[Math.floor(Math.random()*HOEK_DATA.length)];
+  const svg=`<svg viewBox="0 0 240 220" width="160" height="140" style="display:block;margin:0 auto 10px;">${h.svg}</svg>`;
+
+  if(mkLevel===1){
+    // Herken type
+    const correct=h.type;
+    const opts=['recht','scherp','stomp','gestrekt'].sort(()=>Math.random()-0.5);
+    return {
+      svg, vraag:'Welk soort hoek is dit?', type:'mc', correct,
+      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
+    };
+  } else if(mkLevel===2){
+    // Klopt dit: "is dit een rechte hoek?" ja/nee
+    const tested=HOEK_DATA[Math.floor(Math.random()*HOEK_DATA.length)].type;
+    const correct=h.type===tested?'ja':'nee';
+    return {
+      svg, vraag:`Is dit een ${tested} hoek?`, type:'mc', correct,
+      inputHTML:`<div style="display:flex;gap:10px;justify-content:center;"><button class="mc-option" onclick="checkMkMC(this)" data-val="ja" style="flex:1;font-size:20px;"><span class="mc-text">ja</span></button><button class="mc-option" onclick="checkMkMC(this)" data-val="nee" style="flex:1;font-size:20px;"><span class="mc-text">nee</span></button></div>`
+    };
+  } else {
+    // Typ hoeveel graden (bij rechte hoek)
+    return {
+      svg, vraag:`Hoeveel graden heeft deze ${h.type} hoek?`, type:'mc', correct:String(h.graden),
+      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${[h.graden,...[45,90,135,180].filter(g=>g!==h.graden).sort(()=>Math.random()-0.5).slice(0,3)].sort(()=>Math.random()-0.5).map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}°</span></button>`).join('')}</div>`
+    };
+  }
+}
+
+// ── Check functies ──
+function checkMkMC(btn){
+  if(mkAnswered)return;
+  mkAnswered=true;
+  const correct=mkCurrentQ.correct;
+  const given=btn.dataset.val;
+  const ok=given===correct;
+  document.querySelectorAll('#mk-input-area .mc-option').forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.val===correct)b.classList.add('mc-correct');
+    else if(b===btn&&!ok)b.classList.add('mc-wrong');
+    else b.style.opacity='0.4';
+  });
+  handleMkResult(ok, correct);
+}
+
+function checkMkTyped(){
+  if(mkAnswered)return;
+  const inp=document.getElementById('mk-type-input');
+  if(!inp||!inp.value.trim())return;
+  mkAnswered=true;
+  const given=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const correct=mkCurrentQ.correct.toLowerCase();
+  const ok=given===correct||given.replace(/\s/g,'')===correct.replace(/\s/g,'');
+  inp.disabled=true;
+  inp.classList.add(ok?'correct':'wrong');
+  handleMkResult(ok, mkCurrentQ.correct);
+}
+
+function handleMkResult(ok, correct){
+  if(ok){mkScore.good++;mkScore.streak++;}else{mkScore.bad++;mkScore.streak=0;}
+  updateMkScore();
+  const msgs=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];
+  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is: <strong>${correct}</strong>`;
+  const cls=ok?'t-fb-ok':'t-fb-no';
+  const fb=document.getElementById('mk-feedback');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
+  showStickyNext(msg, cls, 'loadMkQ');
+  if(ok)snd('ok');else snd('no');
+}
+
 
 // Storage keys
 const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswijzen'};
