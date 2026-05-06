@@ -987,180 +987,192 @@ function checkInvul(){
 // WOORDENSCHAT DATA
 // ════════════════════════════════════════════════════════
 const WOORDEN = [
-  ["afwimpelen","wegsturen op een luchtige manier"],
-  ["het feit","iets wat echt gebeurd is"],
-  ["de hashtag","hekje (#) voor een woord of zin om kort weer te geven waar je bericht over gaat"],
-  ["de krantenkop","titel van een krantenartikel die beschrijft waarover het artikel gaat"],
-  ["het nadeel","wat niet goed is aan iets"],
-  ["observeren","heel goed bekijken"],
-  ["de speurneus","iemand die goed kan opsporen"],
-  ["de verslaggever","persoon die het artikel schreef"],
-  ["het vervoermiddel","alle vervoer dat je van de ene naar de andere plek brengt (bv. auto, bus, trein)"],
-  ["het voordeel","wat goed is aan iets"],
-  ["weids","groots, ruim, je kunt ver kijken"],
-  ["het kenmerk","iets waaraan je een persoon, dier of voorwerp herkent"],
-  ["de kieuw","gaatje bij de kop van de vis, waardoor hij ademhaalt"],
-  ["het leefgebied","gebied waarin dieren leven, bv. het oerwoud of de woestijn"],
-  ["levensbedreigend","zo gevaarlijk dat je leven in gevaar is"],
-  ["navigeren","de weg zoeken"],
-  ["ondraaglijk","iets dat zo vervelend is dat je het niet kunt volhouden"],
-  ["overbodig","iets dat je niet nodig hebt"],
-  ["praktisch","handig, iets dat je nodig kunt hebben"],
-  ["de school (vissen)","grote groep vissen"],
-  ["de survivaltocht","overlevingstocht"],
-  ["vuur stoken","vuur maken"],
-  ["zich begeven naar","ergens naartoe gaan"],
-  ["de zwaluw","vogelsoort"],
-  ["bestoken","beschieten"],
-  ["de cyclus","iets dat zich steeds herhaalt"],
-  ["depressief","je gedurende lange tijd niet gelukkig voelen"],
-  ["graaien","grabbelen, met de handen in iets zoeken"],
-  ["grinniken","zachtjes lachen"],
-  ["grissen","snel iets wegnemen"],
-  ["nippen","klein slokje drinken"],
-  ["de onomatopee","woord waarmee een klank wordt nagebootst, bv. 'de bam'"],
-  ["verlept","verwelkt"],
-  ["vervullen","laten uitkomen van een wens of droom"],
-  ["de wastafel","—"],
-  ["wissen","verwijderen"],
-  ["zich inbeelden","zich voorstellen dat iets echt waar is, terwijl het niet zo is"],
-  ["aantrekkelijk","knap, mooi om naar te kijken"],
-  ["de consument","iemand die iets koopt"],
-  ["het doel","wat je probeert te bereiken"],
-  ["evalueren","beoordelen, controleren"],
-  ["de fabrikant","maker van een product"],
-  ["favoriet","iets wat je heel graag hebt of doet"],
-  ["het formulier","papier waarop bepaalde gegevens ingevuld moeten worden"],
-  ["gewichtloos","niets wegen, zwevend"],
-  ["de instructie","opdracht die stap voor stap zegt wat je moet doen"],
-  ["het middel","wat je gebruikt om je doel te bereiken"],
-  ["onzijdig","zonder geslacht, niet mannelijk of vrouwelijk"],
-  ["de presentatie","het aan elkaar praten van onderdelen van een programma"],
-  ["roemen","goede dingen over iemand zeggen"],
-  ["het scharminkel","mager mens of dier"],
-  ["de slogan","korte, krachtige zin (vooral in reclame)"],
-  ["de sloppenwijk","arme buurt in een stad"],
-  ["de verbeelding","fantasie"],
-  ["verdoven","ervoor zorgen dat iemand geen pijn meer voelt"],
-  ["woest","heel boos"],
-  ["de aantekeningen","korte tekst of sleutelwoorden die je opschrijft"],
-  ["de benodigdheden","wat je nodig hebt om iets te doen of te maken"],
-  ["de bereidingswijze","manier waarop je een gerecht klaarmaakt"],
-  ["de bijsluiter","instructie over hoe je een medicijn moet gebruiken"],
-  ["chronologisch","in de juiste volgorde"],
-  ["de gebruiksaanwijzing","instructie over hoe je iets gebruikt"],
-  ["haarscherp","heel scherp of duidelijk"],
-  ["huiveren","rillen omdat je bang bent of koud hebt"],
-  ["(informatie) inwinnen","vragen stellen om informatie te krijgen"],
-  ["de kritiek","wat je niet goed vindt aan iets"],
-  ["het nevenpersonage","minder belangrijk persoon in een verhaal of film"],
-  ["verwittigen","op de hoogte brengen"],
-  ["het vormgedicht","gedicht in de vorm van het onderwerp"],
-  ["de amateur","iemand die iets als hobby doet"],
-  ["de bedenksels","dingen die je verzint"],
-  ["exact","heel precies"],
-  ["gelaten","kalm, je legt je erbij neer"],
-  ["een makkelijk doelwit","iemand die je makkelijk kunt pesten"],
-  ["knarsen","een schurend geluid maken met je tanden"],
-  ["stamelen","niet uit je woorden komen"],
-  ["de stuntelaar","onhandig persoon"],
-  ["de trekpleister","iets waar veel mensen naar komen kijken"],
-  ["de zeebries","wind uit de richting van de zee"],
-  ["de voordracht","spreekbeurt of voordragen voor een groep"],
-  ["afzonderlijk","apart, niet samen"],
-  ["attent","aardig"],
-  ["beknopt","in het kort"],
-  ["de bijzaak","wat minder belangrijk is"],
-  ["gebruikelijk","veel voorkomend, alledaags"],
-  ["de hoofdzaak","wat belangrijk is"],
-  ["inspraak hebben","de kans krijgen om je mening te geven"],
-  ["de larve","jong diertje dat later nog verandert"],
-  ["de lippen tuiten","je mond in 'kusstand' brengen"],
-  ["neuriën","zachtjes zingen met gesloten mond"],
-  ["nors","onvriendelijk"],
-  ["het resultaat","uitslag of gevolg"],
-  ["schraal","koud en droog"],
-  ["de sfeer","bepaald gevoel dat ergens hangt"],
-  ["sociaal","graag en leuk met anderen omgaan"],
-  ["specifiek","kenmerkend"],
-  ["stabiel","vast, evenwichtig"],
-  ["uniek","er is er maar één van"],
-  ["voorgoed","definitief en blijvend, het komt nooit meer terug"],
-  ["voor altijd","eindeloos, voor de eeuwigheid"],
-  ["wanhopig","zonder hoop, niet meer weten wat te doen"],
-  ["zorgzaam","zorg dragen voor iemand anders"],
-  ["arrogant","verwaand, als je op anderen neerkijkt"],
-  ["bevorderen","ervoor zorgen dat iets sneller of beter gaat"],
-  ["flets","met weinig kleur of smaak"],
-  ["geschikt","bruikbaar"],
-  ["ingesloten","aan alle kanten ligt er iets naast (bv. een veld ingesloten door een gracht)"],
-  ["klikken (figuurlijk)","goed met elkaar overeenkomen"],
-  ["de kwaal","ziekte, ongemak"],
-  ["monotoon","eentonig, steeds op dezelfde manier"],
-  ["plannen smeden","plannen verzinnen"],
-  ["de rasp","keukengereedschap om fijne stukjes van voedsel te schrapen"],
-  ["de uitwerking","resultaat, effect"],
-  ["het voornaamste","belangrijkste"],
-  ["voorspellen","zeggen wat je verwacht dat er zal gebeuren"],
-  ["weerspiegelen","de afbeelding van iets in een spiegel zien"],
-  ["weken","iets zacht laten worden door het in een vloeistof te leggen"],
-  ["argwanend","je vertrouwt het niet helemaal"],
-  ["het complex","aantal gebouwen dat bij elkaar hoort"],
-  ["efficiënt","goed en snel"],
-  ["de ervaring","wat je leert door dingen mee te maken"],
-  ["functioneren","werken"],
-  ["inenten","injectie tegen een bepaalde ziekte"],
-  ["de kruin","bovenste deel van een boom"],
-  ["de locatie","plaats"],
-  ["onbepaald","niet precies vastgesteld, nog niet zeker"],
-  ["(de) pitten","1 (ww) slapen / 2 (zn) zaadhuisje voor nieuwe planten"],
-  ["ruisen","zacht, ritselend geluid maken door de wind"],
-  ["de serre","glazen huis voor het kweken van planten"],
-  ["stockeren","opslaan"],
-  ["wantrouwig","iets niet vertrouwen"]
+  ["afwimpelen","wegsturen op een luchtige manier",1],
+  ["het feit","iets wat echt gebeurd is",1],
+  ["de hashtag","hekje (#) voor een woord of zin om kort weer te geven waar je bericht over gaat",1],
+  ["de krantenkop","titel van een krantenartikel die beschrijft waarover het artikel gaat",1],
+  ["het nadeel","wat niet goed is aan iets",1],
+  ["observeren","heel goed bekijken",1],
+  ["de speurneus","iemand die goed kan opsporen",1],
+  ["de verslaggever","persoon die het artikel schreef",1],
+  ["het vervoermiddel","alle vervoer dat je van de ene naar de andere plek brengt (bv. auto, bus, trein)",1],
+  ["het voordeel","wat goed is aan iets",1],
+  ["weids","groots, ruim, je kunt ver kijken",1],
+  ["het kenmerk","iets waaraan je een persoon, dier of voorwerp herkent",2],
+  ["de kieuw","gaatje bij de kop van de vis, waardoor hij ademhaalt",2],
+  ["het leefgebied","gebied waarin dieren leven, bv. het oerwoud of de woestijn",2],
+  ["levensbedreigend","zo gevaarlijk dat je leven in gevaar is",2],
+  ["navigeren","de weg zoeken",2],
+  ["ondraaglijk","iets dat zo vervelend is dat je het niet kunt volhouden",2],
+  ["overbodig","iets dat je niet nodig hebt",2],
+  ["praktisch","handig, iets dat je nodig kunt hebben",2],
+  ["de school (vissen)","grote groep vissen",2],
+  ["de survivaltocht","overlevingstocht",2],
+  ["vuur stoken","vuur maken",2],
+  ["zich begeven naar","ergens naartoe gaan",2],
+  ["de zwaluw","vogelsoort",2],
+  ["bestoken","beschieten",3],
+  ["de cyclus","iets dat zich steeds herhaalt",3],
+  ["depressief","je gedurende lange tijd niet gelukkig voelen",3],
+  ["graaien","grabbelen, met de handen in iets zoeken",3],
+  ["grinniken","zachtjes lachen",3],
+  ["grissen","snel iets wegnemen",3],
+  ["nippen","klein slokje drinken",3],
+  ["de onomatopee","woord waarmee een klank wordt nagebootst, bv. 'de bam'",3],
+  ["verlept","verwelkt",3],
+  ["vervullen","laten uitkomen van een wens of droom",3],
+  ["de wastafel","—",3],
+  ["wissen","verwijderen",3],
+  ["zich inbeelden","zich voorstellen dat iets echt waar is, terwijl het niet zo is",3],
+  ["aantrekkelijk","knap, mooi om naar te kijken",4],
+  ["de consument","iemand die iets koopt",4],
+  ["het doel","wat je probeert te bereiken",4],
+  ["evalueren","beoordelen, controleren",4],
+  ["de fabrikant","maker van een product",4],
+  ["favoriet","iets wat je heel graag hebt of doet",4],
+  ["het formulier","papier waarop bepaalde gegevens ingevuld moeten worden",4],
+  ["gewichtloos","niets wegen, zwevend",4],
+  ["de instructie","opdracht die stap voor stap zegt wat je moet doen",4],
+  ["het middel","wat je gebruikt om je doel te bereiken",4],
+  ["onzijdig","zonder geslacht, niet mannelijk of vrouwelijk",4],
+  ["de presentatie","het aan elkaar praten van onderdelen van een programma",4],
+  ["roemen","goede dingen over iemand zeggen",4],
+  ["het scharminkel","mager mens of dier",4],
+  ["de slogan","korte, krachtige zin (vooral in reclame)",4],
+  ["de sloppenwijk","arme buurt in een stad",4],
+  ["de verbeelding","fantasie",4],
+  ["verdoven","ervoor zorgen dat iemand geen pijn meer voelt",4],
+  ["woest","heel boos",4],
+  ["de aantekeningen","korte tekst of sleutelwoorden die je opschrijft",5],
+  ["de benodigdheden","wat je nodig hebt om iets te doen of te maken",5],
+  ["de bereidingswijze","manier waarop je een gerecht klaarmaakt",5],
+  ["de bijsluiter","instructie over hoe je een medicijn moet gebruiken",5],
+  ["chronologisch","in de juiste volgorde",5],
+  ["de gebruiksaanwijzing","instructie over hoe je iets gebruikt",5],
+  ["haarscherp","heel scherp of duidelijk",5],
+  ["huiveren","rillen omdat je bang bent of koud hebt",5],
+  ["(informatie) inwinnen","vragen stellen om informatie te krijgen",5],
+  ["de kritiek","wat je niet goed vindt aan iets",5],
+  ["het nevenpersonage","minder belangrijk persoon in een verhaal of film",5],
+  ["verwittigen","op de hoogte brengen",5],
+  ["het vormgedicht","gedicht in de vorm van het onderwerp",5],
+  ["de amateur","iemand die iets als hobby doet",6],
+  ["de bedenksels","dingen die je verzint",6],
+  ["exact","heel precies",6],
+  ["gelaten","kalm, je legt je erbij neer",6],
+  ["een makkelijk doelwit","iemand die je makkelijk kunt pesten",6],
+  ["knarsen","een schurend geluid maken met je tanden",6],
+  ["stamelen","niet uit je woorden komen",6],
+  ["de stuntelaar","onhandig persoon",6],
+  ["de trekpleister","iets waar veel mensen naar komen kijken",6],
+  ["de zeebries","wind uit de richting van de zee",6],
+  ["de voordracht","spreekbeurt of voordragen voor een groep",6],
+  ["afzonderlijk","apart, niet samen",7],
+  ["attent","aardig",7],
+  ["beknopt","in het kort",7],
+  ["de bijzaak","wat minder belangrijk is",7],
+  ["gebruikelijk","veel voorkomend, alledaags",7],
+  ["de hoofdzaak","wat belangrijk is",7],
+  ["inspraak hebben","de kans krijgen om je mening te geven",7],
+  ["de larve","jong diertje dat later nog verandert",7],
+  ["de lippen tuiten","je mond in 'kusstand' brengen",7],
+  ["neuriën","zachtjes zingen met gesloten mond",7],
+  ["nors","onvriendelijk",7],
+  ["het resultaat","uitslag of gevolg",7],
+  ["schraal","koud en droog",7],
+  ["de sfeer","bepaald gevoel dat ergens hangt",7],
+  ["sociaal","graag en leuk met anderen omgaan",7],
+  ["specifiek","kenmerkend",7],
+  ["stabiel","vast, evenwichtig",7],
+  ["uniek","er is er maar één van",7],
+  ["voorgoed","definitief en blijvend, het komt nooit meer terug",7],
+  ["voor altijd","eindeloos, voor de eeuwigheid",7],
+  ["wanhopig","zonder hoop, niet meer weten wat te doen",7],
+  ["zorgzaam","zorg dragen voor iemand anders",7],
+  ["arrogant","verwaand, als je op anderen neerkijkt",8],
+  ["bevorderen","ervoor zorgen dat iets sneller of beter gaat",8],
+  ["flets","met weinig kleur of smaak",8],
+  ["geschikt","bruikbaar",8],
+  ["ingesloten","aan alle kanten ligt er iets naast (bv. een veld ingesloten door een gracht)",8],
+  ["klikken (figuurlijk)","goed met elkaar overeenkomen",8],
+  ["de kwaal","ziekte, ongemak",8],
+  ["monotoon","eentonig, steeds op dezelfde manier",8],
+  ["plannen smeden","plannen verzinnen",8],
+  ["de rasp","keukengereedschap om fijne stukjes van voedsel te schrapen",8],
+  ["de uitwerking","resultaat, effect",8],
+  ["het voornaamste","belangrijkste",8],
+  ["voorspellen","zeggen wat je verwacht dat er zal gebeuren",8],
+  ["weerspiegelen","de afbeelding van iets in een spiegel zien",8],
+  ["weken","iets zacht laten worden door het in een vloeistof te leggen",8],
+  ["argwanend","je vertrouwt het niet helemaal",9],
+  ["het complex","aantal gebouwen dat bij elkaar hoort",9],
+  ["efficiënt","goed en snel",9],
+  ["de ervaring","wat je leert door dingen mee te maken",9],
+  ["functioneren","werken",9],
+  ["inenten","injectie tegen een bepaalde ziekte",9],
+  ["de kruin","bovenste deel van een boom",9],
+  ["de locatie","plaats",9],
+  ["onbepaald","niet precies vastgesteld, nog niet zeker",9],
+  ["(de) pitten","1 (ww) slapen / 2 (zn) zaadhuisje voor nieuwe planten",9],
+  ["ruisen","zacht, ritselend geluid maken door de wind",9],
+  ["de serre","glazen huis voor het kweken van planten",9],
+  ["stockeren","opslaan",9],
+  ["wantrouwig","iets niet vertrouwen",9]
 ];
 
 // ════════════════════════════════════════════════════════
 // ZEGSWIJZEN DATA
 // ════════════════════════════════════════════════════════
 const ZEGSWIJZEN = [
-  ["een kei zijn in","heel goed zijn in"],
-  ["vroeg uit de veren","vroeg uit bed"],
-  ["een kijkje nemen","ergens even gaan kijken"],
-  ["in de huid kruipen van","zich inleven in"],
-  ["als een hond in een kegelspel","ongewenst, ongelegen"],
-  ["de kleren maken de man","bij beoordelen kijk je vaak naar uiterlijk"],
-  ["een gat in de lucht springen","heel blij zijn"],
-  ["iets broodnodig hebben","iets is onmisbaar"],
-  ["de hel is losgebroken","de situatie is erg slecht geworden"],
-  ["naar de haaien zijn","voorgoed verloren zijn"],
-  ["zo trots als een pauw","erg trots"],
-  ["de sterren van de hemel spelen","heel goed spelen"],
-  ["geen schijn van kans hebben","helemaal geen kans maken"],
-  ["je mening herzien","van mening veranderen"],
-  ["je stoute schoenen aantrekken","al je moed verzamelen om iets te durven"],
-  ["zich meester maken van iets","in zijn macht krijgen, overmeesteren"],
-  ["een doorn in het oog zijn","iets dat je ergert en waar je jaloers op bent"],
-  ["(als) aan de grond genageld","zeer verbaasd en niet meer kunnen bewegen"],
-  ["je adem stokt in je keel","je kunt niets meer zeggen"],
-  ["tot de nok gevuld","heel vol, tot aan de rand gevuld"]
+  ["een kei zijn in","heel goed zijn in",1],
+  ["vroeg uit de veren","vroeg uit bed",1],
+  ["een kijkje nemen","ergens even gaan kijken",2],
+  ["in de huid kruipen van","zich inleven in",2],
+  ["als een hond in een kegelspel","ongewenst, ongelegen",3],
+  ["de kleren maken de man","bij beoordelen kijk je vaak naar uiterlijk",3],
+  ["een gat in de lucht springen","heel blij zijn",4],
+  ["iets broodnodig hebben","iets is onmisbaar",4],
+  ["de hel is losgebroken","de situatie is erg slecht geworden",5],
+  ["naar de haaien zijn","voorgoed verloren zijn",5],
+  ["zo trots als een pauw","erg trots",6],
+  ["de sterren van de hemel spelen","heel goed spelen",6],
+  ["geen schijn van kans hebben","helemaal geen kans maken",7],
+  ["je mening herzien","van mening veranderen",7],
+  ["je stoute schoenen aantrekken","al je moed verzamelen om iets te durven",7],
+  ["zich meester maken van iets","in zijn macht krijgen, overmeesteren",8],
+  ["een doorn in het oog zijn","iets dat je ergert en waar je jaloers op bent",8],
+  ["(als) aan de grond genageld","zeer verbaasd en niet meer kunnen bewegen",9],
+  ["je adem stokt in je keel","je kunt niets meer zeggen",9],
+  ["tot de nok gevuld","heel vol, tot aan de rand gevuld",9]
 ];
 
 // ════════════════════════════════════════════════════════
 // WOORDENSCHAT RENDER
 // ════════════════════════════════════════════════════════
 let woordenSearch = '';
+let woordenThema = 0;
 let woordenQuizMode = false;
 let wqCurrent = null, wqAnswered = false, wqScore = {good:0,bad:0}, wqDir = 'woordBetekenis';
 
 function renderWoordenschat(){
-  document.getElementById('taal-woorden-tab').innerHTML = `
-    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
-      <button class="filter-btn ${!woordenQuizMode?'on':''}" onclick="setWoordenMode(false)">📋 Lijst</button>
-      <button class="filter-btn ${woordenQuizMode?'on':''}" onclick="setWoordenMode(true)">🎯 Quiz</button>
-    </div>
-    <div id="woorden-content"></div>`;
+  const themaButtons = [0,1,2,3,4,5,6,7,8,9].map(t=>
+    '<button class="filter-btn'+(woordenThema===t?' on':'')+'" onclick="setWoordenThema('+t+')">'+(t===0?'Alle':'T'+t)+'</button>'
+  ).join('');
+  document.getElementById('taal-woorden-tab').innerHTML =
+    '<div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap;">'+
+    '<button class="filter-btn'+((!woordenQuizMode)?(' on'):'')+'" onclick="setWoordenMode(false)">📋 Lijst</button>'+
+    '<button class="filter-btn'+((woordenQuizMode)?(' on'):'')+'" onclick="setWoordenMode(true)">🎯 Quiz</button>'+
+    '</div>'+
+    '<div class="filter-row" style="flex-wrap:wrap;gap:5px;">'+
+    '<span class="filter-lbl">Thema:</span>'+themaButtons+
+    '</div>'+
+    '<div id="woorden-content"></div>';
   renderWoordenContent();
+}
+function setWoordenThema(t){
+  woordenThema=t;
+  if(woordenQuizMode){wqScore={good:0,bad:0};wqAnswered=false;}
+  renderWoordenschat();
 }
 function setWoordenMode(quiz){
   woordenQuizMode=quiz;
@@ -1174,7 +1186,7 @@ function renderWoordenContent(){
   const el=document.getElementById('woorden-content');if(!el)return;
   if(!woordenQuizMode){
     const q=(document.getElementById('w-search')||{value:''}).value||woordenSearch;
-    const filtered=WOORDEN.filter(r=>r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase()));
+    const filtered=WOORDEN.filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
     el.innerHTML='<input class="t-search" type="text" id="w-search" placeholder="🔍 Zoek een woord of betekenis..." value="'+q+'" oninput="woordenSearch=this.value;renderWoordenContent()" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Woord</th><th>Betekenis</th></tr></thead>'+
@@ -1210,7 +1222,9 @@ function setWqDir(d){
   loadWoordenQ();
 }
 function getWoordenDistractors(correct, col){
-  const pool=WOORDEN.filter(r=>r!==wqCurrent);
+  const pool=WOORDEN.filter(r=>r!==wqCurrent&&(woordenThema===0||r[2]===woordenThema));
+  // If not enough in thema, add from all
+  const allPool=pool.length>=3?pool:WOORDEN.filter(r=>r!==wqCurrent);
   const shuffled=[...pool].sort(()=>Math.random()-0.5);
   const distractors=[];
   for(const r of shuffled){
@@ -1221,7 +1235,9 @@ function getWoordenDistractors(correct, col){
 }
 function loadWoordenQ(){
   wqAnswered=false;
-  wqCurrent=WOORDEN[Math.floor(Math.random()*WOORDEN.length)];
+  const wPool=woordenThema===0?WOORDEN:WOORDEN.filter(r=>r[2]===woordenThema);
+  const wSrc=wPool.length>0?wPool:WOORDEN;
+  wqCurrent=wSrc[Math.floor(Math.random()*wSrc.length)];
   const askCol=wqDir==='woordBetekenis'?1:0;
   const givenCol=wqDir==='woordBetekenis'?0:1;
   const correct=wqCurrent[askCol];
@@ -1288,13 +1304,24 @@ function checkWoordenQ(btn){
   if(ok)snd('ok');else snd('no');
 }
 function renderZegswijzen(){
-  document.getElementById('taal-zegswijzen-tab').innerHTML = `
-    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
-      <button class="filter-btn ${!zegswijzenQuizMode?'on':''}" onclick="setZegswijzenMode(false)">📋 Lijst</button>
-      <button class="filter-btn ${zegswijzenQuizMode?'on':''}" onclick="setZegswijzenMode(true)">🎯 Quiz</button>
-    </div>
-    <div id="zegswijzen-content"></div>`;
+  const themaButtons=[0,1,2,3,4,5,6,7,8,9].map(t=>
+    '<button class="filter-btn'+(zegswijzenThema===t?' on':'')+'" onclick="setZegswijzenThema('+t+')">'+(t===0?'Alle':'T'+t)+'</button>'
+  ).join('');
+  document.getElementById('taal-zegswijzen-tab').innerHTML=
+    '<div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap;">'+
+    '<button class="filter-btn'+((!zegswijzenQuizMode)?' on':'')+'" onclick="setZegswijzenMode(false)">📋 Lijst</button>'+
+    '<button class="filter-btn'+((zegswijzenQuizMode)?' on':'')+'" onclick="setZegswijzenMode(true)">🎯 Quiz</button>'+
+    '</div>'+
+    '<div class="filter-row" style="flex-wrap:wrap;gap:5px;">'+
+    '<span class="filter-lbl">Thema:</span>'+themaButtons+
+    '</div>'+
+    '<div id="zegswijzen-content"></div>';
   renderZegswijzenContent();
+}
+function setZegswijzenThema(t){
+  zegswijzenThema=t;
+  if(zegswijzenQuizMode){zqScore={good:0,bad:0};zqAnswered=false;}
+  renderZegswijzen();
 }
 function setZegswijzenMode(quiz){
   zegswijzenQuizMode=quiz;
@@ -1308,7 +1335,7 @@ function renderZegswijzenContent(){
   const el=document.getElementById('zegswijzen-content');if(!el)return;
   if(!zegswijzenQuizMode){
     const q=(document.getElementById('z-search')||{value:''}).value||'';
-    const filtered=ZEGSWIJZEN.filter(r=>r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase()));
+    const filtered=ZEGSWIJZEN.filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
     el.innerHTML='<input class="t-search" type="text" id="z-search" placeholder="🔍 Zoek een zegswijze..." value="'+q+'" oninput="renderZegswijzenContent()" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Zegswijze</th><th>Betekenis</th></tr></thead>'+
@@ -1344,7 +1371,8 @@ function setZqDir(d){
   loadZegswijzeQ();
 }
 function getZegswijzenDistractors(correct, col){
-  const pool=ZEGSWIJZEN.filter(r=>r!==zqCurrent);
+  const tPool=ZEGSWIJZEN.filter(r=>r!==zqCurrent&&(zegswijzenThema===0||r[2]===zegswijzenThema));
+  const pool=tPool.length>=3?tPool:ZEGSWIJZEN.filter(r=>r!==zqCurrent);
   const shuffled=[...pool].sort(()=>Math.random()-0.5);
   const distractors=[];
   for(const r of shuffled){
@@ -1355,7 +1383,9 @@ function getZegswijzenDistractors(correct, col){
 }
 function loadZegswijzeQ(){
   zqAnswered=false;
-  zqCurrent=ZEGSWIJZEN[Math.floor(Math.random()*ZEGSWIJZEN.length)];
+  const zPool=zegswijzenThema===0?ZEGSWIJZEN:ZEGSWIJZEN.filter(r=>r[2]===zegswijzenThema);
+  const zSrc=zPool.length>0?zPool:ZEGSWIJZEN;
+  zqCurrent=zSrc[Math.floor(Math.random()*zSrc.length)];
   const askCol=zqDir==='zegswijzeBetekenis'?1:0;
   const givenCol=zqDir==='zegswijzeBetekenis'?0:1;
   const correct=zqCurrent[askCol];
@@ -2547,6 +2577,9 @@ function renderAdminWoorden(el){
       <div class="admin-row">
         <input class="admin-input wide" id="wd-woord" placeholder="Woord (bv. de larve)" />
         <input class="admin-input wide" id="wd-bet" placeholder="Betekenis" />
+        <select class="admin-input" id="wd-thema" style="flex:0 0 80px;">
+          ${[1,2,3,4,5,6,7,8,9].map(t=>'<option value="'+t+'">T'+t+'</option>').join('')}
+        </select>
         <button class="admin-add-btn" onclick="adminAddWoord()">+ Toevoegen</button>
       </div>
     </div>
@@ -2599,8 +2632,9 @@ function adminSaveWoord(i){
 function adminAddWoord(){
   const w=document.getElementById('wd-woord').value.trim();
   const b=document.getElementById('wd-bet').value.trim();
+  const t=parseInt(document.getElementById('wd-thema').value)||1;
   if(!w||!b){alert('Vul woord en betekenis in.');return;}
-  WOORDEN.push([w,b]);
+  WOORDEN.push([w,b,t]);
   WOORDEN.sort((a,b2)=>a[0].localeCompare(b2[0]));
   saveWoorden();
   document.getElementById('wd-woord').value='';
@@ -2625,6 +2659,9 @@ function renderAdminZegswijzen(el){
       <div class="admin-row">
         <input class="admin-input wide" id="zg-zegswijze" placeholder="Zegswijze (bv. een kei zijn in)" />
         <input class="admin-input wide" id="zg-bet" placeholder="Betekenis" />
+        <select class="admin-input" id="zg-thema" style="flex:0 0 80px;">
+          ${[1,2,3,4,5,6,7,8,9].map(t=>'<option value="'+t+'">T'+t+'</option>').join('')}
+        </select>
         <button class="admin-add-btn" onclick="adminAddZegswijze()">+ Toevoegen</button>
       </div>
     </div>
@@ -2676,8 +2713,9 @@ function adminSaveZegswijze(i){
 function adminAddZegswijze(){
   const z=document.getElementById('zg-zegswijze').value.trim();
   const b=document.getElementById('zg-bet').value.trim();
+  const t=parseInt(document.getElementById('zg-thema').value)||1;
   if(!z||!b){alert('Vul zegswijze en betekenis in.');return;}
-  ZEGSWIJZEN.push([z,b]);
+  ZEGSWIJZEN.push([z,b,t]);
   saveZegswijzen();
   document.getElementById('zg-zegswijze').value='';
   document.getElementById('zg-bet').value='';
