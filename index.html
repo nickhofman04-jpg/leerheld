@@ -299,7 +299,71 @@
       #app{padding:0.6rem 0.8rem 2rem;}
     }
 
-    /* ════ Meetkunde theorie ════ */
+    /* ════ Typen module ════ */
+    #typen-inner { padding: 1rem; }
+    #tp-score-bar { display:flex;align-items:center;justify-content:space-around;background:var(--surface2);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-bottom:1rem; }
+    .tp-stat { text-align:center; }
+    .tp-stat-num { font-size:1.4rem;font-weight:700;color:var(--tx);line-height:1; }
+    .tp-stat-lbl { font-size:0.65rem;color:var(--tx2);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px; }
+    #tp-lesson-select { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem; }
+    .tp-lesson-btn { padding:6px 14px;border-radius:20px;border:0.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:0.82rem;cursor:pointer;transition:all 0.15s;font-family:inherit; }
+    .tp-lesson-btn.active { background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600; }
+    #tp-prompt-area { background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.25rem;min-height:70px;margin-bottom:0.75rem; }
+    #tp-prompt-text { font-size:1.6rem;font-family:'Courier New',monospace;letter-spacing:2px;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px; }
+    .tp-word-group { display:inline-flex;white-space:nowrap; }
+    .tp-word-space { display:inline-block;width:0.5em; }
+    .tp-char-done   { color:#1D9E75; }
+    .tp-char-error  { color:#D85A30;text-decoration:underline; }
+    .tp-char-active { background:rgba(124,111,255,0.2);color:var(--accent);border-radius:3px;padding:0 2px;animation:tpBlink 0.75s ease-in-out infinite; }
+    .tp-char-todo   { color:var(--tx2);opacity:0.4; }
+    @keyframes tpBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    #tp-finger-hint { text-align:center;font-size:0.88rem;color:var(--tx2);min-height:22px;margin-bottom:0.5rem; }
+    #tp-finger-hint strong { color:var(--tx); }
+    #tp-keyboard { background:var(--surface2);border-radius:var(--radius-sm);padding:0.75rem 0.5rem;margin-bottom:0.75rem;overflow-x:auto; }
+    .tp-kb-row { display:flex;justify-content:center;gap:3px;margin-bottom:3px; }
+    .tp-key { display:flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:5px;font-size:0.72rem;font-weight:600;border:0.5px solid var(--surface3);background:var(--surface);color:var(--tx2);cursor:default;user-select:none;padding:0 4px;font-family:inherit;transition:transform 0.1s; }
+    .tp-key.tp-space { min-width:140px; }
+    .tp-key.tp-active { transform:scale(1.15);color:white;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,0.2);z-index:2;position:relative; }
+    .tp-key.tp-ok  { background:#9FE1CB!important;color:#04342C!important; }
+    .tp-key.tp-bad { background:#F5C4B3!important;color:#4A1B0C!important; }
+    .tp-f0{background:#EEEDFE;color:#3C3489} .tp-f1{background:#E1F5EE;color:#085040}
+    .tp-f2{background:#FAECE7;color:#4A1B0C} .tp-f3{background:#E6F1FB;color:#0C447C}
+    .tp-f4{background:#FAEEDA;color:#633806} .tp-f5{background:#FAEEDA;color:#633806}
+    .tp-f6{background:#E6F1FB;color:#0C447C} .tp-f7{background:#FAECE7;color:#4A1B0C}
+    .tp-f8{background:#E1F5EE;color:#085040} .tp-f9{background:#EEEDFE;color:#3C3489}
+    .tp-key.tp-active.tp-f0{background:#534AB7} .tp-key.tp-active.tp-f1{background:#1D9E75}
+    .tp-key.tp-active.tp-f2{background:#D85A30} .tp-key.tp-active.tp-f3{background:#378ADD}
+    .tp-key.tp-active.tp-f4{background:#BA7517} .tp-key.tp-active.tp-f5{background:#BA7517}
+    .tp-key.tp-active.tp-f6{background:#378ADD} .tp-key.tp-active.tp-f7{background:#D85A30}
+    .tp-key.tp-active.tp-f8{background:#1D9E75} .tp-key.tp-active.tp-f9{background:#534AB7}
+    #tp-hands { display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem; }
+    .tp-hand { text-align:center; }
+    .tp-finger-part { transition:fill 0.2s ease; }
+    .tp-finger-bounce .tp-finger-part { animation:tpFingerBounce 0.45s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:bottom center; }
+    @keyframes tpFingerBounce { from{transform:translateY(0) scale(1)} to{transform:translateY(-5px) scale(1.1);filter:drop-shadow(0 3px 5px rgba(0,0,0,0.2))} }
+    #tp-feedback-card { background:var(--surface2);border-radius:var(--radius-sm);padding:1.5rem;text-align:center;animation:popIn 0.4s cubic-bezier(.34,1.56,.64,1);margin-bottom:1rem; }
+    .tp-fb-emoji { font-size:3rem;line-height:1;margin-bottom:0.3rem; }
+    .tp-fb-title { font-size:1.3rem;font-weight:800;color:var(--accent);margin-bottom:0.3rem; }
+    .tp-fb-stars { font-size:1.8rem;margin-bottom:0.5rem; }
+    .tp-star { color:#DDD; }
+    .tp-star-on { color:#EF9F27; }
+    .tp-fb-msg { font-size:0.9rem;color:var(--tx2);line-height:1.5;margin-bottom:0.75rem; }
+    .tp-fb-stats { display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem; }
+    .tp-fb-stat { display:flex;flex-direction:column;align-items:center; }
+    .tp-fb-stat-num { font-size:1.5rem;font-weight:700;line-height:1; }
+    .tp-fb-stat-lbl { font-size:0.65rem;color:var(--tx2);text-transform:uppercase;margin-top:2px; }
+    .tp-fb-tip { font-size:0.82rem;color:var(--tx2);background:var(--surface);border-radius:var(--radius-sm);padding:0.5rem 0.9rem;margin-bottom:1rem;display:inline-block; }
+    .tp-fb-btn { display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;border:none;background:var(--accent);color:white;font-size:1.1rem;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 16px var(--glow);animation:btnPulse 1.6s ease-in-out infinite; }
+    #tp-restart-btn { display:block;margin:0.5rem auto 0;padding:8px 22px;border-radius:20px;border:0.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:0.85rem;font-family:inherit;cursor:pointer; }
+    #tp-legend { display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:0.5rem; }
+    .tp-legend-item { display:flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--tx2); }
+    .tp-legend-dot { width:10px;height:10px;border-radius:50%; }
+    @media(max-width:480px){
+      #tp-prompt-text{font-size:1.2rem;letter-spacing:1px;}
+      .tp-key{min-width:26px;height:28px;font-size:0.62rem;}
+      .tp-key.tp-space{min-width:90px;}
+      #tp-hands{gap:0.75rem;}
+    }
     .mk-sectie-titel{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px;}
     .mk-uitleg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
     .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
@@ -398,6 +462,7 @@
       <button class="main-tab on" id="tab-rekenen" onclick="switchMain('rekenen')">🔢 Rekenen</button>
       <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
       <button class="main-tab" id="tab-meetkunde" onclick="switchMain('meetkunde')">📐 Meetkunde</button>
+      <button class="main-tab" id="tab-typen" onclick="switchMain('typen')">⌨️ Typen</button>
     </div>
 
     <div id="rekenen-root" style="width:100%">
@@ -412,6 +477,12 @@
           <button class="taal-subtab" id="mkt-oefeningen" onclick="mkTab('oefeningen')">🎯 Oefeningen</button>
         </div>
         <div id="mk-content"></div>
+      </div>
+    </div>
+
+    <div id="typen-root" style="display:none;width:100%">
+      <div class="panel" style="padding:0;overflow:hidden;">
+        <div id="typen-inner"></div>
       </div>
     </div>
 
@@ -486,7 +557,7 @@ function snd(t){
 let mainSection = 'rekenen';
 function switchMain(s){
   mainSection=s;
-  ['rekenen','taal','meetkunde'].forEach(k=>{
+  ['rekenen','taal','meetkunde','typen'].forEach(k=>{
     const r=document.getElementById(k+'-root');
     const t=document.getElementById('tab-'+k);
     if(r)r.style.display=k===s?'':'none';
@@ -494,6 +565,7 @@ function switchMain(s){
   });
   if(s==='taal') initTaalRoot();
   if(s==='meetkunde') mkTab('theorie');
+  if(s==='typen') initTypen();
   removeStickyNext();
 }
 function goHome(){
@@ -724,6 +796,7 @@ let taalTabState='tabel', taalFilter='all', taalLevel=1;
 let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null;
 let invulFilter='all', invulData=[];
 let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='zegswijzeBetekenis', zqCurrent=null;
+let zegswijzenThema=0;
 
 let taalInited=false;
 function initTaalRoot(){
@@ -2042,345 +2115,6 @@ function handleMkResult(ok, correct){
 }
 
 
-
-function mkTab(t){
-  mkCurrentTab = t;
-  ['vormen','eigenschappen','berekenen','hoeken'].forEach(k=>{
-    const b=document.getElementById('mkt-'+k);
-    if(b)b.classList.toggle('on',k===t);
-  });
-  mkScore={good:0,bad:0,streak:0}; mkTotal=0;
-  renderMkContent();
-}
-
-function renderMkContent(){
-  const el=document.getElementById('mk-content');if(!el)return;
-  el.innerHTML=`
-    <div class="level-selector" style="margin-bottom:12px;">
-      <button class="level-btn ${mkLevel===1?'on':''}" onclick="setMkLevel(1)"><span class="lvl-stars">⭐</span><span class="lvl-name">Niveau 1</span><span class="lvl-desc">Herkennen</span></button>
-      <button class="level-btn ${mkLevel===2?'on':''}" onclick="setMkLevel(2)"><span class="lvl-stars">⭐⭐</span><span class="lvl-name">Niveau 2</span><span class="lvl-desc">Eigenschappen</span></button>
-      <button class="level-btn ${mkLevel===3?'on':''}" onclick="setMkLevel(3)"><span class="lvl-stars">⭐⭐⭐</span><span class="lvl-name">Niveau 3</span><span class="lvl-desc">Berekenen</span></button>
-    </div>
-    <div class="t-score-row">
-      <div class="t-score-card"><div class="t-score-num" id="mksc-good">${mkScore.good}</div><div class="t-score-lbl">Goed</div></div>
-      <div class="t-score-card"><div class="t-score-num" id="mksc-bad">${mkScore.bad}</div><div class="t-score-lbl">Fout</div></div>
-      <div class="t-score-card"><div class="t-score-num" id="mksc-pct">${(mkScore.good+mkScore.bad)>0?Math.round(mkScore.good/(mkScore.good+mkScore.bad)*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
-      <div class="t-score-card t-streak-card"><div class="t-score-num" id="mksc-streak">${mkScore.streak}</div><div class="t-score-lbl">🔥 Reeks</div></div>
-    </div>
-    <div class="t-quiz-card" id="mk-card"></div>`;
-  loadMkQ();
-}
-
-function setMkLevel(l){
-  mkLevel=l;
-  mkScore={good:0,bad:0,streak:0}; mkTotal=0;
-  renderMkContent();
-}
-
-function updateMkScore(){
-  const g=document.getElementById('mksc-good'),b=document.getElementById('mksc-bad'),
-        p=document.getElementById('mksc-pct'),s=document.getElementById('mksc-streak');
-  if(g)g.textContent=mkScore.good;
-  if(b)b.textContent=mkScore.bad;
-  const tot=mkScore.good+mkScore.bad;
-  if(p)p.textContent=tot>0?Math.round(mkScore.good/tot*100)+'%':'—';
-  if(s)s.textContent=mkScore.streak;
-}
-
-// ── SVG vormen ──
-const SHAPES = {
-  vierkant: {
-    svg: `<rect x="60" y="40" width="120" height="120" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3" rx="2"/>`,
-    label:'vierkant', zijden:4, hoeken:4, gelijkZijden:true, rechteHoeken:true,
-    omtrek: (a)=>4*a, oppervlakte: (a)=>a*a,
-    omtrekFormule:'4 × zijde', oppFormule:'zijde × zijde'
-  },
-  rechthoek: {
-    svg: `<rect x="30" y="60" width="180" height="100" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3" rx="2"/>`,
-    label:'rechthoek', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:true,
-    omtrek: (l,b)=>2*(l+b), oppervlakte:(l,b)=>l*b,
-    omtrekFormule:'2 × (lengte + breedte)', oppFormule:'lengte × breedte'
-  },
-  driehoek: {
-    svg: `<polygon points="120,30 30,190 210,190" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'driehoek', zijden:3, hoeken:3, gelijkZijden:false, rechteHoeken:false,
-    omtrek:(a,b,c)=>a+b+c, oppervlakte:(g,h)=>g*h/2,
-    omtrekFormule:'z1 + z2 + z3', oppFormule:'(grondlijn × hoogte) ÷ 2'
-  },
-  cirkel: {
-    svg: `<circle cx="120" cy="110" r="80" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'cirkel', zijden:0, hoeken:0, gelijkZijden:false, rechteHoeken:false,
-    omtrek:(r)=>Math.round(2*Math.PI*r), oppervlakte:(r)=>Math.round(Math.PI*r*r),
-    omtrekFormule:'2 × π × straal', oppFormule:'π × straal²'
-  },
-  ruit: {
-    svg: `<polygon points="120,20 210,110 120,200 30,110" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'ruit', zijden:4, hoeken:4, gelijkZijden:true, rechteHoeken:false,
-    omtrek:(a)=>4*a, oppervlakte:(d1,d2)=>d1*d2/2,
-    omtrekFormule:'4 × zijde', oppFormule:'(diagonaal1 × diagonaal2) ÷ 2'
-  },
-  trapezium: {
-    svg: `<polygon points="50,180 190,180 160,60 80,60" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'trapezium', zijden:4, hoeken:4, gelijkZijden:false, rechteHoeken:false,
-    omtrek:(a,b,c,d)=>a+b+c+d, oppervlakte:(a,b,h)=>(a+b)*h/2,
-    omtrekFormule:'z1 + z2 + z3 + z4', oppFormule:'(basis1 + basis2) × hoogte ÷ 2'
-  },
-  vijfhoek: {
-    svg: `<polygon points="120,20 210,80 180,185 60,185 30,80" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'vijfhoek', zijden:5, hoeken:5, gelijkZijden:true, rechteHoeken:false
-  },
-  zeshoek: {
-    svg: `<polygon points="120,20 200,65 200,155 120,200 40,155 40,65" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="3"/>`,
-    label:'zeshoek', zijden:6, hoeken:6, gelijkZijden:true, rechteHoeken:false
-  }
-};
-
-const SHAPE_KEYS = Object.keys(SHAPES);
-
-function shapeSVG(key, extraContent=''){
-  return `<svg viewBox="0 0 240 220" width="160" height="140" style="display:block;margin:0 auto 10px;">
-    ${SHAPES[key].svg}${extraContent}
-  </svg>`;
-}
-
-// ── Vraag generatie per tab ──
-function loadMkQ(){
-  mkAnswered=false;
-  removeStickyNext();
-  mkTotal++;
-  const card=document.getElementById('mk-card');if(!card)return;
-
-  const tab=mkCurrentTab;
-  let q;
-  if(tab==='vormen') q=genVormenQ();
-  else if(tab==='eigenschappen') q=genEigenschappenQ();
-  else if(tab==='berekenen') q=genBerekeningQ();
-  else q=genHoekenQ();
-
-  mkCurrentQ=q;
-  card.innerHTML=`
-    <div class="t-quiz-meta"><span class="t-prog">Vraag ${mkTotal}</span></div>
-    <div style="text-align:center;">${q.svg||''}</div>
-    <div class="t-question" style="font-size:16px;font-weight:600;margin-bottom:14px;">${q.vraag}</div>
-    <div id="mk-input-area">${q.inputHTML}</div>
-    <div id="mk-feedback"></div>`;
-
-  if(q.type==='type'){
-    const inp=document.getElementById('mk-type-input');
-    if(inp){inp.focus();inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkMkTyped();});}
-  }
-}
-
-// VORMEN: zie een vorm → noem hem
-function genVormenQ(){
-  const shapeKeys = mkLevel===1
-    ? ['vierkant','rechthoek','driehoek','cirkel']
-    : mkLevel===2
-    ? ['vierkant','rechthoek','driehoek','cirkel','ruit','trapezium']
-    : SHAPE_KEYS;
-
-  const key=shapeKeys[Math.floor(Math.random()*shapeKeys.length)];
-  const correct=SHAPES[key].label;
-
-  if(mkLevel<=2){
-    // Meerkeuze
-    const opts=[correct,...shapeKeys.filter(k=>k!==key).sort(()=>Math.random()-0.5).slice(0,3).map(k=>SHAPES[k].label)].sort(()=>Math.random()-0.5);
-    return {
-      svg: shapeSVG(key),
-      vraag: 'Welke vorm zie je?',
-      type:'mc',
-      correct,
-      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" data-opt="${i}" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
-    };
-  } else {
-    return {
-      svg: shapeSVG(key),
-      vraag: 'Typ de naam van deze vorm:',
-      type:'type',
-      correct,
-      inputHTML:`<div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..."/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
-    };
-  }
-}
-
-// EIGENSCHAPPEN: hoeveel zijden/hoeken? Rechte hoeken? Gelijke zijden?
-function genEigenschappenQ(){
-  const shapeKeys = mkLevel===1
-    ? ['vierkant','rechthoek','driehoek','cirkel']
-    : ['vierkant','rechthoek','driehoek','cirkel','ruit','trapezium','vijfhoek','zeshoek'];
-  const key=shapeKeys[Math.floor(Math.random()*shapeKeys.length)];
-  const s=SHAPES[key];
-
-  const vragen=[
-    {v:`Hoeveel zijden heeft een ${s.label}?`, a:`${s.zijden}`, eenheid:''},
-    {v:`Hoeveel hoeken heeft een ${s.label}?`, a:`${s.hoeken}`, eenheid:''},
-    {v:`Heeft een ${s.label} gelijke zijden?`, a:s.gelijkZijden?'ja':'nee', eenheid:''},
-    {v:`Heeft een ${s.label} rechte hoeken?`, a:s.rechteHoeken?'ja':'nee', eenheid:''},
-  ].filter(q=>q.a!=='undefined');
-
-  const chosen=vragen[Math.floor(Math.random()*vragen.length)];
-  const correct=chosen.a;
-
-  // Ja/nee vragen → meerkeuze knoppen
-  if(correct==='ja'||correct==='nee'){
-    const opts=['ja','nee'];
-    return {
-      svg: shapeSVG(key),
-      vraag: chosen.v,
-      type:'mc', correct,
-      inputHTML:`<div style="display:flex;gap:10px;justify-content:center;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}" style="flex:1;font-size:20px;"><span class="mc-text">${o}</span></button>`).join('')}</div>`
-    };
-  }
-  // Getallen → meerkeuze met foute getallen
-  const num=parseInt(correct);
-  const wrong=[...new Set([num-1,num+1,num+2,num-2].filter(n=>n>=0&&n!==num))].slice(0,3);
-  const opts=[correct,...wrong.map(String)].sort(()=>Math.random()-0.5);
-  return {
-    svg: shapeSVG(key),
-    vraag: chosen.v,
-    type:'mc', correct,
-    inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
-  };
-}
-
-// BEREKENEN: omtrek en oppervlakte
-function genBerekeningQ(){
-  const r=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
-  const scenarios=[
-    ()=>{
-      const z=r(3,12);
-      return {key:'vierkant',vraag:`Een vierkant heeft zijde ${z} cm. Wat is de omtrek?`, correct:`${4*z}`, eenheid:'cm',
-        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="14" fill="var(--tx)">${z} cm</text>`};
-    },
-    ()=>{
-      const z=r(3,12);
-      return {key:'vierkant',vraag:`Een vierkant heeft zijde ${z} cm. Wat is de oppervlakte?`, correct:`${z*z}`, eenheid:'cm²',
-        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="14" fill="var(--tx)">${z} cm</text>`};
-    },
-    ()=>{
-      const l=r(4,15),b=r(2,8);
-      return {key:'rechthoek',vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Omtrek?`, correct:`${2*(l+b)}`, eenheid:'cm',
-        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="13" fill="var(--tx)">${l} cm</text><text x="222" y="115" text-anchor="middle" font-size="13" fill="var(--tx)" transform="rotate(90,222,115)">${b} cm</text>`};
-    },
-    ()=>{
-      const l=r(4,15),b=r(2,8);
-      return {key:'rechthoek',vraag:`Rechthoek: lengte ${l} cm, breedte ${b} cm. Oppervlakte?`, correct:`${l*b}`, eenheid:'cm²',
-        extraSVG:`<text x="120" y="175" text-anchor="middle" font-size="13" fill="var(--tx)">${l} cm</text>`};
-    },
-    ()=>{
-      const z1=r(3,10),z2=r(3,10),z3=r(3,10);
-      return {key:'driehoek',vraag:`Driehoek met zijden ${z1}, ${z2} en ${z3} cm. Omtrek?`, correct:`${z1+z2+z3}`, eenheid:'cm',
-        extraSVG:`<text x="120" y="210" text-anchor="middle" font-size="13" fill="var(--tx)">${z1} cm</text>`};
-    },
-    ()=>{
-      const g=r(4,14),h=r(3,10);
-      return {key:'driehoek',vraag:`Driehoek: grondlijn ${g} cm, hoogte ${h} cm. Oppervlakte?`, correct:`${g*h/2}`, eenheid:'cm²',
-        extraSVG:`<text x="120" y="210" text-anchor="middle" font-size="13" fill="var(--tx)">${g} cm</text>`};
-    },
-  ];
-
-  const sc=scenarios[Math.floor(Math.random()*scenarios.length)]();
-  const correct=String(sc.correct);
-  const num=parseFloat(correct);
-  // Wrong answers: nearby plausible numbers
-  const wrongs=[...new Set([num+1,num-1,num*2,Math.round(num/2)].filter(n=>n>0&&n!==num))].slice(0,3);
-  const opts=[correct,...wrongs.map(String)].sort(()=>Math.random()-0.5);
-
-  if(mkLevel===3){
-    return {
-      svg: shapeSVG(sc.key, sc.extraSVG||''),
-      vraag: sc.vraag,
-      type:'type', correct,
-      inputHTML:`<div style="margin-bottom:6px;font-size:12px;color:var(--tx2);">Antwoord in ${sc.eenheid} (alleen het getal)</div><div class="t-input-wrap"><input class="t-input" id="mk-type-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..." inputmode="decimal"/><button class="t-submit" onclick="checkMkTyped()">OK</button></div>`
-    };
-  }
-  return {
-    svg: shapeSVG(sc.key, sc.extraSVG||''),
-    vraag: sc.vraag,
-    type:'mc', correct,
-    inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o} ${sc.eenheid}</span></button>`).join('')}</div>`
-  };
-}
-
-// HOEKEN: scherp, stomp, recht
-const HOEK_DATA = [
-  {type:'recht', graden:90, svg:`<line x1="60" y1="160" x2="60" y2="60" stroke="var(--accent)" stroke-width="3"/><line x1="60" y1="160" x2="180" y2="160" stroke="var(--accent)" stroke-width="3"/><rect x="60" y="140" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2"/>`, label:'rechte hoek (90°)'},
-  {type:'scherp', graden:45, svg:`<line x1="60" y1="170" x2="180" y2="170" stroke="var(--accent)" stroke-width="3"/><line x1="60" y1="170" x2="140" y2="60" stroke="var(--accent)" stroke-width="3"/>`, label:'scherpe hoek (< 90°)'},
-  {type:'stomp', graden:135, svg:`<line x1="30" y1="160" x2="200" y2="160" stroke="var(--accent)" stroke-width="3"/><line x1="30" y1="160" x2="130" y2="60" stroke="var(--accent)" stroke-width="3"/>`, label:'stompe hoek (> 90°)'},
-  {type:'gestrekt', graden:180, svg:`<line x1="20" y1="120" x2="220" y2="120" stroke="var(--accent)" stroke-width="3"/><circle cx="120" cy="120" r="4" fill="var(--accent)"/>`, label:'gestrekte hoek (180°)'},
-];
-
-function genHoekenQ(){
-  const h=HOEK_DATA[Math.floor(Math.random()*HOEK_DATA.length)];
-  const svg=`<svg viewBox="0 0 240 220" width="160" height="140" style="display:block;margin:0 auto 10px;">${h.svg}</svg>`;
-
-  if(mkLevel===1){
-    // Herken type
-    const correct=h.type;
-    const opts=['recht','scherp','stomp','gestrekt'].sort(()=>Math.random()-0.5);
-    return {
-      svg, vraag:'Welk soort hoek is dit?', type:'mc', correct,
-      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${opts.map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}</span></button>`).join('')}</div>`
-    };
-  } else if(mkLevel===2){
-    // Klopt dit: "is dit een rechte hoek?" ja/nee
-    const tested=HOEK_DATA[Math.floor(Math.random()*HOEK_DATA.length)].type;
-    const correct=h.type===tested?'ja':'nee';
-    return {
-      svg, vraag:`Is dit een ${tested} hoek?`, type:'mc', correct,
-      inputHTML:`<div style="display:flex;gap:10px;justify-content:center;"><button class="mc-option" onclick="checkMkMC(this)" data-val="ja" style="flex:1;font-size:20px;"><span class="mc-text">ja</span></button><button class="mc-option" onclick="checkMkMC(this)" data-val="nee" style="flex:1;font-size:20px;"><span class="mc-text">nee</span></button></div>`
-    };
-  } else {
-    // Typ hoeveel graden (bij rechte hoek)
-    return {
-      svg, vraag:`Hoeveel graden heeft deze ${h.type} hoek?`, type:'mc', correct:String(h.graden),
-      inputHTML:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${[h.graden,...[45,90,135,180].filter(g=>g!==h.graden).sort(()=>Math.random()-0.5).slice(0,3)].sort(()=>Math.random()-0.5).map((o,i)=>`<button class="mc-option" onclick="checkMkMC(this)" data-val="${o}"><span class="mc-letter">${['A','B','C','D'][i]}</span><span class="mc-text">${o}°</span></button>`).join('')}</div>`
-    };
-  }
-}
-
-// ── Check functies ──
-function checkMkMC(btn){
-  if(mkAnswered)return;
-  mkAnswered=true;
-  const correct=mkCurrentQ.correct;
-  const given=btn.dataset.val;
-  const ok=given===correct;
-  document.querySelectorAll('#mk-input-area .mc-option').forEach(b=>{
-    b.disabled=true;
-    if(b.dataset.val===correct)b.classList.add('mc-correct');
-    else if(b===btn&&!ok)b.classList.add('mc-wrong');
-    else b.style.opacity='0.4';
-  });
-  handleMkResult(ok, correct);
-}
-
-function checkMkTyped(){
-  if(mkAnswered)return;
-  const inp=document.getElementById('mk-type-input');
-  if(!inp||!inp.value.trim())return;
-  mkAnswered=true;
-  const given=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
-  const correct=mkCurrentQ.correct.toLowerCase();
-  const ok=given===correct||given.replace(/\s/g,'')===correct.replace(/\s/g,'');
-  inp.disabled=true;
-  inp.classList.add(ok?'correct':'wrong');
-  handleMkResult(ok, mkCurrentQ.correct);
-}
-
-function handleMkResult(ok, correct){
-  if(ok){mkScore.good++;mkScore.streak++;}else{mkScore.bad++;mkScore.streak=0;}
-  updateMkScore();
-  const msgs=['Uitstekend! ✓','Goed zo! ✓','Super! ✓','Correct! ✓','Bravo! ✓'];
-  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is: <strong>${correct}</strong>`;
-  const cls=ok?'t-fb-ok':'t-fb-no';
-  const fb=document.getElementById('mk-feedback');
-  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
-  showStickyNext(msg, cls, 'loadMkQ');
-  if(ok)snd('ok');else snd('no');
-}
-
-
 // Storage keys
 const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswijzen'};
 
@@ -2388,11 +2122,11 @@ const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswij
 function loadData(){
   try{
     const ww=localStorage.getItem(SK.ww);
-    if(ww)W.splice(0,W.length,...JSON.parse(ww));
+    if(ww){const p=JSON.parse(ww);if(p&&p.length>0)W.splice(0,W.length,...p);}
     const wd=localStorage.getItem(SK.woorden);
-    if(wd)WOORDEN.splice(0,WOORDEN.length,...JSON.parse(wd));
+    if(wd){const p=JSON.parse(wd);if(p&&p.length>0)WOORDEN.splice(0,WOORDEN.length,...p);}
     const zg=localStorage.getItem(SK.zegswijzen);
-    if(zg)ZEGSWIJZEN.splice(0,ZEGSWIJZEN.length,...JSON.parse(zg));
+    if(zg){const p=JSON.parse(zg);if(p&&p.length>0)ZEGSWIJZEN.splice(0,ZEGSWIJZEN.length,...p);}
   }catch(e){console.warn('loadData error',e);}
 }
 function saveWW(){localStorage.setItem(SK.ww,JSON.stringify(W));}
@@ -2758,6 +2492,177 @@ function changePw(){
   setPw(n1);err.style.color='var(--ok)';err.textContent='✓ Wachtwoord gewijzigd!';
 }
 function adminLogout(){adminUnlocked=false;closeAdmin();}
+
+
+// ════════════════════════════════════════════════════════
+// TYPEN MODULE
+// ════════════════════════════════════════════════════════
+const TP_FINGER_COLORS = {f0:'#534AB7',f1:'#1D9E75',f2:'#D85A30',f3:'#378ADD',f4:'#BA7517',f5:'#BA7517',f6:'#378ADD',f7:'#D85A30',f8:'#1D9E75',f9:'#534AB7'};
+const TP_FINGER_NAMES  = {f0:'Linker pink',f1:'Linker ringvinger',f2:'Linker middelvinger',f3:'Linker wijsvinger',f4:'Linker duim',f5:'Rechter duim',f6:'Rechter wijsvinger',f7:'Rechter middelvinger',f8:'Rechter ringvinger',f9:'Rechter pink'};
+const TP_HAND_MAP = {f0:'tphl-pinky',f1:'tphl-ring',f2:'tphl-middle',f3:'tphl-index',f4:'tphl-thumb',f5:'tphr-thumb',f6:'tphr-index',f7:'tphr-middle',f8:'tphr-ring',f9:'tphr-pinky'};
+const TP_KB_LAYOUT = [['²','&','é','"',"'",'(','-','è','_','ç','à',')','='],['a','z','e','r','t','y','u','i','o','p','^','$'],['q','s','d','f','g','h','j','k','l','m','ù','*'],['w','x','c','v','b','n',',',';',':','!'],[' ']];
+const TP_KEY_FINGER = {'²':'f0','&':'f0','é':'f1','"':'f2',"'":'f3','(':'f3','-':'f6','è':'f6','_':'f7','ç':'f8','à':'f9',')':'f9','=':'f9','a':'f0','z':'f1','e':'f2','r':'f3','t':'f3','y':'f6','u':'f6','i':'f7','o':'f8','p':'f9','^':'f9','$':'f9','q':'f0','s':'f1','d':'f2','f':'f3','g':'f3','h':'f6','j':'f6','k':'f7','l':'f8','m':'f9','ù':'f9','*':'f9','w':'f0','x':'f1','c':'f2','v':'f3','b':'f3','n':'f6',',':'f6',';':'f7',':':'f8','!':'f9',' ':'f5'};
+const TP_LESSONS = [
+  {name:'🏠 Thuisrij',sets:['qsd qsdf jkl jklm fgh fjk das sal fal jal kal lad las asal jdal','aqsd sqfd jkml qfds klad fsjd dalk salm fjal qsal dajl fsam','qqqq ssss dddd ffff jjjj kkkk llll mmmm qsdf jklm','flash klaas smal daks jalm qsdk flam dsqj mkal fjals']},
+  {name:'🔤 Klinkers',sets:['aei oei aio uie oeia uia auo eio uoa','aa ee ii oo uu ae io ua oe ui ai aaa eee','auto euro idea ooit aioli eau oase ui ei au oe','eia uoa ioe aue oui eai uoe aio eui oae iau']},
+  {name:'🐱 Dieren',sets:['kat hond vis beer wolf egel muis haas lam koe geit vos','paard zebra tijger leeuw giraf olifant nijlpaard kameel','konijn hamster papegaai schildpad goudvis kanarie','kip eend gans duif specht merel vink kraai uil tor bij']},
+  {name:'🍕 Eten',sets:['brood melk kaas ei boter jam taart koek peer appel','pizza pasta soep rijst vlees vis friet salade tomaat','chocolade snoep ijsje cake koekje wafel pannenkoek','banaan aardbei druif meloen citroen sinaasappel mango']},
+  {name:'😂 Grappige zinnen',sets:['de kat eet de pizza van de hond helemaal op','mijn konijn rijdt elke dag op een fiets naar school','de olifant past niet door de voordeur dus belt hij aan','papa zit vast in de wasmachine met zijn lievelingssok','de hond heeft zijn bot verstopt in mamas handtas','mama vindt elke ochtend een kikker in haar linker schoen','de vis wil leren fietsen maar heeft jammer genoeg geen benen','opa danst elke avond op het dak met zijn rode paraplu']},
+  {name:'⭐ Alle letters',sets:['azerty uiop qsdfg hjklm wxcvb','vijf boksers jagen op het zwakke duo','fix de blauwe vacht op de groene man','zeven dwaze kabouters eten fijn gebak op']}
+];
+const TP_FB = {
+  perfect:[{e:'🏆',t:'ONGELOOFLIJK!',m:'Geen enkele fout! De toetsen dansen voor jou!'},{e:'🚀',t:'RAKETSNELHEID!',m:'Zo snel en zo perfect!'},{e:'🌟',t:'SUPERSTER!',m:'100% goed! Je bent echt een typkampioen!'},{e:'🦄',t:'MAGISCH!',m:'Eenhoorns typen ook perfect, net zoals jij!'}],
+  great:[{e:'👏',t:'GEWELDIG!',m:'Bijna perfect! Je vingers worden echte typexperts!'},{e:'🎉',t:'SUPER GEDAAN!',m:'Zo goed! Nog een beetje oefenen!'},{e:'🌈',t:'REGENBOOG!',m:'Bijna perfect, dat is echt fantastisch!'}],
+  ok:[{e:'💪',t:'GOED BEZIG!',m:'Je bent goed op weg!'},{e:'🌱',t:'AAN HET GROEIEN!',m:'Elke oefening maakt je beter!'},{e:'🎮',t:'LEVEL UP!',m:'Nog even trainen en je bent toptypist!'}],
+  poor:[{e:'🙈',t:'OEF! OPNIEUW!',m:'Gewoon nog eens proberen, je kan het écht!'},{e:'🐌',t:'SLAKKENSTART!',m:'Slakken geven nooit op! Jij ook niet!'},{e:'🐥',t:'KLEIN KUIKEN!',m:'Elk kuiken leert vallen voor het loopt!'}]
+};
+let tpCurrentLesson=0,tpWords=[],tpPos=0,tpCorrect=0,tpErrors=0,tpStreak=0,tpKeyEls={},tpActiveFinger=null,tpInited=false;
+
+function initTypen(){
+  const el=document.getElementById('typen-inner');if(!el)return;
+  el.innerHTML=`
+    <div id="tp-score-bar">
+      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-correct">0</div><div class="tp-stat-lbl">goed</div></div>
+      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-errors">0</div><div class="tp-stat-lbl">foutjes</div></div>
+      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-streak">0</div><div class="tp-stat-lbl">op rij</div></div>
+      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-pct">—</div><div class="tp-stat-lbl">score</div></div>
+    </div>
+    <div id="tp-lesson-select"></div>
+    <div id="tp-prompt-area"><div id="tp-prompt-text"></div></div>
+    <div id="tp-finger-hint"></div>
+    <div id="tp-keyboard"></div>
+    <div id="tp-hands">
+      <div class="tp-hand"><svg id="tphand-left" width="115" height="135" viewBox="0 0 130 150">
+        <g id="tphl-pinky"><ellipse cx="18" cy="52" rx="11" ry="23" class="tp-finger-part" fill="#F9C9A0"/><rect x="7" y="67" width="22" height="32" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphl-ring"><ellipse cx="40" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="29" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphl-middle"><ellipse cx="64" cy="36" rx="11" ry="27" class="tp-finger-part" fill="#F9C9A0"/><rect x="53" y="59" width="22" height="38" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphl-index"><ellipse cx="88" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="77" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphl-thumb"><ellipse cx="112" cy="89" rx="11" ry="19" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <rect x="5" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
+        <text x="57" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="inherit" font-weight="600">linker hand</text>
+      </svg></div>
+      <div class="tp-hand"><svg id="tphand-right" width="115" height="135" viewBox="0 0 130 150">
+        <g id="tphr-thumb"><ellipse cx="18" cy="89" rx="11" ry="19" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphr-index"><ellipse cx="42" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="31" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphr-middle"><ellipse cx="66" cy="36" rx="11" ry="27" class="tp-finger-part" fill="#F9C9A0"/><rect x="55" y="59" width="22" height="38" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphr-ring"><ellipse cx="90" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="79" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <g id="tphr-pinky"><ellipse cx="112" cy="52" rx="11" ry="23" class="tp-finger-part" fill="#F9C9A0"/><rect x="101" y="67" width="22" height="32" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
+        <rect x="20" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
+        <text x="73" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="inherit" font-weight="600">rechter hand</text>
+      </svg></div>
+    </div>
+    <div id="tp-legend"></div>
+    <div id="tp-feedback-card" style="display:none"></div>
+    <button id="tp-restart-btn">↺ opnieuw</button>`;
+  tpBuildKeyboard();tpBuildLegend();tpBuildLessonBtns();tpStartLesson();
+  if(!tpInited){document.addEventListener('keydown',tpHandleKey);tpInited=true;}
+  document.getElementById('tp-restart-btn').onclick=tpStartLesson;
+}
+function tpBuildKeyboard(){
+  const kb=document.getElementById('tp-keyboard');if(!kb)return;
+  kb.innerHTML='';tpKeyEls={};
+  TP_KB_LAYOUT.forEach(row=>{
+    const rd=document.createElement('div');rd.className='tp-kb-row';
+    row.forEach(k=>{
+      const el=document.createElement('div');
+      const f=TP_KEY_FINGER[k]||'';
+      el.className='tp-key'+(f?' tp-'+f:'')+(k===' '?' tp-space':'');
+      el.textContent=k===' '?'spatie':k.toUpperCase();
+      rd.appendChild(el);tpKeyEls[k]=el;
+    });kb.appendChild(rd);
+  });
+}
+function tpBuildLegend(){
+  const lg=document.getElementById('tp-legend');if(!lg)return;lg.innerHTML='';
+  [{f:'f0',l:'Pink L'},{f:'f1',l:'Ring L'},{f:'f2',l:'Midden L'},{f:'f3',l:'Wijs L'},{f:'f4',l:'Duim'},{f:'f6',l:'Wijs R'},{f:'f7',l:'Midden R'},{f:'f8',l:'Ring R'},{f:'f9',l:'Pink R'}].forEach(({f,l})=>{
+    const d=document.createElement('div');d.className='tp-legend-item';
+    d.innerHTML=`<div class="tp-legend-dot" style="background:${TP_FINGER_COLORS[f]}"></div>${l}`;
+    lg.appendChild(d);
+  });
+}
+function tpBuildLessonBtns(){
+  const c=document.getElementById('tp-lesson-select');if(!c)return;c.innerHTML='';
+  TP_LESSONS.forEach((l,i)=>{
+    const b=document.createElement('button');b.className='tp-lesson-btn'+(i===tpCurrentLesson?' active':'');
+    b.textContent=l.name;b.onclick=()=>{tpCurrentLesson=i;tpStartLesson();};c.appendChild(b);
+  });
+}
+function tpStartLesson(){
+  const sets=TP_LESSONS[tpCurrentLesson].sets;
+  tpWords=sets[Math.floor(Math.random()*sets.length)].split('');
+  tpPos=0;tpCorrect=0;tpErrors=0;tpStreak=0;tpUpdateStats();
+  const fc=document.getElementById('tp-feedback-card');if(fc)fc.style.display='none';
+  const fh=document.getElementById('tp-finger-hint');if(fh)fh.textContent='';
+  tpRenderPrompt();tpBuildLessonBtns();tpResetHands();tpHighlightActive();
+}
+function tpRenderPrompt(){
+  const pt=document.getElementById('tp-prompt-text');if(!pt)return;
+  pt.innerHTML='';let i=0;
+  while(i<tpWords.length){
+    if(tpWords[i]===' '){
+      const sp=document.createElement('span');sp.className='tp-word-space '+tpCls(i);sp.dataset.idx=i;sp.textContent='\u00a0';pt.appendChild(sp);i++;
+    } else {
+      const grp=document.createElement('span');grp.className='tp-word-group';
+      while(i<tpWords.length&&tpWords[i]!==' '){const s=document.createElement('span');s.className=tpCls(i);s.dataset.idx=i;s.textContent=tpWords[i];grp.appendChild(s);i++;}
+      pt.appendChild(grp);
+    }
+  }
+}
+function tpCls(i){return i<tpPos?'tp-char-done':i===tpPos?'tp-char-active':'tp-char-todo';}
+function tpUpdateChar(idx,cls){const s=document.querySelector(`#tp-prompt-text [data-idx="${idx}"]`);if(!s)return;const isSp=s.classList.contains('tp-word-space');s.className=cls+(isSp?' tp-word-space':'');}
+function tpHighlightActive(){
+  Object.values(tpKeyEls).forEach(k=>k.classList.remove('tp-active'));tpResetHands();
+  if(tpPos>=tpWords.length)return;
+  const ch=tpWords[tpPos].toLowerCase();const fid=TP_KEY_FINGER[ch];
+  if(tpKeyEls[ch])tpKeyEls[ch].classList.add('tp-active');
+  if(fid){const fh=document.getElementById('tp-finger-hint');if(fh)fh.innerHTML='👆 Gebruik je <strong>'+TP_FINGER_NAMES[fid]+'</strong>';tpHighlightFinger(fid);}
+}
+function tpResetHands(){
+  if(tpActiveFinger){const g=document.getElementById(TP_HAND_MAP[tpActiveFinger]);if(g){g.classList.remove('tp-finger-bounce');g.querySelectorAll('.tp-finger-part').forEach(el=>el.style.fill='');}tpActiveFinger=null;}
+}
+function tpHighlightFinger(fid){
+  const id=TP_HAND_MAP[fid];if(!id)return;const g=document.getElementById(id);if(!g)return;
+  g.querySelectorAll('.tp-finger-part').forEach(el=>el.style.fill=TP_FINGER_COLORS[fid]);
+  g.classList.add('tp-finger-bounce');tpActiveFinger=fid;
+}
+function tpFlashKey(k,ok){const el=tpKeyEls[k];if(!el)return;el.classList.add(ok?'tp-ok':'tp-bad');setTimeout(()=>el.classList.remove('tp-ok','tp-bad'),260);}
+function tpUpdateStats(){
+  const sc=document.getElementById('tpsc-correct'),se=document.getElementById('tpsc-errors'),ss=document.getElementById('tpsc-streak'),sp=document.getElementById('tpsc-pct');
+  if(sc)sc.textContent=tpCorrect;if(se)se.textContent=tpErrors;if(ss)ss.textContent=tpStreak;
+  const tot=tpCorrect+tpErrors;if(sp)sp.textContent=tot>0?Math.round(tpCorrect/tot*100)+'%':'—';
+}
+function tpShowFeedback(pct){
+  let pool=pct===100?TP_FB.perfect:pct>=80?TP_FB.great:pct>=50?TP_FB.ok:TP_FB.poor;
+  const f=pool[Math.floor(Math.random()*pool.length)];
+  const n=pct===100?5:pct>=80?4:pct>=60?3:pct>=40?2:1;
+  const stars=[...Array(5)].map((_,i)=>`<span class="${i<n?'tp-star-on':'tp-star'}">★</span>`).join('');
+  const card=document.getElementById('tp-feedback-card');if(!card)return;
+  card.innerHTML=`<div class="tp-fb-emoji">${f.e}</div><div class="tp-fb-title">${f.t}</div><div class="tp-fb-stars">${stars}</div><div class="tp-fb-msg">${f.m}</div>
+    <div class="tp-fb-stats">
+      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:#1D9E75">${tpCorrect}</span><span class="tp-fb-stat-lbl">goed</span></div>
+      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:#D85A30">${tpErrors}</span><span class="tp-fb-stat-lbl">foutjes</span></div>
+      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:var(--accent)">${pct}%</span><span class="tp-fb-stat-lbl">score</span></div>
+    </div>
+    <button class="tp-fb-btn" onclick="tpStartLesson()">🎯 Nog een oefening!</button>`;
+  card.style.display='block';card.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function tpHandleKey(e){
+  if(document.getElementById('typen-root')?.style.display==='none')return;
+  if(tpPos>=tpWords.length)return;
+  e.preventDefault();
+  const typed=e.key===' '?' ':(e.key.length===1?e.key:null);if(!typed)return;
+  const expected=tpWords[tpPos];
+  if(typed.toLowerCase()===expected.toLowerCase()){
+    tpFlashKey(expected.toLowerCase(),true);tpUpdateChar(tpPos,'tp-char-done');
+    tpCorrect++;tpStreak++;tpPos++;
+    if(tpPos>=tpWords.length){
+      tpUpdateStats();tpResetHands();Object.values(tpKeyEls).forEach(k=>k.classList.remove('tp-active'));
+      const fh=document.getElementById('tp-finger-hint');if(fh)fh.textContent='';
+      tpShowFeedback(Math.round(tpCorrect/(tpCorrect+tpErrors)*100));
+    } else {tpUpdateChar(tpPos,'tp-char-active');tpHighlightActive();}
+  } else {tpFlashKey(expected.toLowerCase(),false);tpErrors++;tpStreak=0;}
+  tpUpdateStats();
+}
 
 // ════════════════════════════════════════════════════════
 // INIT
