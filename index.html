@@ -2115,6 +2115,15 @@ const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswij
 // Load custom data from localStorage (falls back to built-in)
 function loadData(){
   try{
+    // Versiecheck: als data van oude versie komt, wis dan de cache
+    const APP_VERSION = '2.0';
+    const storedVersion = localStorage.getItem('leerheld_version');
+    if(storedVersion !== APP_VERSION){
+      localStorage.removeItem(SK.ww);
+      localStorage.removeItem(SK.woorden);
+      localStorage.removeItem(SK.zegswijzen);
+      localStorage.setItem('leerheld_version', APP_VERSION);
+    }
     const ww=localStorage.getItem(SK.ww);
     if(ww){const p=JSON.parse(ww);if(p&&p.length>0)W.splice(0,W.length,...p);}
     const wd=localStorage.getItem(SK.woorden);
@@ -2170,47 +2179,57 @@ const TY_KEY_FINGER = {
 };
 
 // ── AUTO-GENERATOR ──
-// Bouwt willekeurige oefeningteksten op basis van woordenlijsten per niveau
 const TY_WORDBANKS = {
-  thuisrij:  ['qsd','jkl','fgh','sal','dal','kal','las','fal','jal','mal','qsdf','jklm','flash','klaas','daks','flam'],
-  klinkers:  ['aei','oei','aio','uie','auto','euro','oase','aioli','idea','ooit'],
-  basis:     ['de','een','het','en','van','is','dat','op','te','in','aan','met','bij','als','dit','zo','wel','nog','ook','maar'],
-  dieren:    ['kat','hond','vis','beer','wolf','egel','muis','haas','lam','koe','geit','vos','paard','zebra','tijger','leeuw','giraf','konijn','hamster','kip','eend','gans','duif','spin','bij'],
-  eten:      ['brood','melk','kaas','ei','boter','jam','taart','koek','peer','appel','pizza','pasta','soep','rijst','vlees','friet','salade','tomaat','chocolade','snoep','ijsje','cake','banaan','druif'],
-  school:    ['boek','pen','potlood','schaar','liniaal','klas','school','meester','juf','les','tafel','stoel','raam','deur','bord','krijtje','rugzak','etui','agenda','huiswerk'],
-  kleuren:   ['rood','blauw','groen','geel','oranje','paars','roze','bruin','zwart','wit','grijs','beige','turkoois','zilver','goud'],
-  cijfers:   ['nul','een','twee','drie','vier','vijf','zes','zeven','acht','negen','tien','elf','twaalf','twintig','honderd'],
-  lichaam:   ['hoofd','haar','oog','neus','mond','oor','arm','hand','vinger','been','voet','teen','buik','rug','nek','schouder'],
-  natuur:    ['boom','bloem','gras','blad','tak','wortel','zon','maan','ster','wolk','regen','sneeuw','wind','zee','rivier','berg','dal','veld','bos','tuin'],
-  zinnen1:   ['de kat slaapt','de hond rent','een appel is rood','het boek is dik','de zon schijnt'],
-  zinnen2:   ['mama koopt brood','papa leest een boek','de kinderen spelen','de hond blaft hard','het regent buiten'],
-  zinnen3:   ['de kat eet de vis op','de hond rent door de tuin','een vogel vliegt over het dak','het kind leest een dik boek'],
-  grappig:   ['de kat rijdt op een fiets','mijn hond eet pizza met kaas','de olifant past niet in de auto','opa danst op het dak met een paraplu','de kikker wil piloot worden maar is bang'],
-  alfabet:   ['azerty uiop qsdfg hjklm wxcvb','vijf boksers jagen op het zwakke duo','fix de blauwe vacht op de groene man','zeven dwaze kabouters eten fijn gebak'],
-  gevorderd: ['de verslaggever observeert heel goed','een speurneus zoekt altijd de waarheid','navigeren door het leefgebied van dieren','de survivaltocht was levensbedreigend'],
+  thuisrij:  ['qsd jkl fgh','sal dal kal las','fal jal mal qsdf','jklm flash klaas','daks flam fjal qsal','dajl fsam qdsl kmfj','fjals kldms qqqq ssss','dddd ffff jjjj kkkk','llll mmmm qsdf jklm'],
+  klinkers:  ['aei oei aio uie','oeia uia auo eio','auto euro idea ooit','aioli eau oase ui ei','au oe aa ee ii oo uu','ae io ua oe ui ai','aaiui ooeau ieeui','aouei euioa uiaoe'],
+  basis:     ['de een het en van','is dat op te in aan','met bij als dit zo wel','nog ook maar want door','naar over voor uit om','dan toch heel erg veel','alle beide elke geen elk','iets niets iemand niemand'],
+  dieren:    ['kat hond vis beer wolf','egel muis haas lam koe','geit vos paard zebra','tijger leeuw giraf olifant','nijlpaard kameel konijn','hamster papegaai schildpad','kip eend gans duif specht','merel vink kraai uil bij','krokodil slang kikker spin'],
+  eten:      ['brood melk kaas ei boter','jam taart koek peer appel','pizza pasta soep rijst vlees','vis friet salade tomaat','chocolade snoep ijsje cake','banaan aardbei druif meloen','citroen sinaasappel mango','friet mayonaise ketchup zout','pannenkoek wafel koekje'],
+  school:    ['boek pen potlood schaar','liniaal klas school meester','juf les tafel stoel raam','deur bord krijtje rugzak','etui agenda huiswerk map','schrift tekening kleur verf','passer geodriehoek atlas globe'],
+  kleuren:   ['rood blauw groen geel','oranje paars roze bruin','zwart wit grijs beige','turkoois zilver goud','donkerblauw lichtgroen','felrood zachtroze hemelblauw'],
+  cijfers:   ['nul een twee drie vier','vijf zes zeven acht negen','tien elf twaalf dertien','veertien vijftien twintig','dertig veertig vijftig','zestig zeventig tachtig','negentig honderd duizend'],
+  lichaam:   ['hoofd haar oog neus mond','oor arm hand vinger been','voet teen buik rug nek','schouder knie elleboog pols','enkel heup borst kin wang'],
+  natuur:    ['boom bloem gras blad tak','wortel zon maan ster wolk','regen sneeuw wind zee rivier','berg dal veld bos tuin','zand steen rots klif strand','woestijn oerwoud savanne pool'],
+  zinnen1:   ['de kat slaapt op de mat','de hond rent door de tuin','een appel is rood en rond','het boek is dik en zwaar','de zon schijnt heel fel vandaag','de vis zwemt in het water','een vogel zingt in de boom','het kind speelt in de tuin','de auto rijdt over de weg'],
+  zinnen2:   ['mama koopt brood bij de bakker','papa leest een dik boek thuis','de kinderen spelen buiten in de tuin','de hond blaft hard aan de deur','het regent hard buiten vandaag','oma bakt een lekkere taart voor ons','de juf schrijft op het bord','we gaan morgen op uitstap naar zee','mijn fiets heeft een lekke band'],
+  zinnen3:   ['de kat eet de vis helemaal op','de hond rent snel door de grote tuin','een vogel vliegt hoog over het dak','het kind leest een heel dik boek','de olifant drinkt water uit de rivier','de aap klimt snel in de hoge boom','het paard galopt over het groene veld','de beer zoekt honing in het donkere bos'],
+  grappig:   ['de kat rijdt op een fiets door het park','mijn hond eet pizza met extra kaas elke dag','de olifant past echt niet in de kleine auto','opa danst op het dak met een rode paraplu','de kikker wil piloot worden maar is doodsbenauwd','de hamster heeft een fitnessruimte in zijn kooi gebouwd','mijn goudvis zwemt in kringen want hij vergeet de weg','de slak heeft vreselijke haast maar zijn schoenen zijn te klein','de koe rijdt met de fiets naar de winkel voor gras','oma stuurt een berichtje maar typt alles in hoofdletters','de hond doet alsof hij slaapt maar kijkt naar de pizza','het konijn heeft de afstandsbediening verstopt zodat niemand tv kijkt','de kat stuurt een brief naar de maan maar vergeet een postzegel','mijn schildpad heeft een rijbewijs maar rijdt veel te langzaam','de koe heeft een blog over gras en heeft al duizend volgers'],
+  alfabet:   ['azerty uiop qsdfg hjklm wxcvb','vijf boksers jagen op het zwakke duo','fix de blauwe vacht op de groene man','quartz jock vamp beg lynx fwd shi','zeven dwaze kabouters eten fijn gebak','de vos jumpt over het luie bruine hek'],
+  gevorderd: ['de verslaggever observeert heel goed en nauwkeurig','een speurneus zoekt altijd de waarheid achter de feiten','navigeren door het leefgebied van wilde dieren is gevaarlijk','de survivaltocht was levensbedreigend maar ook avontuurlijk','het kenmerk van een goede speurneus is geduld en doorzetting'],
 };
 
-function tyGenSentence(bank, count=8){
-  const words = [...TY_WORDBANKS[bank]].sort(()=>Math.random()-0.5);
-  return words.slice(0,count).join(' ');
+// Anti-herhaling wachtrijen per les
+const TY_QUEUES = {};
+
+function tyPickText(lessonIdx){
+  const lesson = TY_LESSONS[lessonIdx];
+  const bankKey = lesson.bankKey;
+  const bank = TY_WORDBANKS[bankKey];
+
+  if(!TY_QUEUES[bankKey] || TY_QUEUES[bankKey].length === 0){
+    // Vul wachtrij opnieuw en schud door elkaar
+    TY_QUEUES[bankKey] = [...Array(bank.length).keys()].sort(()=>Math.random()-0.5);
+  }
+  return bank[TY_QUEUES[bankKey].shift()];
 }
 
 const TY_LESSONS = [
-  { name:'🏠 Thuisrij', gen:()=>tyGenSentence('thuisrij',10) },
-  { name:'🔤 Klinkers', gen:()=>tyGenSentence('klinkers',8) },
-  { name:'📝 Basiswoorden', gen:()=>tyGenSentence('basis',12) },
-  { name:'🐱 Dieren', gen:()=>tyGenSentence('dieren',9) },
-  { name:'🍕 Eten', gen:()=>tyGenSentence('eten',9) },
-  { name:'🎒 School', gen:()=>tyGenSentence('school',9) },
-  { name:'🎨 Kleuren', gen:()=>tyGenSentence('kleuren',8) },
-  { name:'🔢 Cijfers', gen:()=>tyGenSentence('cijfers',8) },
-  { name:'🌳 Natuur', gen:()=>tyGenSentence('natuur',9) },
-  { name:'💬 Zinnen 1', gen:()=>TY_WORDBANKS.zinnen1[Math.floor(Math.random()*TY_WORDBANKS.zinnen1.length)] },
-  { name:'💬 Zinnen 2', gen:()=>TY_WORDBANKS.zinnen2[Math.floor(Math.random()*TY_WORDBANKS.zinnen2.length)] },
-  { name:'💬 Zinnen 3', gen:()=>TY_WORDBANKS.zinnen3[Math.floor(Math.random()*TY_WORDBANKS.zinnen3.length)] },
-  { name:'😂 Grappig', gen:()=>TY_WORDBANKS.grappig[Math.floor(Math.random()*TY_WORDBANKS.grappig.length)] },
-  { name:'⭐ Alfabet', gen:()=>TY_WORDBANKS.alfabet[Math.floor(Math.random()*TY_WORDBANKS.alfabet.length)] },
-  { name:'🚀 Gevorderd', gen:()=>TY_WORDBANKS.gevorderd[Math.floor(Math.random()*TY_WORDBANKS.gevorderd.length)] },
+  { name:'🏠 Thuisrij',     bankKey:'thuisrij' },
+  { name:'🔤 Klinkers',     bankKey:'klinkers' },
+  { name:'📝 Basiswoorden', bankKey:'basis' },
+  { name:'🐱 Dieren',       bankKey:'dieren' },
+  { name:'🍕 Eten',         bankKey:'eten' },
+  { name:'🎒 School',       bankKey:'school' },
+  { name:'🎨 Kleuren',      bankKey:'kleuren' },
+  { name:'🔢 Cijfers',      bankKey:'cijfers' },
+  { name:'🫀 Lichaam',      bankKey:'lichaam' },
+  { name:'🌳 Natuur',       bankKey:'natuur' },
+  { name:'💬 Zinnen 1',     bankKey:'zinnen1' },
+  { name:'💬 Zinnen 2',     bankKey:'zinnen2' },
+  { name:'💬 Zinnen 3',     bankKey:'zinnen3' },
+  { name:'😂 Grappig',      bankKey:'grappig' },
+  { name:'⭐ Alfabet',      bankKey:'alfabet' },
+  { name:'🚀 Gevorderd',    bankKey:'gevorderd' },
 ];
 
 const TY_FEEDBACK = {
@@ -2302,6 +2321,9 @@ function tyBuildLessonBtns(){
 
 function tySelectLesson(i){
   tyLesson=i;
+  // Reset de wachtrij voor deze les zodat hij opnieuw geschud wordt
+  const bankKey = TY_LESSONS[i].bankKey;
+  TY_QUEUES[bankKey] = [];
   tyBuildLessonBtns();
   tyStart();
 }
@@ -2335,7 +2357,7 @@ function tyBuildLegend(){
 }
 
 function tyStart(){
-  const text=TY_LESSONS[tyLesson].gen();
+  const text = tyPickText(tyLesson);
   tyWords=text.split('');
   tyPos=0; tyCorrect=0; tyErrors=0; tyStreak=0;
   tyUpdateStats();
