@@ -299,71 +299,7 @@
       #app{padding:0.6rem 0.8rem 2rem;}
     }
 
-    /* ════ Typen module ════ */
-    #typen-inner { padding: 1rem; }
-    #tp-score-bar { display:flex;align-items:center;justify-content:space-around;background:var(--surface2);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-bottom:1rem; }
-    .tp-stat { text-align:center; }
-    .tp-stat-num { font-size:1.4rem;font-weight:700;color:var(--tx);line-height:1; }
-    .tp-stat-lbl { font-size:0.65rem;color:var(--tx2);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px; }
-    #tp-lesson-select { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem; }
-    .tp-lesson-btn { padding:6px 14px;border-radius:20px;border:0.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:0.82rem;cursor:pointer;transition:all 0.15s;font-family:inherit; }
-    .tp-lesson-btn.active { background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600; }
-    #tp-prompt-area { background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.25rem;min-height:70px;margin-bottom:0.75rem; }
-    #tp-prompt-text { font-size:1.6rem;font-family:'Courier New',monospace;letter-spacing:2px;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px; }
-    .tp-word-group { display:inline-flex;white-space:nowrap; }
-    .tp-word-space { display:inline-block;width:0.5em; }
-    .tp-char-done   { color:#1D9E75; }
-    .tp-char-error  { color:#D85A30;text-decoration:underline; }
-    .tp-char-active { background:rgba(124,111,255,0.2);color:var(--accent);border-radius:3px;padding:0 2px;animation:tpBlink 0.75s ease-in-out infinite; }
-    .tp-char-todo   { color:var(--tx2);opacity:0.4; }
-    @keyframes tpBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    #tp-finger-hint { text-align:center;font-size:0.88rem;color:var(--tx2);min-height:22px;margin-bottom:0.5rem; }
-    #tp-finger-hint strong { color:var(--tx); }
-    #tp-keyboard { background:var(--surface2);border-radius:var(--radius-sm);padding:0.75rem 0.5rem;margin-bottom:0.75rem;overflow-x:auto; }
-    .tp-kb-row { display:flex;justify-content:center;gap:3px;margin-bottom:3px; }
-    .tp-key { display:flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:5px;font-size:0.72rem;font-weight:600;border:0.5px solid var(--surface3);background:var(--surface);color:var(--tx2);cursor:default;user-select:none;padding:0 4px;font-family:inherit;transition:transform 0.1s; }
-    .tp-key.tp-space { min-width:140px; }
-    .tp-key.tp-active { transform:scale(1.15);color:white;border-color:transparent;box-shadow:0 3px 8px rgba(0,0,0,0.2);z-index:2;position:relative; }
-    .tp-key.tp-ok  { background:#9FE1CB!important;color:#04342C!important; }
-    .tp-key.tp-bad { background:#F5C4B3!important;color:#4A1B0C!important; }
-    .tp-f0{background:#EEEDFE;color:#3C3489} .tp-f1{background:#E1F5EE;color:#085040}
-    .tp-f2{background:#FAECE7;color:#4A1B0C} .tp-f3{background:#E6F1FB;color:#0C447C}
-    .tp-f4{background:#FAEEDA;color:#633806} .tp-f5{background:#FAEEDA;color:#633806}
-    .tp-f6{background:#E6F1FB;color:#0C447C} .tp-f7{background:#FAECE7;color:#4A1B0C}
-    .tp-f8{background:#E1F5EE;color:#085040} .tp-f9{background:#EEEDFE;color:#3C3489}
-    .tp-key.tp-active.tp-f0{background:#534AB7} .tp-key.tp-active.tp-f1{background:#1D9E75}
-    .tp-key.tp-active.tp-f2{background:#D85A30} .tp-key.tp-active.tp-f3{background:#378ADD}
-    .tp-key.tp-active.tp-f4{background:#BA7517} .tp-key.tp-active.tp-f5{background:#BA7517}
-    .tp-key.tp-active.tp-f6{background:#378ADD} .tp-key.tp-active.tp-f7{background:#D85A30}
-    .tp-key.tp-active.tp-f8{background:#1D9E75} .tp-key.tp-active.tp-f9{background:#534AB7}
-    #tp-hands { display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem; }
-    .tp-hand { text-align:center; }
-    .tp-finger-part { transition:fill 0.2s ease; }
-    .tp-finger-bounce .tp-finger-part { animation:tpFingerBounce 0.45s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:bottom center; }
-    @keyframes tpFingerBounce { from{transform:translateY(0) scale(1)} to{transform:translateY(-5px) scale(1.1);filter:drop-shadow(0 3px 5px rgba(0,0,0,0.2))} }
-    #tp-feedback-card { background:var(--surface2);border-radius:var(--radius-sm);padding:1.5rem;text-align:center;animation:popIn 0.4s cubic-bezier(.34,1.56,.64,1);margin-bottom:1rem; }
-    .tp-fb-emoji { font-size:3rem;line-height:1;margin-bottom:0.3rem; }
-    .tp-fb-title { font-size:1.3rem;font-weight:800;color:var(--accent);margin-bottom:0.3rem; }
-    .tp-fb-stars { font-size:1.8rem;margin-bottom:0.5rem; }
-    .tp-star { color:#DDD; }
-    .tp-star-on { color:#EF9F27; }
-    .tp-fb-msg { font-size:0.9rem;color:var(--tx2);line-height:1.5;margin-bottom:0.75rem; }
-    .tp-fb-stats { display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem; }
-    .tp-fb-stat { display:flex;flex-direction:column;align-items:center; }
-    .tp-fb-stat-num { font-size:1.5rem;font-weight:700;line-height:1; }
-    .tp-fb-stat-lbl { font-size:0.65rem;color:var(--tx2);text-transform:uppercase;margin-top:2px; }
-    .tp-fb-tip { font-size:0.82rem;color:var(--tx2);background:var(--surface);border-radius:var(--radius-sm);padding:0.5rem 0.9rem;margin-bottom:1rem;display:inline-block; }
-    .tp-fb-btn { display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;border:none;background:var(--accent);color:white;font-size:1.1rem;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 16px var(--glow);animation:btnPulse 1.6s ease-in-out infinite; }
-    #tp-restart-btn { display:block;margin:0.5rem auto 0;padding:8px 22px;border-radius:20px;border:0.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:0.85rem;font-family:inherit;cursor:pointer; }
-    #tp-legend { display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:0.5rem; }
-    .tp-legend-item { display:flex;align-items:center;gap:4px;font-size:0.7rem;color:var(--tx2); }
-    .tp-legend-dot { width:10px;height:10px;border-radius:50%; }
-    @media(max-width:480px){
-      #tp-prompt-text{font-size:1.2rem;letter-spacing:1px;}
-      .tp-key{min-width:26px;height:28px;font-size:0.62rem;}
-      .tp-key.tp-space{min-width:90px;}
-      #tp-hands{gap:0.75rem;}
-    }
+    /* ════ Meetkunde theorie ════ */
     .mk-sectie-titel{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px;}
     .mk-uitleg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
     .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
@@ -376,6 +312,66 @@
     .mk-voorbeeld{font-size:12px;color:var(--tx2);}
     .mk-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
     @media(max-width:480px){.mk-grid{grid-template-columns:1fr 1fr;}.mk-mc-grid{grid-template-columns:1fr 1fr;}}
+
+    /* ════ Typen ════ */
+    .ty-lesson-grid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+    .ty-lesson-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s;}
+    .ty-lesson-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .ty-lesson-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+    .ty-score-bar{display:flex;justify-content:space-around;background:var(--surface2);border-radius:var(--radius-sm);padding:10px;margin-bottom:12px;}
+    .ty-stat{text-align:center;}
+    .ty-stat-num{font-size:22px;font-weight:700;color:var(--tx);line-height:1;}
+    .ty-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
+    .ty-prompt{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.2rem;min-height:70px;margin-bottom:10px;overflow:hidden;}
+    .ty-prompt-text{font-size:clamp(1.2rem,4vw,1.8rem);font-family:'Courier New',monospace;letter-spacing:2px;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;}
+    .ty-word-group{display:inline-flex;white-space:nowrap;}
+    .ty-word-space{display:inline-block;width:0.6em;}
+    .ty-done{color:var(--accent);}
+    .ty-error{color:#E05252;text-decoration:underline;}
+    .ty-active{background:rgba(124,111,255,0.2);color:var(--accent);border-radius:3px;animation:tyBlink 0.75s ease-in-out infinite;}
+    .ty-todo{color:var(--tx2);opacity:0.4;}
+    @keyframes tyBlink{0%,100%{opacity:1}50%{opacity:0.2}}
+    .ty-hint{text-align:center;font-size:13px;color:var(--tx2);min-height:22px;margin-bottom:8px;}
+    .ty-hint strong{color:var(--tx);}
+    .ty-keyboard{background:var(--surface2);border-radius:var(--radius-sm);padding:10px 8px;margin-bottom:10px;}
+    .ty-kb-row{display:flex;justify-content:center;gap:3px;margin-bottom:3px;}
+    .ty-key{display:flex;align-items:center;justify-content:center;min-width:32px;height:32px;border-radius:5px;font-size:11px;font-weight:600;border:1px solid var(--surface3);background:var(--surface);color:var(--tx2);transition:transform 0.1s,background 0.12s;cursor:default;user-select:none;padding:0 4px;font-family:inherit;}
+    .ty-key.ty-space{min-width:140px;}
+    .ty-key.ty-key-active{transform:scale(1.2);color:white;border-color:transparent;box-shadow:0 3px 10px rgba(0,0,0,0.25);z-index:2;position:relative;}
+    .ty-key.ty-ok{background:#9FE1CB!important;color:#04342C!important;border-color:#1D9E75!important;}
+    .ty-key.ty-bad{background:#F5C4B3!important;color:#4A1B0C!important;border-color:#D85A30!important;}
+    .ty-f0{background:#EEEDFE;color:#3C3489}.ty-f1{background:#E1F5EE;color:#085040}
+    .ty-f2{background:#FAECE7;color:#4A1B0C}.ty-f3{background:#E6F1FB;color:#0C447C}
+    .ty-f4{background:#FAEEDA;color:#633806}.ty-f5{background:#FAEEDA;color:#633806}
+    .ty-f6{background:#E6F1FB;color:#0C447C}.ty-f7{background:#FAECE7;color:#4A1B0C}
+    .ty-f8{background:#E1F5EE;color:#085040}.ty-f9{background:#EEEDFE;color:#3C3489}
+    .ty-key.ty-key-active.ty-f0{background:#534AB7}.ty-key.ty-key-active.ty-f1{background:#1D9E75}
+    .ty-key.ty-key-active.ty-f2{background:#D85A30}.ty-key.ty-key-active.ty-f3{background:#378ADD}
+    .ty-key.ty-key-active.ty-f4,.ty-key.ty-key-active.ty-f5{background:#BA7517}
+    .ty-key.ty-key-active.ty-f6{background:#378ADD}.ty-key.ty-key-active.ty-f7{background:#D85A30}
+    .ty-key.ty-key-active.ty-f8{background:#1D9E75}.ty-key.ty-key-active.ty-f9{background:#534AB7}
+    .ty-hands{display:flex;justify-content:center;gap:1.5rem;margin-bottom:10px;}
+    .ty-hand{text-align:center;}
+    .ty-finger-part{transition:fill 0.2s;}
+    .ty-finger-bounce .ty-finger-part{animation:tyFingerBounce 0.45s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:bottom center;}
+    @keyframes tyFingerBounce{from{transform:translateY(0) scale(1)}to{transform:translateY(-6px) scale(1.1);filter:drop-shadow(0 4px 6px rgba(0,0,0,0.25))}}
+    .ty-feedback{text-align:center;padding:1.5rem 1rem;animation:popIn 0.4s cubic-bezier(.34,1.56,.64,1);}
+    .ty-fb-emoji{font-size:3.5rem;margin-bottom:8px;}
+    .ty-fb-title{font-size:1.4rem;font-weight:800;color:var(--accent);margin-bottom:6px;}
+    .ty-fb-stars{font-size:1.8rem;margin-bottom:10px;}
+    .ty-fb-star{color:#CCC;}.ty-fb-star.on{color:#EF9F27;animation:starPop 0.35s ease backwards;}
+    .ty-fb-msg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.5;}
+    .ty-fb-stats{display:flex;justify-content:center;gap:20px;margin-bottom:12px;}
+    .ty-fb-stat{text-align:center;}
+    .ty-fb-stat-num{font-size:1.6rem;font-weight:700;line-height:1;}
+    .ty-fb-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;}
+    .ty-fb-tip{font-size:12px;color:var(--tx2);background:var(--surface2);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:14px;display:inline-block;}
+    .ty-fb-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:40px;border:none;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 16px var(--glow);animation:btnPulse 1.6s ease-in-out infinite;}
+    .ty-restart{display:block;margin:10px auto 0;padding:8px 20px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;font-family:inherit;cursor:pointer;}
+    .ty-legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:8px;}
+    .ty-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2);}
+    .ty-legend-dot{width:10px;height:10px;border-radius:50%;}
+    @media(max-width:480px){.ty-key{min-width:26px;height:28px;font-size:9px;}.ty-key.ty-space{min-width:100px;}.ty-keyboard{padding:6px 4px;}}
 
     /* Sticky volgende knop */
     .sticky-next{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:12px 16px;background:var(--surface);border-top:1px solid var(--surface3);display:flex;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.2);animation:slideUp 0.2s ease;}
@@ -462,7 +458,7 @@
       <button class="main-tab on" id="tab-rekenen" onclick="switchMain('rekenen')">🔢 Rekenen</button>
       <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
       <button class="main-tab" id="tab-meetkunde" onclick="switchMain('meetkunde')">📐 Meetkunde</button>
-      <button class="main-tab" id="tab-typen" onclick="switchMain('typen')">⌨️ Typen</button>
+      <button class="main-tab" id="tab-typen" onclick="switchMain('typen')">🎹 Typen</button>
     </div>
 
     <div id="rekenen-root" style="width:100%">
@@ -481,9 +477,7 @@
     </div>
 
     <div id="typen-root" style="display:none;width:100%">
-      <div class="panel" style="padding:0;overflow:hidden;">
-        <div id="typen-inner"></div>
-      </div>
+      <div class="panel" id="typen-panel"></div>
     </div>
 
     <div id="taal-root" style="display:none;width:100%">
@@ -2138,6 +2132,360 @@ function getStoredPw(){return localStorage.getItem(SK.pw)||null;}
 function setPw(pw){localStorage.setItem(SK.pw,pw);}
 let adminUnlocked=false;
 
+
+// ════════════════════════════════════════════════════════
+// TYPEN
+// ════════════════════════════════════════════════════════
+
+const TY_FINGER_COLORS = {
+  f0:'#534AB7',f1:'#1D9E75',f2:'#D85A30',f3:'#378ADD',
+  f4:'#BA7517',f5:'#BA7517',f6:'#378ADD',f7:'#D85A30',f8:'#1D9E75',f9:'#534AB7'
+};
+const TY_FINGER_NAMES = {
+  f0:'Linker pink',f1:'Linker ringvinger',f2:'Linker middelvinger',f3:'Linker wijsvinger',
+  f4:'Linker duim',f5:'Rechter duim',f6:'Rechter wijsvinger',f7:'Rechter middelvinger',
+  f8:'Rechter ringvinger',f9:'Rechter pink'
+};
+const TY_HAND_MAP = {
+  f0:'ty-hl-pinky',f1:'ty-hl-ring',f2:'ty-hl-middle',f3:'ty-hl-index',f4:'ty-hl-thumb',
+  f5:'ty-hr-thumb',f6:'ty-hr-index',f7:'ty-hr-middle',f8:'ty-hr-ring',f9:'ty-hr-pinky'
+};
+const TY_KB_LAYOUT = [
+  ['²','&','é','"',"'",'(','-','è','_','ç','à',')','='],
+  ['a','z','e','r','t','y','u','i','o','p','^','$'],
+  ['q','s','d','f','g','h','j','k','l','m','ù','*'],
+  ['w','x','c','v','b','n',',',';',':','!'],
+  [' ']
+];
+const TY_KEY_FINGER = {
+  '²':'f0','&':'f0','é':'f1','"':'f2',"'":'f3','(':'f3',
+  '-':'f6','è':'f6','_':'f7','ç':'f8','à':'f9',')':'f9','=':'f9',
+  'a':'f0','z':'f1','e':'f2','r':'f3','t':'f3',
+  'y':'f6','u':'f6','i':'f7','o':'f8','p':'f9','^':'f9','$':'f9',
+  'q':'f0','s':'f1','d':'f2','f':'f3','g':'f3',
+  'h':'f6','j':'f6','k':'f7','l':'f8','m':'f9','ù':'f9','*':'f9',
+  'w':'f0','x':'f1','c':'f2','v':'f3','b':'f3',
+  'n':'f6',',':'f6',';':'f7',':':'f8','!':'f9',
+  ' ':'f5'
+};
+
+// ── AUTO-GENERATOR ──
+// Bouwt willekeurige oefeningteksten op basis van woordenlijsten per niveau
+const TY_WORDBANKS = {
+  thuisrij:  ['qsd','jkl','fgh','sal','dal','kal','las','fal','jal','mal','qsdf','jklm','flash','klaas','daks','flam'],
+  klinkers:  ['aei','oei','aio','uie','auto','euro','oase','aioli','idea','ooit'],
+  basis:     ['de','een','het','en','van','is','dat','op','te','in','aan','met','bij','als','dit','zo','wel','nog','ook','maar'],
+  dieren:    ['kat','hond','vis','beer','wolf','egel','muis','haas','lam','koe','geit','vos','paard','zebra','tijger','leeuw','giraf','konijn','hamster','kip','eend','gans','duif','spin','bij'],
+  eten:      ['brood','melk','kaas','ei','boter','jam','taart','koek','peer','appel','pizza','pasta','soep','rijst','vlees','friet','salade','tomaat','chocolade','snoep','ijsje','cake','banaan','druif'],
+  school:    ['boek','pen','potlood','schaar','liniaal','klas','school','meester','juf','les','tafel','stoel','raam','deur','bord','krijtje','rugzak','etui','agenda','huiswerk'],
+  kleuren:   ['rood','blauw','groen','geel','oranje','paars','roze','bruin','zwart','wit','grijs','beige','turkoois','zilver','goud'],
+  cijfers:   ['nul','een','twee','drie','vier','vijf','zes','zeven','acht','negen','tien','elf','twaalf','twintig','honderd'],
+  lichaam:   ['hoofd','haar','oog','neus','mond','oor','arm','hand','vinger','been','voet','teen','buik','rug','nek','schouder'],
+  natuur:    ['boom','bloem','gras','blad','tak','wortel','zon','maan','ster','wolk','regen','sneeuw','wind','zee','rivier','berg','dal','veld','bos','tuin'],
+  zinnen1:   ['de kat slaapt','de hond rent','een appel is rood','het boek is dik','de zon schijnt'],
+  zinnen2:   ['mama koopt brood','papa leest een boek','de kinderen spelen','de hond blaft hard','het regent buiten'],
+  zinnen3:   ['de kat eet de vis op','de hond rent door de tuin','een vogel vliegt over het dak','het kind leest een dik boek'],
+  grappig:   ['de kat rijdt op een fiets','mijn hond eet pizza met kaas','de olifant past niet in de auto','opa danst op het dak met een paraplu','de kikker wil piloot worden maar is bang'],
+  alfabet:   ['azerty uiop qsdfg hjklm wxcvb','vijf boksers jagen op het zwakke duo','fix de blauwe vacht op de groene man','zeven dwaze kabouters eten fijn gebak'],
+  gevorderd: ['de verslaggever observeert heel goed','een speurneus zoekt altijd de waarheid','navigeren door het leefgebied van dieren','de survivaltocht was levensbedreigend'],
+};
+
+function tyGenSentence(bank, count=8){
+  const words = [...TY_WORDBANKS[bank]].sort(()=>Math.random()-0.5);
+  return words.slice(0,count).join(' ');
+}
+
+const TY_LESSONS = [
+  { name:'🏠 Thuisrij', gen:()=>tyGenSentence('thuisrij',10) },
+  { name:'🔤 Klinkers', gen:()=>tyGenSentence('klinkers',8) },
+  { name:'📝 Basiswoorden', gen:()=>tyGenSentence('basis',12) },
+  { name:'🐱 Dieren', gen:()=>tyGenSentence('dieren',9) },
+  { name:'🍕 Eten', gen:()=>tyGenSentence('eten',9) },
+  { name:'🎒 School', gen:()=>tyGenSentence('school',9) },
+  { name:'🎨 Kleuren', gen:()=>tyGenSentence('kleuren',8) },
+  { name:'🔢 Cijfers', gen:()=>tyGenSentence('cijfers',8) },
+  { name:'🌳 Natuur', gen:()=>tyGenSentence('natuur',9) },
+  { name:'💬 Zinnen 1', gen:()=>TY_WORDBANKS.zinnen1[Math.floor(Math.random()*TY_WORDBANKS.zinnen1.length)] },
+  { name:'💬 Zinnen 2', gen:()=>TY_WORDBANKS.zinnen2[Math.floor(Math.random()*TY_WORDBANKS.zinnen2.length)] },
+  { name:'💬 Zinnen 3', gen:()=>TY_WORDBANKS.zinnen3[Math.floor(Math.random()*TY_WORDBANKS.zinnen3.length)] },
+  { name:'😂 Grappig', gen:()=>TY_WORDBANKS.grappig[Math.floor(Math.random()*TY_WORDBANKS.grappig.length)] },
+  { name:'⭐ Alfabet', gen:()=>TY_WORDBANKS.alfabet[Math.floor(Math.random()*TY_WORDBANKS.alfabet.length)] },
+  { name:'🚀 Gevorderd', gen:()=>TY_WORDBANKS.gevorderd[Math.floor(Math.random()*TY_WORDBANKS.gevorderd.length)] },
+];
+
+const TY_FEEDBACK = {
+  perfect:[
+    {emoji:'🏆',title:'ONGELOOFLIJK!',msg:'Jij bent een typtijger! Geen enkele fout!'},
+    {emoji:'🚀',title:'RAKETSNELHEID!',msg:'Zo snel en zo perfect! Je vingers vliegen!'},
+    {emoji:'🌟',title:'SUPERSTER!',msg:'100% goed! Het toetsenbord begint te blozen!'},
+    {emoji:'🎯',title:'BULLSEYE!',msg:'Elke letter raak! Je bent officieel typkampioen!'},
+    {emoji:'🦄',title:'MAGISCH!',msg:'Eenhoorns typen ook perfect, net zoals jij!'},
+  ],
+  great:[
+    {emoji:'👏',title:'GEWELDIG!',msg:'Bijna perfect! Je vingers worden echte typexperts!'},
+    {emoji:'🎉',title:'SUPER GEDAAN!',msg:'Zo goed! Nog even oefenen en je typt sneller dan het licht!'},
+    {emoji:'🦊',title:'SLIMME VOS!',msg:'Heel knap! Bijna helemaal foutloos!'},
+    {emoji:'🌈',title:'REGENBOOGRESULTAAT!',msg:'Zo kleurrijk goed! Bijna perfect!'},
+  ],
+  ok:[
+    {emoji:'💪',title:'GOED BEZIG!',msg:'Je bent goed op weg! Die fouten verdwijnen als sneeuw voor de zon!'},
+    {emoji:'🌱',title:'AAN HET GROEIEN!',msg:'Elke oefening maakt je beter!'},
+    {emoji:'🐢',title:'LANGZAAM MAAR ZEKER!',msg:'De schildpad wint ook de race! Blijf oefenen!'},
+    {emoji:'🎮',title:'LEVEL UP!',msg:'Nog even trainen en je gaat van level 1 naar level 100!'},
+  ],
+  poor:[
+    {emoji:'🙈',title:'OEF! OPNIEUW!',msg:'Gewoon nog eens proberen, je kan het écht!'},
+    {emoji:'🐌',title:'SLAKKENSTART!',msg:'Slakken geven nooit op! Jij ook niet!'},
+    {emoji:'🤔',title:'HMMMM...',msg:'Je vingers waren even in de war. Geeft niet! Opnieuw!'},
+  ]
+};
+
+// ── STATE ──
+let tyLesson=0, tyWords=[], tyPos=0, tyCorrect=0, tyErrors=0, tyStreak=0;
+let tyKeyEls={}, tyActiveFinger=null, tyListening=false;
+
+function initTypen(){
+  const panel=document.getElementById('typen-panel');
+  if(!panel)return;
+  panel.innerHTML=`
+    <div id="ty-lesson-grid" class="ty-lesson-grid"></div>
+    <div class="ty-score-bar">
+      <div class="ty-stat"><div class="ty-stat-num" id="ty-sc-correct">0</div><div class="ty-stat-lbl">Goed</div></div>
+      <div class="ty-stat"><div class="ty-stat-num" id="ty-sc-errors">0</div><div class="ty-stat-lbl">Foutjes</div></div>
+      <div class="ty-stat"><div class="ty-stat-num" id="ty-sc-streak">0</div><div class="ty-stat-lbl">Op rij</div></div>
+      <div class="ty-stat"><div class="ty-stat-num" id="ty-sc-pct">—</div><div class="ty-stat-lbl">Score</div></div>
+    </div>
+    <div class="ty-prompt"><div class="ty-prompt-text" id="ty-prompt"></div></div>
+    <div class="ty-hint" id="ty-hint"></div>
+    <div class="ty-keyboard" id="ty-keyboard"></div>
+    <div class="ty-hands" id="ty-hands">
+      <div class="ty-hand">
+        <svg id="ty-hand-left" width="110" height="130" viewBox="0 0 130 150">
+          <g id="ty-hl-pinky"><ellipse cx="18" cy="52" rx="11" ry="23" class="ty-finger-part" fill="#F9C9A0"/><rect x="7" y="67" width="22" height="32" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hl-ring"><ellipse cx="40" cy="41" rx="11" ry="25" class="ty-finger-part" fill="#F9C9A0"/><rect x="29" y="62" width="22" height="36" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hl-middle"><ellipse cx="64" cy="36" rx="11" ry="27" class="ty-finger-part" fill="#F9C9A0"/><rect x="53" y="59" width="22" height="38" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hl-index"><ellipse cx="88" cy="41" rx="11" ry="25" class="ty-finger-part" fill="#F9C9A0"/><rect x="77" y="62" width="22" height="36" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hl-thumb"><ellipse cx="112" cy="89" rx="11" ry="19" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <rect x="5" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
+          <text x="57" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="sans-serif" font-weight="600">linker hand</text>
+        </svg>
+      </div>
+      <div class="ty-hand">
+        <svg id="ty-hand-right" width="110" height="130" viewBox="0 0 130 150">
+          <g id="ty-hr-thumb"><ellipse cx="18" cy="89" rx="11" ry="19" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hr-index"><ellipse cx="42" cy="41" rx="11" ry="25" class="ty-finger-part" fill="#F9C9A0"/><rect x="31" y="62" width="22" height="36" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hr-middle"><ellipse cx="66" cy="36" rx="11" ry="27" class="ty-finger-part" fill="#F9C9A0"/><rect x="55" y="59" width="22" height="38" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hr-ring"><ellipse cx="90" cy="41" rx="11" ry="25" class="ty-finger-part" fill="#F9C9A0"/><rect x="79" y="62" width="22" height="36" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <g id="ty-hr-pinky"><ellipse cx="112" cy="52" rx="11" ry="23" class="ty-finger-part" fill="#F9C9A0"/><rect x="101" y="67" width="22" height="32" rx="7" class="ty-finger-part" fill="#F9C9A0"/></g>
+          <rect x="20" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
+          <text x="73" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="sans-serif" font-weight="600">rechter hand</text>
+        </svg>
+      </div>
+    </div>
+    <div class="ty-legend" id="ty-legend"></div>
+    <div id="ty-feedback" style="display:none" class="ty-feedback"></div>
+    <button class="ty-restart" onclick="tyStart()">↺ Opnieuw</button>`;
+
+  tyBuildKeyboard();
+  tyBuildLegend();
+  tyBuildLessonBtns();
+  tyStart();
+  tyAddKeyListener();
+}
+
+function tyBuildLessonBtns(){
+  const c=document.getElementById('ty-lesson-grid');if(!c)return;
+  c.innerHTML=TY_LESSONS.map((l,i)=>
+    `<button class="ty-lesson-btn${i===tyLesson?' on':''}" onclick="tySelectLesson(${i})">${l.name}</button>`
+  ).join('');
+}
+
+function tySelectLesson(i){
+  tyLesson=i;
+  tyBuildLessonBtns();
+  tyStart();
+}
+
+function tyBuildKeyboard(){
+  const kb=document.getElementById('ty-keyboard');if(!kb)return;
+  kb.innerHTML=''; tyKeyEls={};
+  TY_KB_LAYOUT.forEach(row=>{
+    const rd=document.createElement('div'); rd.className='ty-kb-row';
+    row.forEach(k=>{
+      const el=document.createElement('div');
+      const fid=TY_KEY_FINGER[k]||'';
+      el.className='ty-key '+(fid?'ty-'+fid:'')+(k===' '?' ty-space':'');
+      el.textContent=k===' '?'spatie':k.toUpperCase();
+      rd.appendChild(el); tyKeyEls[k]=el;
+    });
+    kb.appendChild(rd);
+  });
+}
+
+function tyBuildLegend(){
+  const lg=document.getElementById('ty-legend');if(!lg)return;
+  lg.innerHTML=[
+    {fid:'f0',label:'Pink L'},{fid:'f1',label:'Ringvinger L'},{fid:'f2',label:'Middelvinger L'},
+    {fid:'f3',label:'Wijsvinger L'},{fid:'f4',label:'Duim'},
+    {fid:'f6',label:'Wijsvinger R'},{fid:'f7',label:'Middelvinger R'},
+    {fid:'f8',label:'Ringvinger R'},{fid:'f9',label:'Pink R'}
+  ].map(({fid,label})=>
+    `<div class="ty-legend-item"><div class="ty-legend-dot" style="background:${TY_FINGER_COLORS[fid]}"></div>${label}</div>`
+  ).join('');
+}
+
+function tyStart(){
+  const text=TY_LESSONS[tyLesson].gen();
+  tyWords=text.split('');
+  tyPos=0; tyCorrect=0; tyErrors=0; tyStreak=0;
+  tyUpdateStats();
+  const fb=document.getElementById('ty-feedback');if(fb)fb.style.display='none';
+  const hint=document.getElementById('ty-hint');if(hint)hint.textContent='';
+  tyRenderPrompt();
+  tyBuildLessonBtns();
+  tyResetHands();
+  tyHighlightActive();
+}
+
+function tyRenderPrompt(){
+  const pt=document.getElementById('ty-prompt');if(!pt)return;
+  pt.innerHTML='';
+  let i=0;
+  while(i<tyWords.length){
+    if(tyWords[i]===' '){
+      const sp=document.createElement('span');
+      sp.className='ty-word-space '+tyCharCls(i);
+      sp.dataset.idx=i; sp.textContent='\u00a0';
+      pt.appendChild(sp); i++;
+    } else {
+      const grp=document.createElement('span'); grp.className='ty-word-group';
+      while(i<tyWords.length && tyWords[i]!==' '){
+        const s=document.createElement('span');
+        s.className=tyCharCls(i); s.dataset.idx=i; s.textContent=tyWords[i];
+        grp.appendChild(s); i++;
+      }
+      pt.appendChild(grp);
+    }
+  }
+}
+
+function tyCharCls(i){
+  return i<tyPos?'ty-done':i===tyPos?'ty-active':'ty-todo';
+}
+
+function tyUpdateCharSpan(idx,cls){
+  const s=document.querySelector(`#ty-prompt [data-idx="${idx}"]`);
+  if(!s)return;
+  const isSpace=s.classList.contains('ty-word-space');
+  s.className=cls+(isSpace?' ty-word-space':'');
+}
+
+function tyHighlightActive(){
+  Object.values(tyKeyEls).forEach(k=>k.classList.remove('ty-key-active'));
+  tyResetHands();
+  if(tyPos>=tyWords.length)return;
+  const ch=tyWords[tyPos].toLowerCase();
+  const fid=TY_KEY_FINGER[ch];
+  if(tyKeyEls[ch])tyKeyEls[ch].classList.add('ty-key-active');
+  if(fid){
+    const hint=document.getElementById('ty-hint');
+    if(hint)hint.innerHTML=`👆 Gebruik je <strong>${TY_FINGER_NAMES[fid]}</strong>`;
+    tyHighlightFinger(fid);
+  }
+}
+
+function tyResetHands(){
+  if(tyActiveFinger){
+    const g=document.getElementById(TY_HAND_MAP[tyActiveFinger]);
+    if(g){g.classList.remove('ty-finger-bounce');g.querySelectorAll('.ty-finger-part').forEach(el=>el.style.fill='');}
+    tyActiveFinger=null;
+  }
+}
+
+function tyHighlightFinger(fid){
+  const id=TY_HAND_MAP[fid];if(!id)return;
+  const g=document.getElementById(id);if(!g)return;
+  g.querySelectorAll('.ty-finger-part').forEach(el=>el.style.fill=TY_FINGER_COLORS[fid]);
+  g.classList.add('ty-finger-bounce');
+  tyActiveFinger=fid;
+}
+
+function tyFlashKey(k,ok){
+  const el=tyKeyEls[k];if(!el)return;
+  el.classList.add(ok?'ty-ok':'ty-bad');
+  setTimeout(()=>el.classList.remove('ty-ok','ty-bad'),260);
+}
+
+function tyUpdateStats(){
+  const g=document.getElementById('ty-sc-correct'),
+        e=document.getElementById('ty-sc-errors'),
+        s=document.getElementById('ty-sc-streak'),
+        p=document.getElementById('ty-sc-pct');
+  if(g)g.textContent=tyCorrect;
+  if(e)e.textContent=tyErrors;
+  if(s)s.textContent=tyStreak;
+  const tot=tyCorrect+tyErrors;
+  if(p)p.textContent=tot>0?Math.round(tyCorrect/tot*100)+'%':'—';
+}
+
+function tyShowFeedback(pct){
+  let pool;
+  if(pct===100)pool=TY_FEEDBACK.perfect;
+  else if(pct>=80)pool=TY_FEEDBACK.great;
+  else if(pct>=50)pool=TY_FEEDBACK.ok;
+  else pool=TY_FEEDBACK.poor;
+  const f=pool[Math.floor(Math.random()*pool.length)];
+  const numStars=pct===100?5:pct>=80?4:pct>=60?3:pct>=40?2:1;
+  const stars=[0,1,2,3,4].map(i=>`<span class="ty-fb-star${i<numStars?' on':''}" style="animation-delay:${i*0.1}s">★</span>`).join('');
+  const fb=document.getElementById('ty-feedback');if(!fb)return;
+  fb.innerHTML=`
+    <div class="ty-fb-emoji">${f.emoji}</div>
+    <div class="ty-fb-title">${f.title}</div>
+    <div class="ty-fb-stars">${stars}</div>
+    <div class="ty-fb-msg">${f.msg}</div>
+    <div class="ty-fb-stats">
+      <div class="ty-fb-stat"><span class="ty-fb-stat-num" style="color:var(--accent)">${tyCorrect}</span><span class="ty-fb-stat-lbl">goed</span></div>
+      <div class="ty-fb-stat"><span class="ty-fb-stat-num" style="color:#E05252">${tyErrors}</span><span class="ty-fb-stat-lbl">foutjes</span></div>
+      <div class="ty-fb-stat"><span class="ty-fb-stat-num" style="color:var(--accent)">${pct}%</span><span class="ty-fb-stat-lbl">score</span></div>
+    </div>
+    <button class="ty-fb-btn" onclick="tyStart()">🎯 Nog een oefening!</button>`;
+  fb.style.display='block';
+  fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function tyAddKeyListener(){
+  if(tyListening)return;
+  tyListening=true;
+  document.addEventListener('keydown',function tyKeyHandler(e){
+    // Only handle when typen tab is active
+    if(document.getElementById('typen-root').style.display==='none')return;
+    if(tyPos>=tyWords.length)return;
+    e.preventDefault();
+    const typed=e.key===' '?' ':(e.key.length===1?e.key:null);
+    if(!typed)return;
+    const expected=tyWords[tyPos];
+    if(typed.toLowerCase()===expected.toLowerCase()){
+      tyFlashKey(expected.toLowerCase(),true);
+      tyUpdateCharSpan(tyPos,'ty-done');
+      tyCorrect++; tyStreak++; tyPos++;
+      if(tyPos>=tyWords.length){
+        tyUpdateStats(); tyResetHands();
+        Object.values(tyKeyEls).forEach(k=>k.classList.remove('ty-key-active'));
+        const hint=document.getElementById('ty-hint');if(hint)hint.textContent='';
+        tyShowFeedback(Math.round(tyCorrect/(tyCorrect+tyErrors)*100));
+      } else {
+        tyUpdateCharSpan(tyPos,'ty-active');
+        tyHighlightActive();
+      }
+    } else {
+      tyFlashKey(expected.toLowerCase(),false);
+      tyErrors++; tyStreak=0;
+    }
+    tyUpdateStats();
+  });
+}
+
+
 function openAdmin(){
   document.getElementById('admin-overlay').style.display='flex';
   if(!getStoredPw()){renderSetPassword();}
@@ -2492,177 +2840,6 @@ function changePw(){
   setPw(n1);err.style.color='var(--ok)';err.textContent='✓ Wachtwoord gewijzigd!';
 }
 function adminLogout(){adminUnlocked=false;closeAdmin();}
-
-
-// ════════════════════════════════════════════════════════
-// TYPEN MODULE
-// ════════════════════════════════════════════════════════
-const TP_FINGER_COLORS = {f0:'#534AB7',f1:'#1D9E75',f2:'#D85A30',f3:'#378ADD',f4:'#BA7517',f5:'#BA7517',f6:'#378ADD',f7:'#D85A30',f8:'#1D9E75',f9:'#534AB7'};
-const TP_FINGER_NAMES  = {f0:'Linker pink',f1:'Linker ringvinger',f2:'Linker middelvinger',f3:'Linker wijsvinger',f4:'Linker duim',f5:'Rechter duim',f6:'Rechter wijsvinger',f7:'Rechter middelvinger',f8:'Rechter ringvinger',f9:'Rechter pink'};
-const TP_HAND_MAP = {f0:'tphl-pinky',f1:'tphl-ring',f2:'tphl-middle',f3:'tphl-index',f4:'tphl-thumb',f5:'tphr-thumb',f6:'tphr-index',f7:'tphr-middle',f8:'tphr-ring',f9:'tphr-pinky'};
-const TP_KB_LAYOUT = [['²','&','é','"',"'",'(','-','è','_','ç','à',')','='],['a','z','e','r','t','y','u','i','o','p','^','$'],['q','s','d','f','g','h','j','k','l','m','ù','*'],['w','x','c','v','b','n',',',';',':','!'],[' ']];
-const TP_KEY_FINGER = {'²':'f0','&':'f0','é':'f1','"':'f2',"'":'f3','(':'f3','-':'f6','è':'f6','_':'f7','ç':'f8','à':'f9',')':'f9','=':'f9','a':'f0','z':'f1','e':'f2','r':'f3','t':'f3','y':'f6','u':'f6','i':'f7','o':'f8','p':'f9','^':'f9','$':'f9','q':'f0','s':'f1','d':'f2','f':'f3','g':'f3','h':'f6','j':'f6','k':'f7','l':'f8','m':'f9','ù':'f9','*':'f9','w':'f0','x':'f1','c':'f2','v':'f3','b':'f3','n':'f6',',':'f6',';':'f7',':':'f8','!':'f9',' ':'f5'};
-const TP_LESSONS = [
-  {name:'🏠 Thuisrij',sets:['qsd qsdf jkl jklm fgh fjk das sal fal jal kal lad las asal jdal','aqsd sqfd jkml qfds klad fsjd dalk salm fjal qsal dajl fsam','qqqq ssss dddd ffff jjjj kkkk llll mmmm qsdf jklm','flash klaas smal daks jalm qsdk flam dsqj mkal fjals']},
-  {name:'🔤 Klinkers',sets:['aei oei aio uie oeia uia auo eio uoa','aa ee ii oo uu ae io ua oe ui ai aaa eee','auto euro idea ooit aioli eau oase ui ei au oe','eia uoa ioe aue oui eai uoe aio eui oae iau']},
-  {name:'🐱 Dieren',sets:['kat hond vis beer wolf egel muis haas lam koe geit vos','paard zebra tijger leeuw giraf olifant nijlpaard kameel','konijn hamster papegaai schildpad goudvis kanarie','kip eend gans duif specht merel vink kraai uil tor bij']},
-  {name:'🍕 Eten',sets:['brood melk kaas ei boter jam taart koek peer appel','pizza pasta soep rijst vlees vis friet salade tomaat','chocolade snoep ijsje cake koekje wafel pannenkoek','banaan aardbei druif meloen citroen sinaasappel mango']},
-  {name:'😂 Grappige zinnen',sets:['de kat eet de pizza van de hond helemaal op','mijn konijn rijdt elke dag op een fiets naar school','de olifant past niet door de voordeur dus belt hij aan','papa zit vast in de wasmachine met zijn lievelingssok','de hond heeft zijn bot verstopt in mamas handtas','mama vindt elke ochtend een kikker in haar linker schoen','de vis wil leren fietsen maar heeft jammer genoeg geen benen','opa danst elke avond op het dak met zijn rode paraplu']},
-  {name:'⭐ Alle letters',sets:['azerty uiop qsdfg hjklm wxcvb','vijf boksers jagen op het zwakke duo','fix de blauwe vacht op de groene man','zeven dwaze kabouters eten fijn gebak op']}
-];
-const TP_FB = {
-  perfect:[{e:'🏆',t:'ONGELOOFLIJK!',m:'Geen enkele fout! De toetsen dansen voor jou!'},{e:'🚀',t:'RAKETSNELHEID!',m:'Zo snel en zo perfect!'},{e:'🌟',t:'SUPERSTER!',m:'100% goed! Je bent echt een typkampioen!'},{e:'🦄',t:'MAGISCH!',m:'Eenhoorns typen ook perfect, net zoals jij!'}],
-  great:[{e:'👏',t:'GEWELDIG!',m:'Bijna perfect! Je vingers worden echte typexperts!'},{e:'🎉',t:'SUPER GEDAAN!',m:'Zo goed! Nog een beetje oefenen!'},{e:'🌈',t:'REGENBOOG!',m:'Bijna perfect, dat is echt fantastisch!'}],
-  ok:[{e:'💪',t:'GOED BEZIG!',m:'Je bent goed op weg!'},{e:'🌱',t:'AAN HET GROEIEN!',m:'Elke oefening maakt je beter!'},{e:'🎮',t:'LEVEL UP!',m:'Nog even trainen en je bent toptypist!'}],
-  poor:[{e:'🙈',t:'OEF! OPNIEUW!',m:'Gewoon nog eens proberen, je kan het écht!'},{e:'🐌',t:'SLAKKENSTART!',m:'Slakken geven nooit op! Jij ook niet!'},{e:'🐥',t:'KLEIN KUIKEN!',m:'Elk kuiken leert vallen voor het loopt!'}]
-};
-let tpCurrentLesson=0,tpWords=[],tpPos=0,tpCorrect=0,tpErrors=0,tpStreak=0,tpKeyEls={},tpActiveFinger=null,tpInited=false;
-
-function initTypen(){
-  const el=document.getElementById('typen-inner');if(!el)return;
-  el.innerHTML=`
-    <div id="tp-score-bar">
-      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-correct">0</div><div class="tp-stat-lbl">goed</div></div>
-      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-errors">0</div><div class="tp-stat-lbl">foutjes</div></div>
-      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-streak">0</div><div class="tp-stat-lbl">op rij</div></div>
-      <div class="tp-stat"><div class="tp-stat-num" id="tpsc-pct">—</div><div class="tp-stat-lbl">score</div></div>
-    </div>
-    <div id="tp-lesson-select"></div>
-    <div id="tp-prompt-area"><div id="tp-prompt-text"></div></div>
-    <div id="tp-finger-hint"></div>
-    <div id="tp-keyboard"></div>
-    <div id="tp-hands">
-      <div class="tp-hand"><svg id="tphand-left" width="115" height="135" viewBox="0 0 130 150">
-        <g id="tphl-pinky"><ellipse cx="18" cy="52" rx="11" ry="23" class="tp-finger-part" fill="#F9C9A0"/><rect x="7" y="67" width="22" height="32" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphl-ring"><ellipse cx="40" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="29" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphl-middle"><ellipse cx="64" cy="36" rx="11" ry="27" class="tp-finger-part" fill="#F9C9A0"/><rect x="53" y="59" width="22" height="38" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphl-index"><ellipse cx="88" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="77" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphl-thumb"><ellipse cx="112" cy="89" rx="11" ry="19" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <rect x="5" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
-        <text x="57" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="inherit" font-weight="600">linker hand</text>
-      </svg></div>
-      <div class="tp-hand"><svg id="tphand-right" width="115" height="135" viewBox="0 0 130 150">
-        <g id="tphr-thumb"><ellipse cx="18" cy="89" rx="11" ry="19" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphr-index"><ellipse cx="42" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="31" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphr-middle"><ellipse cx="66" cy="36" rx="11" ry="27" class="tp-finger-part" fill="#F9C9A0"/><rect x="55" y="59" width="22" height="38" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphr-ring"><ellipse cx="90" cy="41" rx="11" ry="25" class="tp-finger-part" fill="#F9C9A0"/><rect x="79" y="62" width="22" height="36" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <g id="tphr-pinky"><ellipse cx="112" cy="52" rx="11" ry="23" class="tp-finger-part" fill="#F9C9A0"/><rect x="101" y="67" width="22" height="32" rx="7" class="tp-finger-part" fill="#F9C9A0"/></g>
-        <rect x="20" y="95" width="105" height="42" rx="13" fill="#EBA87C"/>
-        <text x="73" y="132" font-size="11" text-anchor="middle" fill="#A0522D" font-family="inherit" font-weight="600">rechter hand</text>
-      </svg></div>
-    </div>
-    <div id="tp-legend"></div>
-    <div id="tp-feedback-card" style="display:none"></div>
-    <button id="tp-restart-btn">↺ opnieuw</button>`;
-  tpBuildKeyboard();tpBuildLegend();tpBuildLessonBtns();tpStartLesson();
-  if(!tpInited){document.addEventListener('keydown',tpHandleKey);tpInited=true;}
-  document.getElementById('tp-restart-btn').onclick=tpStartLesson;
-}
-function tpBuildKeyboard(){
-  const kb=document.getElementById('tp-keyboard');if(!kb)return;
-  kb.innerHTML='';tpKeyEls={};
-  TP_KB_LAYOUT.forEach(row=>{
-    const rd=document.createElement('div');rd.className='tp-kb-row';
-    row.forEach(k=>{
-      const el=document.createElement('div');
-      const f=TP_KEY_FINGER[k]||'';
-      el.className='tp-key'+(f?' tp-'+f:'')+(k===' '?' tp-space':'');
-      el.textContent=k===' '?'spatie':k.toUpperCase();
-      rd.appendChild(el);tpKeyEls[k]=el;
-    });kb.appendChild(rd);
-  });
-}
-function tpBuildLegend(){
-  const lg=document.getElementById('tp-legend');if(!lg)return;lg.innerHTML='';
-  [{f:'f0',l:'Pink L'},{f:'f1',l:'Ring L'},{f:'f2',l:'Midden L'},{f:'f3',l:'Wijs L'},{f:'f4',l:'Duim'},{f:'f6',l:'Wijs R'},{f:'f7',l:'Midden R'},{f:'f8',l:'Ring R'},{f:'f9',l:'Pink R'}].forEach(({f,l})=>{
-    const d=document.createElement('div');d.className='tp-legend-item';
-    d.innerHTML=`<div class="tp-legend-dot" style="background:${TP_FINGER_COLORS[f]}"></div>${l}`;
-    lg.appendChild(d);
-  });
-}
-function tpBuildLessonBtns(){
-  const c=document.getElementById('tp-lesson-select');if(!c)return;c.innerHTML='';
-  TP_LESSONS.forEach((l,i)=>{
-    const b=document.createElement('button');b.className='tp-lesson-btn'+(i===tpCurrentLesson?' active':'');
-    b.textContent=l.name;b.onclick=()=>{tpCurrentLesson=i;tpStartLesson();};c.appendChild(b);
-  });
-}
-function tpStartLesson(){
-  const sets=TP_LESSONS[tpCurrentLesson].sets;
-  tpWords=sets[Math.floor(Math.random()*sets.length)].split('');
-  tpPos=0;tpCorrect=0;tpErrors=0;tpStreak=0;tpUpdateStats();
-  const fc=document.getElementById('tp-feedback-card');if(fc)fc.style.display='none';
-  const fh=document.getElementById('tp-finger-hint');if(fh)fh.textContent='';
-  tpRenderPrompt();tpBuildLessonBtns();tpResetHands();tpHighlightActive();
-}
-function tpRenderPrompt(){
-  const pt=document.getElementById('tp-prompt-text');if(!pt)return;
-  pt.innerHTML='';let i=0;
-  while(i<tpWords.length){
-    if(tpWords[i]===' '){
-      const sp=document.createElement('span');sp.className='tp-word-space '+tpCls(i);sp.dataset.idx=i;sp.textContent='\u00a0';pt.appendChild(sp);i++;
-    } else {
-      const grp=document.createElement('span');grp.className='tp-word-group';
-      while(i<tpWords.length&&tpWords[i]!==' '){const s=document.createElement('span');s.className=tpCls(i);s.dataset.idx=i;s.textContent=tpWords[i];grp.appendChild(s);i++;}
-      pt.appendChild(grp);
-    }
-  }
-}
-function tpCls(i){return i<tpPos?'tp-char-done':i===tpPos?'tp-char-active':'tp-char-todo';}
-function tpUpdateChar(idx,cls){const s=document.querySelector(`#tp-prompt-text [data-idx="${idx}"]`);if(!s)return;const isSp=s.classList.contains('tp-word-space');s.className=cls+(isSp?' tp-word-space':'');}
-function tpHighlightActive(){
-  Object.values(tpKeyEls).forEach(k=>k.classList.remove('tp-active'));tpResetHands();
-  if(tpPos>=tpWords.length)return;
-  const ch=tpWords[tpPos].toLowerCase();const fid=TP_KEY_FINGER[ch];
-  if(tpKeyEls[ch])tpKeyEls[ch].classList.add('tp-active');
-  if(fid){const fh=document.getElementById('tp-finger-hint');if(fh)fh.innerHTML='👆 Gebruik je <strong>'+TP_FINGER_NAMES[fid]+'</strong>';tpHighlightFinger(fid);}
-}
-function tpResetHands(){
-  if(tpActiveFinger){const g=document.getElementById(TP_HAND_MAP[tpActiveFinger]);if(g){g.classList.remove('tp-finger-bounce');g.querySelectorAll('.tp-finger-part').forEach(el=>el.style.fill='');}tpActiveFinger=null;}
-}
-function tpHighlightFinger(fid){
-  const id=TP_HAND_MAP[fid];if(!id)return;const g=document.getElementById(id);if(!g)return;
-  g.querySelectorAll('.tp-finger-part').forEach(el=>el.style.fill=TP_FINGER_COLORS[fid]);
-  g.classList.add('tp-finger-bounce');tpActiveFinger=fid;
-}
-function tpFlashKey(k,ok){const el=tpKeyEls[k];if(!el)return;el.classList.add(ok?'tp-ok':'tp-bad');setTimeout(()=>el.classList.remove('tp-ok','tp-bad'),260);}
-function tpUpdateStats(){
-  const sc=document.getElementById('tpsc-correct'),se=document.getElementById('tpsc-errors'),ss=document.getElementById('tpsc-streak'),sp=document.getElementById('tpsc-pct');
-  if(sc)sc.textContent=tpCorrect;if(se)se.textContent=tpErrors;if(ss)ss.textContent=tpStreak;
-  const tot=tpCorrect+tpErrors;if(sp)sp.textContent=tot>0?Math.round(tpCorrect/tot*100)+'%':'—';
-}
-function tpShowFeedback(pct){
-  let pool=pct===100?TP_FB.perfect:pct>=80?TP_FB.great:pct>=50?TP_FB.ok:TP_FB.poor;
-  const f=pool[Math.floor(Math.random()*pool.length)];
-  const n=pct===100?5:pct>=80?4:pct>=60?3:pct>=40?2:1;
-  const stars=[...Array(5)].map((_,i)=>`<span class="${i<n?'tp-star-on':'tp-star'}">★</span>`).join('');
-  const card=document.getElementById('tp-feedback-card');if(!card)return;
-  card.innerHTML=`<div class="tp-fb-emoji">${f.e}</div><div class="tp-fb-title">${f.t}</div><div class="tp-fb-stars">${stars}</div><div class="tp-fb-msg">${f.m}</div>
-    <div class="tp-fb-stats">
-      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:#1D9E75">${tpCorrect}</span><span class="tp-fb-stat-lbl">goed</span></div>
-      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:#D85A30">${tpErrors}</span><span class="tp-fb-stat-lbl">foutjes</span></div>
-      <div class="tp-fb-stat"><span class="tp-fb-stat-num" style="color:var(--accent)">${pct}%</span><span class="tp-fb-stat-lbl">score</span></div>
-    </div>
-    <button class="tp-fb-btn" onclick="tpStartLesson()">🎯 Nog een oefening!</button>`;
-  card.style.display='block';card.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function tpHandleKey(e){
-  if(document.getElementById('typen-root')?.style.display==='none')return;
-  if(tpPos>=tpWords.length)return;
-  e.preventDefault();
-  const typed=e.key===' '?' ':(e.key.length===1?e.key:null);if(!typed)return;
-  const expected=tpWords[tpPos];
-  if(typed.toLowerCase()===expected.toLowerCase()){
-    tpFlashKey(expected.toLowerCase(),true);tpUpdateChar(tpPos,'tp-char-done');
-    tpCorrect++;tpStreak++;tpPos++;
-    if(tpPos>=tpWords.length){
-      tpUpdateStats();tpResetHands();Object.values(tpKeyEls).forEach(k=>k.classList.remove('tp-active'));
-      const fh=document.getElementById('tp-finger-hint');if(fh)fh.textContent='';
-      tpShowFeedback(Math.round(tpCorrect/(tpCorrect+tpErrors)*100));
-    } else {tpUpdateChar(tpPos,'tp-char-active');tpHighlightActive();}
-  } else {tpFlashKey(expected.toLowerCase(),false);tpErrors++;tpStreak=0;}
-  tpUpdateStats();
-}
 
 // ════════════════════════════════════════════════════════
 // INIT
