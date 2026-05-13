@@ -373,6 +373,17 @@
     .ty-legend-dot{width:10px;height:10px;border-radius:50%;}
     @media(max-width:480px){.ty-key{min-width:26px;height:28px;font-size:9px;}.ty-key.ty-space{min-width:100px;}.ty-keyboard{padding:6px 4px;}}
 
+    /* ════ Foutenrapport ════ */
+    .fr-blok{background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;border:1px solid var(--surface3);}
+    .fr-blok-titel{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:8px;}
+    .fr-tabel-wrap{overflow-x:auto;}
+    .fr-tabel{width:100%;border-collapse:collapse;font-size:13px;}
+    .fr-tabel th{background:var(--surface3);color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:6px 8px;text-align:left;border-bottom:1px solid var(--surface3);}
+    .fr-tabel td{padding:7px 8px;border-bottom:1px solid var(--surface3);color:var(--tx);}
+    .fr-tabel tr:last-child td{border-bottom:none;}
+    .fr-fout{color:#E05252;font-weight:500;}
+    .fr-juist{color:#27A066;font-weight:500;}
+
     /* Sticky volgende knop */
     .sticky-next{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:12px 16px;background:var(--surface);border-top:1px solid var(--surface3);display:flex;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.2);animation:slideUp 0.2s ease;}
     .sticky-next .t-feedback{margin:0;padding:8px 12px;flex:1;font-size:13px;}
@@ -449,6 +460,7 @@
       <div class="header-btns">
         <button class="icon-btn active" id="themebtn" onclick="toggleTheme()" title="Thema">☀️</button>
         <button class="icon-btn" id="mutebtn" onclick="toggleMute()" title="Geluid">🔊</button>
+        <button class="icon-btn" onclick="openFoutenRapport()" title="Foutenrapport">📊</button>
         <button class="icon-btn" id="adminbtn" onclick="openAdmin()" title="Beheer">🔒</button>
       </div>
     </div>
@@ -502,6 +514,16 @@
         <button class="modal-close" onclick="closeAdmin()">✕</button>
       </div>
       <div id="admin-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="fouten-overlay" style="display:none" onclick="if(event.target===this)closeFoutenRapport()">
+    <div class="modal" style="max-width:700px;">
+      <div class="modal-header">
+        <span class="modal-title">📊 Foutenrapport</span>
+        <button class="modal-close" onclick="closeFoutenRapport()">✕</button>
+      </div>
+      <div id="fouten-content" style="padding:12px 4px 4px;max-height:65vh;overflow-y:auto;"></div>
     </div>
   </div>
 
@@ -578,7 +600,7 @@ const HEROES=[
 ];
 function applyTheme(id){document.body.setAttribute('data-hero',id);}
 let cfg={hero:HEROES[0],mode:'normaal',bewerkingen:['keer','plus','min','deel'],count:10,timer:0,cijfers:[0,1,2,3,4,5,6,7,8,9,10]};
-let st={sums:[],cur:0,score:0,res:[],streak:0,maxStreak:0,ti:null,tl:0,input:'',locked:false,curAns:0,autoT:null,schoolStart:0,schoolInterval:null,schoolElapsed:0};
+let st={sums:[],cur:0,score:0,res:[],streak:0,maxStreak:0,ti:null,tl:0,input:'',locked:false,curAns:0,autoT:null,schoolStart:0,schoolInterval:null,schoolElapsed:0,wrongAnswers:{}};
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
@@ -598,7 +620,7 @@ function genSumsForBew(bew,cij,count){
 }
 function genSums(count){
   const cij=cfg.cijfers.length>0?cfg.cijfers:[0,1,2,3,4,5,6,7,8,9,10];
-  const bews=cfg.mode==='school'?['keer','deel']:cfg.bewerkingen;
+  const bews=cfg.bewerkingen.length>0?cfg.bewerkingen:['plus','min','keer','deel'];
   if(bews.length===1)return genSumsForBew(bews[0],cij,count);
   const perBew=Math.ceil(count/bews.length);
   let pool=[];
@@ -732,6 +754,7 @@ function revealOk(){
 }
 function revealWrong(msg){
   st.locked=true;st.res[st.cur]='no';st.streak=0;snd('no');
+  st.wrongAnswers[st.cur]=st.input||'?';
   document.getElementById('fb').innerHTML=msg;document.getElementById('fb').className='fb no';
   const d=document.getElementById('adisp');if(d)d.classList.add('no-flash');
   disableNumpad();startAutoNext();
@@ -749,6 +772,17 @@ function nextQ(){
 function showEnd(){
   clearTimeout(st.autoT);clearInterval(st.schoolInterval);
   const s=st.score,t=cfg.mode==='school'?50:cfg.count,pct=Math.round(s/t*100);
+
+  // Sla fouten op
+  const wrongSums=[];
+  st.sums.forEach((sum,i)=>{
+    if(st.res[i]==='no'){
+      const q=sumToQ(sum);
+      wrongSums.push({vraag:q.q, fout:st.wrongAnswers?.[i]??'?', juist:String(q.ans)});
+      addFout('rekenen', q.q, st.wrongAnswers?.[i]??'?', String(q.ans));
+    }
+  });
+
   let endHtml='';
   if(cfg.mode==='school'){
     const elapsed=st.schoolElapsed,m=Math.floor(elapsed/60),sec=elapsed%60,timeStr=m+':'+(sec<10?'0':'')+sec;
@@ -771,7 +805,13 @@ function showEnd(){
       '<div class="score-card-end"><div class="score-line">Score</div><span class="score-big">'+s+'/'+t+' ('+pct+'%)</span>'+
       '<div class="score-line" style="margin-top:6px">🔥 Langste reeks: '+st.maxStreak+'</div></div>';
   }
-  document.getElementById('screen').innerHTML='<div class="panel">'+endHtml+
+
+  // Foutenrapport sectie
+  const foutenHtml = wrongSums.length>0
+    ? '<div style="margin-top:14px;">'+renderFoutenRapportRekenen(wrongSums)+'</div>'
+    : '<p style="text-align:center;color:#27A066;font-size:13px;margin-top:10px;">✅ Geen fouten gemaakt!</p>';
+
+  document.getElementById('screen').innerHTML='<div class="panel">'+endHtml+foutenHtml+
     '<button class="again-btn" onclick="showSetup()">🔄 Opnieuw spelen</button></div>';
 }
 
@@ -991,7 +1031,13 @@ function checkTaalQ(){
   const dist=ok?0:levenshtein(raw,cn);
   const bijna=!ok&&dist<=2;
   tQAnswered=true;input.disabled=true;input.classList.add(ok?'correct':'wrong');
-  if(ok){tQScore.good++;tQScore.streak++;}else{tQScore.bad++;tQScore.streak=0;}
+  if(ok){tQScore.good++;tQScore.streak++;}else{tQScore.bad++;tQScore.streak=0;
+    const r2=tCurrentQ.row;
+    addFout('werkwoord',
+      `${COL_SHORT[tCurrentQ.givenCol]}: "${r2[tCurrentQ.givenCol]}" → ${COL_SHORT[tCurrentQ.askCol]}?`,
+      raw, correct,
+      `${r2[0]}: stam=${r2[1]}, VT=${r2[2]}, VD=${r2[3]}`);
+  }
   updateTaalScore();
   const r=tCurrentQ.row;
   const fullRow=`<div style="margin-top:6px;font-size:11px;opacity:0.85;"><em>${r[0]}</em> → stam: <em>${r[1]}</em> · VT: <em>${r[2]}</em> · VD: <em>${r[3]}</em></div>`;
@@ -1350,7 +1396,12 @@ function checkWoordenQ(btn){
   if(wqAnswered)return;
   wqAnswered=true;
   const ok=given===correct;
-  if(ok)wqScore.good++;else wqScore.bad++;
+  if(ok)wqScore.good++;else{wqScore.bad++;
+    addFout('woordenschat',
+      wqDir==='woordBetekenis'?`Betekenis van: "${wqCurrent[0]}"?`:`Woord voor: "${wqCurrent[1]}"?`,
+      given, correct,
+      `Thema ${wqCurrent[2]||''}`);
+  }
   const tot=wqScore.good+wqScore.bad;
   const gEl=document.getElementById('wsc-good'),bEl=document.getElementById('wsc-bad');
   if(gEl)gEl.textContent=wqScore.good;if(bEl)bEl.textContent=wqScore.bad;
@@ -1486,7 +1537,12 @@ function checkZegswijzeQ(btn){
   if(zqAnswered)return;
   zqAnswered=true;
   const ok=given===correct;
-  if(ok)zqScore.good++;else zqScore.bad++;
+  if(ok)zqScore.good++;else{zqScore.bad++;
+    addFout('zegswijze',
+      zqDir==='zegswijzeBetekenis'?`Betekenis van: "${zqCurrent[0]}"?`:`Zegswijze voor: "${zqCurrent[1]}"?`,
+      given, correct,
+      `Thema ${zqCurrent[2]||''}`);
+  }
   const gEl=document.getElementById('zsc-good'),bEl=document.getElementById('zsc-bad');
   if(gEl)gEl.textContent=zqScore.good;if(bEl)bEl.textContent=zqScore.bad;
   document.querySelectorAll('#zq-options .mc-option').forEach(b=>{
@@ -2110,7 +2166,7 @@ function handleMkResult(ok, correct){
 
 
 // Storage keys
-const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswijzen'};
+const SK = {pw:'lh_pw', ww:'lh_ww', woorden:'lh_woorden', zegswijzen:'lh_zegswijzen', fouten:'lh_fouten'};
 
 // Load custom data from localStorage (falls back to built-in)
 function loadData(){
@@ -2507,6 +2563,106 @@ function tyAddKeyListener(){
   });
 }
 
+
+
+// ════════════════════════════════════════════════════════
+// FOUTENRAPPORT
+// ════════════════════════════════════════════════════════
+
+const MAX_FOUTEN = 200; // max opgeslagen fouten
+
+function loadFouten(){
+  try{ return JSON.parse(localStorage.getItem(SK.fouten)||'[]'); }catch(e){return[];}
+}
+function saveFouten(fouten){
+  localStorage.setItem(SK.fouten, JSON.stringify(fouten.slice(-MAX_FOUTEN)));
+}
+function addFout(type, vraag, foutAntwoord, juistAntwoord, extra){
+  const fouten = loadFouten();
+  fouten.push({
+    type,       // 'rekenen' | 'werkwoord' | 'woordenschat' | 'zegswijze'
+    vraag,
+    fout: foutAntwoord,
+    juist: juistAntwoord,
+    extra: extra||'',
+    datum: new Date().toLocaleDateString('nl-BE'),
+    ts: Date.now()
+  });
+  saveFouten(fouten);
+}
+function clearFouten(type){
+  if(type){
+    saveFouten(loadFouten().filter(f=>f.type!==type));
+  } else {
+    localStorage.removeItem(SK.fouten);
+  }
+}
+
+// ── Foutenrapport HTML na rekensessie ──
+function renderFoutenRapportRekenen(wrongSums){
+  if(!wrongSums||wrongSums.length===0)
+    return '<p style="color:var(--tx2);font-size:13px;text-align:center;margin-top:6px;">✅ Geen fouten gemaakt!</p>';
+  return `
+    <div class="fr-blok">
+      <div class="fr-blok-titel">❌ Gemaakte fouten (${wrongSums.length})</div>
+      <div class="fr-tabel-wrap">
+        <table class="fr-tabel">
+          <thead><tr><th>Som</th><th>Jouw antwoord</th><th>Juist antwoord</th></tr></thead>
+          <tbody>${wrongSums.map(f=>`<tr><td><strong>${f.vraag}</strong></td><td class="fr-fout">${f.fout}</td><td class="fr-juist">${f.juist}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+// ── Globaal foutenrapport tabblad ──
+function renderFoutenTab(){
+  const el = document.getElementById('fouten-content'); if(!el)return;
+  const fouten = loadFouten();
+  const types = ['rekenen','werkwoord','woordenschat','zegswijze'];
+  const typeLabels = {rekenen:'🔢 Rekenen', werkwoord:'📝 Werkwoorden', woordenschat:'📖 Woordenschat', zegswijze:'💬 Zegswijzen'};
+
+  if(fouten.length===0){
+    el.innerHTML='<div style="text-align:center;padding:2rem;color:var(--tx2);">🎉 Geen fouten opgeslagen! Maak eerst een oefening.</div>';
+    return;
+  }
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <span style="font-size:13px;color:var(--tx2);">${fouten.length} fout${fouten.length!==1?'en':''} opgeslagen</span>
+    <button onclick="clearFouten();renderFoutenTab();" style="padding:5px 12px;border-radius:12px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;">🗑 Alles wissen</button>
+  </div>`;
+
+  types.forEach(type=>{
+    const groep = fouten.filter(f=>f.type===type).reverse();
+    if(groep.length===0)return;
+    html += `<div class="fr-blok">
+      <div class="fr-blok-titel" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>${typeLabels[type]} (${groep.length})</span>
+        <button onclick="clearFouten('${type}');renderFoutenTab();" style="padding:3px 10px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:11px;cursor:pointer;">Wissen</button>
+      </div>
+      <div class="fr-tabel-wrap"><table class="fr-tabel">
+        <thead><tr><th>Datum</th><th>Vraag</th><th>Jouw antwoord</th><th>Juist antwoord</th>${type!=='rekenen'?'<th>Info</th>':''}</tr></thead>
+        <tbody>${groep.slice(0,50).map(f=>`<tr>
+          <td style="white-space:nowrap;color:var(--tx2);font-size:11px;">${f.datum}</td>
+          <td><strong>${f.vraag}</strong></td>
+          <td class="fr-fout">${f.fout||'—'}</td>
+          <td class="fr-juist">${f.juist}</td>
+          ${type!=='rekenen'?`<td style="font-size:11px;color:var(--tx2);">${f.extra||''}</td>`:''}
+        </tr>`).join('')}</tbody>
+      </table></div>
+      ${groep.length>50?`<p style="font-size:12px;color:var(--tx2);text-align:center;margin-top:6px;">... en nog ${groep.length-50} meer</p>`:''}
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function openFoutenRapport(){
+  document.getElementById('fouten-overlay').style.display='flex';
+  renderFoutenTab();
+}
+function closeFoutenRapport(){
+  document.getElementById('fouten-overlay').style.display='none';
+}
 
 function openAdmin(){
   document.getElementById('admin-overlay').style.display='flex';
