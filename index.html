@@ -373,6 +373,32 @@
     .ty-legend-dot{width:10px;height:10px;border-radius:50%;}
     @media(max-width:480px){.ty-key{min-width:26px;height:28px;font-size:9px;}.ty-key.ty-space{min-width:100px;}.ty-keyboard{padding:6px 4px;}}
 
+    /* ════ Profielen ════ */
+    .profiel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+    .profiel-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);cursor:pointer;transition:all 0.15s;position:relative;}
+    .profiel-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+    .profiel-card.actief{border-color:var(--accent);background:rgba(124,111,255,0.1);box-shadow:0 0 0 3px rgba(124,111,255,0.2);}
+    .profiel-card.leeg{border-style:dashed;opacity:0.6;}
+    .profiel-card.leeg:hover{opacity:1;}
+    .profiel-avatar{font-size:2.2rem;line-height:1;}
+    .profiel-naam{font-size:13px;font-weight:600;color:var(--tx);text-align:center;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .profiel-badge{font-size:10px;color:var(--tx2);background:var(--surface3);padding:2px 6px;border-radius:8px;}
+    .profiel-actief-badge{position:absolute;top:6px;right:6px;font-size:10px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:8px;font-weight:600;}
+    .profiel-edit-form{background:var(--surface2);border-radius:var(--radius-sm);padding:14px;margin-top:8px;}
+    .profiel-avatar-keuze{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
+    .profiel-avatar-opt{font-size:1.8rem;padding:6px;border-radius:8px;border:2px solid transparent;cursor:pointer;transition:all 0.1s;}
+    .profiel-avatar-opt:hover{background:var(--surface3);}
+    .profiel-avatar-opt.on{border-color:var(--accent);background:rgba(124,111,255,0.12);}
+    .rapport-tabel{width:100%;border-collapse:collapse;font-size:13px;}
+    .rapport-tabel th{background:var(--surface2);color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:7px 10px;text-align:left;border-bottom:1px solid var(--surface3);}
+    .rapport-tabel td{padding:8px 10px;border-bottom:1px solid var(--surface3);color:var(--tx);}
+    .rapport-tabel tr:last-child td{border-bottom:none;}
+    .rapport-stat-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+    .rapport-stat{flex:1;min-width:80px;background:var(--surface2);border-radius:var(--radius-sm);padding:10px;text-align:center;border:1px solid var(--surface3);}
+    .rapport-stat-num{font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1;}
+    .rapport-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;margin-top:2px;}
+    @media(max-width:480px){.profiel-grid{grid-template-columns:repeat(2,1fr);}}
+
     /* ════ Foutenrapport ════ */
     .fr-blok{background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;border:1px solid var(--surface3);}
     .fr-blok-titel{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:8px;}
@@ -425,6 +451,13 @@
     .admin-reset-btn:hover{border-color:var(--no);color:var(--no);}
     .ww-cols{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;}
 
+    /* ── Leerjaar selector ── */
+    .leerjaar-selector{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .leerjaar-lbl{font-size:13px;color:var(--tx2);font-weight:500;}
+    .leerjaar-btn{padding:6px 16px;border-radius:20px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;font-weight:600;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
+    .leerjaar-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .leerjaar-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+
     /* ── Multiple choice ── */
     .mc-option{width:100%;display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);cursor:pointer;text-align:left;font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;transition:all 0.15s;line-height:1.4;}
     .mc-option:hover:not(:disabled){border-color:var(--accent);background:var(--surface3);}
@@ -458,6 +491,7 @@
         </select>
       </div>
       <div class="header-btns">
+        <button class="icon-btn" id="profiel-btn" onclick="openProfielKeuze()" title="Profiel wisselen" style="font-size:18px;">👤</button>
         <button class="icon-btn active" id="themebtn" onclick="toggleTheme()" title="Thema">☀️</button>
         <button class="icon-btn" id="mutebtn" onclick="toggleMute()" title="Geluid">🔊</button>
         <button class="icon-btn" onclick="openFoutenRapport()" title="Foutenrapport">📊</button>
@@ -494,6 +528,12 @@
 
     <div id="taal-root" style="display:none;width:100%">
       <div class="panel">
+        <div class="leerjaar-selector">
+          <span class="leerjaar-lbl">📚 Leerjaar:</span>
+          <button class="leerjaar-btn" id="lj-3" onclick="setLeerjaar(3)">3de</button>
+          <button class="leerjaar-btn on" id="lj-4" onclick="setLeerjaar(4)">4de</button>
+          <button class="leerjaar-btn" id="lj-5" onclick="setLeerjaar(5)">5de</button>
+        </div>
         <div class="taal-subtabs">
           <button class="taal-subtab on" id="tst-tabel" onclick="taalTab('tabel')">Werkwoorden</button>
           <button class="taal-subtab" id="tst-woorden" onclick="taalTab('woorden')">Woordenschat</button>
@@ -517,7 +557,15 @@
     </div>
   </div>
 
-  <div class="modal-overlay" id="fouten-overlay" style="display:none" onclick="if(event.target===this)closeFoutenRapport()">
+  <div class="modal-overlay" id="profiel-overlay" style="display:none" onclick="if(event.target===this&&huidigProfiel)closeProfiel()">
+    <div class="modal" style="max-width:500px;">
+      <div class="modal-header">
+        <span class="modal-title" id="profiel-modal-titel">👤 Wie ben jij?</span>
+        <button class="modal-close" id="profiel-close-btn" onclick="closeProfiel()" style="display:none">✕</button>
+      </div>
+      <div id="profiel-content" style="padding:12px 4px 4px;"></div>
+    </div>
+  </div>
     <div class="modal" style="max-width:700px;">
       <div class="modal-header">
         <span class="modal-title">📊 Foutenrapport</span>
@@ -773,6 +821,9 @@ function showEnd(){
   clearTimeout(st.autoT);clearInterval(st.schoolInterval);
   const s=st.score,t=cfg.mode==='school'?50:cfg.count,pct=Math.round(s/t*100);
 
+  // Sla statistieken op per profiel
+  trackOefening('rekenen', s, t-s);
+
   // Sla fouten op
   const wrongSums=[];
   st.sums.forEach((sum,i)=>{
@@ -826,6 +877,240 @@ const COL_SHORT=["werkwoord","stam","verleden tijd","voltooid deelwoord"];
 // ════════════════════════════════════════════════════════
 // TAAL STATE
 // ════════════════════════════════════════════════════════
+// ── Leerjaar data ──
+let huidigLeerjaar = 4;
+
+// Werkwoorden per leerjaar — 4de is de bestaande W array
+const W_PER_LJ = {
+  3: [
+    // Regelmatige werkwoorden 3de leerjaar
+    ["bakken","bak","bakte","gebakken",false],
+    ["bellen","bel","belde","gebeld",false],
+    ["dansen","dans","danste","gedanst",false],
+    ["duwen","duw","duwde","geduwd",false],
+    ["fietsen","fiets","fietste","gefietst",false],
+    ["filmen","film","filmde","gefilmd",false],
+    ["giechelen","giechel","giechelde","gegiecheld",false],
+    ["gooien","gooi","gooide","gegooid",false],
+    ["halen","haal","haalde","gehaald",false],
+    ["helpen","help","hielp","geholpen",true],
+    ["horen","hoor","hoorde","gehoord",false],
+    ["huilen","huil","huilde","gehuild",false],
+    ["koken","kook","kookte","gekookt",false],
+    ["kopen","koop","kocht","gekocht",true],
+    ["lachen","lach","lachte","gelachen",false],
+    ["leren","leer","leerde","geleerd",false],
+    ["lopen","loop","liep","gelopen",true],
+    ["luisteren","luister","luisterde","geluisterd",false],
+    ["maken","maak","maakte","gemaakt",false],
+    ["pakken","pak","pakte","gepakt",false],
+    ["plakken","plak","plakte","geplakt",false],
+    ["praten","praat","praatte","gepraat",false],
+    ["rennen","ren","rende","gerend",false],
+    ["rijden","rijd","reed","gereden",true],
+    ["roepen","roep","riep","geroepen",true],
+    ["slapen","slaap","sliep","geslapen",true],
+    ["spelen","speel","speelde","gespeeld",false],
+    ["springen","spring","sprong","gesprongen",true],
+    ["tekenen","teken","tekende","getekend",false],
+    ["tikken","tik","tikte","getikt",false],
+    ["vallen","val","viel","gevallen",true],
+    ["vinden","vind","vond","gevonden",true],
+    ["vragen","vraag","vroeg","gevraagd",true],
+    ["wachten","wacht","wachtte","gewacht",false],
+    ["wandelen","wandel","wandelde","gewandeld",false],
+    ["werken","werk","werkte","gewerkt",false],
+    ["wonen","woon","woonde","gewoond",false],
+    ["schrijven","schrijf","schreef","geschreven",true],
+    ["zijn","ben","was","geweest",true],
+    ["zingen","zing","zong","gezongen",true],
+    ["zitten","zit","zat","gezeten",true],
+    ["zoeken","zoek","zocht","gezocht",true],
+    ["zwemmen","zwem","zwom","gezwommen",true],
+    ["komen","kom","kwam","gekomen",true],
+    ["gaan","ga","ging","gegaan",true],
+    ["zien","zie","zag","gezien",true],
+    ["doen","doe","deed","gedaan",true],
+    ["eten","eet","at","gegeten",true],
+    ["geven","geef","gaf","gegeven",true],
+    ["nemen","neem","nam","genomen",true],
+  ],
+  4: null, // wordt ingevuld vanuit de bestaande W array
+  5: [
+    // Uitgebreidere lijst voor 5de leerjaar
+    ["aanvaarden","aanvaard","aanvaardde","aanvaard",false],
+    ["adviseren","adviseer","adviseerde","geadviseerd",false],
+    ["analyseren","analyseer","analyseerde","geanalyseerd",false],
+    ["argumenteren","argumenteer","argumenteerde","geargumenteerd",false],
+    ["beargumenteren","beargumenteer","beargumenteerde","beargumenteerd",false],
+    ["beoordelen","beoordeel","beoordeelde","beoordeeld",false],
+    ["beschrijven","beschrijf","beschreef","beschreven",true],
+    ["besluiten","besluit","besloot","besloten",true],
+    ["bewijzen","bewijs","bewees","bewezen",true],
+    ["bijdragen","draag bij","droeg bij","bijgedragen",true],
+    ["concluderen","concludeer","concludeerde","geconcludeerd",false],
+    ["controleren","controleer","controleerde","gecontroleerd",false],
+    ["debatteren","debatteer","debatteerde","gedebatteerd",false],
+    ["definiëren","definieer","definieerde","gedefinieerd",false],
+    ["formuleren","formuleer","formuleerde","geformuleerd",false],
+    ["herkennen","herken","herkende","herkend",false],
+    ["illustreren","illustreer","illustreerde","geïllustreerd",false],
+    ["interpreteren","interpreteer","interpreteerde","geïnterpreteerd",false],
+    ["inventariseren","inventariseer","inventariseerde","geïnventariseerd",false],
+    ["motiveren","motiveer","motiveerde","gemotiveerd",false],
+    ["onderscheiden","onderscheid","onderscheidde","onderscheiden",false],
+    ["onderzoeken","onderzoek","onderzocht","onderzocht",true],
+    ["ontdekken","ontdek","ontdekte","ontdekt",false],
+    ["ontwikkelen","ontwikkel","ontwikkelde","ontwikkeld",false],
+    ["oplossen","los op","loste op","opgelost",false],
+    ["ordenen","orden","ordende","geordend",false],
+    ["presenteren","presenteer","presenteerde","gepresenteerd",false],
+    ["reageren","reageer","reageerde","gereageerd",false],
+    ["redeneren","redeneer","redeneerde","geredeneerd",false],
+    ["reflecteren","reflecteer","reflecteerde","gereflecteerd",false],
+    ["samenvatten","vat samen","vatte samen","samengevat",false],
+    ["selecteren","selecteer","selecteerde","geselecteerd",false],
+    ["slagen","slaag","slaagde","geslaagd",false],
+    ["streven","streef","streefde","gestreefd",false],
+    ["structureren","structureer","structureerde","gestructureerd",false],
+    ["toepassen","pas toe","paste toe","toegepast",false],
+    ["uitleggen","leg uit","legde uit","uitgelegd",false],
+    ["verdedigen","verdedig","verdedigde","verdedigd",false],
+    ["vergelijken","vergelijk","vergeleek","vergeleken",true],
+    ["verklaren","verklaar","verklaarde","verklaard",false],
+    ["verwoorden","verwoord","verwoordde","verwoord",false],
+    ["voorstellen","stel voor","stelde voor","voorgesteld",false],
+    ["waarderen","waardeer","waardeerde","gewaardeerd",false],
+    ["weergeven","geef weer","gaf weer","weergegeven",true],
+    ["stijgen","stijg","steeg","gestegen",true],
+    ["dalen","daal","daalde","gedaald",false],
+    ["bijhouden","houd bij","hield bij","bijgehouden",true],
+    ["beïnvloeden","beïnvloed","beïnvloedde","beïnvloed",false],
+    ["vermoeden","vermoed","vermoedde","vermoed",false],
+    ["herinneren","herinner","herinnerde","herinnerd",false],
+    ["bewonderen","bewonder","bewonderde","bewonderd",false],
+  ]
+};
+
+// Woordenschat per leerjaar
+const WOORDEN_PER_LJ = {
+  3: [
+    ["het avontuur","spannende belevenis",1],
+    ["bezig zijn","iets aan het doen zijn",1],
+    ["dichtbij","op kleine afstand",1],
+    ["de gebeurtenis","iets wat gebeurt",1],
+    ["het gevaar","iets dat schade kan brengen",1],
+    ["geweldig","heel goed, super",1],
+    ["handig","slim en snel werken",1],
+    ["het idee","wat je bedenkt",1],
+    ["kiezen","een keuze maken",1],
+    ["de mening","wat jij denkt over iets",1],
+    ["nieuwsgierig","graag meer willen weten",1],
+    ["opgewonden","heel blij en enthousiast",1],
+    ["plotseling","ineens, zonder waarschuwing",1],
+    ["rustig","kalm, niet druk",1],
+    ["verdrietig","triest, niet blij",1],
+    ["verwachten","denken dat iets zal gebeuren",2],
+    ["de boodschap","wat je moet onthouden of doorgeven",2],
+    ["dapper","moedig, niet bang",2],
+    ["eerlijk","de waarheid zeggen",2],
+    ["enthousiast","heel graag iets willen doen",2],
+    ["het geheim","iets wat niet iedereen mag weten",2],
+    ["gezellig","prettig samen zijn",2],
+    ["grappig","iets dat je doet lachen",2],
+    ["helpen","iemand ondersteunen",2],
+    ["jaloers","willen hebben wat een ander heeft",2],
+    ["knap","slim of mooi",2],
+    ["lief","aardig en vriendelijk",2],
+    ["de oplossing","antwoord op een probleem",2],
+    ["slim","snel begrijpen",2],
+    ["trots","blij zijn met jezelf of iemand anders",2],
+    ["vriendelijk","aardig tegen anderen",3],
+    ["het afscheid","dag zeggen voor lange tijd",3],
+    ["bang","een onplezierig gevoel van gevaar",3],
+    ["begrijpen","iets snappen",3],
+    ["de fantasie","dingen verzinnen die niet echt zijn",3],
+    ["herinneren","niet vergeten",3],
+    ["de humor","grappigheid",3],
+    ["ijverig","hard werken",3],
+    ["de legende","oud verhaal dat doorgegeven wordt",3],
+    ["moedig","dapper, niet bang",3],
+  ],
+  4: null, // bestaande WOORDEN array
+  5: [
+    ["abstract","niet concreet, moeilijk voor te stellen",1],
+    ["het argument","reden om iets te bewijzen",1],
+    ["authentiek","echt, niet nep",1],
+    ["betrouwbaar","iemand op wie je kunt rekenen",1],
+    ["de conclusie","besluit aan het einde van een redenering",1],
+    ["de context","de omstandigheden rond iets",1],
+    ["de contradictie","tegenstrijdigheid",1],
+    ["de criteria","de vereisten waaraan iets moet voldoen",1],
+    ["definiëren","de betekenis van iets omschrijven",1],
+    ["democratisch","waarbij iedereen mee beslist",1],
+    ["de doelstelling","wat je wil bereiken",2],
+    ["effectief","met goed resultaat",2],
+    ["de emancipatie","strijden voor gelijke rechten",2],
+    ["de empathie","inlevingsvermogen",2],
+    ["de ethiek","leer over goed en kwaad",2],
+    ["evolutie","geleidelijke verandering",2],
+    ["de hypothese","veronderstelling die je wil bewijzen",2],
+    ["de ideologie","stelsel van ideeën en opvattingen",2],
+    ["de invloed","effect op iets of iemand",2],
+    ["de kritische blik","nauwkeurig en oordelend bekijken",2],
+    ["de methodiek","manier van aanpak",3],
+    ["neutraal","geen kant kiezen",3],
+    ["de norm","wat als normaal of juist beschouwd wordt",3],
+    ["objectief","zonder eigen mening, op feiten gebaseerd",3],
+    ["de observatie","nauwkeurige waarneming",3],
+    ["de paradox","schijnbare tegenstrijdigheid",3],
+    ["de perceptie","manier waarop je iets waarneemt",3],
+    ["de perspectief","gezichtspunt, manier van kijken",3],
+    ["het principe","basisregel of beginsel",3],
+    ["de redenering","logische gedachtegang",3],
+    ["relativeren","iets minder groot of belangrijk maken",4],
+    ["de retoriek","kunst van het overtuigen",4],
+    ["de samenwerking","gezamenlijk werken aan een doel",4],
+    ["de strategie","plan om een doel te bereiken",4],
+    ["subjectief","gekleurd door eigen mening of gevoel",4],
+    ["de synthese","samenvatting van het belangrijkste",4],
+    ["de theorie","uitleg of verklaring van iets",4],
+    ["de tolerantie","verdraagzaamheid tegenover anderen",4],
+    ["de verantwoordelijkheid","plicht om voor iets te zorgen",4],
+    ["de visie","persoonlijke kijk op iets",4],
+  ]
+};
+
+// Zegswijzen per leerjaar
+const ZEGSWIJZEN_PER_LJ = {
+  3: [
+    ["ogen als schoteltjes","heel grote ogen van verbazing",1],
+    ["vlinders in je buik","zenuwachtig of verliefd zijn",1],
+    ["het regent pijpenstelen","het regent heel hard",1],
+    ["iets door de vingers zien","iets door de vingers zien, niet straffen",2],
+    ["met de deur in huis vallen","meteen ter zake komen",2],
+    ["de kat uit de boom kijken","afwachten wat er gebeurt",2],
+    ["iets op de lange baan schuiven","iets uitstellen",3],
+    ["twee vliegen in één klap slaan","twee dingen tegelijk oplossen",3],
+    ["iemand op zijn wenken bedienen","iemand alles geven wat hij wil",3],
+  ],
+  4: null, // bestaande ZEGSWIJZEN array
+  5: [
+    ["het hoofd boven water houden","in moeilijke tijden overeind blijven",1],
+    ["iemand het vuur aan de schenen leggen","iemand onder druk zetten",1],
+    ["de koe bij de horens vatten","een probleem direct aanpakken",1],
+    ["achter de schermen werken","onzichtbaar maar belangrijk werk doen",2],
+    ["het schip ingaan","slecht aflopen",2],
+    ["op twee gedachten hinken","niet kunnen kiezen tussen twee opties",2],
+    ["iets in het juiste perspectief zien","iets goed inschatten in verhouding",3],
+    ["een storm in een glas water","veel drukte om niets",3],
+    ["buiten de lijntjes kleuren","de regels niet volgen, origineel zijn",3],
+    ["het kind met het badwater weggooien","iets goeds weggooien samen met het slechte",4],
+    ["op rozen zitten","het heel goed hebben",4],
+    ["zijn gezicht redden","zijn waardigheid bewaren",4],
+  ]
+};
+
 let taalTabState='tabel', taalFilter='all', taalLevel=1;
 let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null;
 let invulFilter='all', invulData=[];
@@ -833,6 +1118,26 @@ let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='z
 let zegswijzenThema=0;
 
 let taalInited=false;
+
+function getActiveW(){ return huidigLeerjaar===4 ? W : (W_PER_LJ[huidigLeerjaar]||W); }
+function getActiveWOORDEN(){ return huidigLeerjaar===4 ? WOORDEN : (WOORDEN_PER_LJ[huidigLeerjaar]||WOORDEN); }
+function getActiveZEGSWIJZEN(){ return huidigLeerjaar===4 ? ZEGSWIJZEN : (ZEGSWIJZEN_PER_LJ[huidigLeerjaar]||ZEGSWIJZEN); }
+
+function setLeerjaar(lj){
+  huidigLeerjaar = lj;
+  [3,4,5].forEach(n=>{
+    const b=document.getElementById('lj-'+n);
+    if(b)b.classList.toggle('on',n===lj);
+  });
+  // Reset quiz/invul state
+  tQScore={good:0,bad:0,streak:0}; tQTotal=0; tCurrentQ=null;
+  wqScore={good:0,bad:0}; wqAnswered=false;
+  zqScore={good:0,bad:0}; zqAnswered=false;
+  woordenThema=0; zegswijzenThema=0;
+  // Herlaad huidige tab
+  taalTab(taalTabState);
+}
+
 function initTaalRoot(){
   if(!taalInited){taalInited=true;taalTab('tabel');}
 }
@@ -856,7 +1161,7 @@ function setTaalFilter(f){
 }
 function getTaalFiltered(){
   const q=(document.getElementById('t-search')||{value:''}).value.toLowerCase();
-  return W.filter(r=>{
+  return getActiveW().filter(r=>{
     const m=r[0].includes(q)||r[1].includes(q)||r[2].includes(q)||r[3].includes(q);
     if(!m)return false;
     if(taalFilter==='onr')return r[4];
@@ -997,7 +1302,7 @@ function updateTaalScore(){
   if(s)s.textContent=tQScore.streak;
 }
 function pickTaalQ(){
-  let pool=taalLevel===1?W.filter(w=>!w[4]):taalLevel===2?W.filter(w=>w[4]):W;
+  let pool=taalLevel===1?getActiveW().filter(w=>!w[4]):taalLevel===2?getActiveW().filter(w=>w[4]):getActiveW();
   const row=pool[Math.floor(Math.random()*pool.length)];
   let givenCol,askCol,reverse=false;
   if(taalLevel===1){givenCol=0;askCol=[1,2,3][Math.floor(Math.random()*3)];}
@@ -1038,6 +1343,7 @@ function checkTaalQ(){
       raw, correct,
       `${r2[0]}: stam=${r2[1]}, VT=${r2[2]}, VD=${r2[3]}`);
   }
+  trackOefening('werkwoord', ok?1:0, ok?0:1);
   updateTaalScore();
   const r=tCurrentQ.row;
   const fullRow=`<div style="margin-top:6px;font-size:11px;opacity:0.85;"><em>${r[0]}</em> → stam: <em>${r[1]}</em> · VT: <em>${r[2]}</em> · VD: <em>${r[3]}</em></div>`;
@@ -1058,7 +1364,7 @@ function setInvulFilter(f){
   generateInvul();
 }
 function generateInvul(){
-  let pool=invulFilter==='onr'?W.filter(w=>w[4]):invulFilter==='reg'?W.filter(w=>!w[4]):W;
+  let pool=invulFilter==='onr'?getActiveW().filter(w=>w[4]):invulFilter==='reg'?getActiveW().filter(w=>!w[4]):getActiveW();
   const countEl=document.getElementById('invul-count');
   const count=Math.min(parseInt(countEl?countEl.value:20),pool.length);
   const shuffled=[...pool].sort(()=>Math.random()-0.5).slice(0,count);
@@ -1299,7 +1605,7 @@ function renderWoordenContent(){
   const el=document.getElementById('woorden-content');if(!el)return;
   if(!woordenQuizMode){
     const q=(document.getElementById('w-search')||{value:''}).value||woordenSearch;
-    const filtered=WOORDEN.filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
+    const filtered=getActiveWOORDEN().filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
     el.innerHTML='<input class="t-search" type="text" id="w-search" placeholder="🔍 Zoek een woord of betekenis..." value="'+q+'" oninput="woordenSearch=this.value;renderWoordenContent()" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Woord</th><th>Betekenis</th></tr></thead>'+
@@ -1335,9 +1641,9 @@ function setWqDir(d){
   loadWoordenQ();
 }
 function getWoordenDistractors(correct, col){
-  const pool=WOORDEN.filter(r=>r!==wqCurrent&&(woordenThema===0||r[2]===woordenThema));
+  const pool=getActiveWOORDEN().filter(r=>r!==wqCurrent&&(woordenThema===0||r[2]===woordenThema));
   // If not enough in thema, add from all
-  const allPool=pool.length>=3?pool:WOORDEN.filter(r=>r!==wqCurrent);
+  const allPool=pool.length>=3?pool:getActiveWOORDEN().filter(r=>r!==wqCurrent);
   const shuffled=[...pool].sort(()=>Math.random()-0.5);
   const distractors=[];
   for(const r of shuffled){
@@ -1348,8 +1654,8 @@ function getWoordenDistractors(correct, col){
 }
 function loadWoordenQ(){
   wqAnswered=false;
-  const wPool=woordenThema===0?WOORDEN:WOORDEN.filter(r=>r[2]===woordenThema);
-  const wSrc=wPool.length>0?wPool:WOORDEN;
+  const wPool=woordenThema===0?getActiveWOORDEN():getActiveWOORDEN().filter(r=>r[2]===woordenThema);
+  const wSrc=wPool.length>0?wPool:getActiveWOORDEN();
   wqCurrent=wSrc[Math.floor(Math.random()*wSrc.length)];
   const askCol=wqDir==='woordBetekenis'?1:0;
   const givenCol=wqDir==='woordBetekenis'?0:1;
@@ -1402,6 +1708,7 @@ function checkWoordenQ(btn){
       given, correct,
       `Thema ${wqCurrent[2]||''}`);
   }
+  trackOefening('woordenschat', ok?1:0, ok?0:1);
   const tot=wqScore.good+wqScore.bad;
   const gEl=document.getElementById('wsc-good'),bEl=document.getElementById('wsc-bad');
   if(gEl)gEl.textContent=wqScore.good;if(bEl)bEl.textContent=wqScore.bad;
@@ -1453,7 +1760,7 @@ function renderZegswijzenContent(){
   const el=document.getElementById('zegswijzen-content');if(!el)return;
   if(!zegswijzenQuizMode){
     const q=(document.getElementById('z-search')||{value:''}).value||'';
-    const filtered=ZEGSWIJZEN.filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
+    const filtered=getActiveZEGSWIJZEN().filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
     el.innerHTML='<input class="t-search" type="text" id="z-search" placeholder="🔍 Zoek een zegswijze..." value="'+q+'" oninput="renderZegswijzenContent()" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Zegswijze</th><th>Betekenis</th></tr></thead>'+
@@ -1489,8 +1796,8 @@ function setZqDir(d){
   loadZegswijzeQ();
 }
 function getZegswijzenDistractors(correct, col){
-  const tPool=ZEGSWIJZEN.filter(r=>r!==zqCurrent&&(zegswijzenThema===0||r[2]===zegswijzenThema));
-  const pool=tPool.length>=3?tPool:ZEGSWIJZEN.filter(r=>r!==zqCurrent);
+  const tPool=getActiveZEGSWIJZEN().filter(r=>r!==zqCurrent&&(zegswijzenThema===0||r[2]===zegswijzenThema));
+  const pool=tPool.length>=3?tPool:getActiveZEGSWIJZEN().filter(r=>r!==zqCurrent);
   const shuffled=[...pool].sort(()=>Math.random()-0.5);
   const distractors=[];
   for(const r of shuffled){
@@ -1501,7 +1808,7 @@ function getZegswijzenDistractors(correct, col){
 }
 function loadZegswijzeQ(){
   zqAnswered=false;
-  const zPool=zegswijzenThema===0?ZEGSWIJZEN:ZEGSWIJZEN.filter(r=>r[2]===zegswijzenThema);
+  const zPool=zegswijzenThema===0?getActiveZEGSWIJZEN():getActiveZEGSWIJZEN().filter(r=>r[2]===zegswijzenThema);
   const zSrc=zPool.length>0?zPool:ZEGSWIJZEN;
   zqCurrent=zSrc[Math.floor(Math.random()*zSrc.length)];
   const askCol=zqDir==='zegswijzeBetekenis'?1:0;
@@ -1543,6 +1850,7 @@ function checkZegswijzeQ(btn){
       given, correct,
       `Thema ${zqCurrent[2]||''}`);
   }
+  trackOefening('zegswijze', ok?1:0, ok?0:1);
   const gEl=document.getElementById('zsc-good'),bEl=document.getElementById('zsc-bad');
   if(gEl)gEl.textContent=zqScore.good;if(bEl)bEl.textContent=zqScore.bad;
   document.querySelectorAll('#zq-options .mc-option').forEach(b=>{
@@ -2565,9 +2873,224 @@ function tyAddKeyListener(){
 
 
 
+
 // ════════════════════════════════════════════════════════
-// FOUTENRAPPORT
+// PROFIELEN
 // ════════════════════════════════════════════════════════
+
+const MAX_PROFIELEN = 6;
+const PROFIEL_AVATARS = ['🦁','🐯','🦊','🐻','🐼','🐨','🦄','🐸','🐧','🦋','🐲','⭐','🚀','🎯','🎨','🎸','🏆','🌈'];
+const SK_PROFIELEN = 'lh_profielen';
+const SK_HUIDIG_PROFIEL = 'lh_huidig_profiel';
+
+let huidigProfiel = null; // {id, naam, avatar}
+
+function loadProfielen(){
+  try{ return JSON.parse(localStorage.getItem(SK_PROFIELEN)||'[]'); }catch(e){return[];}
+}
+function saveProfielen(p){ localStorage.setItem(SK_PROFIELEN, JSON.stringify(p)); }
+
+function getProfielStats(profielId){
+  try{
+    const raw = localStorage.getItem('lh_stats_'+profielId);
+    return raw ? JSON.parse(raw) : {oefeningen:0, goed:0, fout:0, perOnderdeel:{}, sessies:[]};
+  }catch(e){return {oefeningen:0,goed:0,fout:0,perOnderdeel:{},sessies:[]};}
+}
+function saveProfielStats(profielId, stats){
+  localStorage.setItem('lh_stats_'+profielId, JSON.stringify(stats));
+}
+
+// Registreer een resultaat voor het huidig profiel
+function trackOefening(onderdeel, goed, fout){
+  if(!huidigProfiel) return;
+  const stats = getProfielStats(huidigProfiel.id);
+  stats.oefeningen += goed + fout;
+  stats.goed += goed;
+  stats.fout += fout;
+  if(!stats.perOnderdeel[onderdeel]) stats.perOnderdeel[onderdeel]={oefeningen:0,goed:0,fout:0};
+  stats.perOnderdeel[onderdeel].oefeningen += goed+fout;
+  stats.perOnderdeel[onderdeel].goed += goed;
+  stats.perOnderdeel[onderdeel].fout += fout;
+  // Voeg sessie toe (max 50 bewaren)
+  stats.sessies = [{datum:new Date().toLocaleDateString('nl-BE'), tijd:new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'}), onderdeel, goed, fout},...(stats.sessies||[])].slice(0,50);
+  saveProfielStats(huidigProfiel.id, stats);
+}
+
+// ── Profiel kiezen / aanmaken ──
+function initProfiel(){
+  const opgeslagen = localStorage.getItem(SK_HUIDIG_PROFIEL);
+  if(opgeslagen){
+    try{
+      huidigProfiel = JSON.parse(opgeslagen);
+      updateProfielBtn();
+      return;
+    }catch(e){}
+  }
+  // Eerste keer: toon profielkeuze
+  openProfielKeuze(true);
+}
+
+function updateProfielBtn(){
+  const btn = document.getElementById('profiel-btn');
+  if(btn && huidigProfiel) btn.textContent = huidigProfiel.avatar;
+}
+
+function openProfielKeuze(verplicht=false){
+  const overlay = document.getElementById('profiel-overlay');
+  const closeBtn = document.getElementById('profiel-close-btn');
+  const titel = document.getElementById('profiel-modal-titel');
+  if(closeBtn) closeBtn.style.display = verplicht ? 'none' : '';
+  if(titel) titel.textContent = verplicht ? '👤 Wie ben jij?' : '👤 Profiel kiezen';
+  overlay.style.display = 'flex';
+  renderProfielKeuze();
+}
+
+function closeProfiel(){
+  document.getElementById('profiel-overlay').style.display='none';
+}
+
+function renderProfielKeuze(){
+  const el = document.getElementById('profiel-content'); if(!el) return;
+  const profielen = loadProfielen();
+  const lege = MAX_PROFIELEN - profielen.length;
+
+  let html = '<div class="profiel-grid">';
+  profielen.forEach(p=>{
+    const actief = huidigProfiel && huidigProfiel.id===p.id;
+    const stats = getProfielStats(p.id);
+    html+=`<div class="profiel-card${actief?' actief':''}" onclick="kiesProfiel('${p.id}')">
+      ${actief?'<span class="profiel-actief-badge">✓ actief</span>':''}
+      <div class="profiel-avatar">${p.avatar}</div>
+      <div class="profiel-naam">${p.naam}</div>
+      <div class="profiel-badge">${stats.oefeningen} oefeningen</div>
+    </div>`;
+  });
+  for(let i=0;i<lege;i++){
+    html+=`<div class="profiel-card leeg" onclick="toonNieuwProfielForm()">
+      <div class="profiel-avatar">➕</div>
+      <div class="profiel-naam" style="color:var(--tx2)">Nieuw profiel</div>
+    </div>`;
+  }
+  html += '</div>';
+  html += '<div id="nieuw-profiel-form"></div>';
+  el.innerHTML = html;
+}
+
+function toonNieuwProfielForm(){
+  const el = document.getElementById('nieuw-profiel-form'); if(!el) return;
+  el.innerHTML=`
+    <div class="profiel-edit-form">
+      <p style="font-size:13px;font-weight:600;color:var(--tx);margin-bottom:8px;">Nieuw profiel aanmaken</p>
+      <input class="admin-input" id="nieuw-naam" placeholder="Naam van het kind" maxlength="16" style="width:100%;margin-bottom:10px;" />
+      <p style="font-size:12px;color:var(--tx2);margin-bottom:6px;">Kies een avatar:</p>
+      <div class="profiel-avatar-keuze" id="avatar-keuze">
+        ${PROFIEL_AVATARS.map((a,i)=>`<span class="profiel-avatar-opt${i===0?' on':''}" onclick="kiesAvatar(this,'${a}')" data-avatar="${a}">${a}</span>`).join('')}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="t-submit" onclick="maakProfiel()" style="flex:1;">✓ Aanmaken</button>
+        <button class="t-submit" onclick="document.getElementById('nieuw-profiel-form').innerHTML=''" style="background:var(--surface2);box-shadow:none;color:var(--tx2);flex:1;">Annuleren</button>
+      </div>
+    </div>`;
+}
+
+function kiesAvatar(el, avatar){
+  document.querySelectorAll('.profiel-avatar-opt').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function maakProfiel(){
+  const naam = (document.getElementById('nieuw-naam')||{value:''}).value.trim();
+  if(!naam){alert('Geef een naam in!');return;}
+  const avatarEl = document.querySelector('.profiel-avatar-opt.on');
+  const avatar = avatarEl ? avatarEl.dataset.avatar : '🦁';
+  const profielen = loadProfielen();
+  if(profielen.length>=MAX_PROFIELEN){alert('Maximum aantal profielen bereikt.');return;}
+  const id = 'p_'+Date.now();
+  profielen.push({id, naam, avatar});
+  saveProfielen(profielen);
+  kiesProfiel(id);
+}
+
+function kiesProfiel(id){
+  const profielen = loadProfielen();
+  const p = profielen.find(x=>x.id===id);
+  if(!p) return;
+  huidigProfiel = p;
+  localStorage.setItem(SK_HUIDIG_PROFIEL, JSON.stringify(p));
+  updateProfielBtn();
+  closeProfiel();
+}
+
+function verwijderProfiel(id){
+  if(!confirm('Profiel en alle statistieken verwijderen?')) return;
+  let profielen = loadProfielen();
+  profielen = profielen.filter(p=>p.id!==id);
+  saveProfielen(profielen);
+  localStorage.removeItem('lh_stats_'+id);
+  if(huidigProfiel && huidigProfiel.id===id){
+    huidigProfiel=null;
+    localStorage.removeItem(SK_HUIDIG_PROFIEL);
+    updateProfielBtn();
+  }
+  renderProfielKeuze();
+}
+
+// ── Rapport in admin ──
+function renderProfielRapport(el){
+  const profielen = loadProfielen();
+  if(profielen.length===0){
+    el.innerHTML='<p style="color:var(--tx2);font-size:13px;padding:1rem;">Nog geen profielen aangemaakt.</p>';
+    return;
+  }
+  const onderwerpLabels={rekenen:'🔢 Rekenen',werkwoord:'📝 Werkwoorden',woordenschat:'📖 Woordenschat',zegswijze:'💬 Zegswijzen'};
+
+  let html = profielen.map(p=>{
+    const stats = getProfielStats(p.id);
+    const pct = stats.oefeningen>0 ? Math.round(stats.goed/stats.oefeningen*100) : 0;
+    const actief = huidigProfiel && huidigProfiel.id===p.id;
+
+    let onderwerpHtml = Object.entries(stats.perOnderdeel).map(([k,v])=>{
+      const opct = v.oefeningen>0 ? Math.round(v.goed/v.oefeningen*100) : 0;
+      return `<tr><td>${onderwerpLabels[k]||k}</td><td>${v.oefeningen}</td><td style="color:#27A066">${v.goed}</td><td style="color:#E05252">${v.fout}</td><td><strong>${opct}%</strong></td></tr>`;
+    }).join('');
+
+    let sessiesHtml = (stats.sessies||[]).slice(0,10).map(s=>
+      `<tr><td style="color:var(--tx2);font-size:11px;">${s.datum} ${s.tijd}</td><td>${onderwerpLabels[s.onderdeel]||s.onderdeel}</td><td style="color:#27A066">${s.goed}</td><td style="color:#E05252">${s.fout}</td></tr>`
+    ).join('');
+
+    return `<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;border:1px solid var(--surface3);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:2rem;">${p.avatar}</span>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--tx);">${p.naam}${actief?' <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;margin-left:6px;">actief</span>':''}</div>
+          </div>
+        </div>
+        <button onclick="verwijderProfiel('${p.id}')" style="padding:4px 10px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:11px;cursor:pointer;">🗑 Verwijder</button>
+      </div>
+      <div class="rapport-stat-row">
+        <div class="rapport-stat"><div class="rapport-stat-num">${stats.oefeningen}</div><div class="rapport-stat-lbl">Oefeningen</div></div>
+        <div class="rapport-stat"><div class="rapport-stat-num" style="color:#27A066">${stats.goed}</div><div class="rapport-stat-lbl">Goed</div></div>
+        <div class="rapport-stat"><div class="rapport-stat-num" style="color:#E05252">${stats.fout}</div><div class="rapport-stat-lbl">Fout</div></div>
+        <div class="rapport-stat"><div class="rapport-stat-num">${pct}%</div><div class="rapport-stat-lbl">Score</div></div>
+      </div>
+      ${onderwerpHtml?`<p style="font-size:12px;font-weight:600;color:var(--tx2);margin-bottom:6px;">Per onderdeel:</p>
+      <div style="overflow-x:auto;"><table class="rapport-tabel">
+        <thead><tr><th>Onderdeel</th><th>Oef.</th><th>Goed</th><th>Fout</th><th>Score</th></tr></thead>
+        <tbody>${onderwerpHtml}</tbody>
+      </table></div>`:'<p style="font-size:12px;color:var(--tx2);">Nog geen oefeningen gemaakt.</p>'}
+      ${sessiesHtml?`<p style="font-size:12px;font-weight:600;color:var(--tx2);margin:10px 0 6px;">Laatste sessies:</p>
+      <div style="overflow-x:auto;"><table class="rapport-tabel">
+        <thead><tr><th>Datum/tijd</th><th>Onderdeel</th><th>Goed</th><th>Fout</th></tr></thead>
+        <tbody>${sessiesHtml}</tbody>
+      </table></div>`:''}
+    </div>`;
+  }).join('');
+
+  el.innerHTML = html;
+}
+
+
 
 const MAX_FOUTEN = 200; // max opgeslagen fouten
 
@@ -2709,11 +3232,12 @@ function doLogin(){
 }
 
 // ── Admin panel ──
-let adminTab='ww';
+let adminTab='rapport';
 function renderAdminPanel(){
   document.getElementById('admin-modal-title').textContent='⚙️ Beheer';
   document.getElementById('admin-modal-body').innerHTML=`
     <div class="admin-tabs">
+      <button class="admin-tab ${adminTab==='rapport'?'on':''}" onclick="switchAdminTab('rapport')">📊 Rapport</button>
       <button class="admin-tab ${adminTab==='ww'?'on':''}" onclick="switchAdminTab('ww')">🔤 Werkwoorden</button>
       <button class="admin-tab ${adminTab==='woorden'?'on':''}" onclick="switchAdminTab('woorden')">📚 Woordenschat</button>
       <button class="admin-tab ${adminTab==='zegswijzen'?'on':''}" onclick="switchAdminTab('zegswijzen')">💬 Zegswijzen</button>
@@ -2726,6 +3250,7 @@ function switchAdminTab(t){adminTab=t;renderAdminPanel();}
 
 function renderAdminTab(){
   const el=document.getElementById('admin-tab-content');if(!el)return;
+  if(adminTab==='rapport')renderProfielRapport(el);
   if(adminTab==='ww')renderAdminWW(el);
   if(adminTab==='woorden')renderAdminWoorden(el);
   if(adminTab==='zegswijzen')renderAdminZegswijzen(el);
@@ -3023,6 +3548,7 @@ function adminLogout(){adminUnlocked=false;closeAdmin();}
 // INIT
 // ════════════════════════════════════════════════════════
 loadData();
+initProfiel();
 showSetup();
 </script>
   <script>
