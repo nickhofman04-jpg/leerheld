@@ -2978,23 +2978,35 @@ function renderProfielKeuze(){
 
 function toonNieuwProfielForm(){
   const el = document.getElementById('nieuw-profiel-form'); if(!el) return;
+  const HEROES_KEUZE = [
+    {id:'vuur',ico:'🤜',name:'Vuurheld'},
+    {id:'ijs',ico:'🦙',name:'IJskoning'},
+    {id:'bliksem',ico:'⚡',name:'Bliksem'},
+    {id:'ruimte',ico:'🚀',name:'Ruimterijder'},
+    {id:'draak',ico:'🐉',name:'Dragonkid'},
+    {id:'prinses',ico:'👸',name:'Prinses'},
+  ];
   el.innerHTML=`
     <div class="profiel-edit-form">
       <p style="font-size:13px;font-weight:600;color:var(--tx);margin-bottom:8px;">Nieuw profiel aanmaken</p>
-      <input class="admin-input" id="nieuw-naam" placeholder="Naam van het kind" maxlength="16" style="width:100%;margin-bottom:10px;" />
+      <input class="admin-input" id="nieuw-naam" placeholder="Naam van het kind" maxlength="16" style="width:100%;margin-bottom:12px;" />
       <p style="font-size:12px;color:var(--tx2);margin-bottom:6px;">Kies een avatar:</p>
       <div class="profiel-avatar-keuze" id="avatar-keuze">
         ${PROFIEL_AVATARS.map((a,i)=>`<span class="profiel-avatar-opt${i===0?' on':''}" onclick="kiesAvatar(this,'${a}')" data-avatar="${a}">${a}</span>`).join('')}
       </div>
-      <div style="display:flex;gap:8px;margin-top:10px;">
+      <p style="font-size:12px;color:var(--tx2);margin:12px 0 6px;">Kies een thema:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;" id="thema-keuze">
+        ${HEROES_KEUZE.map((h,i)=>`<button class="leerjaar-btn${i===0?' on':''}" onclick="kiesThema(this,'${h.id}')" data-thema="${h.id}" style="display:flex;align-items:center;gap:5px;">${h.ico} ${h.name}</button>`).join('')}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px;">
         <button class="t-submit" onclick="maakProfiel()" style="flex:1;">✓ Aanmaken</button>
         <button class="t-submit" onclick="document.getElementById('nieuw-profiel-form').innerHTML=''" style="background:var(--surface2);box-shadow:none;color:var(--tx2);flex:1;">Annuleren</button>
       </div>
     </div>`;
 }
 
-function kiesAvatar(el, avatar){
-  document.querySelectorAll('.profiel-avatar-opt').forEach(e=>e.classList.remove('on'));
+function kiesThema(el, thema){
+  document.querySelectorAll('#thema-keuze .leerjaar-btn').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
 }
 
@@ -3003,10 +3015,12 @@ function maakProfiel(){
   if(!naam){alert('Geef een naam in!');return;}
   const avatarEl = document.querySelector('.profiel-avatar-opt.on');
   const avatar = avatarEl ? avatarEl.dataset.avatar : '🦁';
+  const themaEl = document.querySelector('#thema-keuze .leerjaar-btn.on');
+  const thema = themaEl ? themaEl.dataset.thema : 'vuur';
   const profielen = loadProfielen();
   if(profielen.length>=MAX_PROFIELEN){alert('Maximum aantal profielen bereikt.');return;}
   const id = 'p_'+Date.now();
-  profielen.push({id, naam, avatar});
+  profielen.push({id, naam, avatar, thema});
   saveProfielen(profielen);
   kiesProfiel(id);
 }
@@ -3018,6 +3032,13 @@ function kiesProfiel(id){
   huidigProfiel = p;
   localStorage.setItem(SK_HUIDIG_PROFIEL, JSON.stringify(p));
   updateProfielBtn();
+  // Pas thema toe indien ingesteld
+  if(p.thema){
+    document.body.dataset.hero = p.thema;
+    const sel = document.getElementById('hero-select');
+    if(sel) sel.value = p.thema;
+    cfg.hero = HEROES.find(h=>h.id===p.thema)||HEROES[0];
+  }
   closeProfiel();
 }
 
@@ -3064,6 +3085,7 @@ function renderProfielRapport(el){
           <span style="font-size:2rem;">${p.avatar}</span>
           <div>
             <div style="font-size:16px;font-weight:700;color:var(--tx);">${p.naam}${actief?' <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;margin-left:6px;">actief</span>':''}</div>
+            ${p.thema?`<div style="font-size:11px;color:var(--tx2);margin-top:2px;">Thema: ${HEROES.find(h=>h.id===p.thema)?.ico||''} ${p.thema}</div>`:''}
           </div>
         </div>
         <button onclick="verwijderProfiel('${p.id}')" style="padding:4px 10px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:11px;cursor:pointer;">🗑 Verwijder</button>
@@ -3249,12 +3271,15 @@ function renderAdminPanel(){
 function switchAdminTab(t){adminTab=t;renderAdminPanel();}
 
 function renderAdminTab(){
-  const el=document.getElementById('admin-tab-content');if(!el)return;
-  if(adminTab==='rapport')renderProfielRapport(el);
-  if(adminTab==='ww')renderAdminWW(el);
-  if(adminTab==='woorden')renderAdminWoorden(el);
-  if(adminTab==='zegswijzen')renderAdminZegswijzen(el);
-  if(adminTab==='instellingen')renderAdminInstellingen(el);
+  // Kleine timeout zodat de DOM zeker klaar is
+  setTimeout(()=>{
+    const el=document.getElementById('admin-tab-content');if(!el)return;
+    if(adminTab==='rapport')renderProfielRapport(el);
+    else if(adminTab==='ww')renderAdminWW(el);
+    else if(adminTab==='woorden')renderAdminWoorden(el);
+    else if(adminTab==='zegswijzen')renderAdminZegswijzen(el);
+    else if(adminTab==='instellingen')renderAdminInstellingen(el);
+  },0);
 }
 
 // ── Werkwoorden beheer ──
