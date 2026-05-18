@@ -470,6 +470,54 @@
     .mc-option.mc-wrong .mc-letter{background:rgba(255,107,157,0.2);color:var(--no);}
     body.light .mc-option{background:var(--surface2);border-color:var(--surface3);}
     body.light .mc-option:hover:not(:disabled){border-color:var(--accent);}
+
+    /* ════ Aardrijkskunde ════ */
+    .aard-subtabs{display:flex;gap:6px;margin-bottom:1rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
+    .aard-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:9px 0;text-align:center;transition:all 0.2s;}
+    .aard-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+    .aard-search{width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:15px;font-family:'Nunito',sans-serif;margin-bottom:10px;outline:none;transition:border-color 0.2s;}
+    .aard-search:focus{border-color:var(--accent);}
+    .aard-search::placeholder{color:var(--tx3);}
+    .aard-map-wrap{width:100%;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface2);border:1px solid var(--surface3);margin-bottom:12px;position:relative;}
+    .aard-map-wrap svg{display:block;width:100%;height:auto;}
+    .aard-map-wrap svg path{cursor:pointer;transition:fill 0.18s;stroke:var(--bg);stroke-width:0.5;}
+    .aard-map-wrap svg path:hover{opacity:0.78;}
+    .aard-map-wrap svg path.selected{stroke:var(--accent3);stroke-width:2;}
+    .country-card{background:var(--surface2);border-radius:var(--radius-sm);border:2px solid var(--surface3);padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;transition:border-color 0.2s;animation:slideUp 0.22s ease;}
+    .country-card.highlighted{border-color:var(--accent);}
+    .country-flag{font-size:3rem;line-height:1;flex-shrink:0;}
+    .country-info{flex:1;min-width:0;}
+    .country-name{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:var(--tx);margin-bottom:2px;}
+    .country-capital{font-size:13px;color:var(--tx2);font-weight:600;margin-bottom:6px;}
+    .country-capital strong{color:var(--accent);}
+    .country-facts{display:flex;gap:8px;flex-wrap:wrap;}
+    .country-fact{font-size:11px;background:var(--surface3);color:var(--tx2);border-radius:8px;padding:3px 8px;font-weight:600;}
+    .quiz-question-card{background:var(--surface2);border-radius:var(--radius);padding:1.2rem;text-align:center;margin-bottom:14px;}
+    .quiz-q-flag{font-size:5rem;margin-bottom:8px;}
+    .quiz-q-text{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:var(--tx);margin-bottom:4px;}
+    .quiz-q-hint{font-size:12px;color:var(--tx3);}
+    .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+    .quiz-opt{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;border:2px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:12px 8px;text-align:center;transition:border-color 0.15s, background 0.15s, color 0.15s;min-height:60px;display:flex;align-items:center;justify-content:center;width:100%;}
+    .quiz-opt:hover:not(:disabled){border-color:var(--accent);background:var(--surface3);}
+    .quiz-opt:disabled{cursor:default;}
+    .quiz-opt.correct{border-color:var(--ok);background:rgba(6,214,160,0.15);color:var(--ok);}
+    .quiz-opt.wrong{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
+    .quiz-feedback{min-height:24px;text-align:center;font-size:13px;color:var(--tx2);margin-bottom:8px;}
+    .quiz-next-wrap{min-height:54px;}
+    .quiz-score-bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--tx2);margin-bottom:10px;}
+    .quiz-next-btn{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:12px;width:100%;cursor:pointer;box-shadow:0 4px 16px var(--glow);margin-top:6px;}
+    .aard-continent-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+    .aard-cont-btn{font-family:'Fredoka',sans-serif;font-size:12px;padding:5px 12px;border-radius:20px;border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.15s;font-weight:600;}
+    .aard-cont-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--glow);}
+    .country-list-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .country-list-item:hover{background:var(--surface2);}
+    .country-list-item:last-child{border-bottom:none;}
+    .cli-flag{font-size:1.5rem;flex-shrink:0;}
+    .cli-name{font-size:14px;font-weight:700;color:var(--tx);}
+    .cli-cap{font-size:11px;color:var(--tx3);}
+    .aard-quiz-end{text-align:center;padding:1.5rem 1rem;animation:slideUp 0.3s ease;}
+    .aard-quiz-end-emoji{font-size:4rem;margin-bottom:8px;}
+    .aard-quiz-end-title{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
   </style>
 </head>
 <body data-hero="vuur" class="light">
@@ -505,6 +553,7 @@
       <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
       <button class="main-tab" id="tab-meetkunde" onclick="switchMain('meetkunde')">📐 Meetkunde</button>
       <button class="main-tab" id="tab-typen" onclick="switchMain('typen')">🎹 Typen</button>
+      <button class="main-tab" id="tab-aardrijkskunde" onclick="switchMain('aardrijkskunde')">🌍 Wereld</button>
     </div>
 
     <div id="rekenen-root" style="width:100%">
@@ -524,6 +573,10 @@
 
     <div id="typen-root" style="display:none;width:100%">
       <div class="panel" id="typen-panel"></div>
+    </div>
+
+    <div id="aardrijkskunde-root" style="display:none;width:100%">
+      <div class="panel" id="aard-panel" style="min-height:520px;padding:1rem;"></div>
     </div>
 
     <div id="taal-root" style="display:none;width:100%">
@@ -621,7 +674,7 @@ function snd(t){
 let mainSection = 'rekenen';
 function switchMain(s){
   mainSection=s;
-  ['rekenen','taal','meetkunde','typen'].forEach(k=>{
+  ['rekenen','taal','meetkunde','typen','aardrijkskunde'].forEach(k=>{
     const r=document.getElementById(k+'-root');
     const t=document.getElementById('tab-'+k);
     if(r)r.style.display=k===s?'':'none';
@@ -630,6 +683,7 @@ function switchMain(s){
   if(s==='taal') initTaalRoot();
   if(s==='meetkunde') mkTab('theorie');
   if(s==='typen') initTypen();
+  if(s==='aardrijkskunde') initAardrijkskunde();
   removeStickyNext();
 }
 function goHome(){
@@ -3540,7 +3594,1009 @@ function adminResetZegswijzen(){
   localStorage.removeItem(SK.zegswijzen);location.reload();
 }
 
-// ── Instellingen ──
+// ════════════════════════════════════════════════════════
+// AARDRIJKSKUNDE
+// ════════════════════════════════════════════════════════
+const LANDEN = [
+  // ── Europa ──
+  {id:'BE',name:'België',capital:'Brussel',flag:'🇧🇪',cont:'Europa',pop:'11,6 mln',opp:'30.528 km²',munt:'Euro',taal:'Nederlands, Frans, Duits'},
+  {id:'NL',name:'Nederland',capital:'Amsterdam',flag:'🇳🇱',cont:'Europa',pop:'17,9 mln',opp:'41.543 km²',munt:'Euro',taal:'Nederlands'},
+  {id:'FR',name:'Frankrijk',capital:'Parijs',flag:'🇫🇷',cont:'Europa',pop:'68 mln',opp:'551.695 km²',munt:'Euro',taal:'Frans'},
+  {id:'DE',name:'Duitsland',capital:'Berlijn',flag:'🇩🇪',cont:'Europa',pop:'84 mln',opp:'357.114 km²',munt:'Euro',taal:'Duits'},
+  {id:'GB',name:'Verenigd Koninkrijk',capital:'Londen',flag:'🇬🇧',cont:'Europa',pop:'67 mln',opp:'242.495 km²',munt:'Pond sterling',taal:'Engels'},
+  {id:'IT',name:'Italië',capital:'Rome',flag:'🇮🇹',cont:'Europa',pop:'59 mln',opp:'301.340 km²',munt:'Euro',taal:'Italiaans'},
+  {id:'ES',name:'Spanje',capital:'Madrid',flag:'🇪🇸',cont:'Europa',pop:'47 mln',opp:'505.990 km²',munt:'Euro',taal:'Spaans'},
+  {id:'PT',name:'Portugal',capital:'Lissabon',flag:'🇵🇹',cont:'Europa',pop:'10 mln',opp:'92.212 km²',munt:'Euro',taal:'Portugees'},
+  {id:'CH',name:'Zwitserland',capital:'Bern',flag:'🇨🇭',cont:'Europa',pop:'8,7 mln',opp:'41.285 km²',munt:'Zwitserse frank',taal:'Duits, Frans, Italiaans'},
+  {id:'AT',name:'Oostenrijk',capital:'Wenen',flag:'🇦🇹',cont:'Europa',pop:'9 mln',opp:'83.871 km²',munt:'Euro',taal:'Duits'},
+  {id:'PL',name:'Polen',capital:'Warschau',flag:'🇵🇱',cont:'Europa',pop:'38 mln',opp:'312.696 km²',munt:'Zloty',taal:'Pools'},
+  {id:'SE',name:'Zweden',capital:'Stockholm',flag:'🇸🇪',cont:'Europa',pop:'10,4 mln',opp:'450.295 km²',munt:'Zweedse kroon',taal:'Zweeds'},
+  {id:'NO',name:'Noorwegen',capital:'Oslo',flag:'🇳🇴',cont:'Europa',pop:'5,4 mln',opp:'385.207 km²',munt:'Noorse kroon',taal:'Noors'},
+  {id:'DK',name:'Denemarken',capital:'Kopenhagen',flag:'🇩🇰',cont:'Europa',pop:'5,9 mln',opp:'43.094 km²',munt:'Deense kroon',taal:'Deens'},
+  {id:'FI',name:'Finland',capital:'Helsinki',flag:'🇫🇮',cont:'Europa',pop:'5,5 mln',opp:'338.145 km²',munt:'Euro',taal:'Fins, Zweeds'},
+  {id:'GR',name:'Griekenland',capital:'Athene',flag:'🇬🇷',cont:'Europa',pop:'10,7 mln',opp:'131.957 km²',munt:'Euro',taal:'Grieks'},
+  {id:'CZ',name:'Tsjechië',capital:'Praag',flag:'🇨🇿',cont:'Europa',pop:'10,9 mln',opp:'78.866 km²',munt:'Tsjechische kroon',taal:'Tsjechisch'},
+  {id:'HU',name:'Hongarije',capital:'Boedapest',flag:'🇭🇺',cont:'Europa',pop:'9,7 mln',opp:'93.028 km²',munt:'Forint',taal:'Hongaars'},
+  {id:'RO',name:'Roemenië',capital:'Boekarest',flag:'🇷🇴',cont:'Europa',pop:'19 mln',opp:'238.397 km²',munt:'Leu',taal:'Roemeens'},
+  {id:'RU',name:'Rusland',capital:'Moskou',flag:'🇷🇺',cont:'Europa',pop:'144 mln',opp:'17,1 mln km²',munt:'Roebel',taal:'Russisch'},
+  {id:'UA',name:'Oekraïne',capital:'Kyiv',flag:'🇺🇦',cont:'Europa',pop:'44 mln',opp:'603.550 km²',munt:'Hryvnia',taal:'Oekraïens'},
+  {id:'SK',name:'Slowakije',capital:'Bratislava',flag:'🇸🇰',cont:'Europa',pop:'5,5 mln',opp:'49.035 km²',munt:'Euro',taal:'Slowaaks'},
+  {id:'HR',name:'Kroatië',capital:'Zagreb',flag:'🇭🇷',cont:'Europa',pop:'3,9 mln',opp:'56.594 km²',munt:'Euro',taal:'Kroatisch'},
+  {id:'BA',name:'Bosnië-Herzegovina',capital:'Sarajevo',flag:'🇧🇦',cont:'Europa',pop:'3,5 mln',opp:'51.197 km²',munt:'Convertibele mark',taal:'Bosnisch, Servisch, Kroatisch'},
+  {id:'RS',name:'Servië',capital:'Belgrado',flag:'🇷🇸',cont:'Europa',pop:'6,8 mln',opp:'77.474 km²',munt:'Servische dinar',taal:'Servisch'},
+  {id:'BG',name:'Bulgarije',capital:'Sofia',flag:'🇧🇬',cont:'Europa',pop:'6,5 mln',opp:'110.879 km²',munt:'Lev',taal:'Bulgaars'},
+  {id:'BY',name:'Belarus',capital:'Minsk',flag:'🇧🇾',cont:'Europa',pop:'9,4 mln',opp:'207.600 km²',munt:'Wit-Russische roebel',taal:'Wit-Russisch, Russisch'},
+  {id:'LT',name:'Litouwen',capital:'Vilnius',flag:'🇱🇹',cont:'Europa',pop:'2,8 mln',opp:'65.300 km²',munt:'Euro',taal:'Litouws'},
+  {id:'LV',name:'Letland',capital:'Riga',flag:'🇱🇻',cont:'Europa',pop:'1,8 mln',opp:'64.589 km²',munt:'Euro',taal:'Lets'},
+  {id:'EE',name:'Estland',capital:'Tallinn',flag:'🇪🇪',cont:'Europa',pop:'1,3 mln',opp:'45.228 km²',munt:'Euro',taal:'Ests'},
+  {id:'MD',name:'Moldavië',capital:'Chișinău',flag:'🇲🇩',cont:'Europa',pop:'2,6 mln',opp:'33.851 km²',munt:'Moldavische leu',taal:'Roemeens'},
+  {id:'AL',name:'Albanië',capital:'Tirana',flag:'🇦🇱',cont:'Europa',pop:'2,8 mln',opp:'28.748 km²',munt:'Lek',taal:'Albanees'},
+  {id:'MK',name:'Noord-Macedonië',capital:'Skopje',flag:'🇲🇰',cont:'Europa',pop:'2,1 mln',opp:'25.713 km²',munt:'Macedonische denar',taal:'Macedonisch'},
+  {id:'ME',name:'Montenegro',capital:'Podgorica',flag:'🇲🇪',cont:'Europa',pop:'0,6 mln',opp:'13.812 km²',munt:'Euro',taal:'Montenegrijns'},
+  {id:'SI',name:'Slovenië',capital:'Ljubljana',flag:'🇸🇮',cont:'Europa',pop:'2,1 mln',opp:'20.273 km²',munt:'Euro',taal:'Sloveens'},
+  {id:'IE',name:'Ierland',capital:'Dublin',flag:'🇮🇪',cont:'Europa',pop:'5,1 mln',opp:'70.273 km²',munt:'Euro',taal:'Iers, Engels'},
+  // ── Azië ──
+  {id:'CN',name:'China',capital:'Peking',flag:'🇨🇳',cont:'Azië',pop:'1,4 mld',opp:'9,6 mln km²',munt:'Renminbi (yuan)',taal:'Mandarijn'},
+  {id:'JP',name:'Japan',capital:'Tokio',flag:'🇯🇵',cont:'Azië',pop:'125 mln',opp:'377.975 km²',munt:'Yen',taal:'Japans'},
+  {id:'IN',name:'India',capital:'New Delhi',flag:'🇮🇳',cont:'Azië',pop:'1,4 mld',opp:'3,3 mln km²',munt:'Indiase roepie',taal:'Hindi, Engels'},
+  {id:'KR',name:'Zuid-Korea',capital:'Seoul',flag:'🇰🇷',cont:'Azië',pop:'51 mln',opp:'100.210 km²',munt:'Won',taal:'Koreaans'},
+  {id:'KP',name:'Noord-Korea',capital:'Pyongyang',flag:'🇰🇵',cont:'Azië',pop:'26 mln',opp:'120.538 km²',munt:'Noord-Koreaanse won',taal:'Koreaans'},
+  {id:'SA',name:'Saudi-Arabië',capital:'Riyad',flag:'🇸🇦',cont:'Azië',pop:'35 mln',opp:'2,15 mln km²',munt:'Saoedische riyal',taal:'Arabisch'},
+  {id:'TR',name:'Turkije',capital:'Ankara',flag:'🇹🇷',cont:'Azië',pop:'85 mln',opp:'783.562 km²',munt:'Turkse lira',taal:'Turks'},
+  {id:'ID',name:'Indonesië',capital:'Jakarta',flag:'🇮🇩',cont:'Azië',pop:'277 mln',opp:'1,9 mln km²',munt:'Indonesische roepia',taal:'Indonesisch'},
+  {id:'PK',name:'Pakistan',capital:'Islamabad',flag:'🇵🇰',cont:'Azië',pop:'230 mln',opp:'881.913 km²',munt:'Pakistaanse roepie',taal:'Urdu, Engels'},
+  {id:'TH',name:'Thailand',capital:'Bangkok',flag:'🇹🇭',cont:'Azië',pop:'70 mln',opp:'513.120 km²',munt:'Baht',taal:'Thai'},
+  {id:'VN',name:'Vietnam',capital:'Hanoi',flag:'🇻🇳',cont:'Azië',pop:'97 mln',opp:'331.212 km²',munt:'Dong',taal:'Vietnamees'},
+  {id:'MY',name:'Maleisië',capital:'Kuala Lumpur',flag:'🇲🇾',cont:'Azië',pop:'33 mln',opp:'329.847 km²',munt:'Ringgit',taal:'Maleis'},
+  {id:'PH',name:'Filipijnen',capital:'Manilla',flag:'🇵🇭',cont:'Azië',pop:'115 mln',opp:'300.000 km²',munt:'Peso',taal:'Filipijns, Engels'},
+  {id:'MM',name:'Myanmar',capital:'Naypyidaw',flag:'🇲🇲',cont:'Azië',pop:'54 mln',opp:'676.578 km²',munt:'Kyat',taal:'Birmaans'},
+  {id:'KH',name:'Cambodja',capital:'Phnom Penh',flag:'🇰🇭',cont:'Azië',pop:'17 mln',opp:'181.035 km²',munt:'Riel',taal:'Khmer'},
+  {id:'LA',name:'Laos',capital:'Vientiane',flag:'🇱🇦',cont:'Azië',pop:'7,4 mln',opp:'236.800 km²',munt:'Kip',taal:'Laotiaans'},
+  {id:'BD',name:'Bangladesh',capital:'Dhaka',flag:'🇧🇩',cont:'Azië',pop:'170 mln',opp:'147.570 km²',munt:'Taka',taal:'Bengaals'},
+  {id:'NP',name:'Nepal',capital:'Kathmandu',flag:'🇳🇵',cont:'Azië',pop:'30 mln',opp:'147.181 km²',munt:'Nepalese roepie',taal:'Nepalees'},
+  {id:'LK',name:'Sri Lanka',capital:'Sri Jayawardenepura Kotte',flag:'🇱🇰',cont:'Azië',pop:'22 mln',opp:'65.610 km²',munt:'Sri Lankaanse roepie',taal:'Singalees, Tamil'},
+  {id:'IQ',name:'Irak',capital:'Bagdad',flag:'🇮🇶',cont:'Azië',pop:'42 mln',opp:'438.317 km²',munt:'Iraakse dinar',taal:'Arabisch, Koerdisch'},
+  {id:'IR',name:'Iran',capital:'Teheran',flag:'🇮🇷',cont:'Azië',pop:'87 mln',opp:'1,65 mln km²',munt:'Iraanse rial',taal:'Perzisch'},
+  {id:'AF',name:'Afghanistan',capital:'Kabul',flag:'🇦🇫',cont:'Azië',pop:'41 mln',opp:'652.230 km²',munt:'Afghani',taal:'Dari, Pasjtoe'},
+  {id:'UZ',name:'Oezbekistan',capital:'Tasjkent',flag:'🇺🇿',cont:'Azië',pop:'36 mln',opp:'448.978 km²',munt:'Sum',taal:'Oezbeeks'},
+  {id:'KZ',name:'Kazachstan',capital:'Astana',flag:'🇰🇿',cont:'Azië',pop:'19 mln',opp:'2,72 mln km²',munt:'Tenge',taal:'Kazachs, Russisch'},
+  {id:'SY',name:'Syrië',capital:'Damascus',flag:'🇸🇾',cont:'Azië',pop:'22 mln',opp:'185.180 km²',munt:'Syrisch pond',taal:'Arabisch'},
+  {id:'YE',name:'Jemen',capital:'Sanaa',flag:'🇾🇪',cont:'Azië',pop:'34 mln',opp:'527.968 km²',munt:'Jemenitische rial',taal:'Arabisch'},
+  {id:'JO',name:'Jordanië',capital:'Amman',flag:'🇯🇴',cont:'Azië',pop:'10 mln',opp:'89.342 km²',munt:'Jordaanse dinar',taal:'Arabisch'},
+  {id:'AZ',name:'Azerbeidzjan',capital:'Bakoe',flag:'🇦🇿',cont:'Azië',pop:'10 mln',opp:'86.600 km²',munt:'Manat',taal:'Azerbeidzjaans'},
+  {id:'GE',name:'Georgië',capital:'Tbilisi',flag:'🇬🇪',cont:'Azië',pop:'3,7 mln',opp:'69.700 km²',munt:'Lari',taal:'Georgisch'},
+  {id:'AM',name:'Armenië',capital:'Jerevan',flag:'🇦🇲',cont:'Azië',pop:'3 mln',opp:'29.743 km²',munt:'Dram',taal:'Armeens'},
+  {id:'TJ',name:'Tadzjikistan',capital:'Dusjanbe',flag:'🇹🇯',cont:'Azië',pop:'10 mln',opp:'143.100 km²',munt:'Somoni',taal:'Tadzjieks'},
+  {id:'TM',name:'Turkmenistan',capital:'Asjchabad',flag:'🇹🇲',cont:'Azië',pop:'6 mln',opp:'488.100 km²',munt:'Manat',taal:'Turkmeens'},
+  {id:'KG',name:'Kirgizstan',capital:'Bisjkek',flag:'🇰🇬',cont:'Azië',pop:'7 mln',opp:'199.951 km²',munt:'Som',taal:'Kirgiziaans, Russisch'},
+  {id:'MN',name:'Mongolië',capital:'Ulaanbaatar',flag:'🇲🇳',cont:'Azië',pop:'3,4 mln',opp:'1,56 mln km²',munt:'Tögrög',taal:'Mongools'},
+  {id:'LB',name:'Libanon',capital:'Beiroet',flag:'🇱🇧',cont:'Azië',pop:'5,5 mln',opp:'10.452 km²',munt:'Libanese pond',taal:'Arabisch'},
+  {id:'KW',name:'Koeweit',capital:'Koeweit-stad',flag:'🇰🇼',cont:'Azië',pop:'4,3 mln',opp:'17.818 km²',munt:'Koeweitse dinar',taal:'Arabisch'},
+  {id:'QA',name:'Qatar',capital:'Doha',flag:'🇶🇦',cont:'Azië',pop:'2,9 mln',opp:'11.586 km²',munt:'Qatarese riyal',taal:'Arabisch'},
+  // ── Afrika ──
+  {id:'EG',name:'Egypte',capital:'Caïro',flag:'🇪🇬',cont:'Afrika',pop:'104 mln',opp:'1 mln km²',munt:'Egyptisch pond',taal:'Arabisch'},
+  {id:'ZA',name:'Zuid-Afrika',capital:'Pretoria',flag:'🇿🇦',cont:'Afrika',pop:'60 mln',opp:'1,2 mln km²',munt:'Rand',taal:'Zoeloe, Xhosa, Afrikaans, Engels'},
+  {id:'NG',name:'Nigeria',capital:'Abuja',flag:'🇳🇬',cont:'Afrika',pop:'218 mln',opp:'923.768 km²',munt:'Naira',taal:'Engels'},
+  {id:'KE',name:'Kenia',capital:'Nairobi',flag:'🇰🇪',cont:'Afrika',pop:'55 mln',opp:'580.367 km²',munt:'Keniaanse shilling',taal:'Swahili, Engels'},
+  {id:'MA',name:'Marokko',capital:'Rabat',flag:'🇲🇦',cont:'Afrika',pop:'37 mln',opp:'446.550 km²',munt:'Dirham',taal:'Arabisch, Berber'},
+  {id:'ET',name:'Ethiopië',capital:'Addis Abeba',flag:'🇪🇹',cont:'Afrika',pop:'126 mln',opp:'1,1 mln km²',munt:'Birr',taal:'Amhaars'},
+  {id:'DZ',name:'Algerije',capital:'Algiers',flag:'🇩🇿',cont:'Afrika',pop:'46 mln',opp:'2,38 mln km²',munt:'Algerijnse dinar',taal:'Arabisch, Berber'},
+  {id:'SD',name:'Soedan',capital:'Khartoum',flag:'🇸🇩',cont:'Afrika',pop:'46 mln',opp:'1,86 mln km²',munt:'Soedanese pond',taal:'Arabisch'},
+  {id:'TN',name:'Tunesië',capital:'Tunis',flag:'🇹🇳',cont:'Afrika',pop:'12 mln',opp:'163.610 km²',munt:'Tunesische dinar',taal:'Arabisch'},
+  {id:'LY',name:'Libië',capital:'Tripoli',flag:'🇱🇾',cont:'Afrika',pop:'7 mln',opp:'1,76 mln km²',munt:'Libische dinar',taal:'Arabisch'},
+  {id:'GH',name:'Ghana',capital:'Accra',flag:'🇬🇭',cont:'Afrika',pop:'33 mln',opp:'238.533 km²',munt:'Ghanese cedi',taal:'Engels'},
+  {id:'TZ',name:'Tanzania',capital:'Dodoma',flag:'🇹🇿',cont:'Afrika',pop:'63 mln',opp:'945.087 km²',munt:'Tanzaniaanse shilling',taal:'Swahili, Engels'},
+  {id:'UG',name:'Oeganda',capital:'Kampala',flag:'🇺🇬',cont:'Afrika',pop:'48 mln',opp:'241.038 km²',munt:'Oegandese shilling',taal:'Engels, Swahili'},
+  {id:'MZ',name:'Mozambique',capital:'Maputo',flag:'🇲🇿',cont:'Afrika',pop:'33 mln',opp:'801.590 km²',munt:'Metical',taal:'Portugees'},
+  {id:'ZW',name:'Zimbabwe',capital:'Harare',flag:'🇿🇼',cont:'Afrika',pop:'16 mln',opp:'390.757 km²',munt:'Zimbabwe-dollar',taal:'Shona, Ndebele, Engels'},
+  {id:'ZM',name:'Zambia',capital:'Lusaka',flag:'🇿🇲',cont:'Afrika',pop:'20 mln',opp:'752.618 km²',munt:'Kwacha',taal:'Engels'},
+  {id:'SN',name:'Senegal',capital:'Dakar',flag:'🇸🇳',cont:'Afrika',pop:'17 mln',opp:'196.722 km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'CM',name:'Kameroen',capital:'Yaoundé',flag:'🇨🇲',cont:'Afrika',pop:'27 mln',opp:'475.442 km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Frans, Engels'},
+  {id:'CI',name:'Ivoorkust',capital:'Yamoussoukro',flag:'🇨🇮',cont:'Afrika',pop:'27 mln',opp:'322.463 km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'MG',name:'Madagaskar',capital:'Antananarivo',flag:'🇲🇬',cont:'Afrika',pop:'28 mln',opp:'587.041 km²',munt:'Ariary',taal:'Malagassisch, Frans'},
+  {id:'AO',name:'Angola',capital:'Luanda',flag:'🇦🇴',cont:'Afrika',pop:'35 mln',opp:'1,25 mln km²',munt:'Kwanza',taal:'Portugees'},
+  {id:'ML',name:'Mali',capital:'Bamako',flag:'🇲🇱',cont:'Afrika',pop:'22 mln',opp:'1,24 mln km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'NE',name:'Niger',capital:'Niamey',flag:'🇳🇪',cont:'Afrika',pop:'25 mln',opp:'1,27 mln km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'BF',name:'Burkina Faso',capital:'Ouagadougou',flag:'🇧🇫',cont:'Afrika',pop:'22 mln',opp:'274.222 km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'SO',name:'Somalië',capital:'Mogadishu',flag:'🇸🇴',cont:'Afrika',pop:'17 mln',opp:'637.657 km²',munt:'Somalische shilling',taal:'Somalisch, Arabisch'},
+  {id:'TD',name:'Tsjaad',capital:"N'Djamena",flag:'🇹🇩',cont:'Afrika',pop:'18 mln',opp:'1,28 mln km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Frans, Arabisch'},
+  {id:'GN',name:'Guinee',capital:'Conakry',flag:'🇬🇳',cont:'Afrika',pop:'13 mln',opp:'245.857 km²',munt:'Guinese frank',taal:'Frans'},
+  {id:'RW',name:'Rwanda',capital:'Kigali',flag:'🇷🇼',cont:'Afrika',pop:'13 mln',opp:'26.338 km²',munt:'Rwandese frank',taal:'Kinyarwanda, Frans, Engels'},
+  {id:'BI',name:'Burundi',capital:'Gitega',flag:'🇧🇮',cont:'Afrika',pop:'12 mln',opp:'27.834 km²',munt:'Burundese frank',taal:'Kirundi, Frans'},
+  {id:'SS',name:'Zuid-Soedan',capital:'Juba',flag:'🇸🇸',cont:'Afrika',pop:'11 mln',opp:'619.745 km²',munt:'Zuid-Soedanese pond',taal:'Engels'},
+  {id:'ER',name:'Eritrea',capital:'Asmara',flag:'🇪🇷',cont:'Afrika',pop:'3,5 mln',opp:'117.600 km²',munt:'Nakfa',taal:'Tigrinya, Arabisch, Engels'},
+  {id:'LR',name:'Liberia',capital:'Monrovia',flag:'🇱🇷',cont:'Afrika',pop:'5,4 mln',opp:'111.369 km²',munt:'Liberiaanse dollar',taal:'Engels'},
+  {id:'CF',name:'Centraal-Afrikaanse Republiek',capital:'Bangui',flag:'🇨🇫',cont:'Afrika',pop:'5 mln',opp:'622.984 km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Sango, Frans'},
+  {id:'CG',name:'Congo-Brazzaville',capital:'Brazzaville',flag:'🇨🇬',cont:'Afrika',pop:'5,8 mln',opp:'342.000 km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'CD',name:'Congo-Kinshasa (DRC)',capital:'Kinshasa',flag:'🇨🇩',cont:'Afrika',pop:'100 mln',opp:'2,34 mln km²',munt:'Congolese frank',taal:'Frans'},
+  {id:'NA',name:'Namibië',capital:'Windhoek',flag:'🇳🇦',cont:'Afrika',pop:'2,6 mln',opp:'824.292 km²',munt:'Namibische dollar',taal:'Engels'},
+  {id:'BW',name:'Botswana',capital:'Gaborone',flag:'🇧🇼',cont:'Afrika',pop:'2,6 mln',opp:'581.730 km²',munt:'Pula',taal:'Setswana, Engels'},
+  {id:'MW',name:'Malawi',capital:'Lilongwe',flag:'🇲🇼',cont:'Afrika',pop:'20 mln',opp:'118.484 km²',munt:'Malawische kwacha',taal:'Chichewa, Engels'},
+  // ── Noord-Amerika ──
+  {id:'US',name:'Verenigde Staten',capital:'Washington D.C.',flag:'🇺🇸',cont:'Noord-Amerika',pop:'331 mln',opp:'9,8 mln km²',munt:'Dollar',taal:'Engels'},
+  {id:'CA',name:'Canada',capital:'Ottawa',flag:'🇨🇦',cont:'Noord-Amerika',pop:'38 mln',opp:'10 mln km²',munt:'Canadese dollar',taal:'Engels, Frans'},
+  {id:'MX',name:'Mexico',capital:'Mexico-Stad',flag:'🇲🇽',cont:'Noord-Amerika',pop:'130 mln',opp:'1,96 mln km²',munt:'Mexicaanse peso',taal:'Spaans'},
+  {id:'GT',name:'Guatemala',capital:'Guatemala-Stad',flag:'🇬🇹',cont:'Noord-Amerika',pop:'17 mln',opp:'108.889 km²',munt:'Quetzal',taal:'Spaans'},
+  {id:'HN',name:'Honduras',capital:'Tegucigalpa',flag:'🇭🇳',cont:'Noord-Amerika',pop:'10 mln',opp:'112.492 km²',munt:'Lempira',taal:'Spaans'},
+  {id:'NI',name:'Nicaragua',capital:'Managua',flag:'🇳🇮',cont:'Noord-Amerika',pop:'6,9 mln',opp:'130.373 km²',munt:'Córdoba',taal:'Spaans'},
+  {id:'CR',name:'Costa Rica',capital:'San José',flag:'🇨🇷',cont:'Noord-Amerika',pop:'5,2 mln',opp:'51.100 km²',munt:'Colón',taal:'Spaans'},
+  {id:'PA',name:'Panama',capital:'Panama-Stad',flag:'🇵🇦',cont:'Noord-Amerika',pop:'4,4 mln',opp:'75.417 km²',munt:'Balboa / Dollar',taal:'Spaans'},
+  {id:'CU',name:'Cuba',capital:'Havana',flag:'🇨🇺',cont:'Noord-Amerika',pop:'11 mln',opp:'109.884 km²',munt:'Cubaanse peso',taal:'Spaans'},
+  {id:'DO',name:'Dominicaanse Republiek',capital:'Santo Domingo',flag:'🇩🇴',cont:'Noord-Amerika',pop:'11 mln',opp:'48.671 km²',munt:'Dominicaanse peso',taal:'Spaans'},
+  // ── Zuid-Amerika ──
+  {id:'BR',name:'Brazilië',capital:'Brasília',flag:'🇧🇷',cont:'Zuid-Amerika',pop:'215 mln',opp:'8,5 mln km²',munt:'Real',taal:'Portugees'},
+  {id:'AR',name:'Argentinië',capital:'Buenos Aires',flag:'🇦🇷',cont:'Zuid-Amerika',pop:'46 mln',opp:'2,78 mln km²',munt:'Argentijnse peso',taal:'Spaans'},
+  {id:'CO',name:'Colombia',capital:'Bogotá',flag:'🇨🇴',cont:'Zuid-Amerika',pop:'51 mln',opp:'1,14 mln km²',munt:'Colombiaanse peso',taal:'Spaans'},
+  {id:'CL',name:'Chili',capital:'Santiago',flag:'🇨🇱',cont:'Zuid-Amerika',pop:'19 mln',opp:'756.102 km²',munt:'Chileense peso',taal:'Spaans'},
+  {id:'PE',name:'Peru',capital:'Lima',flag:'🇵🇪',cont:'Zuid-Amerika',pop:'33 mln',opp:'1,28 mln km²',munt:'Sol',taal:'Spaans, Quechua'},
+  {id:'VE',name:'Venezuela',capital:'Caracas',flag:'🇻🇪',cont:'Zuid-Amerika',pop:'29 mln',opp:'916.445 km²',munt:'Bolivar soberano',taal:'Spaans'},
+  {id:'EC',name:'Ecuador',capital:'Quito',flag:'🇪🇨',cont:'Zuid-Amerika',pop:'18 mln',opp:'283.561 km²',munt:'Dollar',taal:'Spaans'},
+  {id:'BO',name:'Bolivia',capital:'Sucre',flag:'🇧🇴',cont:'Zuid-Amerika',pop:'12 mln',opp:'1,09 mln km²',munt:'Boliviano',taal:'Spaans, Quechua, Aymara'},
+  {id:'PY',name:'Paraguay',capital:'Asunción',flag:'🇵🇾',cont:'Zuid-Amerika',pop:'7,4 mln',opp:'406.752 km²',munt:'Guaraní',taal:'Spaans, Guaraní'},
+  {id:'UY',name:'Uruguay',capital:'Montevideo',flag:'🇺🇾',cont:'Zuid-Amerika',pop:'3,5 mln',opp:'176.215 km²',munt:'Uruguayaanse peso',taal:'Spaans'},
+  {id:'GY',name:'Guyana',capital:'Georgetown',flag:'🇬🇾',cont:'Zuid-Amerika',pop:'0,8 mln',opp:'214.969 km²',munt:'Guyaanse dollar',taal:'Engels'},
+  {id:'SR',name:'Suriname',capital:'Paramaribo',flag:'🇸🇷',cont:'Zuid-Amerika',pop:'0,6 mln',opp:'163.820 km²',munt:'Surinaamse dollar',taal:'Nederlands'},
+  // ── Oceanië ──
+  {id:'AU',name:'Australië',capital:'Canberra',flag:'🇦🇺',cont:'Oceanië',pop:'26 mln',opp:'7,7 mln km²',munt:'Australische dollar',taal:'Engels'},
+  {id:'NZ',name:'Nieuw-Zeeland',capital:'Wellington',flag:'🇳🇿',cont:'Oceanië',pop:'5 mln',opp:'270.467 km²',munt:'Nieuw-Zeelandse dollar',taal:'Engels, Māori'},
+  {id:'PG',name:'Papoea-Nieuw-Guinea',capital:'Port Moresby',flag:'🇵🇬',cont:'Oceanië',pop:'10 mln',opp:'462.840 km²',munt:'Kina',taal:'Tok Pisin, Engels, Hiri Motu'},
+  // ── Europa (aanvulling) ──
+  {id:'IS',name:'IJsland',capital:'Reykjavik',flag:'🇮🇸',cont:'Europa',pop:'0,4 mln',opp:'103.000 km²',munt:'Ijslandse kroon',taal:'IJslands'},
+  {id:'LU',name:'Luxemburg',capital:'Luxemburg',flag:'🇱🇺',cont:'Europa',pop:'0,7 mln',opp:'2.586 km²',munt:'Euro',taal:'Luxemburgs, Frans, Duits'},
+  {id:'MT',name:'Malta',capital:'Valletta',flag:'🇲🇹',cont:'Europa',pop:'0,5 mln',opp:'316 km²',munt:'Euro',taal:'Maltees, Engels'},
+  {id:'CY',name:'Cyprus',capital:'Nicosia',flag:'🇨🇾',cont:'Europa',pop:'1,2 mln',opp:'9.251 km²',munt:'Euro',taal:'Grieks, Turks'},
+  {id:'XK',name:'Kosovo',capital:'Pristina',flag:'🇽🇰',cont:'Europa',pop:'1,8 mln',opp:'10.887 km²',munt:'Euro',taal:'Albanees, Servisch'},
+  // ── Azië (aanvulling) ──
+  {id:'IL',name:'Israël',capital:'Jeruzalem',flag:'🇮🇱',cont:'Azië',pop:'9,4 mln',opp:'20.770 km²',munt:'Nieuwe sjekel',taal:'Hebreeuws, Arabisch'},
+  {id:'AE',name:'Verenigde Arabische Emiraten',capital:'Abu Dhabi',flag:'🇦🇪',cont:'Azië',pop:'10 mln',opp:'83.600 km²',munt:'Dirham',taal:'Arabisch'},
+  {id:'OM',name:'Oman',capital:'Muskat',flag:'🇴🇲',cont:'Azië',pop:'4,5 mln',opp:'309.500 km²',munt:'Omaanse rial',taal:'Arabisch'},
+  {id:'BH',name:'Bahrein',capital:'Manama',flag:'🇧🇭',cont:'Azië',pop:'1,5 mln',opp:'780 km²',munt:'Bahreinse dinar',taal:'Arabisch'},
+  {id:'TW',name:'Taiwan',capital:'Taipei',flag:'🇹🇼',cont:'Azië',pop:'23 mln',opp:'36.193 km²',munt:'Nieuwe Taiwanese dollar',taal:'Mandarijn'},
+  {id:'SG',name:'Singapore',capital:'Singapore',flag:'🇸🇬',cont:'Azië',pop:'5,9 mln',opp:'733 km²',munt:'Singaporese dollar',taal:'Engels, Mandarijn, Maleis, Tamil'},
+  {id:'BN',name:'Brunei',capital:'Bandar Seri Begawan',flag:'🇧🇳',cont:'Azië',pop:'0,5 mln',opp:'5.765 km²',munt:'Brunei-dollar',taal:'Maleis'},
+  {id:'TL',name:'Oost-Timor',capital:'Dili',flag:'🇹🇱',cont:'Azië',pop:'1,3 mln',opp:'14.874 km²',munt:'Dollar',taal:'Tetum, Portugees'},
+  {id:'BT',name:'Bhutan',capital:'Thimphu',flag:'🇧🇹',cont:'Azië',pop:'0,8 mln',opp:'38.394 km²',munt:'Ngultrum',taal:'Dzongkha'},
+  {id:'MV',name:'Maldiven',capital:'Malé',flag:'🇲🇻',cont:'Azië',pop:'0,5 mln',opp:'298 km²',munt:'Rufiyaa',taal:'Dhivehi'},
+  // ── Afrika (aanvulling) ──
+  {id:'SL',name:'Sierra Leone',capital:'Freetown',flag:'🇸🇱',cont:'Afrika',pop:'8 mln',opp:'71.740 km²',munt:'Leone',taal:'Engels'},
+  {id:'GW',name:'Guinee-Bissau',capital:'Bissau',flag:'🇬🇼',cont:'Afrika',pop:'2 mln',opp:'36.125 km²',munt:'West-Afrikaanse CFA-frank',taal:'Portugees'},
+  {id:'GM',name:'Gambia',capital:'Banjul',flag:'🇬🇲',cont:'Afrika',pop:'2,6 mln',opp:'11.295 km²',munt:'Dalasi',taal:'Engels'},
+  {id:'TG',name:'Togo',capital:'Lomé',flag:'🇹🇬',cont:'Afrika',pop:'8,6 mln',opp:'56.785 km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'BJ',name:'Benin',capital:'Porto-Novo',flag:'🇧🇯',cont:'Afrika',pop:'13 mln',opp:'114.763 km²',munt:'West-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'GQ',name:'Equatoriaal-Guinea',capital:'Malabo',flag:'🇬🇶',cont:'Afrika',pop:'1,5 mln',opp:'28.051 km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Spaans, Frans, Portugees'},
+  {id:'GA',name:'Gabon',capital:'Libreville',flag:'🇬🇦',cont:'Afrika',pop:'2,3 mln',opp:'267.668 km²',munt:'Centraal-Afrikaanse CFA-frank',taal:'Frans'},
+  {id:'ST',name:'Sao Tomé en Principe',capital:'São Tomé',flag:'🇸🇹',cont:'Afrika',pop:'0,2 mln',opp:'964 km²',munt:'Dobra',taal:'Portugees'},
+  {id:'CV',name:'Kaapverdië',capital:'Praia',flag:'🇨🇻',cont:'Afrika',pop:'0,6 mln',opp:'4.033 km²',munt:'Kaapverdische escudo',taal:'Portugees'},
+  {id:'MR',name:'Mauritanië',capital:'Nouakchott',flag:'🇲🇷',cont:'Afrika',pop:'4,6 mln',opp:'1,03 mln km²',munt:'Ouguiya',taal:'Arabisch'},
+  {id:'EH',name:'Westelijke Sahara',capital:'El Aaiún',flag:'🇪🇭',cont:'Afrika',pop:'0,6 mln',opp:'266.000 km²',munt:'Marokkaanse dirham',taal:'Arabisch'},
+  {id:'DJ',name:'Djibouti',capital:'Djibouti',flag:'🇩🇯',cont:'Afrika',pop:'1 mln',opp:'23.200 km²',munt:'Djibouti-frank',taal:'Frans, Arabisch'},
+  {id:'KM',name:'Comoren',capital:'Moroni',flag:'🇰🇲',cont:'Afrika',pop:'0,9 mln',opp:'2.235 km²',munt:'Comorese frank',taal:'Comorisch, Frans, Arabisch'},
+  {id:'SC',name:'Seychellen',capital:'Victoria',flag:'🇸🇨',cont:'Afrika',pop:'0,1 mln',opp:'459 km²',munt:'Seychelse roepie',taal:'Seychels Creools, Engels, Frans'},
+  {id:'MU',name:'Mauritius',capital:'Port Louis',flag:'🇲🇺',cont:'Afrika',pop:'1,3 mln',opp:'2.040 km²',munt:'Mauritiaanse roepie',taal:'Engels, Frans'},
+  {id:'SZ',name:'Eswatini',capital:'Mbabane',flag:'🇸🇿',cont:'Afrika',pop:'1,2 mln',opp:'17.364 km²',munt:'Lilangeni',taal:'Swazi, Engels'},
+  {id:'LS',name:'Lesotho',capital:'Maseru',flag:'🇱🇸',cont:'Afrika',pop:'2,3 mln',opp:'30.355 km²',munt:'Loti',taal:'Sesotho, Engels'},
+  // ── Noord-Amerika (aanvulling) ──
+  {id:'BZ',name:'Belize',capital:'Belmopan',flag:'🇧🇿',cont:'Noord-Amerika',pop:'0,4 mln',opp:'22.966 km²',munt:'Belizaanse dollar',taal:'Engels'},
+  {id:'SV',name:'El Salvador',capital:'San Salvador',flag:'🇸🇻',cont:'Noord-Amerika',pop:'6,5 mln',opp:'21.041 km²',munt:'Dollar',taal:'Spaans'},
+  {id:'JM',name:'Jamaica',capital:'Kingston',flag:'🇯🇲',cont:'Noord-Amerika',pop:'3 mln',opp:'10.991 km²',munt:'Jamaicaanse dollar',taal:'Engels'},
+  {id:'HT',name:'Haïti',capital:'Port-au-Prince',flag:'🇭🇹',cont:'Noord-Amerika',pop:'11 mln',opp:'27.750 km²',munt:'Haïtiaanse gourde',taal:'Frans, Haïtiaans Creools'},
+  {id:'TT',name:'Trinidad en Tobago',capital:'Port of Spain',flag:'🇹🇹',cont:'Noord-Amerika',pop:'1,4 mln',opp:'5.130 km²',munt:'Trinidad en Tobago-dollar',taal:'Engels'},
+  {id:'BB',name:'Barbados',capital:'Bridgetown',flag:'🇧🇧',cont:'Noord-Amerika',pop:'0,3 mln',opp:'431 km²',munt:'Barbadiaanse dollar',taal:'Engels'},
+  // ── Zuid-Amerika (aanvulling) ──
+  {id:'FG',name:'Frans-Guyana',capital:'Cayenne',flag:'🇬🇫',cont:'Zuid-Amerika',pop:'0,3 mln',opp:'83.534 km²',munt:'Euro',taal:'Frans'},
+  // ── Oceanië (aanvulling) ──
+  {id:'SB',name:'Salomonseilanden',capital:'Honiara',flag:'🇸🇧',cont:'Oceanië',pop:'0,7 mln',opp:'28.896 km²',munt:'Salomondollar',taal:'Engels'},
+  {id:'VU',name:'Vanuatu',capital:'Port Vila',flag:'🇻🇺',cont:'Oceanië',pop:'0,3 mln',opp:'12.189 km²',munt:'Vatu',taal:'Bislama, Engels, Frans'},
+  {id:'FJ',name:'Fiji',capital:'Suva',flag:'🇫🇯',cont:'Oceanië',pop:'0,9 mln',opp:'18.274 km²',munt:'Fiji-dollar',taal:'Engels, Fijisch, Hindi'},
+  {id:'NC',name:'Nieuw-Caledonië',capital:'Nouméa',flag:'🇳🇨',cont:'Oceanië',pop:'0,3 mln',opp:'18.575 km²',munt:'CFP-frank',taal:'Frans'},
+  {id:'WS',name:'Samoa',capital:'Apia',flag:'🇼🇸',cont:'Oceanië',pop:'0,2 mln',opp:'2.842 km²',munt:'Tālā',taal:'Samoaans, Engels'},
+  {id:'TO',name:'Tonga',capital:'Nukuʻalofa',flag:'🇹🇴',cont:'Oceanië',pop:'0,1 mln',opp:'748 km²',munt:'Paʻanga',taal:'Tongaans, Engels'},
+  {id:'KI',name:'Kiribati',capital:'Tarawa',flag:'🇰🇮',cont:'Oceanië',pop:'0,1 mln',opp:'811 km²',munt:'Australische dollar',taal:'Gilbertees, Engels'},
+  {id:'FM',name:'Micronesië',capital:'Palikir',flag:'🇫🇲',cont:'Oceanië',pop:'0,1 mln',opp:'702 km²',munt:'Dollar',taal:'Engels'},
+  {id:'MH',name:'Marshalleilanden',capital:'Majuro',flag:'🇲🇭',cont:'Oceanië',pop:'0,04 mln',opp:'181 km²',munt:'Dollar',taal:'Marshallees, Engels'},
+  {id:'PW',name:'Palau',capital:'Ngerulmud',flag:'🇵🇼',cont:'Oceanië',pop:'0,02 mln',opp:'459 km²',munt:'Dollar',taal:'Palaues, Engels'},
+  {id:'NR',name:'Nauru',capital:'Yaren',flag:'🇳🇷',cont:'Oceanië',pop:'0,01 mln',opp:'21 km²',munt:'Australische dollar',taal:'Nauruan, Engels'},
+  {id:'TV',name:'Tuvalu',capital:'Funafuti',flag:'🇹🇻',cont:'Oceanië',pop:'0,01 mln',opp:'26 km²',munt:'Tuvaluan dollar',taal:'Tuvaluaans, Engels'},
+  // ── Europa (micro-staten) ──
+  {id:'AD',name:'Andorra',capital:'Andorra la Vella',flag:'🇦🇩',cont:'Europa',pop:'0,08 mln',opp:'468 km²',munt:'Euro',taal:'Catalaans'},
+  {id:'LI',name:'Liechtenstein',capital:'Vaduz',flag:'🇱🇮',cont:'Europa',pop:'0,04 mln',opp:'160 km²',munt:'Zwitserse frank',taal:'Duits'},
+  {id:'MC',name:'Monaco',capital:'Monaco',flag:'🇲🇨',cont:'Europa',pop:'0,04 mln',opp:'2 km²',munt:'Euro',taal:'Frans'},
+  {id:'SM',name:'San Marino',capital:'San Marino',flag:'🇸🇲',cont:'Europa',pop:'0,03 mln',opp:'61 km²',munt:'Euro',taal:'Italiaans'},
+  {id:'VA',name:'Vaticaanstad',capital:'Vaticaanstad',flag:'🇻🇦',cont:'Europa',pop:'0,001 mln',opp:'0,44 km²',munt:'Euro',taal:'Latijn, Italiaans'},
+  // ── Noord-Amerika (kleine eilandstaten) ──
+  {id:'AG',name:'Antigua en Barbuda',capital:"Saint John's",flag:'🇦🇬',cont:'Noord-Amerika',pop:'0,1 mln',opp:'443 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'BS',name:'Bahama\'s',capital:'Nassau',flag:'🇧🇸',cont:'Noord-Amerika',pop:'0,4 mln',opp:'13.943 km²',munt:'Bahamaanse dollar',taal:'Engels'},
+  {id:'DM',name:'Dominica',capital:'Roseau',flag:'🇩🇲',cont:'Noord-Amerika',pop:'0,07 mln',opp:'751 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'GD',name:'Grenada',capital:"Saint George's",flag:'🇬🇩',cont:'Noord-Amerika',pop:'0,1 mln',opp:'344 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'KN',name:'Saint Kitts en Nevis',capital:'Basseterre',flag:'🇰🇳',cont:'Noord-Amerika',pop:'0,05 mln',opp:'261 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'LC',name:'Saint Lucia',capital:'Castries',flag:'🇱🇨',cont:'Noord-Amerika',pop:'0,2 mln',opp:'617 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'VC',name:'Saint Vincent en de Grenadines',capital:'Kingstown',flag:'🇻🇨',cont:'Noord-Amerika',pop:'0,1 mln',opp:'389 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  // ── Territoria & Bijzondere Gebieden ──
+  {id:'GRL',name:'Groenland',capital:'Nuuk',flag:'🇬🇱',cont:'Noord-Amerika',pop:'0,06 mln',opp:'2,17 mln km²',munt:'Deense kroon',taal:'Groenlands, Deens'},
+  {id:'HKG',name:'Hongkong',capital:'Hongkong',flag:'🇭🇰',cont:'Azië',pop:'7,5 mln',opp:'1.106 km²',munt:'Hongkongse dollar',taal:'Kantonees, Engels'},
+  {id:'PRI',name:'Puerto Rico',capital:'San Juan',flag:'🇵🇷',cont:'Noord-Amerika',pop:'3,3 mln',opp:'9.104 km²',munt:'Dollar',taal:'Spaans, Engels'},
+  {id:'GIB',name:'Gibraltar',capital:'Gibraltar',flag:'🇬🇮',cont:'Europa',pop:'0,03 mln',opp:'6,8 km²',munt:'Gibraltarees pond',taal:'Engels, Spaans'},
+  {id:'FLK',name:'Falklandeilanden',capital:'Stanley',flag:'🇫🇰',cont:'Zuid-Amerika',pop:'0,004 mln',opp:'12.173 km²',munt:'Falklands pond',taal:'Engels'},
+  {id:'BMU',name:'Bermuda',capital:'Hamilton',flag:'🇧🇲',cont:'Noord-Amerika',pop:'0,06 mln',opp:'54 km²',munt:'Bermudaanse dollar',taal:'Engels'},
+  {id:'CYM',name:'Caymaneilanden',capital:'George Town',flag:'🇰🇾',cont:'Noord-Amerika',pop:'0,07 mln',opp:'264 km²',munt:'Caymaneilandse dollar',taal:'Engels'},
+  {id:'COK',name:'Cookeilanden',capital:'Avarua',flag:'🇨🇰',cont:'Oceanië',pop:'0,02 mln',opp:'236 km²',munt:'Nieuw-Zeelandse dollar',taal:'Engels, Rarotongan'},
+  {id:'PSE',name:'Palestina',capital:'Ramallah',flag:'🇵🇸',cont:'Azië',pop:'5,4 mln',opp:'6.020 km²',munt:'Israëlische shekel',taal:'Arabisch'},
+  {id:'ATA',name:'Antarctica',capital:'—',flag:'🇦🇶',cont:'Antarctica',pop:'0 (onderzoekers)',opp:'14 mln km²',munt:'—',taal:'—'},
+  {id:'ASM',name:'Amerikaans Samoa',capital:'Pago Pago',flag:'🇦🇸',cont:'Oceanië',pop:'0,06 mln',opp:'199 km²',munt:'Dollar',taal:'Samoaans, Engels'},
+  {id:'VGB',name:'Britse Maagdeneilanden',capital:'Road Town',flag:'🇻🇬',cont:'Noord-Amerika',pop:'0,03 mln',opp:'153 km²',munt:'Dollar',taal:'Engels'},
+  {id:'FRO',name:'Faroereilanden',capital:'Tórshavn',flag:'🇫🇴',cont:'Europa',pop:'0,05 mln',opp:'1.399 km²',munt:'Faeröerse kroon',taal:'Faeröers, Deens'},
+  {id:'PYF',name:'Frans-Polynesië',capital:'Papeete',flag:'🇵🇫',cont:'Oceanië',pop:'0,3 mln',opp:'4.167 km²',munt:'CFP-frank',taal:'Frans, Tahitiaans'},
+  {id:'GUM',name:'Guam',capital:'Hagåtña',flag:'🇬🇺',cont:'Oceanië',pop:'0,2 mln',opp:'549 km²',munt:'Dollar',taal:'Chamorro, Engels'},
+  {id:'MAC',name:'Macau',capital:'Macau',flag:'🇲🇴',cont:'Azië',pop:'0,7 mln',opp:'32 km²',munt:'Pataca',taal:'Kantonees, Portugees'},
+  {id:'MSR',name:'Montserrat',capital:'Plymouth (verlaten)',flag:'🇲🇸',cont:'Noord-Amerika',pop:'0,005 mln',opp:'102 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'CUW',name:'Curaçao',capital:'Willemstad',flag:'🇨🇼',cont:'Noord-Amerika',pop:'0,2 mln',opp:'444 km²',munt:'Antilliaanse gulden',taal:'Papiaments, Nederlands, Engels'},
+  {id:'ABW',name:'Aruba',capital:'Oranjestad',flag:'🇦🇼',cont:'Noord-Amerika',pop:'0,1 mln',opp:'180 km²',munt:'Arubaanse florin',taal:'Papiaments, Nederlands'},
+  {id:'SXM',name:'Sint-Maarten',capital:'Philipsburg',flag:'🇸🇽',cont:'Noord-Amerika',pop:'0,04 mln',opp:'34 km²',munt:'Antilliaanse gulden',taal:'Engels, Nederlands'},
+  {id:'TCA',name:'Turks- en Caicoseilanden',capital:'Cockburn Town',flag:'🇹🇨',cont:'Noord-Amerika',pop:'0,04 mln',opp:'948 km²',munt:'Dollar',taal:'Engels'},
+  {id:'AIA',name:'Anguilla',capital:'The Valley',flag:'🇦🇮',cont:'Noord-Amerika',pop:'0,02 mln',opp:'91 km²',munt:'Oost-Caribische dollar',taal:'Engels'},
+  {id:'SYC',name:'Seychellen',capital:'Victoria',flag:'🇸🇨',cont:'Afrika',pop:'0,1 mln',opp:'459 km²',munt:'Seychelse roepie',taal:'Seychels Creools, Engels, Frans'},
+  {id:'GGY',name:'Guernsey',capital:'Saint Peter Port',flag:'🇬🇬',cont:'Europa',pop:'0,07 mln',opp:'78 km²',munt:'Guernsey pond',taal:'Engels, Normandisch'},
+  {id:'JEY',name:'Jersey',capital:'Saint Helier',flag:'🇯🇪',cont:'Europa',pop:'0,1 mln',opp:'116 km²',munt:'Jersey pond',taal:'Engels, Normandisch'},
+  {id:'IMN',name:'Isle of Man',capital:'Douglas',flag:'🇮🇲',cont:'Europa',pop:'0,09 mln',opp:'572 km²',munt:'Manx pond',taal:'Engels, Manx'},
+  {id:'VIR',name:'Amerikaanse Maagdeneilanden',capital:'Charlotte Amalie',flag:'🇻🇮',cont:'Noord-Amerika',pop:'0,1 mln',opp:'347 km²',munt:'Dollar',taal:'Engels'},
+  {id:'MNP',name:'Noordelijke Marianen',capital:'Saipan',flag:'🇲🇵',cont:'Oceanië',pop:'0,05 mln',opp:'464 km²',munt:'Dollar',taal:'Chamorro, Carolinian, Engels'},
+  {id:'SHN',name:'Sint-Helena',capital:'Jamestown',flag:'🇸🇭',cont:'Afrika',pop:'0,006 mln',opp:'394 km²',munt:'Sint-Helenas pond',taal:'Engels'},
+  {id:'PCN',name:'Pitcairneilanden',capital:'Adamstown',flag:'🇵🇳',cont:'Oceanië',pop:'0,00005 mln',opp:'47 km²',munt:'Nieuw-Zeelandse dollar',taal:'Pitcairns, Engels'},
+  {id:'NIU',name:'Niue',capital:'Alofi',flag:'🇳🇺',cont:'Oceanië',pop:'0,002 mln',opp:'261 km²',munt:'Nieuw-Zeelandse dollar',taal:'Niuean, Engels'},
+  {id:'SPM',name:'Saint-Pierre en Miquelon',capital:'Saint-Pierre',flag:'🇵🇲',cont:'Noord-Amerika',pop:'0,006 mln',opp:'242 km²',munt:'Euro',taal:'Frans'},
+  {id:'WLF',name:'Wallis en Futuna',capital:'Mata-Utu',flag:'🇼🇫',cont:'Oceanië',pop:'0,01 mln',opp:'142 km²',munt:'CFP-frank',taal:'Wallisian, Futunan, Frans'},
+  {id:'MAF',name:'Saint-Martin (FR)',capital:'Marigot',flag:'🇲🇫',cont:'Noord-Amerika',pop:'0,04 mln',opp:'54 km²',munt:'Euro',taal:'Frans'},
+  {id:'BLM',name:'Saint-Barthélemy',capital:'Gustavia',flag:'🇧🇱',cont:'Noord-Amerika',pop:'0,01 mln',opp:'25 km²',munt:'Euro',taal:'Frans'},
+  {id:'NFK',name:'Norfolkeiland',capital:'Kingston',flag:'🇳🇫',cont:'Oceanië',pop:'0,002 mln',opp:'36 km²',munt:'Australische dollar',taal:'Norfuk, Engels'},
+];
+
+const CONTINENTEN = ['Alle', 'Europa', 'Azië', 'Afrika', 'Noord-Amerika', 'Zuid-Amerika', 'Oceanië'];
+
+let aardState = {
+  tab: 'kaart',
+  zoek: '',
+  cont: 'Alle',
+  selected: null,
+  quiz: { vragen: [], cur: 0, score: 0, gekozen: null, type: 'capital' }
+};
+
+function initAardrijkskunde() {
+  const panel = document.getElementById('aard-panel');
+  if (!panel) return;
+  renderAardPanel();
+}
+
+function renderAardPanel() {
+  const panel = document.getElementById('aard-panel');
+  if (!panel) return;
+  panel.innerHTML = `
+    <div class="aard-subtabs">
+      <button class="aard-subtab ${aardState.tab==='kaart'?'on':''}" onclick="aardTab('kaart')">🗺️ Kaart</button>
+      <button class="aard-subtab ${aardState.tab==='lijst'?'on':''}" onclick="aardTab('lijst')">📋 Landen</button>
+      <button class="aard-subtab ${aardState.tab==='quiz'?'on':''}" onclick="aardTab('quiz')">🎯 Quiz</button>
+    </div>
+    <div id="aard-content"></div>
+  `;
+  renderAardContent();
+}
+
+function aardTab(t) {
+  aardState.tab = t;
+  aardState.selected = null;
+  if (t === 'quiz') { startAardQuiz(); return; }
+  renderAardPanel();
+}
+
+function renderAardContent() {
+  const el = document.getElementById('aard-content');
+  if (!el) return;
+  if (aardState.tab === 'kaart') renderAardKaart(el);
+  else if (aardState.tab === 'lijst') renderAardLijst(el);
+  else if (aardState.tab === 'quiz') renderAardQuizContent(el);
+}
+
+function renderAardKaart(el) {
+  const land = aardState.selected ? LANDEN.find(l => l.id === aardState.selected) : null;
+  el.innerHTML = `
+    <input class="aard-search" id="aard-zoek" placeholder="🔍 Zoek een land..." value="${aardState.zoek}" autocomplete="off" spellcheck="false" />
+    <div id="aard-zoek-resultaten">${aardState.zoek ? renderZoekResultatenHTML(aardState.zoek) : ''}</div>
+    <div id="aard-map-wrap-holder">${aardState.zoek ? '' : renderWorldMap()}</div>
+    <div id="aard-country-card">
+      ${land ? renderCountryCard(land, true) : '<p style="text-align:center;color:var(--tx3);font-size:13px;margin-top:8px;">Klik op een land op de kaart of zoek hierboven 🌍</p>'}
+    </div>
+  `;
+  // Attach input listener after DOM insert — avoids inline oninput re-render issue
+  const inp = document.getElementById('aard-zoek');
+  if (inp) {
+    inp.addEventListener('input', function() { aardZoek(this.value); });
+    if (aardState.zoek) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+  }
+  if (!aardState.zoek) loadD3AndMap();
+}
+
+function loadD3AndMap() {
+  if (window.d3 && window.topojson) { initInteractiveMap(); return; }
+  if (window._d3Loading) { setTimeout(loadD3AndMap, 200); return; }
+  window._d3Loading = true;
+  const s1 = document.createElement('script');
+  s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js';
+  s1.onload = () => {
+    const s2 = document.createElement('script');
+    s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js';
+    s2.onload = () => { window._d3Loading = false; initInteractiveMap(); };
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s1);
+}
+
+function renderZoekResultatenHTML(q) {
+  q = (q || '').toLowerCase();
+  const hits = LANDEN.filter(l => l.name.toLowerCase().includes(q) || l.capital.toLowerCase().includes(q) || l.cont.toLowerCase().includes(q));
+  if (!hits.length) return '<p style="text-align:center;color:var(--tx3);font-size:13px;padding:12px;">Geen landen gevonden</p>';
+  return `<div style="background:var(--surface2);border-radius:var(--radius-sm);overflow:hidden;max-height:220px;overflow-y:auto;margin-bottom:10px;border:1px solid var(--surface3);">
+    ${hits.map(l => `<div class="country-list-item" onclick="selectLand('${l.id}')">
+      <span class="cli-flag">${l.flag}</span>
+      <div><div class="cli-name">${l.name}</div><div class="cli-cap">🏛️ ${l.capital} · ${l.cont}</div></div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function renderWorldMap() {
+  return `<div class="aard-map-wrap" id="aard-map-container" style="background:#1a2744;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:10px;position:relative;min-height:260px;">
+    <div id="aard-map-inner" style="width:100%;"></div>
+    <div id="aard-map-tooltip" style="display:none;position:absolute;background:rgba(15,14,23,0.95);color:#EEEAF8;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;pointer-events:none;border:1px solid rgba(124,111,255,0.4);z-index:10;"></div>
+    <div style="position:absolute;bottom:6px;right:8px;display:flex;gap:4px;">
+      <button onclick="aardMapZoom(1.4)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;width:26px;height:26px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+      <button onclick="aardMapZoom(0.7)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;width:26px;height:26px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">−</button>
+      <button onclick="aardMapReset()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;width:26px;height:26px;border-radius:6px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">↺</button>
+    </div>
+  </div>`;
+}
+
+let _d3Loaded = false;
+let _mapZoom = null;
+let _mapSvg = null;
+let _mapG = null;
+let _mapTransform = {k:1, x:0, y:0};
+
+function aardMapZoom(factor) {
+  if (!_mapZoom || !_mapSvg) return;
+  _mapSvg.call(_mapZoom.scaleBy, factor);
+}
+function aardMapReset() {
+  if (!_mapZoom || !_mapSvg) return;
+  _mapSvg.call(_mapZoom.transform, d3.zoomIdentity);
+}
+
+const ISO_TO_LEERHELD = {
+  'BEL':'BE','NLD':'NL','FRA':'FR','DEU':'DE','GBR':'GB','ITA':'IT','ESP':'ES','PRT':'PT',
+  'CHE':'CH','AUT':'AT','POL':'PL','SWE':'SE','NOR':'NO','DNK':'DK','FIN':'FI','GRC':'GR',
+  'CZE':'CZ','HUN':'HU','ROU':'RO','RUS':'RU','CHN':'CN','JPN':'JP','IND':'IN','KOR':'KR',
+  'SAU':'SA','TUR':'TR','IDN':'ID','PAK':'PK','THA':'TH','VNM':'VN','EGY':'EG','ZAF':'ZA',
+  'NGA':'NG','KEN':'KE','MAR':'MA','ETH':'ET','USA':'US','CAN':'CA','MEX':'MX','BRA':'BR',
+  'ARG':'AR','COL':'CO','CHL':'CL','PER':'PE','AUS':'AU','NZL':'NZ',
+  // Europa
+  'UKR':'UA','SVK':'SK','HRV':'HR','BIH':'BA','SRB':'RS','BGR':'BG','BLR':'BY',
+  'LTU':'LT','LVA':'LV','EST':'EE','MDA':'MD','ALB':'AL','MKD':'MK','MNE':'ME',
+  'SVN':'SI','IRL':'IE','ISL':'IS','LUX':'LU','MLT':'MT','CYP':'CY',
+  'AND':'AD','LIE':'LI','MCO':'MC','SMR':'SM','VAT':'VA',
+  // Azië
+  'PRK':'KP','MYS':'MY','PHL':'PH','MMR':'MM','KHM':'KH','LAO':'LA','BGD':'BD',
+  'NPL':'NP','LKA':'LK','IRQ':'IQ','IRN':'IR','AFG':'AF','UZB':'UZ','KAZ':'KZ',
+  'SYR':'SY','YEM':'YE','JOR':'JO','AZE':'AZ','GEO':'GE','ARM':'AM','TJK':'TJ',
+  'TKM':'TM','KGZ':'KG','MNG':'MN','LBN':'LB','KWT':'KW','QAT':'QA',
+  'ISR':'IL','ARE':'AE','OMN':'OM','BHR':'BH','TWN':'TW','BTN':'BT','TLS':'TL',
+  'SGP':'SG','BRN':'BN','MDV':'MV',
+  // Afrika
+  'DZA':'DZ','SDN':'SD','TUN':'TN','LBY':'LY','GHA':'GH','TZA':'TZ','UGA':'UG',
+  'MOZ':'MZ','ZWE':'ZW','ZMB':'ZM','SEN':'SN','CMR':'CM','CIV':'CI','MDG':'MG',
+  'AGO':'AO','MLI':'ML','NER':'NE','BFA':'BF','SOM':'SO','TCD':'TD','GIN':'GN',
+  'RWA':'RW','BDI':'BI','SSD':'SS','ERI':'ER','LBR':'LR','CAF':'CF','COG':'CG',
+  'COD':'CD','NAM':'NA','BWA':'BW','MWI':'MW','SLE':'SL','GNB':'GW','GMB':'GM',
+  'TGO':'TG','BEN':'BJ','GNQ':'GQ','GAB':'GA','MRT':'MR','ESH':'EH','DJI':'DJ',
+  'SWZ':'SZ','LSO':'LS','COM':'KM','SYC':'SC','MUS':'MU','CPV':'CV','STP':'ST',
+  // Noord-Amerika
+  'GTM':'GT','HND':'HN','NIC':'NI','CRI':'CR','PAN':'PA','CUB':'CU','DOM':'DO',
+  'BLZ':'BZ','SLV':'SV','JAM':'JM','HTI':'HT','TTO':'TT','BRB':'BB',
+  'ATG':'AG','BHS':'BS','DMA':'DM','GRD':'GD','KNA':'KN','LCA':'LC','VCT':'VC',
+  // Zuid-Amerika
+  'VEN':'VE','ECU':'EC','BOL':'BO','PRY':'PY','URY':'UY','GUY':'GY','SUR':'SR',
+  // Oceanië
+  'PNG':'PG','SLB':'SB','VUT':'VU','FJI':'FJ','NCL':'NC',
+  'WSM':'WS','TON':'TO','KIR':'KI','FSM':'FM','MHL':'MH','PLW':'PW','NRU':'NR','TUV':'TV',
+  // Territoria (zichtbaar op kaart)
+  'GRL':'GRL','HKG':'HKG','PRI':'PRI','GIB':'GIB','FLK':'FLK','BMU':'BMU','CYM':'CYM','COK':'COK',
+  // Extra landen/gebieden in 50m cache
+  'PSE':'PSE','ATA':'ATA',
+  'ASM':'ASM','VGB':'VGB','FRO':'FRO','PYF':'PYF','GUM':'GUM','MAC':'MAC','MSR':'MSR',
+  'CUW':'CUW','ABW':'ABW','SXM':'SXM','NIU':'NIU','NFK':'NFK','MNP':'MNP','PCN':'PCN',
+  'BLM':'BLM','SHN':'SHN','AIA':'AIA','MAF':'MAF','SPM':'SPM','SYC':'SYC','TCA':'TCA',
+  'GGY':'GGY','JEY':'JEY','IMN':'IMN','VIR':'VIR','WLF':'WLF',
+};
+const CONT_COLORS = {
+  'Europa':'#7C6FFF','Azië':'#06D6A0','Afrika':'#FFD166','Noord-Amerika':'#FF6B9D',
+  'Zuid-Amerika':'#FF9F1C','Oceanië':'#38BDF8','Europa/Azië':'#818CF8','Azië/Europa':'#818CF8',
+  'Antarctica':'#B0D0E8'
+};
+
+function getLid(feature) {
+  const iso3 = getNumToIso3()[String(feature.id)] || null;
+  return iso3 ? (ISO_TO_LEERHELD[iso3] || null) : null;
+}
+
+function getCountryFill(feature) {
+  const lid = getLid(feature);
+  if (!lid) return '#2a3a5c';
+  const land = LANDEN.find(l => l.id === lid);
+  if (!land) return '#2a3a5c';
+  if (aardState.selected === lid) return '#FFD166';
+  return CONT_COLORS[land.cont] || '#7C6FFF';
+}
+
+function initInteractiveMap() {
+  const container = document.getElementById('aard-map-inner');
+  if (!container || !window.d3 || !window.topojson) return;
+  // Clear any previous SVG
+  container.innerHTML = '';
+  _mapSvg = null; _mapG = null; _mapZoom = null;
+
+  const W = container.parentElement.offsetWidth || 680;
+  const H = Math.round(W * 0.52);
+
+  const svg = d3.select('#aard-map-inner').append('svg')
+    .attr('width', '100%')
+    .attr('height', H)
+    .attr('viewBox', `0 0 ${W} ${H}`)
+    .style('display','block');
+  _mapSvg = svg;
+
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill','#0d1b2e');
+
+  const g = svg.append('g');
+  _mapG = g;
+
+  const projection = d3.geoNaturalEarth1()
+    .scale(W / 6.3)
+    .translate([W / 2, H / 2]);
+  const path = d3.geoPath().projection(projection);
+
+  const zoom = d3.zoom()
+    .scaleExtent([0.8, 8])
+    .on('zoom', (event) => { g.attr('transform', event.transform); });
+  _mapZoom = zoom;
+  svg.call(zoom);
+
+  const tooltip = document.getElementById('aard-map-tooltip');
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+    .then(r => r.json())
+    .then(world => {
+      const countries = topojson.feature(world, world.objects.countries);
+
+      g.selectAll('path.country')
+        .data(countries.features)
+        .enter().append('path')
+          .attr('class', 'country')
+          .attr('d', path)
+          .attr('fill', d => getCountryFill(d))
+          .attr('stroke', '#0d1b2e')
+          .attr('stroke-width', 0.5)
+          .attr('opacity', d => getLid(d) ? 1 : 0.35)
+          .style('cursor', d => getLid(d) ? 'pointer' : 'default')
+          .on('mouseover', function(event, d) {
+            const lid = getLid(d);
+            if (!lid) {
+              d3.select(this).attr('opacity', 0.55).attr('fill', '#3a4a6c');
+              return;
+            }
+            const land = LANDEN.find(l => l.id === lid);
+            if (!land) return;
+            if (aardState.selected !== lid) d3.select(this).attr('opacity', 0.72);
+            if (tooltip) {
+              tooltip.style.display = 'block';
+              tooltip.innerHTML = `${land.flag} <strong>${land.name}</strong><br><span style="color:#9B93C4;font-weight:400;font-size:11px;">🏛️ ${land.capital}</span>`;
+            }
+          })
+          .on('mousemove', function(event) {
+            if (!tooltip) return;
+            const mapEl = document.getElementById('aard-map-container');
+            if (!mapEl) return;
+            const rect = mapEl.getBoundingClientRect();
+            let x = event.clientX - rect.left + 12;
+            let y = event.clientY - rect.top - 50;
+            if (x + 170 > rect.width) x = rect.width - 175;
+            if (y < 4) y = 4;
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+          })
+          .on('mouseout', function(event, d) {
+            const lid = getLid(d);
+            d3.select(this)
+              .attr('opacity', lid ? 1 : 0.35)
+              .attr('fill', getCountryFill(d));
+            if (tooltip) tooltip.style.display = 'none';
+          })
+          .on('click', function(event, d) {
+            const lid = getLid(d);
+            if (!lid) {
+              // Toon vriendelijke melding voor landen zonder info
+              const cardEl = document.getElementById('aard-country-card');
+              if (cardEl) cardEl.innerHTML = '<p style="text-align:center;color:var(--tx3);font-size:13px;padding:12px;">📍 Dit land staat nog niet in onze lijst. Probeer een gekleurd land!</p>';
+              return;
+            }
+            aardState.selected = lid;
+            aardState.zoek = '';
+            g.selectAll('path.country')
+              .attr('fill', feat => getCountryFill(feat))
+              .attr('opacity', feat => getLid(feat) ? 1 : 0.35);
+            const land = LANDEN.find(l => l.id === lid);
+            const cardEl = document.getElementById('aard-country-card');
+            if (cardEl && land) cardEl.innerHTML = renderCountryCard(land, true);
+          });
+
+      // Country borders
+      g.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
+        .attr('fill', 'none')
+        .attr('stroke', '#0a1525')
+        .attr('stroke-width', 0.4)
+        .attr('d', path);
+
+      // Legenda
+      const legItems = [
+        {label:'Europa', col:'#7C6FFF'},{label:'Azië', col:'#06D6A0'},
+        {label:'Afrika', col:'#FFD166'},{label:'N-Amerika', col:'#FF6B9D'},
+        {label:'Z-Amerika', col:'#FF9F1C'},{label:'Oceanië', col:'#38BDF8'}
+      ];
+      const legG = svg.append('g').attr('transform',`translate(6,${H-22})`);
+      legItems.forEach((item, i) => {
+        const lx = i * (W/6);
+        legG.append('rect').attr('x', lx).attr('y', 0).attr('width', 10).attr('height', 10).attr('rx', 2).attr('fill', item.col);
+        legG.append('text').attr('x', lx+13).attr('y', 9).attr('fill','rgba(255,255,255,0.55)').attr('font-size', Math.max(8, W/90)).text(item.label);
+      });
+    })
+    .catch(err => {
+      const inner = document.getElementById('aard-map-inner');
+      if (inner) inner.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:30px;font-size:13px;">⚠️ Kaart kon niet laden.</p>';
+    });
+}
+
+
+function getNumToIso3() {
+  if (window._numToIso3Cache) return window._numToIso3Cache;
+  window._numToIso3Cache = {
+    "4":"AFG","8":"ALB","10":"ATA","12":"DZA","16":"ASM","20":"AND","24":"AGO","28":"ATG",
+    "31":"AZE","32":"ARG","36":"AUS","40":"AUT","44":"BHS","48":"BHR","50":"BGD",
+    "51":"ARM","52":"BRB","56":"BEL","60":"BMU","64":"BTN","68":"BOL","70":"BIH",
+    "72":"BWA","76":"BRA","84":"BLZ","90":"SLB","92":"VGB","96":"BRN","100":"BGR","104":"MMR",
+    "108":"BDI","112":"BLR","116":"KHM","120":"CMR","124":"CAN","132":"CPV","136":"CYM",
+    "140":"CAF","144":"LKA","148":"TCD","152":"CHL","156":"CHN","158":"TWN","170":"COL",
+    "174":"COM","178":"COG","180":"COD","184":"COK","188":"CRI","191":"HRV","192":"CUB",
+    "196":"CYP","203":"CZE","204":"BEN","208":"DNK","212":"DMA","214":"DOM","218":"ECU",
+    "222":"SLV","226":"GNQ","231":"ETH","232":"ERI","233":"EST","234":"FRO","238":"FLK",
+    "242":"FJI","246":"FIN","250":"FRA","258":"PYF","262":"DJI","266":"GAB","268":"GEO",
+    "270":"GMB","275":"PSE","276":"DEU","288":"GHA","296":"KIR","300":"GRC","304":"GRL",
+    "308":"GRD","316":"GUM","320":"GTM","324":"GIN","328":"GUY","332":"HTI","336":"VAT",
+    "340":"HND","344":"HKG","348":"HUN","352":"ISL","356":"IND","360":"IDN","364":"IRN",
+    "368":"IRQ","372":"IRL","376":"ISR","380":"ITA","384":"CIV","388":"JAM","392":"JPN",
+    "398":"KAZ","400":"JOR","404":"KEN","408":"PRK","410":"KOR","414":"KWT","417":"KGZ",
+    "418":"LAO","422":"LBN","426":"LSO","428":"LVA","430":"LBR","434":"LBY","438":"LIE",
+    "440":"LTU","442":"LUX","446":"MAC","450":"MDG","454":"MWI","458":"MYS","462":"MDV",
+    "466":"MLI","470":"MLT","478":"MRT","480":"MUS","484":"MEX","492":"MCO","496":"MNG",
+    "498":"MDA","499":"MNE","500":"MSR","504":"MAR","508":"MOZ","512":"OMN","516":"NAM",
+    "520":"NRU","524":"NPL","528":"NLD","531":"CUW","533":"ABW","534":"SXM","540":"NCL",
+    "548":"VUT","554":"NZL","558":"NIC","562":"NER","566":"NGA","570":"NIU","574":"NFK",
+    "578":"NOR","580":"MNP","583":"FSM","584":"MHL","585":"PLW","586":"PAK","591":"PAN",
+    "598":"PNG","600":"PRY","604":"PER","608":"PHL","612":"PCN","616":"POL","620":"PRT",
+    "624":"GNB","626":"TLS","630":"PRI","634":"QAT","642":"ROU","643":"RUS","646":"RWA",
+    "652":"BLM","654":"SHN","659":"KNA","660":"AIA","662":"LCA","663":"MAF","666":"SPM",
+    "670":"VCT","674":"SMR","678":"STP","682":"SAU","686":"SEN","688":"SRB","690":"SYC",
+    "694":"SLE","702":"SGP","703":"SVK","704":"VNM","705":"SVN","706":"SOM","710":"ZAF",
+    "716":"ZWE","724":"ESP","728":"SSD","729":"SDN","732":"ESH","740":"SUR","748":"SWZ",
+    "752":"SWE","756":"CHE","760":"SYR","762":"TJK","764":"THA","768":"TGO","776":"TON",
+    "780":"TTO","784":"ARE","788":"TUN","792":"TUR","795":"TKM","796":"TCA","800":"UGA",
+    "804":"UKR","807":"MKD","818":"EGY","826":"GBR","831":"GGY","832":"JEY","833":"IMN",
+    "834":"TZA","840":"USA","850":"VIR","854":"BFA","858":"URY","860":"UZB","862":"VEN",
+    "876":"WLF","882":"WSM","887":"YEM","894":"ZMB"
+  };
+  return window._numToIso3Cache;
+}
+
+function selectLand(id) {
+  aardState.selected = id;
+  aardState.zoek = '';
+
+  if (aardState.tab === 'kaart') {
+    // Leeg het zoekveld
+    const zoekEl = document.getElementById('aard-zoek');
+    if (zoekEl) zoekEl.value = '';
+
+    // Verberg zoekresultaten
+    const zoekDiv = document.getElementById('aard-zoek-resultaten');
+    if (zoekDiv) zoekDiv.innerHTML = '';
+
+    // Toon kaart terug
+    const mapHolder = document.getElementById('aard-map-wrap-holder');
+    if (mapHolder) {
+      mapHolder.style.display = '';
+      if (!document.getElementById('aard-map-container')) {
+        mapHolder.innerHTML = renderWorldMap();
+        loadD3AndMap();
+      }
+    }
+
+    // Update kaart kleuren
+    if (_mapG) {
+      _mapG.selectAll('path.country')
+        .attr('fill', d => getCountryFill(d))
+        .attr('opacity', d => getLid(d) ? 1 : 0.35);
+    }
+
+    // Toon landkaart
+    const land = LANDEN.find(l => l.id === id);
+    const cardEl = document.getElementById('aard-country-card');
+    if (cardEl && land) cardEl.innerHTML = renderCountryCard(land, true);
+
+  } else if (aardState.tab === 'lijst') {
+    renderAardContent();
+  }
+}
+
+function aardZoek(v) {
+  aardState.zoek = v;
+  aardState.selected = null;
+
+  // Update alleen de resultaten — het input-veld wordt NIET aangeraakt zodat focus behouden blijft
+  const zoekDiv = document.getElementById('aard-zoek-resultaten');
+  const mapHolder = document.getElementById('aard-map-wrap-holder');
+  const cardEl = document.getElementById('aard-country-card');
+
+  if (zoekDiv) zoekDiv.innerHTML = v ? renderZoekResultatenHTML(v) : '';
+
+  if (mapHolder) {
+    if (v) {
+      mapHolder.style.display = 'none'; // verberg kaart tijdens zoeken maar behoud D3-state
+    } else {
+      mapHolder.style.display = '';
+      if (!document.getElementById('aard-map-container')) {
+        mapHolder.innerHTML = renderWorldMap();
+        loadD3AndMap();
+      }
+    }
+  }
+
+  if (cardEl) {
+    cardEl.innerHTML = '<p style="text-align:center;color:var(--tx3);font-size:13px;margin-top:8px;">Klik op een land op de kaart of zoek hierboven 🌍</p>';
+  }
+}
+
+function renderCountryCard(l, highlighted) {
+  return `<div class="country-card ${highlighted?'highlighted':''}">
+    <div class="country-flag">${l.flag}</div>
+    <div class="country-info">
+      <div class="country-name">${l.name}</div>
+      <div class="country-capital">🏛️ Hoofdstad: <strong>${l.capital}</strong></div>
+      <div class="country-facts">
+        <span class="country-fact">🌍 ${l.cont}</span>
+        <span class="country-fact">👥 ${l.pop}</span>
+        <span class="country-fact">📐 ${l.opp}</span>
+        <span class="country-fact">💰 ${l.munt}</span>
+        <span class="country-fact">🗣️ ${l.taal}</span>
+        ${l.extra ? `<span class="country-fact" style="color:var(--accent3);">ℹ️ ${l.extra}</span>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAardLijst(el) {
+  el.innerHTML = `
+    <input class="aard-search" id="aard-lijst-zoek" placeholder="🔍 Zoek land of hoofdstad..." value="${aardState.zoek}" autocomplete="off" spellcheck="false" />
+    <div class="aard-continent-row" id="aard-cont-row">
+      ${CONTINENTEN.map(c=>`<button class="aard-cont-btn ${aardState.cont===c?'on':''}" onclick="aardFilterCont('${c}')">${c}</button>`).join('')}
+    </div>
+    <div id="aard-lijst-card">${aardState.selected ? renderCountryCard(LANDEN.find(l=>l.id===aardState.selected)||LANDEN[0], true) : ''}</div>
+    <div id="aard-lijst-results"></div>
+    <p id="aard-lijst-count" style="font-size:11px;color:var(--tx3);text-align:right;margin-top:4px;"></p>
+  `;
+  renderAardLijstResults();
+  const inp = document.getElementById('aard-lijst-zoek');
+  if (inp) {
+    inp.addEventListener('input', function() {
+      aardState.zoek = this.value;
+      aardState.selected = null;
+      document.getElementById('aard-lijst-card').innerHTML = '';
+      renderAardLijstResults();
+    });
+  }
+}
+
+function renderAardLijstResults() {
+  const q = aardState.zoek.toLowerCase();
+  const filtered = LANDEN.filter(l => {
+    const matchCont = aardState.cont === 'Alle' || l.cont.includes(aardState.cont);
+    const matchQ = !q || l.name.toLowerCase().includes(q) || l.capital.toLowerCase().includes(q);
+    return matchCont && matchQ;
+  });
+  const resultsEl = document.getElementById('aard-lijst-results');
+  const countEl = document.getElementById('aard-lijst-count');
+  if (resultsEl) resultsEl.innerHTML = `
+    <div style="background:var(--surface2);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--surface3);max-height:380px;overflow-y:auto;">
+      ${filtered.map(l => `<div class="country-list-item" onclick="selectLand('${l.id}')">
+        <span class="cli-flag">${l.flag}</span>
+        <div style="flex:1"><div class="cli-name">${l.name}</div><div class="cli-cap">🏛️ ${l.capital} · ${l.cont}</div></div>
+        <span style="font-size:11px;color:var(--tx3);">${l.pop}</span>
+      </div>`).join('')}
+      ${!filtered.length ? '<p style="text-align:center;color:var(--tx3);font-size:13px;padding:16px;">Geen landen gevonden</p>' : ''}
+    </div>`;
+  if (countEl) countEl.textContent = filtered.length + ' landen';
+}
+
+function aardZoekLijst(v) {
+  aardState.zoek = v;
+  aardState.selected = null;
+  renderAardLijstResults();
+}
+
+function aardFilterCont(c) {
+  aardState.cont = c;
+  aardState.selected = null;
+  // Update knop stijlen
+  document.querySelectorAll('.aard-cont-btn').forEach(btn => btn.classList.toggle('on', btn.textContent === c));
+  document.getElementById('aard-lijst-card').innerHTML = '';
+  renderAardLijstResults();
+}
+
+function startAardQuiz() {
+  // Elke vraag krijgt een eigen willekeurig type
+  const validLanden = LANDEN.filter(l => l.id !== 'ATA' && l.cont !== 'Antarctica');
+  const shuffled = [...validLanden].sort(() => Math.random() - 0.5).slice(0, 10);
+  // Kaart-type alleen voor landen die groot genoeg zijn om op de kaart te zien
+  const kaartLanden = ['US','CA','RU','CN','BR','AU','IN','AR','KZ','DZ','CD','SA','MX','ID','SD','LY','IR','MN','PE','NG','ET','EG','CO','ZA','TN','MA','FR','DE','GB','ES','TR','UA','PL','NO','SE','FI','IQ','AF','PK','VN','TH','MM','IQ','BO','VE','ZM','MZ','TZ','KE','AO','ZW','BW','NA','ML','NE','TD','MR','YE','OM','MYS','PH'];
+  aardState.quiz.vragen = shuffled.map(l => {
+    const types = ['capital','flag','continent','population'];
+    if (kaartLanden.includes(l.id)) types.push('map','map'); // dubbel = hogere kans
+    return { land: l, type: types[Math.floor(Math.random() * types.length)] };
+  });
+  aardState.quiz.cur = 0;
+  aardState.quiz.score = 0;
+  aardState.quiz.gekozen = null;
+  aardState.tab = 'quiz';
+  renderAardPanel();
+}
+
+// Genereer 4 opties voor een vraag
+function quizOpties(juist, veld) {
+  const pool = LANDEN.filter(l => l.id !== 'ATA' && l.id !== juist.id);
+  const wrong = pool.sort(() => Math.random() - 0.5).slice(0, 3);
+  return [juist, ...wrong].sort(() => Math.random() - 0.5);
+}
+
+function renderAardQuizContent(el) {
+  if (aardState.quiz.cur >= aardState.quiz.vragen.length) {
+    renderAardQuizEnd(el); return;
+  }
+  const { land: q, type } = aardState.quiz.vragen[aardState.quiz.cur];
+  const gekozen = aardState.quiz.gekozen;
+  const opts = quizOpties(q, type);
+
+  // Vraag + opties per type
+  let vraagHTML = '', optLabel = '', vraagTitel = '';
+  if (type === 'capital') {
+    vraagTitel = `Wat is de hoofdstad van ${q.name}?`;
+    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
+    optLabel = 'capital';
+  } else if (type === 'flag') {
+    vraagTitel = 'Van welk land is dit de vlag?';
+    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
+    optLabel = 'name';
+  } else if (type === 'continent') {
+    vraagTitel = `Op welk continent ligt ${q.name}?`;
+    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
+    optLabel = 'continent';
+  } else if (type === 'population') {
+    vraagTitel = `Welk land heeft ${q.pop} inwoners?`;
+    vraagHTML = `<div class="quiz-q-text">${vraagTitel}</div><div class="quiz-q-hint">Hint: dit land ligt in ${q.cont}</div>`;
+    optLabel = 'name';
+  } else if (type === 'map') {
+    vraagTitel = 'Welk land is gemarkeerd op de kaart?';
+    vraagHTML = `<div class="quiz-q-text">${vraagTitel}</div><div id="quiz-mini-map" style="width:100%;height:160px;background:#0d1b2e;border-radius:10px;overflow:hidden;margin:8px 0;position:relative;"></div>`;
+    optLabel = 'name';
+  }
+
+  // Continent-opties zijn anders (niet landnamen maar continenten)
+  let optsHTML = '';
+  if (type === 'continent') {
+    const contOpts = [...new Set(LANDEN.map(l => l.cont))].filter(c => c !== 'Antarctica').sort(() => Math.random() - 0.5).slice(0, 3);
+    if (!contOpts.includes(q.cont)) { contOpts.pop(); contOpts.push(q.cont); }
+    const contShuffled = contOpts.sort(() => Math.random() - 0.5);
+    optsHTML = contShuffled.map((c, i) => {
+      let cls = 'quiz-opt';
+      if (gekozen !== null) cls += c === q.cont ? ' correct' : (c === gekozen ? ' wrong' : '');
+      return `<button class="${cls}" id="quiz-opt-${i}" data-id="${c}" onclick="aardQuizAntwoord('${c}')" ${gekozen!==null?'disabled':''}>${c}</button>`;
+    }).join('');
+  } else {
+    optsHTML = opts.map((o, i) => {
+      const label = optLabel === 'capital' ? o.capital : optLabel === 'name' ? o.name : o.capital;
+      const isCorrect = o.id === q.id;
+      let cls = 'quiz-opt';
+      if (gekozen !== null) cls += isCorrect ? ' correct' : (o.id === gekozen ? ' wrong' : '');
+      return `<button class="${cls}" id="quiz-opt-${i}" data-id="${o.id}" onclick="aardQuizAntwoord('${o.id}')" ${gekozen!==null?'disabled':''}>${label}</button>`;
+    }).join('');
+  }
+
+  // Type-label voor boven de vraag
+  const typeLabel = {capital:'🏛️ Hoofdstad raden', flag:'🚩 Vlag herkennen', continent:'🌍 Continent raden', population:'👥 Bevolking raden', map:'🗺️ Land op kaart zoeken'}[type] || '';
+
+  el.innerHTML = `
+    <div class="quiz-score-bar">
+      <span>Vraag ${aardState.quiz.cur+1} / ${aardState.quiz.vragen.length}</span>
+      <span style="color:var(--accent2);font-size:11px;font-weight:700;">${typeLabel}</span>
+      <span style="color:var(--ok);">✓ ${aardState.quiz.score}</span>
+    </div>
+    <div class="quiz-question-card">${vraagHTML}</div>
+    <div class="quiz-opts" id="quiz-opts-grid" style="grid-template-columns:${type==='continent'?'1fr 1fr':'1fr 1fr'};">${optsHTML}</div>
+    <div class="quiz-feedback" id="quiz-feedback">
+      ${gekozen !== null ? (
+        type === 'continent'
+          ? (gekozen === q.cont ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${q.cont}</strong>`)
+          : (gekozen === q.id ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${optLabel==='capital'?q.capital:q.name}</strong>`)
+      ) : ''}
+    </div>
+    <div class="quiz-next-wrap" id="quiz-next-wrap">
+      ${gekozen !== null ? `
+        ${renderCountryCard(q, false)}
+        <button class="quiz-next-btn" onclick="aardQuizVolgende()">
+          ${aardState.quiz.cur+1 < aardState.quiz.vragen.length ? 'Volgende vraag →' : '🏁 Resultaat bekijken'}
+        </button>` : ''}
+    </div>
+    <button onclick="aardTab('kaart')" style="display:block;margin:8px auto 0;padding:6px 16px;border-radius:20px;border:1px solid var(--surface3);background:none;color:var(--tx3);font-size:12px;cursor:pointer;">✕ Quiz stoppen</button>
+  `;
+
+  // Mini-kaart renderen na DOM insert
+  if (type === 'map') renderQuizMiniMap(q.id);
+}
+
+function renderQuizMiniMap(highlightId) {
+  const container = document.getElementById('quiz-mini-map');
+  if (!container || !window.d3 || !window.topojson) {
+    if (container) container.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:20px;font-size:12px;">Kaart laden...</p>';
+    // Wacht op D3 en probeer opnieuw
+    const wait = setInterval(() => {
+      if (window.d3 && window.topojson) { clearInterval(wait); renderQuizMiniMap(highlightId); }
+    }, 200);
+    return;
+  }
+  container.innerHTML = '';
+  const W = container.offsetWidth || 320;
+  const H = 160;
+  const svg = d3.select('#quiz-mini-map').append('svg').attr('width','100%').attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);
+  svg.append('rect').attr('width',W).attr('height',H).attr('fill','#0d1b2e');
+  const projection = d3.geoNaturalEarth1().scale(W/6.5).translate([W/2, H/2]);
+  const path = d3.geoPath().projection(projection);
+  const g = svg.append('g');
+
+  // Pulse animatie voor het gemarkeerde land
+  svg.append('defs').html(`
+    <filter id="quiz-glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .quiz-highlight { animation: quizPulse 1.2s ease-in-out infinite alternate; }
+      @keyframes quizPulse { from { fill: #FFD166; } to { fill: #FF9F1C; } }
+    </style>
+  `);
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+    .then(r => r.json())
+    .then(world => {
+      const countries = topojson.feature(world, world.objects.countries);
+      // Zoek het gemarkeerde land op om te centreren
+      const targetFeature = countries.features.find(f => {
+        const iso3 = getNumToIso3()[String(f.id)];
+        const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
+        return lid === highlightId;
+      });
+
+      // Zoom in op het gemarkeerde land als het gevonden is
+      if (targetFeature) {
+        const [[x0,y0],[x1,y1]] = path.bounds(targetFeature);
+        const cx = (x0+x1)/2, cy = (y0+y1)/2;
+        const dx = x1-x0, dy = y1-y0;
+        const scale = Math.min(8, Math.max(1.2, 0.7 / Math.max(dx/W, dy/H)));
+        const tx = W/2 - scale*cx, ty = H/2 - scale*cy;
+        g.attr('transform', `translate(${tx},${ty}) scale(${scale})`);
+      }
+
+      g.selectAll('path')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('d', path)
+        .attr('fill', f => {
+          const iso3 = getNumToIso3()[String(f.id)];
+          const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
+          return lid === highlightId ? '#FFD166' : '#2a3a5c';
+        })
+        .attr('stroke', '#0d1b2e')
+        .attr('stroke-width', 0.3)
+        .attr('class', f => {
+          const iso3 = getNumToIso3()[String(f.id)];
+          const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
+          return lid === highlightId ? 'quiz-highlight' : '';
+        })
+        .attr('filter', f => {
+          const iso3 = getNumToIso3()[String(f.id)];
+          return (iso3 ? ISO_TO_LEERHELD[iso3] : null) === highlightId ? 'url(#quiz-glow)' : '';
+        });
+    });
+}
+
+function aardQuizAntwoord(id) {
+  if (aardState.quiz.gekozen !== null) return;
+  aardState.quiz.gekozen = id;
+  const { land: q, type } = aardState.quiz.vragen[aardState.quiz.cur];
+  const correct = type === 'continent' ? id === q.cont : id === q.id;
+  if (correct) { aardState.quiz.score++; snd('ok'); } else { snd('no'); }
+
+  // Update knoppen in-place
+  const grid = document.getElementById('quiz-opts-grid');
+  if (grid) {
+    grid.querySelectorAll('.quiz-opt').forEach(btn => {
+      const btnId = btn.getAttribute('data-id');
+      btn.disabled = true;
+      const isCorrect = type === 'continent' ? btnId === q.cont : btnId === q.id;
+      if (isCorrect) btn.classList.add('correct');
+      else if (btnId === id) btn.classList.add('wrong');
+    });
+  }
+
+  const fb = document.getElementById('quiz-feedback');
+  if (fb) {
+    let correctLabel = type === 'capital' ? q.capital : type === 'continent' ? q.cont : q.name;
+    fb.innerHTML = correct ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${correctLabel}</strong>`;
+  }
+
+  const wrap = document.getElementById('quiz-next-wrap');
+  if (wrap) {
+    wrap.innerHTML = `
+      ${renderCountryCard(q, false)}
+      <button class="quiz-next-btn" onclick="aardQuizVolgende()">
+        ${aardState.quiz.cur+1 < aardState.quiz.vragen.length ? 'Volgende vraag →' : '🏁 Resultaat bekijken'}
+      </button>`;
+  }
+}
+
+function aardQuizVolgende() {
+  aardState.quiz.cur++;
+  aardState.quiz.gekozen = null;
+  renderAardContent();
+}
+
+function renderAardQuizEnd(el) {
+  const score = aardState.quiz.score;
+  const total = aardState.quiz.vragen.length;
+  const pct = Math.round(score / total * 100);
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '⭐' : pct >= 40 ? '💪' : '📚';
+  const msg = pct >= 80 ? 'Geweldig! Je bent een echte wereldkenner!' : pct >= 60 ? 'Goed gedaan! Nog een beetje oefenen!' : pct >= 40 ? 'Niet slecht! Blijf oefenen!' : 'Oefening baart kunst! Probeer opnieuw!';
+  if (pct >= 80) boom();
+  el.innerHTML = `
+    <div class="aard-quiz-end">
+      <div class="aard-quiz-end-emoji">${emoji}</div>
+      <div class="aard-quiz-end-title">${score} / ${total} goed!</div>
+      <div style="font-size:13px;color:var(--tx2);margin-bottom:16px;">${msg}</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px;">
+        <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px 20px;text-align:center;">
+          <div style="font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">${pct}%</div>
+          <div style="font-size:11px;color:var(--tx3);text-transform:uppercase;">score</div>
+        </div>
+      </div>
+      <button class="quiz-next-btn" onclick="startAardQuiz()" style="margin-bottom:8px;">🔄 Opnieuw spelen</button>
+      <button onclick="aardTab('kaart')" style="display:block;width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--surface3);background:none;color:var(--tx2);font-size:14px;cursor:pointer;font-family:'Fredoka',sans-serif;">🗺️ Terug naar kaart</button>
+    </div>
+  `;
+}
+
+
 function renderAdminInstellingen(el){
   el.innerHTML=`
     <div class="admin-section">
