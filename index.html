@@ -1170,7 +1170,7 @@ let taalTabState='tabel', taalFilter='all', taalLevel=1;
 let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null;
 let invulFilter='all', invulData=[];
 let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='zegswijzeBetekenis', zqCurrent=null;
-let zegswijzenThema=0;
+let zegswijzenThema=0, zegswijzenZoek='';
 let wwSelectie = new Set(); // geselecteerde werkwoorden (via infinitief)
 
 function getWwLijst(){
@@ -1247,9 +1247,22 @@ function toggleWwSel(checkbox){
 }
 
 function wwSelectieAlles(aan){
-  if(aan){ wwSelectie.clear(); }
-  else { getActiveW().forEach(w => wwSelectie.add(w[0])); }
-  renderWwSelLijst();
+  if(aan){
+    wwSelectie.clear();
+  } else {
+    getActiveW().forEach(w => wwSelectie.add(w[0]));
+  }
+  // Update alle checkboxes in de DOM direct
+  document.querySelectorAll('#ww-sel-lijst input[type=checkbox]').forEach(cb => {
+    cb.checked = aan;
+    const label = cb.closest('label');
+    if(label){
+      label.style.background = aan ? 'rgba(124,111,255,0.1)' : 'transparent';
+      label.style.border = `1px solid ${aan ? 'var(--accent)' : 'var(--surface3)'}`;
+    }
+  });
+  const countEl = document.getElementById('ww-sel-count');
+  if(countEl) countEl.textContent = aan ? 'Alle woorden' : '0 gekozen';
 }
 
 function sluitWwSelectie(){
@@ -1301,8 +1314,8 @@ function setTaalFilter(f){
   ['all','onr','reg'].forEach(k=>{const b=document.getElementById('tf-'+k);if(b)b.classList.toggle('on',k===f);});
   renderTaalRows();
 }
-function getTaalFiltered(){
-  const q=(document.getElementById('t-search')||{value:''}).value.toLowerCase();
+function getTaalFiltered(q){
+  q=(q||'').toLowerCase();
   return getActiveW().filter(r=>{
     const m=r[0].includes(q)||r[1].includes(q)||r[2].includes(q)||r[3].includes(q);
     if(!m)return false;
@@ -1311,8 +1324,8 @@ function getTaalFiltered(){
     return true;
   });
 }
-function renderTaalRows(){
-  const rows=getTaalFiltered();
+function renderTaalRows(q){
+  const rows=getTaalFiltered(q);
   const el=document.getElementById('t-tbody');
   if(!el)return;
   el.innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
@@ -1349,9 +1362,8 @@ function renderWwContent(){
 }
 
 function renderWwLijst(el){
-  const q=(document.getElementById('t-search')||{value:''}).value||'';
   el.innerHTML=`
-    <input class="t-search" type="text" id="t-search" placeholder="🔍 Zoek een werkwoord..." value="${q}" oninput="renderWwLijst(document.getElementById('ww-content'))" />
+    <input class="t-search" type="text" id="t-search" placeholder="🔍 Zoek een werkwoord..." value="" autocomplete="off" />
     <div class="filter-row">
       <span class="filter-lbl">Filter:</span>
       <button class="filter-btn ${taalFilter==='all'?'on':''}" id="tf-all" onclick="setTaalFilter('all')">Alle</button>
@@ -1366,6 +1378,8 @@ function renderWwLijst(el){
     </div>
     <p class="t-hint" id="t-rowcount"></p>`;
   renderTaalRows();
+  const inp = document.getElementById('t-search');
+  if (inp) inp.addEventListener('input', function(){ renderTaalRows(this.value); });
 }
 
 function renderWwQuiz(el){
@@ -1929,14 +1943,25 @@ function setZegswijzenMode(quiz){
 function renderZegswijzenContent(){
   const el=document.getElementById('zegswijzen-content');if(!el)return;
   if(!zegswijzenQuizMode){
-    const q=(document.getElementById('z-search')||{value:''}).value||'';
-    const filtered=getActiveZEGSWIJZEN().filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
-    el.innerHTML='<input class="t-search" type="text" id="z-search" placeholder="🔍 Zoek een zegswijze..." value="'+q+'" oninput="renderZegswijzenContent()" />'+
+    const filtered=getActiveZEGSWIJZEN().filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes((zegswijzenZoek||'').toLowerCase())||r[1].toLowerCase().includes((zegswijzenZoek||'').toLowerCase())));
+    el.innerHTML='<input class="t-search" type="text" id="z-search" placeholder="🔍 Zoek een zegswijze..." value="'+(zegswijzenZoek||'')+'" autocomplete="off" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Zegswijze</th><th>Betekenis</th></tr></thead>'+
-      '<tbody>'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
+      '<tbody id="z-tbody">'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
       '</table></div>'+
-      '<p class="t-hint">'+filtered.length+' zegswijzen</p>';
+      '<p class="t-hint" id="z-count">'+filtered.length+' zegswijzen</p>';
+    const inp=document.getElementById('z-search');
+    if(inp){
+      inp.addEventListener('input',function(){
+        zegswijzenZoek=this.value;
+        const q=this.value.toLowerCase();
+        const rows=getActiveZEGSWIJZEN().filter(r=>(zegswijzenThema===0||r[2]===zegswijzenThema)&&(r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q)));
+        const tbody=document.getElementById('z-tbody');
+        if(tbody)tbody.innerHTML=rows.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('');
+        const cnt=document.getElementById('z-count');
+        if(cnt)cnt.textContent=rows.length+' zegswijzen';
+      });
+    }
   } else {
     renderZegswijzenQuiz();
   }
@@ -4136,19 +4161,35 @@ const CONT_COLORS = {
   'Antarctica':'#B0D0E8'
 };
 
+// Pre-built direct map: numeric feature id -> continent color
+// This avoids the 3-step chain (numToIso3 -> ISO_TO_LEERHELD -> LANDEN -> CONT_COLORS)
+let _numToColorCache = null;
+function getNumToColorMap() {
+  if (_numToColorCache) return _numToColorCache;
+  _numToColorCache = {};
+  const n2i = getNumToIso3();
+  for (const [num, iso3] of Object.entries(n2i)) {
+    const lid = ISO_TO_LEERHELD[iso3];
+    if (!lid) continue;
+    const land = LANDEN.find(l => l.id === lid);
+    if (!land) continue;
+    _numToColorCache[num] = { lid, color: CONT_COLORS[land.cont] || '#7C6FFF', land };
+  }
+  return _numToColorCache;
+}
+
 function getLid(feature) {
   if (!feature || feature.id === undefined || feature.id === null) return null;
-  const iso3 = getNumToIso3()[String(feature.id)] || null;
-  return iso3 ? (ISO_TO_LEERHELD[iso3] || null) : null;
+  const entry = getNumToColorMap()[String(feature.id)];
+  return entry ? entry.lid : null;
 }
 
 function getCountryFill(feature) {
-  const lid = getLid(feature);
-  if (!lid) return '#2a3a5c';
-  const land = LANDEN.find(l => l.id === lid);
-  if (!land) return '#2a3a5c';
-  if (aardState.selected === lid) return '#FFD166';
-  return CONT_COLORS[land.cont] || '#7C6FFF';
+  if (!feature || feature.id === undefined) return '#2a3a5c';
+  const entry = getNumToColorMap()[String(feature.id)];
+  if (!entry) return '#2a3a5c';
+  if (aardState.selected === entry.lid) return '#FFD166';
+  return entry.color;
 }
 
 function initInteractiveMap() {
