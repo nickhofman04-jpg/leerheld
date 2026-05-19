@@ -340,16 +340,16 @@
     .ty-key.ty-key-active{transform:scale(1.2);color:white;border-color:transparent;box-shadow:0 3px 10px rgba(0,0,0,0.25);z-index:2;position:relative;}
     .ty-key.ty-ok{background:#9FE1CB!important;color:#04342C!important;border-color:#1D9E75!important;}
     .ty-key.ty-bad{background:#F5C4B3!important;color:#4A1B0C!important;border-color:#D85A30!important;}
-    .ty-f0{background:#EEEDFE;color:#3C3489}.ty-f1{background:#E1F5EE;color:#085040}
-    .ty-f2{background:#FAECE7;color:#4A1B0C}.ty-f3{background:#E6F1FB;color:#0C447C}
-    .ty-f4{background:#FAEEDA;color:#633806}.ty-f5{background:#FAEEDA;color:#633806}
-    .ty-f6{background:#E6F1FB;color:#0C447C}.ty-f7{background:#FAECE7;color:#4A1B0C}
-    .ty-f8{background:#E1F5EE;color:#085040}.ty-f9{background:#EEEDFE;color:#3C3489}
-    .ty-key.ty-key-active.ty-f0{background:#534AB7}.ty-key.ty-key-active.ty-f1{background:#1D9E75}
-    .ty-key.ty-key-active.ty-f2{background:#D85A30}.ty-key.ty-key-active.ty-f3{background:#378ADD}
-    .ty-key.ty-key-active.ty-f4,.ty-key.ty-key-active.ty-f5{background:#BA7517}
-    .ty-key.ty-key-active.ty-f6{background:#378ADD}.ty-key.ty-key-active.ty-f7{background:#D85A30}
-    .ty-key.ty-key-active.ty-f8{background:#1D9E75}.ty-key.ty-key-active.ty-f9{background:#534AB7}
+    .ty-f0{background:#FFE5E5;color:#8B0000}.ty-f1{background:#E5EEFF;color:#003A8B}
+    .ty-f2{background:#FFFAE5;color:#6B5000}.ty-f3{background:#E5F9EE;color:#005A25}
+    .ty-f4{background:#F0F0F0;color:#444444}.ty-f5{background:#F0F0F0;color:#444444}
+    .ty-f6{background:#E5F9EE;color:#005A25}.ty-f7{background:#FFFAE5;color:#6B5000}
+    .ty-f8{background:#E5EEFF;color:#003A8B}.ty-f9{background:#FFE5E5;color:#8B0000}
+    .ty-key.ty-key-active.ty-f0{background:#E05252}.ty-key.ty-key-active.ty-f1{background:#4A90D9}
+    .ty-key.ty-key-active.ty-f2{background:#F5C842}.ty-key.ty-key-active.ty-f3{background:#3DB87A}
+    .ty-key.ty-key-active.ty-f4,.ty-key.ty-key-active.ty-f5{background:#9B9B9B}
+    .ty-key.ty-key-active.ty-f6{background:#3DB87A}.ty-key.ty-key-active.ty-f7{background:#F5C842}
+    .ty-key.ty-key-active.ty-f8{background:#4A90D9}.ty-key.ty-key-active.ty-f9{background:#E05252}
     .ty-hands{display:flex;justify-content:center;gap:1.5rem;margin-bottom:10px;}
     .ty-hand{text-align:center;}
     .ty-finger-part{transition:fill 0.2s;}
@@ -619,6 +619,7 @@
       <div id="profiel-content" style="padding:12px 4px 4px;"></div>
     </div>
   </div>
+  <div class="modal-overlay" id="fouten-overlay" style="display:none" onclick="if(event.target===this)closeFoutenRapport()">
     <div class="modal" style="max-width:700px;">
       <div class="modal-header">
         <span class="modal-title">📊 Foutenrapport</span>
@@ -2565,8 +2566,8 @@ let adminUnlocked=false;
 // ════════════════════════════════════════════════════════
 
 const TY_FINGER_COLORS = {
-  f0:'#534AB7',f1:'#1D9E75',f2:'#D85A30',f3:'#378ADD',
-  f4:'#BA7517',f5:'#BA7517',f6:'#378ADD',f7:'#D85A30',f8:'#1D9E75',f9:'#534AB7'
+  f0:'#E05252',f1:'#4A90D9',f2:'#F5C842',f3:'#3DB87A',
+  f4:'#9B9B9B',f5:'#9B9B9B',f6:'#3DB87A',f7:'#F5C842',f8:'#4A90D9',f9:'#E05252'
 };
 const TY_FINGER_NAMES = {
   f0:'Linker pink',f1:'Linker ringvinger',f2:'Linker middelvinger',f3:'Linker wijsvinger',
@@ -4020,6 +4021,7 @@ const CONT_COLORS = {
 };
 
 function getLid(feature) {
+  if (!feature || feature.id === undefined || feature.id === null) return null;
   const iso3 = getNumToIso3()[String(feature.id)] || null;
   return iso3 ? (ISO_TO_LEERHELD[iso3] || null) : null;
 }
@@ -4347,100 +4349,96 @@ function aardFilterCont(c) {
 }
 
 function startAardQuiz() {
-  // Elke vraag krijgt een eigen willekeurig type
-  const validLanden = LANDEN.filter(l => l.id !== 'ATA' && l.cont !== 'Antarctica');
-  const shuffled = [...validLanden].sort(() => Math.random() - 0.5).slice(0, 10);
-  // Kaart-type alleen voor landen die groot genoeg zijn om op de kaart te zien
-  const kaartLanden = ['US','CA','RU','CN','BR','AU','IN','AR','KZ','DZ','CD','SA','MX','ID','SD','LY','IR','MN','PE','NG','ET','EG','CO','ZA','TN','MA','FR','DE','GB','ES','TR','UA','PL','NO','SE','FI','IQ','AF','PK','VN','TH','MM','IQ','BO','VE','ZM','MZ','TZ','KE','AO','ZW','BW','NA','ML','NE','TD','MR','YE','OM','MYS','PH'];
-  aardState.quiz.vragen = shuffled.map(l => {
-    const types = ['capital','flag','continent','population'];
-    if (kaartLanden.includes(l.id)) types.push('map','map'); // dubbel = hogere kans
-    return { land: l, type: types[Math.floor(Math.random() * types.length)] };
-  });
-  aardState.quiz.cur = 0;
-  aardState.quiz.score = 0;
-  aardState.quiz.gekozen = null;
+  // Toon keuzemenu
+  aardState.quiz.mode = null;
   aardState.tab = 'quiz';
   renderAardPanel();
 }
 
-// Genereer 4 opties voor een vraag
-function quizOpties(juist, veld) {
-  const pool = LANDEN.filter(l => l.id !== 'ATA' && l.id !== juist.id);
-  const wrong = pool.sort(() => Math.random() - 0.5).slice(0, 3);
-  return [juist, ...wrong].sort(() => Math.random() - 0.5);
+function startAardQuizMode(mode) {
+  // mode: 'vlag' | 'hoofdstad' | 'kaart'
+  aardState.quiz.mode = mode;
+  const validLanden = LANDEN.filter(l => l.id !== 'ATA' && l.cont !== 'Antarctica');
+  // Kaartmodus: enkel landen die groot genoeg zijn
+  const kaartLanden = new Set(['US','CA','RU','CN','BR','AU','IN','AR','KZ','DZ','CD','SA','MX','ID','SD','LY','IR','MN','PE','NG','ET','EG','CO','ZA','TN','MA','FR','DE','GB','ES','TR','UA','PL','NO','SE','FI','IQ','AF','PK','VN','TH','MM','BO','VE','ZM','MZ','TZ','KE','AO','ZW','ML','NE','TD','MR','YE','OM','MY','PH','BY','RO','CZ','SK','HU','RS','BG','GR','FI','SE','PT','BE','NL','AT','CH','HRV','BA','MK','AL','MD','GE','AZ','AM','TJ','TM','KG','UZ','SY','LB','JO','IQ','KW','QA','OM','LK','NP','BD','KH','LA','MM','PH','MY','ID','VN','TH','CN','MN','KZ','UZ']);
+  const pool = mode === 'kaart' ? validLanden.filter(l => kaartLanden.has(l.id)) : validLanden;
+  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, 10);
+  aardState.quiz.vragen = shuffled.map(l => ({ land: l }));
+  aardState.quiz.cur = 0;
+  aardState.quiz.score = 0;
+  aardState.quiz.gekozen = null;
+  renderAardContent();
 }
 
 function renderAardQuizContent(el) {
+  // Keuzemenu als nog geen modus gekozen
+  if (!aardState.quiz.mode) {
+    el.innerHTML = `
+      <div style="text-align:center;padding:8px 0 16px;">
+        <div style="font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:var(--tx);margin-bottom:4px;">Kies een quizmodus</div>
+        <div style="font-size:13px;color:var(--tx3);">Wat wil je oefenen?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <button onclick="startAardQuizMode('vlag')" style="display:flex;align-items:center;gap:14px;background:var(--surface2);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;text-align:left;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--surface3)'">
+          <span style="font-size:2.2rem;">🚩</span>
+          <div><div style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">Vlaggen oefenen</div><div style="font-size:12px;color:var(--tx3);">Herken de vlag en kies het juiste land</div></div>
+        </button>
+        <button onclick="startAardQuizMode('hoofdstad')" style="display:flex;align-items:center;gap:14px;background:var(--surface2);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;text-align:left;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='var(--surface3)'">
+          <span style="font-size:2.2rem;">🏛️</span>
+          <div><div style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">Land & Hoofdstad</div><div style="font-size:12px;color:var(--tx3);">Vlag + naam gegeven — raad de hoofdstad</div></div>
+        </button>
+        <button onclick="startAardQuizMode('kaart')" style="display:flex;align-items:center;gap:14px;background:var(--surface2);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;text-align:left;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent3)'" onmouseout="this.style.borderColor='var(--surface3)'">
+          <span style="font-size:2.2rem;">🗺️</span>
+          <div><div style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">Kaart herkennen</div><div style="font-size:12px;color:var(--tx3);">Een land licht op op de kaart — welk land is het?</div></div>
+        </button>
+      </div>
+      <button onclick="aardTab('kaart')" style="display:block;margin:0 auto;padding:6px 16px;border-radius:20px;border:1px solid var(--surface3);background:none;color:var(--tx3);font-size:12px;cursor:pointer;">← Terug naar kaart</button>
+    `;
+    return;
+  }
+
   if (aardState.quiz.cur >= aardState.quiz.vragen.length) {
     renderAardQuizEnd(el); return;
   }
-  const { land: q, type } = aardState.quiz.vragen[aardState.quiz.cur];
+
+  const { land: q } = aardState.quiz.vragen[aardState.quiz.cur];
+  const mode = aardState.quiz.mode;
   const gekozen = aardState.quiz.gekozen;
-  const opts = quizOpties(q, type);
 
-  // Vraag + opties per type
-  let vraagHTML = '', optLabel = '', vraagTitel = '';
-  if (type === 'capital') {
-    vraagTitel = `Wat is de hoofdstad van ${q.name}?`;
-    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
-    optLabel = 'capital';
-  } else if (type === 'flag') {
-    vraagTitel = 'Van welk land is dit de vlag?';
-    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
-    optLabel = 'name';
-  } else if (type === 'continent') {
-    vraagTitel = `Op welk continent ligt ${q.name}?`;
-    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">${vraagTitel}</div>`;
-    optLabel = 'continent';
-  } else if (type === 'population') {
-    vraagTitel = `Welk land heeft ${q.pop} inwoners?`;
-    vraagHTML = `<div class="quiz-q-text">${vraagTitel}</div><div class="quiz-q-hint">Hint: dit land ligt in ${q.cont}</div>`;
-    optLabel = 'name';
-  } else if (type === 'map') {
-    vraagTitel = 'Welk land is gemarkeerd op de kaart?';
-    vraagHTML = `<div class="quiz-q-text">${vraagTitel}</div><div id="quiz-mini-map" style="width:100%;height:160px;background:#0d1b2e;border-radius:10px;overflow:hidden;margin:8px 0;position:relative;"></div>`;
-    optLabel = 'name';
-  }
+  // Genereer opties
+  const pool = LANDEN.filter(l => l.id !== 'ATA' && l.id !== q.id);
+  const wrong = pool.sort(() => Math.random() - 0.5).slice(0, 3);
+  const opts = [q, ...wrong].sort(() => Math.random() - 0.5);
 
-  // Continent-opties zijn anders (niet landnamen maar continenten)
-  let optsHTML = '';
-  if (type === 'continent') {
-    const contOpts = [...new Set(LANDEN.map(l => l.cont))].filter(c => c !== 'Antarctica').sort(() => Math.random() - 0.5).slice(0, 3);
-    if (!contOpts.includes(q.cont)) { contOpts.pop(); contOpts.push(q.cont); }
-    const contShuffled = contOpts.sort(() => Math.random() - 0.5);
-    optsHTML = contShuffled.map((c, i) => {
-      let cls = 'quiz-opt';
-      if (gekozen !== null) cls += c === q.cont ? ' correct' : (c === gekozen ? ' wrong' : '');
-      return `<button class="${cls}" id="quiz-opt-${i}" data-id="${c}" onclick="aardQuizAntwoord('${c}')" ${gekozen!==null?'disabled':''}>${c}</button>`;
-    }).join('');
+  const modeLabel = {vlag:'🚩 Vlaggen', hoofdstad:'🏛️ Hoofdsteden', kaart:'🗺️ Kaart'}[mode];
+
+  let vraagHTML = '';
+  if (mode === 'vlag') {
+    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">Van welk land is dit de vlag?</div>`;
+  } else if (mode === 'hoofdstad') {
+    vraagHTML = `<div class="quiz-q-flag">${q.flag}</div><div class="quiz-q-text">Wat is de hoofdstad van <strong>${q.name}</strong>?</div>`;
   } else {
-    optsHTML = opts.map((o, i) => {
-      const label = optLabel === 'capital' ? o.capital : optLabel === 'name' ? o.name : o.capital;
-      const isCorrect = o.id === q.id;
-      let cls = 'quiz-opt';
-      if (gekozen !== null) cls += isCorrect ? ' correct' : (o.id === gekozen ? ' wrong' : '');
-      return `<button class="${cls}" id="quiz-opt-${i}" data-id="${o.id}" onclick="aardQuizAntwoord('${o.id}')" ${gekozen!==null?'disabled':''}>${label}</button>`;
-    }).join('');
+    vraagHTML = `<div class="quiz-q-text">Welk land is <span style="color:#FFD166;font-weight:700;">geel</span> gemarkeerd?</div><div id="quiz-mini-map" style="width:100%;height:170px;background:#0d1b2e;border-radius:12px;overflow:hidden;margin:8px 0;"></div>`;
   }
 
-  // Type-label voor boven de vraag
-  const typeLabel = {capital:'🏛️ Hoofdstad raden', flag:'🚩 Vlag herkennen', continent:'🌍 Continent raden', population:'👥 Bevolking raden', map:'🗺️ Land op kaart zoeken'}[type] || '';
+  const optsHTML = opts.map((o, i) => {
+    const label = mode === 'hoofdstad' ? o.capital : o.name;
+    const isCorrect = o.id === q.id;
+    let cls = 'quiz-opt';
+    if (gekozen !== null) cls += isCorrect ? ' correct' : (o.id === gekozen ? ' wrong' : '');
+    return `<button class="${cls}" id="quiz-opt-${i}" data-id="${o.id}" onclick="aardQuizAntwoord('${o.id}')" ${gekozen!==null?'disabled':''}>${label}</button>`;
+  }).join('');
 
   el.innerHTML = `
     <div class="quiz-score-bar">
       <span>Vraag ${aardState.quiz.cur+1} / ${aardState.quiz.vragen.length}</span>
-      <span style="color:var(--accent2);font-size:11px;font-weight:700;">${typeLabel}</span>
+      <span style="color:var(--accent2);font-size:11px;font-weight:700;">${modeLabel}</span>
       <span style="color:var(--ok);">✓ ${aardState.quiz.score}</span>
     </div>
     <div class="quiz-question-card">${vraagHTML}</div>
-    <div class="quiz-opts" id="quiz-opts-grid" style="grid-template-columns:${type==='continent'?'1fr 1fr':'1fr 1fr'};">${optsHTML}</div>
+    <div class="quiz-opts" id="quiz-opts-grid">${optsHTML}</div>
     <div class="quiz-feedback" id="quiz-feedback">
-      ${gekozen !== null ? (
-        type === 'continent'
-          ? (gekozen === q.cont ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${q.cont}</strong>`)
-          : (gekozen === q.id ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${optLabel==='capital'?q.capital:q.name}</strong>`)
-      ) : ''}
+      ${gekozen !== null ? (gekozen===q.id ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${mode==='hoofdstad'?q.capital:q.name}</strong>`) : ''}
     </div>
     <div class="quiz-next-wrap" id="quiz-next-wrap">
       ${gekozen !== null ? `
@@ -4449,151 +4447,90 @@ function renderAardQuizContent(el) {
           ${aardState.quiz.cur+1 < aardState.quiz.vragen.length ? 'Volgende vraag →' : '🏁 Resultaat bekijken'}
         </button>` : ''}
     </div>
-    <button onclick="aardTab('kaart')" style="display:block;margin:8px auto 0;padding:6px 16px;border-radius:20px;border:1px solid var(--surface3);background:none;color:var(--tx3);font-size:12px;cursor:pointer;">✕ Quiz stoppen</button>
+    <button onclick="startAardQuiz()" style="display:block;margin:8px auto 0;padding:6px 16px;border-radius:20px;border:1px solid var(--surface3);background:none;color:var(--tx3);font-size:12px;cursor:pointer;">✕ Quiz stoppen</button>
   `;
 
-  // Mini-kaart renderen na DOM insert
-  if (type === 'map') renderQuizMiniMap(q.id);
+  if (mode === 'kaart') renderQuizMiniMap(q.id);
 }
 
 function renderQuizMiniMap(highlightId) {
   const container = document.getElementById('quiz-mini-map');
-  if (!container || !window.d3 || !window.topojson) {
-    if (container) container.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:20px;font-size:12px;">Kaart laden...</p>';
-    // Wacht op D3 en probeer opnieuw
-    const wait = setInterval(() => {
-      if (window.d3 && window.topojson) { clearInterval(wait); renderQuizMiniMap(highlightId); }
-    }, 200);
+  if (!container) return;
+  if (!window.d3 || !window.topojson) {
+    container.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:20px;font-size:12px;">⏳ Kaart laden...</p>';
+    const wait = setInterval(() => { if (window.d3 && window.topojson) { clearInterval(wait); renderQuizMiniMap(highlightId); } }, 200);
     return;
   }
   container.innerHTML = '';
-  const W = container.offsetWidth || 320;
-  const H = 160;
+  const W = container.offsetWidth || 340;
+  const H = 170;
   const svg = d3.select('#quiz-mini-map').append('svg').attr('width','100%').attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);
   svg.append('rect').attr('width',W).attr('height',H).attr('fill','#0d1b2e');
+
+  svg.append('defs').html(`
+    <filter id="qglow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>@keyframes qpulse{0%{fill:#FFD166}50%{fill:#FF9F1C}100%{fill:#FFD166}}.qhl{animation:qpulse 1.4s ease-in-out infinite;}</style>
+  `);
+
   const projection = d3.geoNaturalEarth1().scale(W/6.5).translate([W/2, H/2]);
   const path = d3.geoPath().projection(projection);
   const g = svg.append('g');
-
-  // Pulse animatie voor het gemarkeerde land
-  svg.append('defs').html(`
-    <filter id="quiz-glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <style>
-      .quiz-highlight { animation: quizPulse 1.2s ease-in-out infinite alternate; }
-      @keyframes quizPulse { from { fill: #FFD166; } to { fill: #FF9F1C; } }
-    </style>
-  `);
 
   fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
     .then(r => r.json())
     .then(world => {
       const countries = topojson.feature(world, world.objects.countries);
-      // Zoek het gemarkeerde land op om te centreren
       const targetFeature = countries.features.find(f => {
         const iso3 = getNumToIso3()[String(f.id)];
-        const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
-        return lid === highlightId;
+        return iso3 ? ISO_TO_LEERHELD[iso3] === highlightId : false;
       });
-
-      // Zoom in op het gemarkeerde land als het gevonden is
       if (targetFeature) {
         const [[x0,y0],[x1,y1]] = path.bounds(targetFeature);
-        const cx = (x0+x1)/2, cy = (y0+y1)/2;
         const dx = x1-x0, dy = y1-y0;
-        const scale = Math.min(8, Math.max(1.2, 0.7 / Math.max(dx/W, dy/H)));
-        const tx = W/2 - scale*cx, ty = H/2 - scale*cy;
+        const scale = Math.min(7, Math.max(1.5, 0.65 / Math.max(dx/W, dy/H)));
+        const tx = W/2 - scale*(x0+x1)/2;
+        const ty = H/2 - scale*(y0+y1)/2;
         g.attr('transform', `translate(${tx},${ty}) scale(${scale})`);
       }
-
-      g.selectAll('path')
-        .data(countries.features)
-        .enter().append('path')
+      g.selectAll('path').data(countries.features).enter().append('path')
         .attr('d', path)
-        .attr('fill', f => {
-          const iso3 = getNumToIso3()[String(f.id)];
-          const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
-          return lid === highlightId ? '#FFD166' : '#2a3a5c';
-        })
-        .attr('stroke', '#0d1b2e')
-        .attr('stroke-width', 0.3)
-        .attr('class', f => {
-          const iso3 = getNumToIso3()[String(f.id)];
-          const lid = iso3 ? ISO_TO_LEERHELD[iso3] : null;
-          return lid === highlightId ? 'quiz-highlight' : '';
-        })
-        .attr('filter', f => {
-          const iso3 = getNumToIso3()[String(f.id)];
-          return (iso3 ? ISO_TO_LEERHELD[iso3] : null) === highlightId ? 'url(#quiz-glow)' : '';
-        });
+        .attr('fill', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
+        .attr('stroke','#0a1525').attr('stroke-width',0.4)
+        .attr('class', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
+        .attr('filter', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
     });
 }
 
 function aardQuizAntwoord(id) {
   if (aardState.quiz.gekozen !== null) return;
   aardState.quiz.gekozen = id;
-  const { land: q, type } = aardState.quiz.vragen[aardState.quiz.cur];
-  const correct = type === 'continent' ? id === q.cont : id === q.id;
+  const { land: q } = aardState.quiz.vragen[aardState.quiz.cur];
+  const correct = id === q.id;
   if (correct) { aardState.quiz.score++; snd('ok'); } else { snd('no'); }
 
-  // Update knoppen in-place
   const grid = document.getElementById('quiz-opts-grid');
-  if (grid) {
-    grid.querySelectorAll('.quiz-opt').forEach(btn => {
-      const btnId = btn.getAttribute('data-id');
-      btn.disabled = true;
-      const isCorrect = type === 'continent' ? btnId === q.cont : btnId === q.id;
-      if (isCorrect) btn.classList.add('correct');
-      else if (btnId === id) btn.classList.add('wrong');
-    });
-  }
+  if (grid) grid.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.disabled = true;
+    if (btn.dataset.id === q.id) btn.classList.add('correct');
+    else if (btn.dataset.id === id) btn.classList.add('wrong');
+  });
 
+  const mode = aardState.quiz.mode;
   const fb = document.getElementById('quiz-feedback');
-  if (fb) {
-    let correctLabel = type === 'capital' ? q.capital : type === 'continent' ? q.cont : q.name;
-    fb.innerHTML = correct ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${correctLabel}</strong>`;
-  }
+  if (fb) fb.innerHTML = correct ? '✅ Goed zo!' : `❌ Juist: <strong style="color:var(--ok);">${mode==='hoofdstad'?q.capital:q.name}</strong>`;
 
   const wrap = document.getElementById('quiz-next-wrap');
-  if (wrap) {
-    wrap.innerHTML = `
-      ${renderCountryCard(q, false)}
-      <button class="quiz-next-btn" onclick="aardQuizVolgende()">
-        ${aardState.quiz.cur+1 < aardState.quiz.vragen.length ? 'Volgende vraag →' : '🏁 Resultaat bekijken'}
-      </button>`;
-  }
+  if (wrap) wrap.innerHTML = `
+    ${renderCountryCard(q, false)}
+    <button class="quiz-next-btn" onclick="aardQuizVolgende()">
+      ${aardState.quiz.cur+1 < aardState.quiz.vragen.length ? 'Volgende vraag →' : '🏁 Resultaat bekijken'}
+    </button>`;
 }
 
 function aardQuizVolgende() {
   aardState.quiz.cur++;
   aardState.quiz.gekozen = null;
   renderAardContent();
-}
-
-function renderAardQuizEnd(el) {
-  const score = aardState.quiz.score;
-  const total = aardState.quiz.vragen.length;
-  const pct = Math.round(score / total * 100);
-  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '⭐' : pct >= 40 ? '💪' : '📚';
-  const msg = pct >= 80 ? 'Geweldig! Je bent een echte wereldkenner!' : pct >= 60 ? 'Goed gedaan! Nog een beetje oefenen!' : pct >= 40 ? 'Niet slecht! Blijf oefenen!' : 'Oefening baart kunst! Probeer opnieuw!';
-  if (pct >= 80) boom();
-  el.innerHTML = `
-    <div class="aard-quiz-end">
-      <div class="aard-quiz-end-emoji">${emoji}</div>
-      <div class="aard-quiz-end-title">${score} / ${total} goed!</div>
-      <div style="font-size:13px;color:var(--tx2);margin-bottom:16px;">${msg}</div>
-      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px;">
-        <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px 20px;text-align:center;">
-          <div style="font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">${pct}%</div>
-          <div style="font-size:11px;color:var(--tx3);text-transform:uppercase;">score</div>
-        </div>
-      </div>
-      <button class="quiz-next-btn" onclick="startAardQuiz()" style="margin-bottom:8px;">🔄 Opnieuw spelen</button>
-      <button onclick="aardTab('kaart')" style="display:block;width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--surface3);background:none;color:var(--tx2);font-size:14px;cursor:pointer;font-family:'Fredoka',sans-serif;">🗺️ Terug naar kaart</button>
-    </div>
-  `;
 }
 
 
