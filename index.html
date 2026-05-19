@@ -924,7 +924,7 @@ function showEnd(){
 // ════════════════════════════════════════════════════════
 // TAAL DATA
 // ════════════════════════════════════════════════════════
-const W=[["antwoorden","antwoord","antwoordde","geantwoord",false],["ademen","adem","ademde","geademd",false],["blijven","blijf","bleef","gebleven",true],["breien","brei","breide","gebreid",false],["bibberen","bibber","bibberde","gebibberd",false],["babbelen","babbel","babbelde","gebabbeld",false],["branden","brand","brandde","gebrand",false],["bloeden","bloed","bloedde","gebloed",false],["bezoeken","bezoek","bezocht","bezocht",true],["bedenken","bedenk","bedacht","bedacht",true],["beseffen","besef","besefte","beseft",false],["beantwoorden","beantwoord","beantwoordde","beantwoord",false],["boksen","boks","bokste","gebokst",false],["brengen","breng","bracht","gebracht",true],["breken","breek","brak","gebroken",true],["beginnen","begin","begon","begonnen",true],["binden","bind","bond","gebonden",true],["bevelen","beveel","beval","bevolen",true],["bellen","bel","belde","gebeld",false],["bakken","bak","bakte","gebakken",false],["blaten","blaat","blaatte","geblaat",false],["botsen","bots","botste","gebotst",false],["betalen","betaal","betaalde","betaald",false],["bestellen","bestel","bestelde","besteld",false],["boren","boor","boorde","geboord",false],["blazen","blaas","blies","geblazen",true],["drinken","drink","dronk","gedronken",true],["dromen","droom","droomde","gedroomd",false],["durven","durf","durfde","gedurfd",false],["duiken","duik","dook","gedoken",true],["doen","doe","deed","gedaan",true],["denken","denk","dacht","gedacht",true],["drijven","drijf","dreef","gedreven",true],["dansen","dans","danste","gedanst",false],["drummen","drum","drumde","gedrummd",false],["dragen","draag","droeg","gedragen",true],["eten","eet","at","gegeten",true],["fietsen","fiets","fietste","gefietst",false],["filmen","film","filmde","gefilmd",false],["fluiten","fluit","floot","gefloten",true],["gaan","ga","ging","gegaan",true],["goochelen","goochel","goochelde","gegoocheld",false],["groeien","groei","groeide","gegroeid",false],["geeuwen","geeuw","geeuwd","gegeewd",false],["gieten","giet","goot","gegoten",true],["gillen","gil","gilde","gegild",false],["geven","geef","gaf","gegeven",true],["genieten","geniet","genoot","genoten",true],["gebruiken","gebruik","gebruikte","gebruikt",false],["grijpen","grijp","greep","gegrepen",true],["giechelen","giechel","giechelde","gegiecheld",false],["hopen","hoop","hoopte","gehoopt",false],["horen","hoor","hoorde","gehoord",false],["herkennen","herken","herkende","herkend",false],["houden","houd","hield","gehouden",true],["halen","haal","haalde","gehaald",false],["haasten","haast","haastte","gehaast",false],["helpen","help","hielp","geholpen",true],["heten","heet","heette","geheten",false],["haten","haat","haatte","gehaat",false],["hinkelen","hinkel","hinkelde","gehinkeld",false],["huilen","huil","huilde","gehuild",false],["interviewen","interview","interviewde","geïnterviewd",false],["jubelen","jubel","jubelde","gejubeld",false],["jagen","jaag","joeg","gejaagd",true],["janken","jank","jankte","gejankt",false],["juichen","juich","juichte","gejuicht",false],["krijgen","krijg","kreeg","gekregen",true],["kopen","koop","kocht","gekocht",true],["kiezen","kies","koos","gekozen",true],["kammen","kam","kamde","gekamd",false],["kijken","kijk","keek","gekeken",true],["kleden","kleed","kleedde","gekleed",false],["kletsen","klets","kletste","gekletst",false],["koken","kook","kookte","gekookt",false],["klimmen","klim","klom","geklommen",true],["komen","kom","kwam","gekomen",true],["klauteren","klauter","klauterde","geklauterd",false],["klagen","klaag","klaagde","geklaagd",false],["kwetsen","kwets","kwetste","gekwetst",false],["knikkeren","knikkeri","knikerde","geknikerd",false],["kleuren","kleur","kleurde","gekleurd",false],["knippen","knip","knipte","geknipt",false],["krassen","kras","kraste","gekrast",false],["knorren","knor","knorde","geknord",false],["lopen","loop","liep","gelopen",true],["logeren","logeer","logeerde","gelogeerd",false],["leren","leer","leerde","geleerd",false],["leven","leef","leefde","geleefd",false],["lezen","lees","las","gelezen",true],["lusten","lust","lustte","gelust",false],["lachen","lach","lachte","gelachen",false],["luisteren","luister","luisterde","geluisterd",false],["lijden","lijd","leed","geleden",true],["leiden","leid","leidde","geleid",false],["liggen","lig","lag","gelegen",true],["landen","land","landde","geland",false],["leveren","lever","leverde","geleverd",false],["liegen","lieg","loog","gelogen",true],["maaien","maai","maaide","gemaaid",false],["missen","mis","miste","gemist",false],["moeten","moet","moest","gemoeten",true],["maken","maak","maakte","gemaakt",false],["meten","meet","mat","gemeten",true],["mijden","mijd","meed","gemeden",true],["mogen","mag","mocht","gemogen",true],["miauwen","miauw","miauwde","gemiauwd",false],["melden","meld","meldde","gemeld",false],["naaien","naai","naaide","genaaid",false],["nemen","neem","nam","genomen",true],["ontwerpen","ontwerp","ontwierp","ontworpen",true],["opruimen","ruim op","ruimde op","opgeruimd",false],["ontwijken","ontwijkt","ontweek","ontweek",true],["plooien","plooi","plooide","geplooide",false],["plakken","plak","plakte","geplakt",false],["poetsen","poets","poetste","gepoetst",false],["protesteren","protesteer","protesteerde","geprotesteerd",false],["praten","praat","praatte","gepraat",false],["proeven","proef","proefde","geproefd",false],["plannen","plan","plande","gepland",false],["planten","plant","plantte","geplant",false],["roepen","roep","riep","geroepen",true],["ruiken","ruik","rook","geroken",true],["rijden","rijd","reed","gereden",true],["redden","red","redde","gered",false],["roddelen","roddel","roddelde","geroddeld",false],["rusten","rust","rustte","gerust",false],["regenen","regent","regende","geregend",false],["rekenen","reken","rekende","gerekend",false],["rollen","rol","rolde","gerold",false],["spelen","speel","speelde","gespeeld",false],["springen","spring","sprong","gesprongen",true],["slapen","slaap","sliep","geslapen",true],["schreeuwen","schreeuw","schreeuwde","geschreeuwd",false],["snoepen","snoep","snoepte","gesnoept",false],["slenteren","slenter","slenterde","geslenterd",false],["schrijven","schrijf","schreef","geschreven",true],["skeeleren","skeeler","skeelerde","geskeelerd",false],["schitteren","schitter","schitterde","geschitterd",false],["spreken","spreek","sprak","gesproken",true],["snijden","snijd","sneed","gesneden",true],["staan","sta","stond","gestaan",true],["slaan","sla","sloeg","geslagen",true],["stappen","stap","stapte","gestapt",false],["studeren","studeer","studeerde","gestudeerd",false],["schoppen","schop","schopte","geschopt",false],["schrikken","schrik","schrok","geschrokken",true],["sneeuwen","sneeuw","sneeuwde","gesneeuwd",false],["smullen","smul","smulde","gesmuld",false],["sturen","stuur","stuurde","gestuurd",false],["sparen","spaar","spaarde","gespaard",false],["smaken","smaak","smaakte","gesmaakt",false],["soezen","soes","soesde","gesoesd",false],["schaatsen","schaats","schaatste","geschaatst",false],["toeteren","toeter","toetertde","getoeterd",false],["trekken","trek","trok","getrokken",true],["tikken","tik","tikte","getikt",false],["tonen","toon","toonde","getoond",false],["tekenen","teken","tekende","getekend",false],["uitleggen","leg uit","legde uit","uitgelegd",false],["vinden","vind","vond","gevonden",true],["verstaan","versta","verstond","verstaan",true],["vallen","val","viel","gevallen",true],["vergeten","vergeet","vergat","vergeten",true],["vertrekken","vertrek","vertrok","vertrokken",true],["verwennen","verwennen","verwende","verwend",false],["verzorgen","verzorg","verzorgde","verzorgd",false],["vragen","vraag","vroeg","gevraagd",true],["verkleden","verkleed","verkleedde","verkleed",false],["verbranden","verbrand","verbrandde","verbrand",false],["verkopen","verkoop","verkocht","verkocht",true],["vertellen","vertel","vertelde","verteld",false],["verdedigen","verdedig","verdedigde","verdedigd",false],["verdelen","verdeel","verdeelde","verdeeld",false],["vliegen","vlieg","vloog","gevlogen",true],["verstoppen","verstop","verstopte","verstopt",false],["verliezen","verlies","verloor","verloren",true],["verdwalen","verdwaal","verdwaalde","verdwaald",false],["vissen","vis","viste","gevist",false],["verschijnen","verschijn","verscheen","verschenen",true],["verdienen","verdien","verdiende","verdiend",false],["vegen","veeg","veegde","geveegd",false],["vangen","vang","ving","gevangen",true],["verslinden","verslind","verslond","verslonden",true],["verlangen","verlang","verlangde","verlangd",false],["verloten","verloot","verlootte","verloot",false],["vieren","vier","vierde","gevierd",false],["vergroten","vergroot","vergrootte","vergroot",false],["verwachten","verwacht","verwachtte","verwacht",false],["voetballen","voetbal","voetbalde","gevoetbald",false],["verven","verf","verfde","geverfd",false],["verrassen","verrass","verrastte","verrast",false],["verbinden","verbind","verbond","verbonden",true],["verzenden","verzend","verzond","verzonden",true],["versieren","versier","versierde","versierd",false],["vervuilen","vervuil","vervuilde","vervuild",false],["voelen","voel","voelde","gevoeld",false],["vechten","vecht","vocht","gevochten",true],["worden","word","werd","geworden",true],["willen","wil","wilde","gewild",true],["winnen","win","won","gewonnen",true],["wuiven","wuif","wuifde","gewuifd",false],["wandelen","wandel","wandelde","gewandeld",false],["werken","werk","werkte","gewerkt",false],["weigeren","weiger","weigerde","geweigerd",false],["wachten","wacht","wachtte","gewacht",false],["weten","weet","wist","geweten",true],["wrijven","wrijf","wreef","gewreven",true],["wassen","was","waste","gewassen",true],["winkelen","winkel","winkelde","gewinkeld",false],["wonen","woon","woonde","gewoond",false],["zijn","ben","was","geweest",true],["zoeken","zoek","zocht","gezocht",true],["zien","zie","zag","gezien",true],["zoemen","zoem","zoemde","gezoemed",false],["zweten","zweet","zweette","gezweet",false],["zakken","zak","zakte","gezakt",false],["zwaaien","zwaai","zwaaide","gezwaaid",false],["zwemmen","zwem","zwom","gezwommen",true],["zingen","zing","zong","gezongen",true],["zinken","zink","zonk","gezonken",true],["zorgen","zorg","zorgde","gezorgd",false],["zitten","zit","zat","gezeten",true]];
+const W=[["antwoorden","antwoord","antwoordde","geantwoord",false],["ademen","adem","ademde","geademd",false],["blijven","blijf","bleef","gebleven",true],["breien","brei","breide","gebreid",false],["bibberen","bibber","bibberde","gebibberd",false],["babbelen","babbel","babbelde","gebabbeld",false],["branden","brand","brandde","gebrand",false],["bloeden","bloed","bloedde","gebloed",false],["bezoeken","bezoek","bezocht","bezocht",true],["bedenken","bedenk","bedacht","bedacht",true],["beseffen","besef","besefte","beseft",false],["beantwoorden","beantwoord","beantwoordde","beantwoord",false],["boksen","boks","bokste","gebokst",false],["brengen","breng","bracht","gebracht",true],["breken","breek","brak","gebroken",true],["beginnen","begin","begon","begonnen",true],["binden","bind","bond","gebonden",true],["bevelen","beveel","beval","bevolen",true],["bellen","bel","belde","gebeld",false],["bakken","bak","bakte","gebakken",false],["blaten","blaat","blaatte","geblaat",false],["botsen","bots","botste","gebotst",false],["betalen","betaal","betaalde","betaald",false],["bestellen","bestel","bestelde","besteld",false],["boren","boor","boorde","geboord",false],["blazen","blaas","blies","geblazen",true],["drinken","drink","dronk","gedronken",true],["dromen","droom","droomde","gedroomd",false],["durven","durf","durfde","gedurfd",false],["duiken","duik","dook","gedoken",true],["doen","doe","deed","gedaan",true],["denken","denk","dacht","gedacht",true],["drijven","drijf","dreef","gedreven",true],["dansen","dans","danste","gedanst",false],["drummen","drum","drumde","gedrummd",false],["dragen","draag","droeg","gedragen",true],["eten","eet","at","gegeten",true],["fietsen","fiets","fietste","gefietst",false],["filmen","film","filmde","gefilmd",false],["fluiten","fluit","floot","gefloten",true],["gaan","ga","ging","gegaan",true],["goochelen","goochel","goochelde","gegoocheld",false],["groeien","groei","groeide","gegroeid",false],["geeuwen","geeuw","geeuwd","gegeewd",false],["gieten","giet","goot","gegoten",true],["gillen","gil","gilde","gegild",false],["geven","geef","gaf","gegeven",true],["genieten","geniet","genoot","genoten",true],["gebruiken","gebruik","gebruikte","gebruikt",false],["grijpen","grijp","greep","gegrepen",true],["giechelen","giechel","giechelde","gegiecheld",false],["hopen","hoop","hoopte","gehoopt",false],["horen","hoor","hoorde","gehoord",false],["herkennen","herken","herkende","herkend",false],["houden","houd","hield","gehouden",true],["halen","haal","haalde","gehaald",false],["haasten","haast","haastte","gehaast",false],["helpen","help","hielp","geholpen",true],["heten","heet","heette","geheten",false],["haten","haat","haatte","gehaat",false],["hinkelen","hinkel","hinkelde","gehinkeld",false],["huilen","huil","huilde","gehuild",false],["interviewen","interview","interviewde","geïnterviewd",false],["jubelen","jubel","jubelde","gejubeld",false],["jagen","jaag","joeg","gejaagd",true],["janken","jank","jankte","gejankt",false],["juichen","juich","juichte","gejuicht",false],["krijgen","krijg","kreeg","gekregen",true],["kopen","koop","kocht","gekocht",true],["kiezen","kies","koos","gekozen",true],["kammen","kam","kamde","gekamd",false],["kijken","kijk","keek","gekeken",true],["kleden","kleed","kleedde","gekleed",false],["kletsen","klets","kletste","gekletst",false],["koken","kook","kookte","gekookt",false],["klimmen","klim","klom","geklommen",true],["komen","kom","kwam","gekomen",true],["klauteren","klauter","klauterde","geklauterd",false],["klagen","klaag","klaagde","geklaagd",false],["kwetsen","kwets","kwetste","gekwetst",false],["knikkeren","knikkeri","knikerde","geknikerd",false],["kleuren","kleur","kleurde","gekleurd",false],["knippen","knip","knipte","geknipt",false],["krassen","kras","kraste","gekrast",false],["knorren","knor","knorde","geknord",false],["lopen","loop","liep","gelopen",true],["logeren","logeer","logeerde","gelogeerd",false],["leren","leer","leerde","geleerd",false],["leven","leef","leefde","geleefd",false],["lezen","lees","las","gelezen",true],["lusten","lust","lustte","gelust",false],["lachen","lach","lachte","gelachen",false],["luisteren","luister","luisterde","geluisterd",false],["lijden","lijd","leed","geleden",true],["leiden","leid","leidde","geleid",false],["liggen","lig","lag","gelegen",true],["landen","land","landde","geland",false],["leveren","lever","leverde","geleverd",false],["liegen","lieg","loog","gelogen",true],["maaien","maai","maaide","gemaaid",false],["missen","mis","miste","gemist",false],["moeten","moet","moest","gemoeten",true],["maken","maak","maakte","gemaakt",false],["meten","meet","mat","gemeten",true],["mijden","mijd","meed","gemeden",true],["mogen","mag","mocht","gemogen",true],["miauwen","miauw","miauwde","gemiauwd",false],["melden","meld","meldde","gemeld",false],["naaien","naai","naaide","genaaid",false],["nemen","neem","nam","genomen",true],["ontwerpen","ontwerp","ontwierp","ontworpen",true],["opruimen","ruim op","ruimde op","opgeruimd",false],["ontwijken","ontwijkt","ontweek","ontweek",true],["plooien","plooi","plooide","geplooide",false],["plakken","plak","plakte","geplakt",false],["poetsen","poets","poetste","gepoetst",false],["protesteren","protesteer","protesteerde","geprotesteerd",false],["praten","praat","praatte","gepraat",false],["proeven","proef","proefde","geproefd",false],["plannen","plan","plande","gepland",false],["planten","plant","plantte","geplant",false],["roepen","roep","riep","geroepen",true],["ruiken","ruik","rook","geroken",true],["rijden","rijd","reed","gereden",true],["redden","red","redde","gered",false],["roddelen","roddel","roddelde","geroddeld",false],["rusten","rust","rustte","gerust",false],["regenen","regent","regende","geregend",false],["rekenen","reken","rekende","gerekend",false],["rollen","rol","rolde","gerold",false],["spelen","speel","speelde","gespeeld",false],["springen","spring","sprong","gesprongen",true],["slapen","slaap","sliep","geslapen",true],["schreeuwen","schreeuw","schreeuwde","geschreeuwd",false],["snoepen","snoep","snoepte","gesnoept",false],["slenteren","slenter","slenterde","geslenterd",false],["schrijven","schrijf","schreef","geschreven",true],["skeeleren","skeeler","skeelerde","geskeelerd",false],["schitteren","schitter","schitterde","geschitterd",false],["spreken","spreek","sprak","gesproken",true],["snijden","snijd","sneed","gesneden",true],["staan","sta","stond","gestaan",true],["slaan","sla","sloeg","geslagen",true],["stappen","stap","stapte","gestapt",false],["studeren","studeer","studeerde","gestudeerd",false],["schoppen","schop","schopte","geschopt",false],["schrikken","schrik","schrok","geschrokken",true],["sneeuwen","sneeuw","sneeuwde","gesneeuwd",false],["smullen","smul","smulde","gesmuld",false],["sturen","stuur","stuurde","gestuurd",false],["sparen","spaar","spaarde","gespaard",false],["smaken","smaak","smaakte","gesmaakt",false],["soezen","soes","soesde","gesoesd",false],["schaatsen","schaats","schaatste","geschaatst",false],["toeteren","toeter","toetertde","getoeterd",false],["trekken","trek","trok","getrokken",true],["tikken","tik","tikte","getikt",false],["tonen","toon","toonde","getoond",false],["tekenen","teken","tekende","getekend",false],["uitleggen","leg uit","legde uit","uitgelegd",false],["vinden","vind","vond","gevonden",true],["verstaan","versta","verstond","verstaan",true],["vallen","val","viel","gevallen",true],["vergeten","vergeet","vergat","vergeten",true],["vertrekken","vertrek","vertrok","vertrokken",true],["verwennen","verwen","verwende","verwend",false],["verzorgen","verzorg","verzorgde","verzorgd",false],["vragen","vraag","vroeg","gevraagd",true],["verkleden","verkleed","verkleedde","verkleed",false],["verbranden","verbrand","verbrandde","verbrand",false],["verkopen","verkoop","verkocht","verkocht",true],["vertellen","vertel","vertelde","verteld",false],["verdedigen","verdedig","verdedigde","verdedigd",false],["verdelen","verdeel","verdeelde","verdeeld",false],["vliegen","vlieg","vloog","gevlogen",true],["verstoppen","verstop","verstopte","verstopt",false],["verliezen","verlies","verloor","verloren",true],["verdwalen","verdwaal","verdwaalde","verdwaald",false],["vissen","vis","viste","gevist",false],["verschijnen","verschijn","verscheen","verschenen",true],["verdienen","verdien","verdiende","verdiend",false],["vegen","veeg","veegde","geveegd",false],["vangen","vang","ving","gevangen",true],["verslinden","verslind","verslond","verslonden",true],["verlangen","verlang","verlangde","verlangd",false],["verloten","verloot","verlootte","verloot",false],["vieren","vier","vierde","gevierd",false],["vergroten","vergroot","vergrootte","vergroot",false],["verwachten","verwacht","verwachtte","verwacht",false],["voetballen","voetbal","voetbalde","gevoetbald",false],["verven","verf","verfde","geverfd",false],["verrassen","verrass","verrastte","verrast",false],["verbinden","verbind","verbond","verbonden",true],["verzenden","verzend","verzond","verzonden",true],["versieren","versier","versierde","versierd",false],["vervuilen","vervuil","vervuilde","vervuild",false],["voelen","voel","voelde","gevoeld",false],["vechten","vecht","vocht","gevochten",true],["worden","word","werd","geworden",true],["willen","wil","wilde","gewild",true],["winnen","win","won","gewonnen",true],["wuiven","wuif","wuifde","gewuifd",false],["wandelen","wandel","wandelde","gewandeld",false],["werken","werk","werkte","gewerkt",false],["weigeren","weiger","weigerde","geweigerd",false],["wachten","wacht","wachtte","gewacht",false],["weten","weet","wist","geweten",true],["wrijven","wrijf","wreef","gewreven",true],["wassen","was","waste","gewassen",true],["winkelen","winkel","winkelde","gewinkeld",false],["wonen","woon","woonde","gewoond",false],["zijn","ben","was","geweest",true],["zoeken","zoek","zocht","gezocht",true],["zien","zie","zag","gezien",true],["zoemen","zoem","zoemde","gezoemed",false],["zweten","zweet","zweette","gezweet",false],["zakken","zak","zakte","gezakt",false],["zwaaien","zwaai","zwaaide","gezwaaid",false],["zwemmen","zwem","zwom","gezwommen",true],["zingen","zing","zong","gezongen",true],["zinken","zink","zonk","gezonken",true],["zorgen","zorg","zorgde","gezorgd",false],["zitten","zit","zat","gezeten",true]];
 
 const COL_NAMES=["het werkwoord","de stam (ik T.T.)","de verleden tijd (ik)","het voltooid deelwoord"];
 const COL_SHORT=["werkwoord","stam","verleden tijd","voltooid deelwoord"];
@@ -1171,6 +1171,93 @@ let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null
 let invulFilter='all', invulData=[];
 let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='zegswijzeBetekenis', zqCurrent=null;
 let zegswijzenThema=0;
+let wwSelectie = new Set(); // geselecteerde werkwoorden (via infinitief)
+
+function getWwLijst(){
+  const base = getActiveW();
+  if(wwSelectie.size === 0) return base;
+  return base.filter(w => wwSelectie.has(w[0]));
+}
+
+function openWwSelectie(){
+  const base = getActiveW();
+  // Sorteer op infinitief
+  const sorted = [...base].sort((a,b) => a[0].localeCompare(b[0]));
+  const overlay = document.createElement('div');
+  overlay.id = 'ww-sel-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;display:flex;align-items:flex-end;justify-content:center;';
+  overlay.innerHTML = `
+    <div style="background:var(--surface);border-radius:20px 20px 0 0;padding:16px;width:100%;max-width:700px;max-height:80vh;display:flex;flex-direction:column;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">📝 Kies woorden om te oefenen</span>
+        <button onclick="document.getElementById('ww-sel-overlay').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--tx3);">✕</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <button onclick="wwSelectieAlles(true)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;font-weight:600;">✅ Alles selecteren</button>
+        <button onclick="wwSelectieAlles(false)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;font-weight:600;">⬜ Alles deselecteren</button>
+        <span id="ww-sel-count" style="align-self:center;font-size:12px;color:var(--tx3);">${wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden'}</span>
+      </div>
+      <input id="ww-sel-zoek" placeholder="🔍 Zoek..." style="padding:8px 12px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;margin-bottom:8px;outline:none;" oninput="renderWwSelLijst()" />
+      <div id="ww-sel-lijst" style="overflow-y:auto;flex:1;"></div>
+      <button onclick="sluitWwSelectie()" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">Bevestigen</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  renderWwSelLijst();
+}
+
+function renderWwSelLijst(){
+  const base = getActiveW().sort((a,b) => a[0].localeCompare(b[0]));
+  const q = (document.getElementById('ww-sel-zoek')||{value:''}).value.toLowerCase();
+  const filtered = q ? base.filter(w => w[0].toLowerCase().includes(q)) : base;
+  const el = document.getElementById('ww-sel-lijst');
+  if(!el) return;
+  el.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+    ${filtered.map(w => {
+      const checked = wwSelectie.size === 0 || wwSelectie.has(w[0]);
+      return `<label style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;background:${wwSelectie.has(w[0])?'rgba(124,111,255,0.1)':'transparent'};border:1px solid ${wwSelectie.has(w[0])?'var(--accent)':'var(--surface3)'};">
+        <input type="checkbox" ${wwSelectie.has(w[0])||wwSelectie.size===0?'checked':''} data-ww="${w[0]}" onchange="toggleWwSel(this)" style="accent-color:var(--accent);width:16px;height:16px;" />
+        <span style="font-size:13px;font-weight:600;color:var(--tx);">${w[0]}</span>
+        <span style="font-size:11px;color:var(--tx3);margin-left:auto;">${w[4]?'onr.':''}</span>
+      </label>`;
+    }).join('')}
+  </div>`;
+  const countEl = document.getElementById('ww-sel-count');
+  if(countEl) countEl.textContent = wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden';
+}
+
+function toggleWwSel(checkbox){
+  if(checkbox.checked){
+    // Als alles was geselecteerd (size=0), initialiseer met alle woorden behalve deze
+    if(wwSelectie.size === 0){
+      getActiveW().forEach(w => { if(w[0] !== checkbox.dataset.ww) wwSelectie.add(w[0]); });
+    }
+    wwSelectie.add(checkbox.dataset.ww);
+  } else {
+    if(wwSelectie.size === 0){ getActiveW().forEach(w => wwSelectie.add(w[0])); }
+    wwSelectie.delete(checkbox.dataset.ww);
+  }
+  // Update label stijl
+  const label = checkbox.closest('label');
+  if(label){
+    label.style.background = checkbox.checked ? 'rgba(124,111,255,0.1)' : 'transparent';
+    label.style.border = `1px solid ${checkbox.checked?'var(--accent)':'var(--surface3)'}`;
+  }
+  const countEl = document.getElementById('ww-sel-count');
+  if(countEl) countEl.textContent = wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden';
+}
+
+function wwSelectieAlles(aan){
+  if(aan){ wwSelectie.clear(); }
+  else { getActiveW().forEach(w => wwSelectie.add(w[0])); }
+  renderWwSelLijst();
+}
+
+function sluitWwSelectie(){
+  // Als alle woorden gekozen zijn = geen filter
+  if(wwSelectie.size === getActiveW().length) wwSelectie.clear();
+  document.getElementById('ww-sel-overlay')?.remove();
+  renderWwContent();
+}
 
 let taalInited=false;
 
@@ -1282,12 +1369,18 @@ function renderWwLijst(el){
 }
 
 function renderWwQuiz(el){
+  const huidigeLijst = getWwLijst();
+  const selectieTekst = wwSelectie.size > 0 ? `${wwSelectie.size} gekozen` : 'Alle woorden';
   el.innerHTML=`
     <div class="level-selector">
       <button class="level-btn ${taalLevel===1?'on':''}" id="tlvl-1" onclick="setTaalLevel(1)"><span class="lvl-stars">⭐</span><span class="lvl-name">Niveau 1</span><span class="lvl-desc">Regelmatig</span></button>
       <button class="level-btn ${taalLevel===2?'on':''}" id="tlvl-2" onclick="setTaalLevel(2)"><span class="lvl-stars">⭐⭐</span><span class="lvl-name">Niveau 2</span><span class="lvl-desc">Onregelmatig</span></button>
       <button class="level-btn ${taalLevel===3?'on':''}" id="tlvl-3" onclick="setTaalLevel(3)"><span class="lvl-stars">⭐⭐⭐</span><span class="lvl-name">Niveau 3</span><span class="lvl-desc">Alles · omgekeerd</span></button>
     </div>
+    <button onclick="openWwSelectie()" style="display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;border-radius:var(--radius-sm);border:2px solid ${wwSelectie.size>0?'var(--accent)':'var(--surface3)'};background:var(--surface2);color:var(--tx);cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;">
+      <span>📝</span><span>Woordselectie: <strong>${selectieTekst}</strong></span>
+      <span style="margin-left:auto;color:var(--tx3);">▼</span>
+    </button>
     <div class="t-score-row">
       <div class="t-score-card"><div class="t-score-num" id="tsc-good">${tQScore.good}</div><div class="t-score-lbl">Goed</div></div>
       <div class="t-score-card"><div class="t-score-num" id="tsc-bad">${tQScore.bad}</div><div class="t-score-lbl">Fout</div></div>
@@ -1307,6 +1400,7 @@ function renderWwQuiz(el){
 }
 
 function renderWwInvul(el){
+  const selectieTekst = wwSelectie.size > 0 ? `${wwSelectie.size} gekozen` : 'Alle woorden';
   el.innerHTML=`
     <div class="invul-toolbar">
       <div class="filter-row" style="margin-bottom:0">
@@ -1315,8 +1409,11 @@ function renderWwInvul(el){
         <button class="filter-btn ${invulFilter==='onr'?'on':''}" id="if-onr" onclick="setInvulFilter('onr')">Onregelmatig</button>
         <button class="filter-btn ${invulFilter==='reg'?'on':''}" id="if-reg" onclick="setInvulFilter('reg')">Regelmatig</button>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <span class="filter-lbl">Aantal woorden:</span>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <button onclick="openWwSelectie()" style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;border:2px solid ${wwSelectie.size>0?'var(--accent)':'var(--surface3)'};background:var(--surface2);color:var(--tx);cursor:pointer;font-size:12px;font-weight:600;">
+          📝 Selectie: <strong>${selectieTekst}</strong>
+        </button>
+        <span class="filter-lbl">Aantal:</span>
         <select id="invul-count" class="t-count-select">
           <option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="50">50</option>
         </select>
@@ -1357,7 +1454,9 @@ function updateTaalScore(){
   if(s)s.textContent=tQScore.streak;
 }
 function pickTaalQ(){
-  let pool=taalLevel===1?getActiveW().filter(w=>!w[4]):taalLevel===2?getActiveW().filter(w=>w[4]):getActiveW();
+  const wwLijst = getWwLijst();
+  let pool=taalLevel===1?wwLijst.filter(w=>!w[4]):taalLevel===2?wwLijst.filter(w=>w[4]):wwLijst;
+  if(!pool.length) pool = wwLijst; // fallback
   const row=pool[Math.floor(Math.random()*pool.length)];
   let givenCol,askCol,reverse=false;
   if(taalLevel===1){givenCol=0;askCol=[1,2,3][Math.floor(Math.random()*3)];}
@@ -1419,7 +1518,8 @@ function setInvulFilter(f){
   generateInvul();
 }
 function generateInvul(){
-  let pool=invulFilter==='onr'?getActiveW().filter(w=>w[4]):invulFilter==='reg'?getActiveW().filter(w=>!w[4]):getActiveW();
+  const wwLijst = getWwLijst();
+  let pool=invulFilter==='onr'?wwLijst.filter(w=>w[4]):invulFilter==='reg'?wwLijst.filter(w=>!w[4]):wwLijst;
   const countEl=document.getElementById('invul-count');
   const count=Math.min(parseInt(countEl?countEl.value:20),pool.length);
   const shuffled=[...pool].sort(()=>Math.random()-0.5).slice(0,count);
@@ -1559,8 +1659,8 @@ const WOORDEN = [
   ["specifiek","kenmerkend",7],
   ["stabiel","vast, evenwichtig",7],
   ["uniek","er is er maar één van",7],
-  ["voorgoed","definitief en blijvend, het komt nooit meer terug",7],
-  ["voor altijd","eindeloos, voor de eeuwigheid",7],
+  ["voorgoed","voor altijd, definitief en blijvend",7],
+  ["voor altijd","eindeloos, voor de eeuwigheid — ook: voorgoed",7],
   ["wanhopig","zonder hoop, niet meer weten wat te doen",7],
   ["zorgzaam","zorg dragen voor iemand anders",7],
   ["arrogant","verwaand, als je op anderen neerkijkt",8],
@@ -1600,24 +1700,28 @@ const WOORDEN = [
 const ZEGSWIJZEN = [
   ["een kei zijn in","heel goed zijn in",1],
   ["vroeg uit de veren","vroeg uit bed",1],
-  ["een kijkje nemen","ergens even gaan kijken",2],
-  ["in de huid kruipen van","zich inleven in",2],
-  ["als een hond in een kegelspel","ongewenst, ongelegen",3],
-  ["de kleren maken de man","bij beoordelen kijk je vaak naar uiterlijk",3],
+  ["een kijkje nemen","ergens even gaan kijken",3],
+  ["in de huid kruipen van","zich inleven in iemand anders",3],
+  ["als een hond in een kegelspel","ongewenst en ongelegen",4],
+  ["de kleren maken de man","bij het beoordelen kijk je vaak naar het uiterlijk",4],
   ["een gat in de lucht springen","heel blij zijn",4],
   ["iets broodnodig hebben","iets is onmisbaar",4],
-  ["de hel is losgebroken","de situatie is erg slecht geworden",5],
-  ["naar de haaien zijn","voorgoed verloren zijn",5],
-  ["zo trots als een pauw","erg trots",6],
+  ["de hel is losgebroken","de situatie is erg slecht geworden",4],
+  ["naar de haaien zijn","voorgoed verloren zijn",4],
+  ["zo trots als een pauw","erg trots zijn",4],
+  ["ergens een stokje voor steken","iets verhinderen of tegenhouden",5],
+  ["iets op je duimpje kennen","iets heel goed kennen of onthouden hebben",5],
+  ["op elkaar lijken als twee druppels water","heel erg op elkaar lijken",5],
+  ["op het puntje van mijn tong liggen","bijna weten maar het woord niet vinden",5],
   ["de sterren van de hemel spelen","heel goed spelen",6],
-  ["geen schijn van kans hebben","helemaal geen kans maken",7],
-  ["je mening herzien","van mening veranderen",7],
-  ["je stoute schoenen aantrekken","al je moed verzamelen om iets te durven",7],
-  ["zich meester maken van iets","in zijn macht krijgen, overmeesteren",8],
-  ["een doorn in het oog zijn","iets dat je ergert en waar je jaloers op bent",8],
-  ["(als) aan de grond genageld","zeer verbaasd en niet meer kunnen bewegen",9],
-  ["je adem stokt in je keel","je kunt niets meer zeggen",9],
-  ["tot de nok gevuld","heel vol, tot aan de rand gevuld",9]
+  ["geen schijn van kans hebben","helemaal geen kans maken",6],
+  ["je mening herzien","van mening veranderen",6],
+  ["je stoute schoenen aantrekken","al je moed verzamelen om iets te durven",6],
+  ["zich meester maken van iets","iets in zijn macht krijgen of overmeesteren",6],
+  ["een doorn in het oog zijn","iets of iemand die je ergert",8],
+  ["(als) aan de grond genageld","zeer verbaasd zijn en niet meer kunnen bewegen",9],
+  ["je adem stokt in je keel","je kunt niets meer zeggen van schrik of verbazing",9],
+  ["tot de nok gevuld","heel vol, tot aan de rand gevuld",9],
 ];
 
 // ════════════════════════════════════════════════════════
@@ -1659,14 +1763,25 @@ function setWoordenMode(quiz){
 function renderWoordenContent(){
   const el=document.getElementById('woorden-content');if(!el)return;
   if(!woordenQuizMode){
-    const q=(document.getElementById('w-search')||{value:''}).value||woordenSearch;
-    const filtered=getActiveWOORDEN().filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(q.toLowerCase())||r[1].toLowerCase().includes(q.toLowerCase())));
-    el.innerHTML='<input class="t-search" type="text" id="w-search" placeholder="🔍 Zoek een woord of betekenis..." value="'+q+'" oninput="woordenSearch=this.value;renderWoordenContent()" />'+
+    const filtered=getActiveWOORDEN().filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(woordenSearch.toLowerCase())||r[1].toLowerCase().includes(woordenSearch.toLowerCase())));
+    el.innerHTML='<input class="t-search" type="text" id="w-search" placeholder="🔍 Zoek een woord of betekenis..." value="'+woordenSearch+'" autocomplete="off" />'+
       '<div class="t-table-wrap"><table class="t-table">'+
       '<thead><tr><th>Woord</th><th>Betekenis</th></tr></thead>'+
-      '<tbody>'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
+      '<tbody id="woorden-tbody">'+filtered.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('')+'</tbody>'+
       '</table></div>'+
-      '<p class="t-hint">'+filtered.length+' woorden</p>';
+      '<p class="t-hint" id="woorden-count">'+filtered.length+' woorden</p>';
+    const inp=document.getElementById('w-search');
+    if(inp){
+      inp.addEventListener('input',function(){
+        woordenSearch=this.value;
+        const q=this.value.toLowerCase();
+        const rows=getActiveWOORDEN().filter(r=>(woordenThema===0||r[2]===woordenThema)&&(r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q)));
+        const tbody=document.getElementById('woorden-tbody');
+        if(tbody)tbody.innerHTML=rows.map(r=>'<tr><td><strong>'+r[0]+'</strong></td><td>'+r[1]+'</td></tr>').join('');
+        const cnt=document.getElementById('woorden-count');
+        if(cnt)cnt.textContent=rows.length+' woorden';
+      });
+    }
   } else {
     renderWoordenQuiz();
   }
@@ -2522,8 +2637,9 @@ function handleMkResult(ok, correct){
   const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout. Het juiste antwoord is: <strong>${correct}</strong>`;
   const cls=ok?'t-fb-ok':'t-fb-no';
   const fb=document.getElementById('mk-feedback');
-  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
-  showStickyNext(msg,cls,'loadMkQ');
+  if(fb)fb.innerHTML=`
+    <div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>
+    <button class="t-next" style="margin-top:10px;width:100%;" onclick="loadMkQ()">Volgende →</button>`;
   if(ok)snd('ok');else snd('no');
 }
 
@@ -3784,7 +3900,7 @@ const LANDEN = [
   {id:'TT',name:'Trinidad en Tobago',capital:'Port of Spain',flag:'🇹🇹',cont:'Noord-Amerika',pop:'1,4 mln',opp:'5.130 km²',munt:'Trinidad en Tobago-dollar',taal:'Engels'},
   {id:'BB',name:'Barbados',capital:'Bridgetown',flag:'🇧🇧',cont:'Noord-Amerika',pop:'0,3 mln',opp:'431 km²',munt:'Barbadiaanse dollar',taal:'Engels'},
   // ── Zuid-Amerika (aanvulling) ──
-  {id:'FG',name:'Frans-Guyana',capital:'Cayenne',flag:'🇬🇫',cont:'Zuid-Amerika',pop:'0,3 mln',opp:'83.534 km²',munt:'Euro',taal:'Frans'},
+  {id:'GUF',name:'Frans-Guyana',capital:'Cayenne',flag:'🇬🇫',cont:'Zuid-Amerika',pop:'0,3 mln',opp:'83.534 km²',munt:'Euro',taal:'Frans'},
   // ── Oceanië (aanvulling) ──
   {id:'SB',name:'Salomonseilanden',capital:'Honiara',flag:'🇸🇧',cont:'Oceanië',pop:'0,7 mln',opp:'28.896 km²',munt:'Salomondollar',taal:'Engels'},
   {id:'VU',name:'Vanuatu',capital:'Port Vila',flag:'🇻🇺',cont:'Oceanië',pop:'0,3 mln',opp:'12.189 km²',munt:'Vatu',taal:'Bislama, Engels, Frans'},
@@ -4001,7 +4117,7 @@ const ISO_TO_LEERHELD = {
   'BLZ':'BZ','SLV':'SV','JAM':'JM','HTI':'HT','TTO':'TT','BRB':'BB',
   'ATG':'AG','BHS':'BS','DMA':'DM','GRD':'GD','KNA':'KN','LCA':'LC','VCT':'VC',
   // Zuid-Amerika
-  'VEN':'VE','ECU':'EC','BOL':'BO','PRY':'PY','URY':'UY','GUY':'GY','SUR':'SR',
+  'VEN':'VE','ECU':'EC','BOL':'BO','PRY':'PY','URY':'UY','GUY':'GY','SUR':'SR','GUF':'GUF',
   // Oceanië
   'PNG':'PG','SLB':'SB','VUT':'VU','FJI':'FJ','NCL':'NC',
   'WSM':'WS','TON':'TO','KIR':'KI','FSM':'FM','MHL':'MH','PLW':'PW','NRU':'NR','TUV':'TV',
@@ -4095,8 +4211,14 @@ function initInteractiveMap() {
             if (!land) return;
             if (aardState.selected !== lid) d3.select(this).attr('opacity', 0.72);
             if (tooltip) {
+              // Check if this is a France territory outside Europe (French Guiana etc.)
+              const bounds = path.bounds(d);
+              const cx = (bounds[0][0] + bounds[1][0]) / 2;
+              const isOverseas = lid === 'FR' && cx < W * 0.35; // left side = Americas
+              const displayName = isOverseas ? 'Frans-Guyana 🇬🇫' : land.name;
+              const displayCapital = isOverseas ? 'Cayenne' : land.capital;
               tooltip.style.display = 'block';
-              tooltip.innerHTML = `${land.flag} <strong>${land.name}</strong><br><span style="color:#9B93C4;font-weight:400;font-size:11px;">🏛️ ${land.capital}</span>`;
+              tooltip.innerHTML = `${land.flag} <strong>${displayName}</strong><br><span style="color:#9B93C4;font-weight:400;font-size:11px;">🏛️ ${displayCapital}</span>`;
             }
           })
           .on('mousemove', function(event) {
@@ -4176,7 +4298,7 @@ function getNumToIso3() {
     "174":"COM","178":"COG","180":"COD","184":"COK","188":"CRI","191":"HRV","192":"CUB",
     "196":"CYP","203":"CZE","204":"BEN","208":"DNK","212":"DMA","214":"DOM","218":"ECU",
     "222":"SLV","226":"GNQ","231":"ETH","232":"ERI","233":"EST","234":"FRO","238":"FLK",
-    "242":"FJI","246":"FIN","250":"FRA","258":"PYF","262":"DJI","266":"GAB","268":"GEO",
+    "242":"FJI","246":"FIN","250":"FRA","254":"GUF","258":"PYF","262":"DJI","266":"GAB","268":"GEO",
     "270":"GMB","275":"PSE","276":"DEU","288":"GHA","296":"KIR","300":"GRC","304":"GRL",
     "308":"GRD","316":"GUM","320":"GTM","324":"GIN","328":"GUY","332":"HTI","336":"VAT",
     "340":"HND","344":"HKG","348":"HUN","352":"ISL","356":"IND","360":"IDN","364":"IRN",
@@ -4453,6 +4575,8 @@ function renderAardQuizContent(el) {
   if (mode === 'kaart') renderQuizMiniMap(q.id);
 }
 
+let _worldDataCache = null;
+
 function renderQuizMiniMap(highlightId) {
   const container = document.getElementById('quiz-mini-map');
   if (!container) return;
@@ -4461,44 +4585,45 @@ function renderQuizMiniMap(highlightId) {
     const wait = setInterval(() => { if (window.d3 && window.topojson) { clearInterval(wait); renderQuizMiniMap(highlightId); } }, 200);
     return;
   }
-  container.innerHTML = '';
-  const W = container.offsetWidth || 340;
-  const H = 170;
-  const svg = d3.select('#quiz-mini-map').append('svg').attr('width','100%').attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);
-  svg.append('rect').attr('width',W).attr('height',H).attr('fill','#0d1b2e');
 
-  svg.append('defs').html(`
-    <filter id="qglow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <style>@keyframes qpulse{0%{fill:#FFD166}50%{fill:#FF9F1C}100%{fill:#FFD166}}.qhl{animation:qpulse 1.4s ease-in-out infinite;}</style>
-  `);
+  const drawMap = (world) => {
+    container.innerHTML = '';
+    const W = container.offsetWidth || 340;
+    const H = 170;
+    const svg = d3.select('#quiz-mini-map').append('svg').attr('width','100%').attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);
+    svg.append('rect').attr('width',W).attr('height',H).attr('fill','#0d1b2e');
+    svg.append('defs').html(`
+      <filter id="qglow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <style>@keyframes qpulse{0%{fill:#FFD166}50%{fill:#FF9F1C}100%{fill:#FFD166}}.qhl{animation:qpulse 1.4s ease-in-out infinite;}</style>
+    `);
+    const projection = d3.geoNaturalEarth1().scale(W/6.5).translate([W/2, H/2]);
+    const path = d3.geoPath().projection(projection);
+    const g = svg.append('g');
+    const countries = topojson.feature(world, world.objects.countries);
+    const targetFeature = countries.features.find(f => {
+      const iso3 = getNumToIso3()[String(f.id)];
+      return iso3 ? ISO_TO_LEERHELD[iso3] === highlightId : false;
+    });
+    if (targetFeature) {
+      const [[x0,y0],[x1,y1]] = path.bounds(targetFeature);
+      const dx = x1-x0, dy = y1-y0;
+      const scale = Math.min(7, Math.max(1.5, 0.65 / Math.max(dx/W, dy/H)));
+      g.attr('transform', `translate(${W/2 - scale*(x0+x1)/2},${H/2 - scale*(y0+y1)/2}) scale(${scale})`);
+    }
+    g.selectAll('path').data(countries.features).enter().append('path')
+      .attr('d', path)
+      .attr('fill', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
+      .attr('stroke','#0a1525').attr('stroke-width',0.4)
+      .attr('class', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
+      .attr('filter', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
+  };
 
-  const projection = d3.geoNaturalEarth1().scale(W/6.5).translate([W/2, H/2]);
-  const path = d3.geoPath().projection(projection);
-  const g = svg.append('g');
-
+  if (_worldDataCache) { drawMap(_worldDataCache); return; }
+  container.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:20px;font-size:12px;">⏳ Kaart laden...</p>';
   fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
     .then(r => r.json())
-    .then(world => {
-      const countries = topojson.feature(world, world.objects.countries);
-      const targetFeature = countries.features.find(f => {
-        const iso3 = getNumToIso3()[String(f.id)];
-        return iso3 ? ISO_TO_LEERHELD[iso3] === highlightId : false;
-      });
-      if (targetFeature) {
-        const [[x0,y0],[x1,y1]] = path.bounds(targetFeature);
-        const dx = x1-x0, dy = y1-y0;
-        const scale = Math.min(7, Math.max(1.5, 0.65 / Math.max(dx/W, dy/H)));
-        const tx = W/2 - scale*(x0+x1)/2;
-        const ty = H/2 - scale*(y0+y1)/2;
-        g.attr('transform', `translate(${tx},${ty}) scale(${scale})`);
-      }
-      g.selectAll('path').data(countries.features).enter().append('path')
-        .attr('d', path)
-        .attr('fill', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
-        .attr('stroke','#0a1525').attr('stroke-width',0.4)
-        .attr('class', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
-        .attr('filter', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
-    });
+    .then(world => { _worldDataCache = world; drawMap(world); })
+    .catch(() => { container.innerHTML = '<p style="color:#9B93C4;text-align:center;padding:20px;font-size:12px;">⚠️ Kaart kon niet laden.</p>'; });
 }
 
 function aardQuizAntwoord(id) {
@@ -4533,6 +4658,38 @@ function aardQuizVolgende() {
   renderAardContent();
 }
 
+
+function renderAardQuizEnd(el) {
+  const score = aardState.quiz.score;
+  const total = aardState.quiz.vragen.length;
+  const pct = Math.round(score / total * 100);
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '⭐' : pct >= 40 ? '💪' : '📚';
+  const msg = pct >= 80 ? 'Geweldig! Je bent een echte wereldkenner!' : pct >= 60 ? 'Goed gedaan! Nog een beetje oefenen!' : pct >= 40 ? 'Niet slecht! Blijf oefenen!' : 'Oefening baart kunst! Probeer opnieuw!';
+  if (pct >= 80) boom();
+  el.innerHTML = `
+    <div class="aard-quiz-end">
+      <div class="aard-quiz-end-emoji">${emoji}</div>
+      <div class="aard-quiz-end-title">${score} / ${total} goed!</div>
+      <div style="font-size:13px;color:var(--tx2);margin-bottom:16px;">${msg}</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px;">
+        <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px 20px;text-align:center;">
+          <div style="font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">${pct}%</div>
+          <div style="font-size:11px;color:var(--tx3);text-transform:uppercase;">score</div>
+        </div>
+      </div>
+      <button class="quiz-next-btn" onclick="startAardQuizMode('${aardState.quiz.mode}')" style="margin-bottom:8px;">🔄 Opnieuw spelen</button>
+      <button onclick="startAardQuiz()" style="display:block;width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--surface3);background:none;color:var(--tx2);font-size:14px;cursor:pointer;font-family:'Fredoka',sans-serif;margin-bottom:8px;">🎯 Andere modus</button>
+      <button onclick="aardTab('kaart')" style="display:block;width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--surface3);background:none;color:var(--tx3);font-size:14px;cursor:pointer;font-family:'Fredoka',sans-serif;">🗺️ Terug naar kaart</button>
+    </div>`;
+}
+
+// Avatar kiezen bij profielen
+let _tmpAvatar = '';
+function kiesAvatar(el, avatar) {
+  _tmpAvatar = avatar;
+  document.querySelectorAll('.profiel-avatar-opt').forEach(e => e.classList.remove('on'));
+  el.classList.add('on');
+}
 
 function renderAdminInstellingen(el){
   el.innerHTML=`
