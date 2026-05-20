@@ -4165,15 +4165,24 @@ function getNumToColorMap() {
   return _numToColorCache;
 }
 
-function getLid(feature) {
+function _featureKey(feature) {
   if (!feature || feature.id === undefined || feature.id === null) return null;
-  const entry = getNumToColorMap()[String(feature.id)];
+  // world-atlas stores IDs as strings like '036' - normalize by parsing as int
+  const n = parseInt(feature.id, 10);
+  return isNaN(n) ? null : String(n);
+}
+
+function getLid(feature) {
+  const key = _featureKey(feature);
+  if (!key) return null;
+  const entry = getNumToColorMap()[key];
   return entry ? entry.lid : null;
 }
 
 function getCountryFill(feature) {
-  if (!feature || feature.id === undefined) return '#2a3a5c';
-  const entry = getNumToColorMap()[String(feature.id)];
+  const key = _featureKey(feature);
+  if (!key) return '#2a3a5c';
+  const entry = getNumToColorMap()[key];
   if (!entry) return '#2a3a5c';
   if (aardState.selected === entry.lid) return '#FFD166';
   return entry.color;
@@ -4647,7 +4656,7 @@ function renderQuizMiniMap(highlightId) {
     const g = svg.append('g');
     const countries = topojson.feature(world, world.objects.countries);
     const targetFeature = countries.features.find(f => {
-      const iso3 = getNumToIso3()[String(f.id)];
+      const iso3 = getNumToIso3()[String(parseInt(f.id,10))];
       return iso3 ? ISO_TO_LEERHELD[iso3] === highlightId : false;
     });
     if (targetFeature) {
@@ -4658,10 +4667,10 @@ function renderQuizMiniMap(highlightId) {
     }
     g.selectAll('path').data(countries.features).enter().append('path')
       .attr('d', path)
-      .attr('fill', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
+      .attr('fill', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
       .attr('stroke','#0a1525').attr('stroke-width',0.4)
-      .attr('class', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
-      .attr('filter', f => { const iso3=getNumToIso3()[String(f.id)]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
+      .attr('class', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
+      .attr('filter', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
   };
 
   if (_worldDataCache) { drawMap(_worldDataCache); return; }
