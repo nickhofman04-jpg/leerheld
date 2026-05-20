@@ -1171,7 +1171,7 @@ let tQScore={good:0,bad:0,streak:0}, tQAnswered=false, tQTotal=0, tCurrentQ=null
 let invulFilter='all', invulData=[];
 let zegswijzenQuizMode=false, zqScore={good:0,bad:0}, zqAnswered=false, zqDir='zegswijzeBetekenis', zqCurrent=null;
 let zegswijzenThema=0, zegswijzenZoek='';
-let wwSelectie = new Set(); // geselecteerde werkwoorden (via infinitief)
+let wwSelectie = new Set(); // leeg=alles; gevuld=enkel die woorden
 
 function getWwLijst(){
   const base = getActiveW();
@@ -1180,9 +1180,8 @@ function getWwLijst(){
 }
 
 function openWwSelectie(){
-  const base = getActiveW();
-  // Sorteer op infinitief
-  const sorted = [...base].sort((a,b) => a[0].localeCompare(b[0]));
+  // Bij openen: als geen filter actief, initialiseer met ALLE woorden zodat checkboxes correct zijn
+  if(wwSelectie.size === 0) getActiveW().forEach(w => wwSelectie.add(w[0]));
   const overlay = document.createElement('div');
   overlay.id = 'ww-sel-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;display:flex;align-items:flex-end;justify-content:center;';
@@ -1190,18 +1189,20 @@ function openWwSelectie(){
     <div style="background:var(--surface);border-radius:20px 20px 0 0;padding:16px;width:100%;max-width:700px;max-height:80vh;display:flex;flex-direction:column;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
         <span style="font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">📝 Kies woorden om te oefenen</span>
-        <button onclick="document.getElementById('ww-sel-overlay').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--tx3);">✕</button>
+        <button onclick="sluitWwSelectie()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--tx3);">✕</button>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
         <button onclick="wwSelectieAlles(true)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;font-weight:600;">✅ Alles selecteren</button>
         <button onclick="wwSelectieAlles(false)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;font-weight:600;">⬜ Alles deselecteren</button>
-        <span id="ww-sel-count" style="align-self:center;font-size:12px;color:var(--tx3);">${wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden'}</span>
+        <span id="ww-sel-count" style="align-self:center;font-size:12px;color:var(--tx3);">${wwSelectie.size} gekozen</span>
       </div>
-      <input id="ww-sel-zoek" placeholder="🔍 Zoek..." style="padding:8px 12px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;margin-bottom:8px;outline:none;" oninput="renderWwSelLijst()" />
+      <input id="ww-sel-zoek" placeholder="🔍 Zoek..." style="padding:8px 12px;border-radius:10px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;margin-bottom:8px;outline:none;" autocomplete="off" />
       <div id="ww-sel-lijst" style="overflow-y:auto;flex:1;"></div>
-      <button onclick="sluitWwSelectie()" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">Bevestigen</button>
+      <button onclick="sluitWwSelectie()" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">✓ Bevestigen</button>
     </div>`;
   document.body.appendChild(overlay);
+  const zi = overlay.querySelector('#ww-sel-zoek');
+  if(zi) zi.addEventListener('input', renderWwSelLijst);
   renderWwSelLijst();
 }
 
@@ -1211,63 +1212,49 @@ function renderWwSelLijst(){
   const filtered = q ? base.filter(w => w[0].toLowerCase().includes(q)) : base;
   const el = document.getElementById('ww-sel-lijst');
   if(!el) return;
-  el.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-    ${filtered.map(w => {
-      const checked = wwSelectie.size === 0 || wwSelectie.has(w[0]);
-      return `<label style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;background:${wwSelectie.has(w[0])?'rgba(124,111,255,0.1)':'transparent'};border:1px solid ${wwSelectie.has(w[0])?'var(--accent)':'var(--surface3)'};">
-        <input type="checkbox" ${wwSelectie.has(w[0])||wwSelectie.size===0?'checked':''} data-ww="${w[0]}" onchange="toggleWwSel(this)" style="accent-color:var(--accent);width:16px;height:16px;" />
+  el.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">' +
+    filtered.map(w => {
+      const sel = wwSelectie.has(w[0]);
+      return `<label style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;background:${sel?'rgba(124,111,255,0.1)':'transparent'};border:1px solid ${sel?'var(--accent)':'var(--surface3)'};">
+        <input type="checkbox" ${sel?'checked':''} data-ww="${w[0]}" onchange="toggleWwSel(this)" style="accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;" />
         <span style="font-size:13px;font-weight:600;color:var(--tx);">${w[0]}</span>
-        <span style="font-size:11px;color:var(--tx3);margin-left:auto;">${w[4]?'onr.':''}</span>
+        <span style="font-size:10px;color:var(--tx3);margin-left:auto;">${w[4]?'onr':''}</span>
       </label>`;
-    }).join('')}
-  </div>`;
-  const countEl = document.getElementById('ww-sel-count');
-  if(countEl) countEl.textContent = wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden';
+    }).join('') + '</div>';
+  const c = document.getElementById('ww-sel-count');
+  if(c) c.textContent = wwSelectie.size + ' gekozen';
 }
 
 function toggleWwSel(checkbox){
-  if(checkbox.checked){
-    // Als alles was geselecteerd (size=0), initialiseer met alle woorden behalve deze
-    if(wwSelectie.size === 0){
-      getActiveW().forEach(w => { if(w[0] !== checkbox.dataset.ww) wwSelectie.add(w[0]); });
-    }
-    wwSelectie.add(checkbox.dataset.ww);
-  } else {
-    if(wwSelectie.size === 0){ getActiveW().forEach(w => wwSelectie.add(w[0])); }
-    wwSelectie.delete(checkbox.dataset.ww);
-  }
-  // Update label stijl
+  if(checkbox.checked) wwSelectie.add(checkbox.dataset.ww);
+  else wwSelectie.delete(checkbox.dataset.ww);
   const label = checkbox.closest('label');
   if(label){
     label.style.background = checkbox.checked ? 'rgba(124,111,255,0.1)' : 'transparent';
     label.style.border = `1px solid ${checkbox.checked?'var(--accent)':'var(--surface3)'}`;
   }
-  const countEl = document.getElementById('ww-sel-count');
-  if(countEl) countEl.textContent = wwSelectie.size > 0 ? wwSelectie.size + ' gekozen' : 'Alle woorden';
+  const c = document.getElementById('ww-sel-count');
+  if(c) c.textContent = wwSelectie.size + ' gekozen';
 }
 
 function wwSelectieAlles(aan){
-  if(aan){
-    wwSelectie.clear();
-  } else {
-    getActiveW().forEach(w => wwSelectie.add(w[0]));
-  }
-  // Update alle checkboxes in de DOM direct
+  if(aan) getActiveW().forEach(w => wwSelectie.add(w[0]));
+  else wwSelectie.clear();
   document.querySelectorAll('#ww-sel-lijst input[type=checkbox]').forEach(cb => {
     cb.checked = aan;
     const label = cb.closest('label');
     if(label){
       label.style.background = aan ? 'rgba(124,111,255,0.1)' : 'transparent';
-      label.style.border = `1px solid ${aan ? 'var(--accent)' : 'var(--surface3)'}`;
+      label.style.border = `1px solid ${aan?'var(--accent)':'var(--surface3)'}`;
     }
   });
-  const countEl = document.getElementById('ww-sel-count');
-  if(countEl) countEl.textContent = aan ? 'Alle woorden' : '0 gekozen';
+  const c = document.getElementById('ww-sel-count');
+  if(c) c.textContent = (aan ? getActiveW().length : 0) + ' gekozen';
 }
 
 function sluitWwSelectie(){
-  // Als alle woorden gekozen zijn = geen filter
-  if(wwSelectie.size === getActiveW().length) wwSelectie.clear();
+  // Als alles geselecteerd = geen filter nodig, reset naar leeg (= alles)
+  if(wwSelectie.size >= getActiveW().length) wwSelectie.clear();
   document.getElementById('ww-sel-overlay')?.remove();
   renderWwContent();
 }
@@ -4252,12 +4239,24 @@ function initInteractiveMap() {
             if (!land) return;
             if (aardState.selected !== lid) d3.select(this).attr('opacity', 0.72);
             if (tooltip) {
-              // Check if this is a France territory outside Europe (French Guiana etc.)
-              const bounds = path.bounds(d);
-              const cx = (bounds[0][0] + bounds[1][0]) / 2;
-              const isOverseas = lid === 'FR' && cx < W * 0.35; // left side = Americas
-              const displayName = isOverseas ? 'Frans-Guyana 🇬🇫' : land.name;
-              const displayCapital = isOverseas ? 'Cayenne' : land.capital;
+              // Use geographic centroid to detect France's overseas territories
+              // French Guiana is around longitude -53, Reunion around +56, Martinique around -61
+              // Metropolitan France is around longitude +2
+              let displayName = land.name;
+              let displayCapital = land.capital;
+              if (lid === 'FR') {
+                try {
+                  const centroid = d3.geoCentroid(d);
+                  const lon = centroid[0]; // longitude
+                  if (lon < -20) { // Americas (French Guiana, Martinique, Guadeloupe)
+                    displayName = 'Frans-Guyana 🇬🇫';
+                    displayCapital = 'Cayenne';
+                  } else if (lon > 40) { // Indian Ocean (Réunion, Mayotte)
+                    displayName = 'Frans overzees gebied 🇫🇷';
+                    displayCapital = '—';
+                  }
+                } catch(e) {}
+              }
               tooltip.style.display = 'block';
               tooltip.innerHTML = `${land.flag} <strong>${displayName}</strong><br><span style="color:#9B93C4;font-weight:400;font-size:11px;">🏛️ ${displayCapital}</span>`;
             }
@@ -4282,12 +4281,18 @@ function initInteractiveMap() {
             if (tooltip) tooltip.style.display = 'none';
           })
           .on('click', function(event, d) {
-            const lid = getLid(d);
+            let lid = getLid(d);
             if (!lid) {
-              // Toon vriendelijke melding voor landen zonder info
               const cardEl = document.getElementById('aard-country-card');
               if (cardEl) cardEl.innerHTML = '<p style="text-align:center;color:var(--tx3);font-size:13px;padding:12px;">📍 Dit land staat nog niet in onze lijst. Probeer een gekleurd land!</p>';
               return;
+            }
+            // For France overseas territories, show GUF instead
+            if (lid === 'FR') {
+              try {
+                const lon = d3.geoCentroid(d)[0];
+                if (lon < -20) lid = 'GUF'; // Frans-Guyana
+              } catch(e) {}
             }
             aardState.selected = lid;
             aardState.zoek = '';
