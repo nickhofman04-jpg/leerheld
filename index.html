@@ -1524,7 +1524,7 @@ function generateInvul(){
   const countEl=document.getElementById('invul-count');
   const count=Math.min(parseInt(countEl?countEl.value:20),pool.length);
   const shuffled=[...pool].sort(()=>Math.random()-0.5).slice(0,count);
-  invulData=shuffled.map(row=>{const n=Math.random()<0.5?1:2;const cols=[0,1,2,3].sort(()=>Math.random()-0.5).slice(0,n);return{row,blanks:cols};});
+  invulData=shuffled.map(row=>({row, blanks:[1,2,3]}));
   renderInvulRows();
   const fb=document.getElementById('invul-feedback');if(fb)fb.innerHTML='';
 }
@@ -4248,21 +4248,19 @@ function initInteractiveMap() {
             if (!land) return;
             if (aardState.selected !== lid) d3.select(this).attr('opacity', 0.72);
             if (tooltip) {
-              // Use geographic centroid to detect France's overseas territories
-              // French Guiana is around longitude -53, Reunion around +56, Martinique around -61
-              // Metropolitan France is around longitude +2
               let displayName = land.name;
               let displayCapital = land.capital;
               if (lid === 'FR') {
                 try {
-                  const centroid = d3.geoCentroid(d);
-                  const lon = centroid[0]; // longitude
-                  if (lon < -20) { // Americas (French Guiana, Martinique, Guadeloupe)
+                  // Use bounding box west longitude to detect overseas territories
+                  const bounds = d3.geoBounds(d);
+                  const westLon = bounds[0][0]; // westernmost point
+                  if (westLon < -20) {
                     displayName = 'Frans-Guyana 🇬🇫';
                     displayCapital = 'Cayenne';
-                  } else if (lon > 40) { // Indian Ocean (Réunion, Mayotte)
+                  } else if (westLon > 40) {
                     displayName = 'Frans overzees gebied 🇫🇷';
-                    displayCapital = '—';
+                    displayCapital = '(Indische Oceaan)';
                   }
                 } catch(e) {}
               }
@@ -4299,8 +4297,9 @@ function initInteractiveMap() {
             // For France overseas territories, show GUF instead
             if (lid === 'FR') {
               try {
-                const lon = d3.geoCentroid(d)[0];
-                if (lon < -20) lid = 'GUF'; // Frans-Guyana
+                const bounds = d3.geoBounds(d);
+                const westLon = bounds[0][0];
+                if (westLon < -20) lid = 'GUF'; // Frans-Guyana
               } catch(e) {}
             }
             aardState.selected = lid;
