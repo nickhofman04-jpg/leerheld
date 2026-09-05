@@ -19,330 +19,311 @@
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 
     :root{
-      --bg:#0F0E17;
-      --surface:#1A1929;
-      --surface2:#221F35;
-      --surface3:#2A2742;
+      --bg:#0B0A14;
+      --surface:#16152A;
+      --surface2:#1E1C33;
+      --surface3:#272542;
+      --surface4:#302D52;
       --accent:#7C6FFF;
       --accent2:#FF6B9D;
       --accent3:#FFD166;
       --accent4:#06D6A0;
-      --tx:#EEEAF8;
+      --tx:#F0ECF8;
       --tx2:#9B93C4;
-      --tx3:#6B6491;
+      --tx3:#5E5880;
       --ok:#06D6A0;
       --no:#FF6B9D;
-      --glow:rgba(124,111,255,0.35);
-      --radius:20px;
-      --radius-sm:12px;
-      --tab-accent:#7C6FFF;
+      --glow:rgba(124,111,255,0.3);
+      --radius:16px;
+      --radius-sm:10px;
+      --radius-xs:7px;
     }
 
-    /* ── Light theme ── */
     body.light{
-      --bg:#F0EEF8;
+      --bg:#F2F0FA;
       --surface:#FFFFFF;
-      --surface2:#EAE8F5;
-      --surface3:#D8D4EF;
-      --tx:#1A1730;
-      --tx2:#5A5378;
-      --tx3:#9B93C4;
+      --surface2:#EAE7F5;
+      --surface3:#D9D5EE;
+      --surface4:#CAC5E5;
+      --tx:#17142E;
+      --tx2:#524C78;
+      --tx3:#9890C0;
       --ok:#0B9E77;
       --no:#D94F7A;
     }
-    body.light::before{opacity:0.5;}
-    body.light::after{opacity:0.4;}
-    body[data-hero="vuur"]{--accent:#FF6B35;--accent2:#FFD166;--glow:rgba(255,107,53,0.35);}
-    body[data-hero="ijs"]{--accent:#38BDF8;--accent2:#A5F3FC;--glow:rgba(56,189,248,0.35);}
-    body[data-hero="bliksem"]{--accent:#FFD166;--accent2:#FF9F1C;--glow:rgba(255,209,102,0.35);}
-    body[data-hero="ruimte"]{--accent:#818CF8;--accent2:#C4B5FD;--glow:rgba(129,140,248,0.35);}
-    body[data-hero="draak"]{--accent:#34D399;--accent2:#6EE7B7;--glow:rgba(52,211,153,0.35);}
-    body[data-hero="prinses"]{--accent:#FF6EB4;--accent2:#FFB3D9;--glow:rgba(255,110,180,0.35);}
-    
+    body.light::before{opacity:0.4;}
+    body.light::after{opacity:0.3;}
 
-    body{background:var(--bg);min-height:100vh;font-family:'Nunito',sans-serif;color:var(--tx);transition:--accent 0.4s;}
-    body::before{content:'';position:fixed;top:-20%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,var(--glow) 0%,transparent 65%);pointer-events:none;z-index:0;transition:background 0.6s;}
-    body::after{content:'';position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(255,107,157,0.12) 0%,transparent 65%);pointer-events:none;z-index:0;}
+    body[data-hero="vuur"]{--accent:#FF6B35;--accent2:#FFD166;--glow:rgba(255,107,53,0.3);}
+    body[data-hero="ijs"]{--accent:#38BDF8;--accent2:#A5F3FC;--glow:rgba(56,189,248,0.3);}
+    body[data-hero="bliksem"]{--accent:#FFD166;--accent2:#FF9F1C;--glow:rgba(255,209,102,0.3);}
+    body[data-hero="ruimte"]{--accent:#818CF8;--accent2:#C4B5FD;--glow:rgba(129,140,248,0.3);}
+    body[data-hero="draak"]{--accent:#34D399;--accent2:#6EE7B7;--glow:rgba(52,211,153,0.3);}
+    body[data-hero="prinses"]{--accent:#FF6EB4;--accent2:#FFB3D9;--glow:rgba(255,110,180,0.3);}
+
+    body{background:var(--bg);min-height:100vh;font-family:'Nunito',sans-serif;color:var(--tx);transition:background 0.4s;}
+    body::before{content:'';position:fixed;top:-30%;left:-20%;width:65%;height:65%;background:radial-gradient(circle,var(--glow) 0%,transparent 65%);pointer-events:none;z-index:0;transition:background 0.5s;}
+    body::after{content:'';position:fixed;bottom:-25%;right:-15%;width:55%;height:55%;background:radial-gradient(circle,rgba(255,107,157,0.1) 0%,transparent 65%);pointer-events:none;z-index:0;}
 
     #ccanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
-
-    #app{position:relative;z-index:1;padding:0.8rem 1.5rem 2rem;display:flex;flex-direction:column;align-items:center;min-height:100vh;max-width:900px;margin:0 auto;}
+    #app{position:relative;z-index:1;padding:0.7rem 1.2rem 3rem;display:flex;flex-direction:column;align-items:center;min-height:100vh;max-width:860px;margin:0 auto;}
 
     /* ── Header ── */
-    .logo{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;letter-spacing:0.5px;}
-    .logo-sub{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:2px;text-transform:uppercase;margin-top:-4px;}
-    .header-btns{display:flex;gap:8px;align-items:center;}
-    .icon-btn{width:38px;height:38px;border-radius:50%;border:none;background:var(--surface2);color:var(--tx2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+    .logo{font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;letter-spacing:0.3px;}
+    .logo-sub{font-size:9px;font-weight:800;color:var(--tx3);letter-spacing:2.5px;text-transform:uppercase;margin-top:-3px;}
+    .header-btns{display:flex;gap:6px;align-items:center;}
+    .icon-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--surface2);color:var(--tx2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;}
     .icon-btn:hover{background:var(--surface3);color:var(--tx);}
     .icon-btn.active{background:var(--accent);color:#fff;}
-    .app-header{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;padding:0 0.2rem;gap:10px;}
+    .app-header{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem;padding:0 0.1rem;gap:10px;}
     .header-center{flex:1;display:flex;justify-content:center;}
-    .hero-dropdown{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;background:var(--surface2);color:var(--tx);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:8px 12px;cursor:pointer;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;text-align:center;}
-    .hero-dropdown option{background:var(--surface2);color:var(--tx);}
+    .hero-dropdown{font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;background:var(--surface2);color:var(--tx);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);padding:7px 12px;cursor:pointer;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;text-align:center;}
     .hero-dropdown:focus{border-color:var(--accent);}
 
-    /* ── Main tabs (Rekenen / Taal) ── */
-    .main-tabs{width:100%;display:flex;gap:6px;margin-bottom:1rem;background:var(--surface);border-radius:var(--radius-sm);padding:4px;}
-    .main-tab{flex:1;font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;border:none;border-radius:10px;background:transparent;color:var(--tx3);cursor:pointer;padding:12px 0;text-align:center;transition:all 0.22s;letter-spacing:0.3px;}
-    .main-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 16px var(--glow);}
+    /* ── Main tabs ── */
+    .main-tabs{width:100%;display:flex;gap:4px;margin-bottom:0.8rem;background:var(--surface);border-radius:var(--radius-sm);padding:4px;position:relative;border:1px solid rgba(255,255,255,0.04);}
+    .main-tab{flex:1;font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;border:none;border-radius:8px;background:transparent;color:var(--tx3);cursor:pointer;padding:10px 0;text-align:center;transition:all 0.2s;letter-spacing:0.2px;}
+    .main-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 3px 14px var(--glow);}
+    .main-tab-dropdown{flex:1;position:relative;}
+    .main-tab-dropdown .main-tab{width:100%;font-size:14px;}
+    .main-tab-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border-radius:var(--radius-sm);box-shadow:0 8px 28px rgba(0,0,0,0.25);z-index:200;overflow:hidden;border:1px solid var(--surface3);min-width:140px;}
+    .main-tab-menu.open{display:block;}
+    .main-tab-menu button{display:block;width:100%;padding:10px 14px;text-align:left;border:none;background:transparent;color:var(--tx);font-size:13px;font-weight:600;font-family:'Nunito',sans-serif;cursor:pointer;transition:background 0.1s;}
+    .main-tab-menu button:hover{background:var(--surface2);}
+    .main-tab-menu button.active-sub{color:var(--accent);background:rgba(124,111,255,0.08);}
+    @media(max-width:480px){.main-tab-dropdown .main-tab{font-size:12px;padding:9px 2px;}.main-tab{font-size:12px;padding:9px 0;}}
 
     /* ── Panel ── */
-    .panel{background:var(--surface);border-radius:var(--radius);padding:1.4rem;width:100%;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.05);min-height:480px;animation:slideUp 0.28s ease;}
-    @keyframes slideUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    .panel{background:var(--surface);border-radius:var(--radius);padding:1.2rem;width:100%;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.04);min-height:460px;animation:slideUp 0.22s ease;}
+    @keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes popIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
 
-    .sec-lbl{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;margin-top:4px;}
-    .divider{height:1px;background:rgba(255,255,255,0.06);margin:1rem 0;}
+    .sec-lbl{font-family:'Fredoka',sans-serif;font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px;margin-top:4px;}
+    .divider{height:1px;background:rgba(255,255,255,0.05);margin:1rem 0;}
 
     /* ── Hero picker ── */
-    .hero-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:0.3rem;}
+    .hero-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:0.3rem;}
     .hcard{border:2px solid transparent;border-radius:var(--radius-sm);padding:8px 4px 6px;text-align:center;cursor:pointer;background:var(--surface2);transition:all 0.2s;position:relative;overflow:hidden;}
     .hcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
-    .hcard.on{border-color:var(--accent);box-shadow:0 0 16px var(--glow);}
-    .hcard.on::before{opacity:0.15;}
-    .hcard .ico{font-size:26px;line-height:1;display:block;margin-bottom:3px;position:relative;}
-    .hcard .hname{font-size:9px;font-weight:700;color:var(--tx2);position:relative;letter-spacing:0.5px;}
+    .hcard.on{border-color:var(--accent);box-shadow:0 0 14px var(--glow);}
+    .hcard.on::before{opacity:0.12;}
+    .hcard .ico{font-size:24px;line-height:1;display:block;margin-bottom:3px;position:relative;}
+    .hcard .hname{font-size:9px;font-weight:700;color:var(--tx2);position:relative;letter-spacing:0.4px;}
     .hcard.on .hname{color:var(--tx);}
 
-    /* ── Mode tabs ── */
-    .mode-tabs{display:flex;gap:8px;margin-bottom:0.3rem;justify-content:flex-start;}
-    .mode-tab{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;border:2px solid transparent;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx2);cursor:pointer;padding:10px 20px;text-align:center;transition:all 0.2s;letter-spacing:0.3px;}
-    .mode-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 4px 16px var(--glow);}
-
-    /* ── Opt buttons ── */
-    .opt-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.3rem;}
-    .opt-btn{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;padding:8px 14px;border-radius:var(--radius-sm);border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.18s;letter-spacing:0.3px;}
-    .opt-btn.on{background:var(--accent);color:#fff;box-shadow:0 4px 12px var(--glow);}
-    .bew-btn{font-size:22px;min-width:56px;padding:8px 10px;}
+    /* ── Mode / opt buttons ── */
+    .mode-tabs{display:flex;gap:6px;margin-bottom:0.3rem;justify-content:flex-start;flex-wrap:wrap;}
+    .mode-tab{font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx2);cursor:pointer;padding:9px 18px;text-align:center;transition:all 0.18s;}
+    .mode-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 3px 12px var(--glow);}
+    .opt-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:0.3rem;}
+    .opt-btn{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;padding:7px 13px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.16s;}
+    .opt-btn.on{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 3px 10px var(--glow);}
+    .bew-btn{font-size:20px;min-width:50px;padding:7px 9px;}
 
     /* ── Cijfer grid ── */
-    .cijfer-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:0.3rem;}
-    .cij-btn{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;border:2px solid transparent;border-radius:10px;background:var(--surface2);color:var(--tx2);cursor:pointer;padding:8px 0;text-align:center;transition:all 0.18s;}
-    .cij-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 10px var(--glow);}
+    .cijfer-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-bottom:0.3rem;}
+    .cij-btn{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;border:1.5px solid var(--surface3);border-radius:8px;background:var(--surface2);color:var(--tx2);cursor:pointer;padding:7px 0;text-align:center;transition:all 0.16s;}
+    .cij-btn.on{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 2px 8px var(--glow);}
 
     /* ── Start btn ── */
-    .start-btn{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 6px 24px var(--glow);letter-spacing:1px;transition:all 0.18s;position:relative;overflow:hidden;}
+    .start-btn{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:13px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 5px 20px var(--glow);letter-spacing:0.8px;transition:all 0.18s;}
     .start-btn:active{transform:scale(0.98);}
+    .again-btn{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:13px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 5px 20px var(--glow);letter-spacing:0.8px;transition:all 0.18s;}
 
     /* ── Game screen ── */
-    .info-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--tx2);margin-bottom:10px;}
-    .hero-chip{display:flex;align-items:center;gap:6px;background:var(--surface2);border-radius:20px;padding:4px 10px 4px 6px;font-size:12px;font-weight:700;}
-    .streak-badge{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:800;font-family:'Fredoka',sans-serif;}
-    .prog-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--surface3);transition:all 0.2s;}
-    .dot.ok{background:var(--ok);box-shadow:0 0 6px rgba(6,214,160,0.5);}
-    .dot.no{background:var(--no);box-shadow:0 0 6px rgba(255,107,157,0.5);}
-    .dot.cur{background:var(--accent);box-shadow:0 0 8px var(--glow);transform:scale(1.3);}
-    .tbar-wrap{width:100%;height:6px;background:var(--surface3);border-radius:3px;margin-bottom:10px;overflow:hidden;}
+    .info-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:var(--tx2);margin-bottom:10px;}
+    .hero-chip{display:flex;align-items:center;gap:5px;background:var(--surface2);border-radius:20px;padding:4px 10px 4px 6px;font-size:11px;font-weight:700;}
+    .streak-badge{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:800;font-family:'Fredoka',sans-serif;}
+    .prog-row{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-bottom:9px;}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--surface3);transition:all 0.2s;}
+    .dot.ok{background:var(--ok);box-shadow:0 0 5px rgba(6,214,160,0.5);}
+    .dot.no{background:var(--no);box-shadow:0 0 5px rgba(255,107,157,0.5);}
+    .dot.cur{background:var(--accent);box-shadow:0 0 7px var(--glow);transform:scale(1.3);}
+    .tbar-wrap{width:100%;height:5px;background:var(--surface3);border-radius:3px;margin-bottom:10px;overflow:hidden;}
     .tbar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.1s linear;}
-    .streak-bar{display:flex;gap:4px;justify-content:center;margin-bottom:12px;}
-    .streak-pip{width:20px;height:6px;border-radius:3px;background:var(--surface3);transition:all 0.3s;}
-    .streak-pip.lit{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 8px var(--glow);}
-    .q-wrap{background:var(--surface2);border-radius:var(--radius);padding:18px 12px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;}
-    .q-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,0.08),transparent);}
-    .q-text{font-family:'Fredoka',sans-serif;font-size:52px;font-weight:700;color:var(--tx);letter-spacing:2px;line-height:1;position:relative;}
-    .ans-display{font-family:'Fredoka',sans-serif;font-size:40px;font-weight:700;text-align:center;min-height:58px;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);padding:6px 16px;margin:0 auto 12px;width:160px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface3);transition:all 0.15s;}
+    .streak-bar{display:flex;gap:3px;justify-content:center;margin-bottom:10px;}
+    .streak-pip{width:18px;height:5px;border-radius:3px;background:var(--surface3);transition:all 0.3s;}
+    .streak-pip.lit{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 7px var(--glow);}
+    .q-wrap{background:var(--surface2);border-radius:var(--radius);padding:16px 12px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.04);}
+    .q-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,0.06),transparent);}
+    .q-text{font-family:'Fredoka',sans-serif;font-size:50px;font-weight:700;color:var(--tx);letter-spacing:2px;line-height:1;position:relative;}
+    .ans-display{font-family:'Fredoka',sans-serif;font-size:38px;font-weight:700;text-align:center;min-height:54px;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);padding:6px 14px;margin:0 auto 10px;width:150px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--surface3);transition:all 0.15s;}
     .ans-display.empty{color:var(--tx3);}
-    .ans-display.ok-flash{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
-    .ans-display.no-flash{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
-    .fb{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:600;text-align:center;min-height:30px;margin-bottom:6px;letter-spacing:0.5px;}
+    .ans-display.ok-flash{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
+    .ans-display.no-flash{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .fb{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;text-align:center;min-height:28px;margin-bottom:5px;letter-spacing:0.4px;}
     .fb.ok{color:var(--ok);}.fb.no{color:var(--no);}
-    .auto-bar-wrap{width:100%;height:4px;background:var(--surface3);border-radius:2px;margin-top:6px;overflow:hidden;opacity:0;}
+    .auto-bar-wrap{width:100%;height:4px;background:var(--surface3);border-radius:2px;margin-top:5px;overflow:hidden;opacity:0;}
     .auto-bar-wrap.show{opacity:1;}
     .auto-bar{height:100%;border-radius:2px;background:var(--accent);width:100%;transition:width 2s linear;}
     .auto-bar.go{width:0%;}
-    .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;}
-    .nk{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:600;border:none;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:13px 0;text-align:center;transition:all 0.12s;user-select:none;box-shadow:0 4px 0 rgba(0,0,0,0.3);position:relative;}
-    .nk:active{transform:translateY(3px);box-shadow:none;}
-    .nk.del{background:rgba(255,107,157,0.15);color:var(--no);font-size:18px;}
-    .nk.ok-key{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:20px;font-weight:700;box-shadow:0 4px 0 rgba(0,0,0,0.3),0 0 16px var(--glow);}
-    .nk.ok-key:active{box-shadow:none;}
-    .school-timer{font-family:'Fredoka',sans-serif;font-size:52px;font-weight:700;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px;line-height:1;}
+    .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:7px;}
+    .nk{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:600;border:none;border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:12px 0;text-align:center;transition:all 0.1s;user-select:none;box-shadow:0 3px 0 rgba(0,0,0,0.3);position:relative;border:1px solid rgba(255,255,255,0.04);}
+    .nk:active{transform:translateY(2px);box-shadow:none;}
+    .nk.del{background:rgba(255,107,157,0.12);color:var(--no);font-size:16px;}
+    .nk.ok-key{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:18px;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,0.25),0 0 14px var(--glow);}
+    .school-timer{font-family:'Fredoka',sans-serif;font-size:50px;font-weight:700;text-align:center;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px;line-height:1;}
     .school-timer.warning{background:linear-gradient(135deg,var(--no),var(--accent3));-webkit-background-clip:text;background-clip:text;}
-    .school-goal{font-size:12px;font-weight:700;color:var(--tx3);text-align:center;margin-bottom:10px;letter-spacing:0.5px;}
-    .hero-avatar{font-size:64px;text-align:center;display:block;margin-bottom:8px;}
-    .end-title{font-family:'Fredoka',sans-serif;font-size:32px;font-weight:700;text-align:center;margin-bottom:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .stars-row{text-align:center;font-size:32px;letter-spacing:8px;margin-bottom:10px;}
-    .score-card-end{background:var(--surface2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:8px;}
-    .score-line{font-size:13px;color:var(--tx2);font-weight:600;margin-bottom:4px;}
-    .score-big{font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);display:block;}
-    .rank-badge{display:inline-block;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:20px;padding:4px 14px;margin:6px 0;}
-    .again-btn{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;width:100%;cursor:pointer;margin-top:8px;box-shadow:0 6px 24px var(--glow);letter-spacing:1px;transition:all 0.18s;}
-    .again-btn:active{transform:scale(0.98);}
-    .school-info-box{background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:var(--tx2);line-height:1.6;border-left:3px solid var(--accent);margin-top:4px;}
+    .school-goal{font-size:11px;font-weight:700;color:var(--tx3);text-align:center;margin-bottom:9px;letter-spacing:0.4px;}
+    .hero-avatar{font-size:60px;text-align:center;display:block;margin-bottom:7px;}
+    .end-title{font-family:'Fredoka',sans-serif;font-size:30px;font-weight:700;text-align:center;margin-bottom:5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .stars-row{text-align:center;font-size:30px;letter-spacing:7px;margin-bottom:9px;}
+    .score-card-end{background:var(--surface2);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:7px;border:1px solid rgba(255,255,255,0.04);}
+    .score-line{font-size:12px;color:var(--tx2);font-weight:600;margin-bottom:3px;}
+    .score-big{font-family:'Fredoka',sans-serif;font-size:34px;font-weight:700;color:var(--tx);display:block;}
+    .rank-badge{display:inline-block;font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:20px;padding:4px 14px;margin:5px 0;}
+    .school-info-box{background:var(--surface2);border-radius:var(--radius-sm);padding:9px 11px;font-size:12px;color:var(--tx2);line-height:1.6;border-left:3px solid var(--accent);margin-top:4px;}
 
-    /* ════════════════════════════════
-       TAAL STYLES
-    ════════════════════════════════ */
-    .taal-subtabs{display:flex;gap:6px;margin-bottom:1rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
-    .taal-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:9px 0;text-align:center;transition:all 0.2s;}
-    .taal-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+    /* ════ TAAL ════ */
+    .taal-subtabs{display:flex;gap:4px;margin-bottom:0.9rem;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;border:1px solid rgba(255,255,255,0.03);}
+    .taal-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:8px;background:transparent;color:var(--tx3);cursor:pointer;padding:8px 0;text-align:center;transition:all 0.18s;}
+    .taal-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.25);}
 
-    /* Search */
-    .t-search{width:100%;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:16px;font-family:'Nunito',sans-serif;margin-bottom:12px;outline:none;transition:border-color 0.2s;}
-    .t-search:focus{border-color:var(--accent);}
-    .t-search::placeholder{color:var(--tx3);}
-
-    /* Filter pills */
-    .filter-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
-    .filter-lbl{font-size:12px;color:var(--tx3);font-weight:600;}
-    .filter-btn{font-family:'Fredoka',sans-serif;font-size:13px;padding:5px 13px;border-radius:20px;border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.15s;}
-    .filter-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--glow);}
+    /* Filter row */
+    .filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;align-items:center;}
+    .filter-lbl{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;}
+    .filter-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);cursor:pointer;font-weight:600;transition:all 0.15s;font-family:'Nunito',sans-serif;}
+    .filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .filter-btn.on{background:var(--accent);border-color:transparent;color:#fff;box-shadow:0 2px 8px var(--glow);}
 
     /* Table */
-    .t-table-wrap{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--surface3);margin-bottom:8px;}
+    .t-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-sm);border:1px solid var(--surface3);}
     .t-table{width:100%;border-collapse:collapse;font-size:13px;}
-    .t-table th{background:var(--surface2);color:var(--tx3);font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;padding:11px 14px;text-align:left;border-bottom:1px solid var(--surface3);letter-spacing:0.8px;text-transform:uppercase;}
-    .t-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--tx);font-size:15px;}
+    .t-table th{padding:9px 12px;text-align:left;font-size:10px;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;background:var(--surface2);border-bottom:1px solid var(--surface3);}
+    .t-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--tx);vertical-align:middle;}
     .t-table tr:last-child td{border-bottom:none;}
-    .t-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
-    .t-hint{font-size:12px;color:var(--tx3);text-align:right;margin-top:4px;}
-    .onr-badge{display:inline-block;padding:3px 9px;border-radius:8px;font-size:12px;font-weight:700;background:rgba(124,111,255,0.2);color:var(--accent);margin-left:6px;letter-spacing:0.3px;}
+    .t-table tr:hover td{background:rgba(124,111,255,0.04);}
+    .t-search{width:100%;padding:10px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.18s;}
+    .t-search:focus{border-color:var(--accent);}
+    .t-search::placeholder{color:var(--tx3);}
+    .t-hint{font-size:11px;color:var(--tx3);margin-top:5px;text-align:right;}
 
     /* Level selector */
-    .level-selector{display:flex;gap:8px;margin-bottom:12px;}
-    .level-btn{flex:1;padding:10px 6px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);cursor:pointer;text-align:center;transition:all 0.2s;color:var(--tx);}
-    .level-btn.on{border-color:var(--accent);background:var(--surface3);box-shadow:0 0 14px var(--glow);}
-    .lvl-stars{font-size:16px;display:block;margin-bottom:3px;}
+    .level-selector{display:flex;gap:7px;margin-bottom:12px;justify-content:center;}
+    .level-btn{flex:1;padding:10px 6px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);cursor:pointer;text-align:center;transition:all 0.18s;}
+    .level-btn.on{border-color:var(--accent);background:rgba(124,111,255,0.1);box-shadow:0 0 12px var(--glow);}
+    .lvl-stars{font-size:14px;display:block;margin-bottom:3px;}
     .lvl-name{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;display:block;color:var(--tx);}
-    .lvl-desc{font-size:10px;color:var(--tx3);display:block;margin-top:2px;}
+    .lvl-desc{font-size:9px;color:var(--tx3);display:block;margin-top:2px;}
 
-    /* Score bar */
-    .t-score-row{display:flex;gap:8px;margin-bottom:12px;}
-    .t-score-card{flex:1;background:var(--surface2);border-radius:var(--radius-sm);padding:9px 10px;text-align:center;}
-    .t-score-num{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--tx);}
-    .t-score-lbl{font-size:10px;color:var(--tx3);margin-top:2px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+    /* Score row */
+    .t-score-row{display:flex;gap:6px;margin-bottom:10px;}
+    .t-score-card{flex:1;background:var(--surface2);border-radius:var(--radius-sm);padding:8px 6px;text-align:center;border:1px solid rgba(255,255,255,0.03);}
+    .t-score-num{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:var(--tx);}
+    .t-score-lbl{font-size:9px;color:var(--tx3);margin-top:2px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
     .t-streak-card .t-score-num{background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
     /* Quiz card */
-    .t-quiz-card{background:var(--surface2);border-radius:var(--radius);padding:1.2rem;margin-bottom:10px;border:1px solid var(--surface3);}
-    .t-quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-    .t-prog{font-size:12px;color:var(--tx3);font-weight:700;}
-    .t-dir-badge{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--surface3);color:var(--tx2);}
-    .t-context{font-size:12px;color:var(--tx3);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;}
-    .t-word{font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);margin-bottom:6px;line-height:1.2;}
-    .t-question{font-size:15px;color:var(--tx2);margin-bottom:16px;}
+    .t-quiz-card{background:var(--surface2);border-radius:var(--radius);padding:1.1rem;margin-bottom:9px;border:1px solid rgba(255,255,255,0.04);}
+    .t-quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;}
+    .t-prog{font-size:11px;color:var(--tx3);font-weight:700;}
+    .t-dir-badge{font-size:10px;padding:3px 9px;border-radius:8px;background:var(--surface3);color:var(--tx2);}
+    .t-context{font-size:11px;color:var(--tx3);margin-bottom:3px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;}
+    .t-word{font-family:'Fredoka',sans-serif;font-size:34px;font-weight:700;color:var(--tx);margin-bottom:5px;line-height:1.2;}
+    .t-question{font-size:14px;color:var(--tx2);margin-bottom:14px;}
 
-    /* Type input */
-    .t-input-wrap{display:flex;gap:8px;align-items:stretch;}
-    .t-input{flex:1;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:18px;font-family:'Nunito',sans-serif;outline:none;transition:all 0.2s;}
+    /* Input */
+    .t-input-wrap{display:flex;gap:7px;align-items:stretch;}
+    .t-input{flex:1;padding:12px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:17px;font-family:'Nunito',sans-serif;outline:none;transition:all 0.18s;}
     .t-input:focus{border-color:var(--accent);}
-    .t-input.correct{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
-    .t-input.wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
-    .t-submit{padding:11px 18px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:14px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;}
-    .t-submit:hover{opacity:0.9;}
-    .t-hint-txt{font-size:11px;color:var(--tx3);margin-top:6px;}
+    .t-input.correct{border-color:var(--ok);background:rgba(6,214,160,0.08);color:var(--ok);}
+    .t-input.wrong{border-color:var(--no);background:rgba(255,107,157,0.08);color:var(--no);}
+    .t-submit{padding:10px 16px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:13px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;transition:opacity 0.18s;white-space:nowrap;}
+    .t-submit:hover{opacity:0.88;}
+    .type-hint{font-size:10px;color:var(--tx3);margin-top:5px;}
 
     /* Feedback */
-    .t-feedback{margin-top:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;line-height:1.6;}
-    .t-fb-ok{background:rgba(6,214,160,0.12);color:var(--ok);border:1px solid rgba(6,214,160,0.3);}
-    .t-fb-bijna{background:rgba(255,209,102,0.12);color:var(--accent3);border:1px solid rgba(255,209,102,0.3);}
-    .t-fb-no{background:rgba(255,107,157,0.12);color:var(--no);border:1px solid rgba(255,107,157,0.3);}
-    .t-next{margin-top:10px;padding:10px 24px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:15px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 4px 12px var(--glow);}
+    .t-feedback{margin-top:9px;padding:11px 14px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;line-height:1.55;}
+    .t-fb-ok{background:rgba(6,214,160,0.1);color:var(--ok);border:1px solid rgba(6,214,160,0.25);}
+    .t-fb-bijna{background:rgba(255,209,102,0.1);color:var(--accent3);border:1px solid rgba(255,209,102,0.25);}
+    .t-fb-no{background:rgba(255,107,157,0.1);color:var(--no);border:1px solid rgba(255,107,157,0.25);}
+    .t-next{margin-top:9px;padding:10px 22px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:14px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 3px 10px var(--glow);}
 
-    /* Invul */
-    .invul-toolbar{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;background:var(--surface2);border-radius:var(--radius-sm);padding:12px;}
-    .invul-input{width:100%;padding:7px 10px;border-radius:8px;border:2px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:15px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
+    /* Invuloefening */
+    .invul-toolbar{display:flex;flex-direction:column;gap:9px;margin-bottom:11px;background:var(--surface2);border-radius:var(--radius-sm);padding:11px;border:1px solid rgba(255,255,255,0.03);}
+    .invul-input{width:100%;padding:6px 9px;border-radius:7px;border:1.5px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:14px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.18s;}
     .invul-input:focus{border-color:var(--accent);}
     .invul-input:disabled{cursor:default;opacity:0.9;}
-    .invul-input.inv-correct{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
-    .invul-input.inv-almost{border-color:var(--accent3);background:rgba(255,209,102,0.1);color:var(--accent3);}
-    .invul-input.inv-wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
-    .invul-answer{font-size:10px;color:var(--tx3);margin-top:2px;display:block;font-style:italic;}
-    .invul-score-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
-    .invul-pill{padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;font-family:'Fredoka',sans-serif;}
-    .ip-good{background:rgba(6,214,160,0.2);color:var(--ok);}
-    .ip-almost{background:rgba(255,209,102,0.2);color:var(--accent3);}
-    .ip-wrong{background:rgba(255,107,157,0.2);color:var(--no);}
+    .invul-input.inv-correct{border-color:var(--ok);background:rgba(6,214,160,0.08);color:var(--ok);}
+    .invul-input.inv-almost{border-color:var(--accent3);background:rgba(255,209,102,0.08);color:var(--accent3);}
+    .invul-input.inv-wrong{border-color:var(--no);background:rgba(255,107,157,0.08);color:var(--no);}
+    .invul-answer{font-size:9px;color:var(--tx3);margin-top:2px;display:block;font-style:italic;}
+    .invul-score-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px;}
+    .invul-pill{padding:3px 11px;border-radius:12px;font-size:11px;font-weight:700;font-family:'Fredoka',sans-serif;}
+    .ip-good{background:rgba(6,214,160,0.15);color:var(--ok);}
+    .ip-almost{background:rgba(255,209,102,0.15);color:var(--accent3);}
+    .ip-wrong{background:rgba(255,107,157,0.15);color:var(--no);}
     .ip-neutral{background:var(--surface2);color:var(--tx3);}
-    .t-count-select{padding:6px 10px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:13px;font-family:'Nunito',sans-serif;}
-    body.light .t-table tr:nth-child(even) td{background:rgba(0,0,0,0.025);}
-    body.light .t-table td{border-bottom-color:rgba(0,0,0,0.07);}
-    body.light .nk{box-shadow:0 4px 0 rgba(0,0,0,0.12);}
-    body.light .q-wrap{background:var(--surface2);}
-    body.light .panel{box-shadow:0 8px 32px rgba(0,0,0,0.1),0 0 0 1px rgba(0,0,0,0.06);}
+    .t-count-select{padding:5px 9px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:12px;font-family:'Nunito',sans-serif;}
 
-    /* ════════════════════════════════
-       MOBIEL
-    ════════════════════════════════ */
+    body.light .t-table tr:hover td{background:rgba(0,0,0,0.02);}
+    body.light .panel{box-shadow:0 4px 20px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.05);}
+    body.light .nk{box-shadow:0 3px 0 rgba(0,0,0,0.1);}
+
+    /* ════ MOBIEL ════ */
     @media (max-width: 480px) {
-      /* Quiz: input en knop onder elkaar */
-      .t-input-wrap{flex-direction:column;gap:8px;}
+      .t-input-wrap{flex-direction:column;gap:7px;}
       .t-input{width:100%;font-size:16px;}
-      .t-submit{width:100%;padding:13px;font-size:16px;text-align:center;}
-      .t-hint-txt{display:none;}
-
-      /* Invul: tabel compact op mobiel */
+      .t-submit{width:100%;padding:12px;font-size:15px;text-align:center;}
+      .type-hint{display:none;}
       .t-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-      .t-table{font-size:12px;table-layout:auto;}
+      .t-table{font-size:12px;}
       .t-table th,.t-table td{padding:7px 8px;}
       .invul-input{font-size:12px;padding:5px 6px;}
-
-      /* Invul toolbar: filterknopjes netjes */
-      .invul-toolbar{gap:8px;}
-      .filter-row{gap:5px;}
-      .filter-btn{font-size:12px;padding:5px 10px;}
-
-      /* Score cards kleiner */
-      .t-score-card{padding:7px 6px;}
-      .t-score-num{font-size:22px;}
-      .t-score-lbl{font-size:9px;}
-
-      /* Level knoppen */
-      .level-selector{gap:6px;}
-      .level-btn{padding:8px 4px;}
-      .lvl-stars{font-size:14px;}
-      .lvl-name{font-size:12px;}
-      .lvl-desc{font-size:9px;}
-
-      /* Panel padding */
-      .panel{padding:1rem 0.8rem;}
-      #app{padding:0.6rem 0.8rem 2rem;}
+      .invul-toolbar{gap:7px;}
+      .filter-row{gap:4px;}
+      .filter-btn{font-size:11px;padding:4px 9px;}
+      .t-score-card{padding:6px 4px;}
+      .t-score-num{font-size:20px;}
+      .level-selector{gap:5px;}
+      .level-btn{padding:7px 4px;}
+      .panel{padding:0.9rem 0.7rem;}
+      #app{padding:0.5rem 0.7rem 2rem;}
     }
 
-    /* ════ Meetkunde theorie ════ */
-    .mk-sectie-titel{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px;}
-    .mk-uitleg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
-    .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
-    .mk-card{background:var(--surface2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--surface3);}
-    .mk-card-wide{grid-column:span 1;}
-    .mk-card-naam{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;color:var(--tx);margin:6px 0 4px;}
+    /* ════ MEETKUNDE ════ */
+    .mk-sectie-titel{font-family:'Fredoka',sans-serif;font-size:17px;font-weight:600;color:var(--accent);margin-bottom:11px;}
+    .mk-uitleg{font-size:13px;color:var(--tx2);margin-bottom:13px;line-height:1.6;}
+    .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:14px;}
+    .mk-card{background:var(--surface2);border-radius:var(--radius-sm);padding:11px;text-align:center;border:1px solid rgba(255,255,255,0.04);}
+    .mk-card-naam{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;color:var(--tx);margin:5px 0 3px;}
     .mk-card-info{list-style:none;padding:0;text-align:left;font-size:12px;color:var(--tx2);line-height:1.8;}
     .mk-card-info li::before{content:'• ';color:var(--accent);}
-    .mk-formule{font-size:13px;font-weight:600;color:var(--accent);margin:4px 0 2px;font-family:monospace;}
-    .mk-voorbeeld{font-size:12px;color:var(--tx2);}
-    .mk-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .mk-formule{font-size:12px;font-weight:600;color:var(--accent);margin:3px 0 2px;font-family:monospace;}
+    .mk-voorbeeld{font-size:11px;color:var(--tx2);}
+    .mk-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
     @media(max-width:480px){.mk-grid{grid-template-columns:1fr 1fr;}.mk-mc-grid{grid-template-columns:1fr 1fr;}}
 
-    /* ════ Typen ════ */
-    .ty-lesson-grid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-    .ty-lesson-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s;}
+    /* ════ TYPEN ════ */
+    .ty-lesson-grid{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+    .ty-lesson-btn{padding:6px 13px;border-radius:20px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;transition:all 0.15s;}
     .ty-lesson-btn:hover{border-color:var(--accent);color:var(--accent);}
-    .ty-lesson-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
-    .ty-score-bar{display:flex;justify-content:space-around;background:var(--surface2);border-radius:var(--radius-sm);padding:10px;margin-bottom:12px;}
+    .ty-lesson-btn.on{background:var(--accent);border-color:transparent;color:#fff;}
+    .ty-score-bar{display:flex;justify-content:space-around;background:var(--surface2);border-radius:var(--radius-sm);padding:9px;margin-bottom:11px;border:1px solid rgba(255,255,255,0.03);}
     .ty-stat{text-align:center;}
-    .ty-stat-num{font-size:22px;font-weight:700;color:var(--tx);line-height:1;}
-    .ty-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
-    .ty-prompt{background:var(--surface2);border-radius:var(--radius-sm);padding:1rem 1.2rem;min-height:70px;margin-bottom:10px;overflow:hidden;}
-    .ty-prompt-text{font-size:clamp(1.2rem,4vw,1.8rem);font-family:'Courier New',monospace;letter-spacing:2px;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;}
+    .ty-stat-num{font-size:20px;font-weight:700;color:var(--tx);line-height:1;}
+    .ty-stat-lbl{font-size:9px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
+    .ty-prompt{background:var(--surface2);border-radius:var(--radius-sm);padding:0.9rem 1.1rem;min-height:65px;margin-bottom:9px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+    .ty-prompt-text{font-size:clamp(1.1rem,4vw,1.7rem);font-family:'Courier New',monospace;letter-spacing:2px;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;}
     .ty-word-group{display:inline-flex;white-space:nowrap;}
     .ty-word-space{display:inline-block;width:0.6em;}
     .ty-done{color:var(--accent);}
     .ty-error{color:#E05252;text-decoration:underline;}
-    .ty-active{background:rgba(124,111,255,0.2);color:var(--accent);border-radius:3px;animation:tyBlink 0.75s ease-in-out infinite;}
-    .ty-todo{color:var(--tx2);opacity:0.4;}
-    @keyframes tyBlink{0%,100%{opacity:1}50%{opacity:0.2}}
-    .ty-hint{text-align:center;font-size:13px;color:var(--tx2);min-height:22px;margin-bottom:8px;}
+    .ty-active{background:rgba(124,111,255,0.18);color:var(--accent);border-radius:3px;animation:tyBlink 0.75s ease-in-out infinite;}
+    .ty-todo{color:var(--tx2);opacity:0.35;}
+    @keyframes tyBlink{0%,100%{opacity:1}50%{opacity:0.15}}
+    .ty-hint{text-align:center;font-size:12px;color:var(--tx2);min-height:20px;margin-bottom:7px;}
     .ty-hint strong{color:var(--tx);}
-    .ty-keyboard{background:var(--surface2);border-radius:var(--radius-sm);padding:10px 8px;margin-bottom:10px;}
-    .ty-kb-row{display:flex;justify-content:center;gap:3px;margin-bottom:3px;}
-    .ty-key{display:flex;align-items:center;justify-content:center;min-width:32px;height:32px;border-radius:5px;font-size:11px;font-weight:600;border:1px solid var(--surface3);background:var(--surface);color:var(--tx2);transition:transform 0.1s,background 0.12s;cursor:default;user-select:none;padding:0 4px;font-family:inherit;}
-    .ty-key.ty-space{min-width:140px;}
-    .ty-key.ty-key-active{transform:scale(1.2);color:white;border-color:transparent;box-shadow:0 3px 10px rgba(0,0,0,0.25);z-index:2;position:relative;}
+    .ty-keyboard{background:var(--surface2);border-radius:var(--radius-sm);padding:9px 7px;margin-bottom:9px;border:1px solid rgba(255,255,255,0.03);}
+    .ty-kb-row{display:flex;justify-content:center;gap:2px;margin-bottom:2px;}
+    .ty-key{display:flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:5px;font-size:10px;font-weight:600;border:1px solid var(--surface3);background:var(--surface);color:var(--tx2);transition:transform 0.1s,background 0.1s;cursor:default;user-select:none;padding:0 3px;font-family:inherit;}
+    .ty-key.ty-space{min-width:130px;}
+    .ty-key.ty-key-active{transform:scale(1.2);color:white;border-color:transparent;box-shadow:0 3px 10px rgba(0,0,0,0.2);z-index:2;position:relative;}
     .ty-key.ty-ok{background:#9FE1CB!important;color:#04342C!important;border-color:#1D9E75!important;}
     .ty-key.ty-bad{background:#F5C4B3!important;color:#4A1B0C!important;border-color:#D85A30!important;}
     .ty-f0{background:#FFE5E5;color:#8B0000}.ty-f1{background:#E5EEFF;color:#003A8B}
     .ty-f2{background:#FFFAE5;color:#6B5000}.ty-f3{background:#E5F9EE;color:#005A25}
-    .ty-f4{background:#F0F0F0;color:#444444}.ty-f5{background:#F0F0F0;color:#444444}
+    .ty-f4{background:#F0F0F0;color:#444}.ty-f5{background:#F0F0F0;color:#444}
     .ty-f6{background:#E5F9EE;color:#005A25}.ty-f7{background:#FFFAE5;color:#6B5000}
     .ty-f8{background:#E5EEFF;color:#003A8B}.ty-f9{background:#FFE5E5;color:#8B0000}
     .ty-key.ty-key-active.ty-f0{background:#E05252}.ty-key.ty-key-active.ty-f1{background:#4A90D9}
@@ -350,174 +331,139 @@
     .ty-key.ty-key-active.ty-f4,.ty-key.ty-key-active.ty-f5{background:#9B9B9B}
     .ty-key.ty-key-active.ty-f6{background:#3DB87A}.ty-key.ty-key-active.ty-f7{background:#F5C842}
     .ty-key.ty-key-active.ty-f8{background:#4A90D9}.ty-key.ty-key-active.ty-f9{background:#E05252}
-    .ty-hands{display:flex;justify-content:center;gap:1.5rem;margin-bottom:10px;}
+    .ty-hands{display:flex;justify-content:center;gap:1.4rem;margin-bottom:9px;}
     .ty-hand{text-align:center;}
-    .ty-finger-part{transition:fill 0.2s;}
+    .ty-finger-part{transition:fill 0.18s;}
     .ty-finger-bounce .ty-finger-part{animation:tyFingerBounce 0.45s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:bottom center;}
-    @keyframes tyFingerBounce{from{transform:translateY(0) scale(1)}to{transform:translateY(-6px) scale(1.1);filter:drop-shadow(0 4px 6px rgba(0,0,0,0.25))}}
-    .ty-feedback{text-align:center;padding:1.5rem 1rem;animation:popIn 0.4s cubic-bezier(.34,1.56,.64,1);}
-    .ty-fb-emoji{font-size:3.5rem;margin-bottom:8px;}
-    .ty-fb-title{font-size:1.4rem;font-weight:800;color:var(--accent);margin-bottom:6px;}
-    .ty-fb-stars{font-size:1.8rem;margin-bottom:10px;}
+    @keyframes tyFingerBounce{from{transform:translateY(0) scale(1)}to{transform:translateY(-5px) scale(1.1);filter:drop-shadow(0 3px 5px rgba(0,0,0,0.2))}}
+    .ty-feedback{text-align:center;padding:1.3rem 0.9rem;animation:popIn 0.35s cubic-bezier(.34,1.56,.64,1);}
+    .ty-fb-emoji{font-size:3.2rem;margin-bottom:7px;}
+    .ty-fb-title{font-size:1.3rem;font-weight:800;color:var(--accent);margin-bottom:5px;}
+    .ty-fb-stars{font-size:1.6rem;margin-bottom:9px;}
     .ty-fb-star{color:#CCC;}.ty-fb-star.on{color:#EF9F27;animation:starPop 0.35s ease backwards;}
-    .ty-fb-msg{font-size:14px;color:var(--tx2);margin-bottom:14px;line-height:1.5;}
-    .ty-fb-stats{display:flex;justify-content:center;gap:20px;margin-bottom:12px;}
+    .ty-fb-msg{font-size:13px;color:var(--tx2);margin-bottom:13px;line-height:1.5;}
+    .ty-fb-stats{display:flex;justify-content:center;gap:18px;margin-bottom:11px;}
     .ty-fb-stat{text-align:center;}
-    .ty-fb-stat-num{font-size:1.6rem;font-weight:700;line-height:1;}
-    .ty-fb-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;}
-    .ty-fb-tip{font-size:12px;color:var(--tx2);background:var(--surface2);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:14px;display:inline-block;}
-    .ty-fb-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:40px;border:none;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 16px var(--glow);animation:btnPulse 1.6s ease-in-out infinite;}
-    .ty-restart{display:block;margin:10px auto 0;padding:8px 20px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;font-family:inherit;cursor:pointer;}
-    .ty-legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:8px;}
-    .ty-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2);}
-    .ty-legend-dot{width:10px;height:10px;border-radius:50%;}
-    @media(max-width:480px){.ty-key{min-width:26px;height:28px;font-size:9px;}.ty-key.ty-space{min-width:100px;}.ty-keyboard{padding:6px 4px;}}
+    .ty-fb-stat-num{font-size:1.5rem;font-weight:700;line-height:1;}
+    .ty-fb-stat-lbl{font-size:9px;color:var(--tx2);text-transform:uppercase;letter-spacing:0.5px;}
+    .ty-fb-tip{font-size:11px;color:var(--tx2);background:var(--surface2);border-radius:var(--radius-sm);padding:7px 11px;margin-bottom:13px;display:inline-block;}
+    .ty-fb-btn{display:inline-flex;align-items:center;gap:7px;padding:13px 30px;border-radius:40px;border:none;background:var(--accent);color:#fff;font-size:1rem;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px var(--glow);animation:btnPulse 1.6s ease-in-out infinite;}
+    .ty-restart{display:block;margin:9px auto 0;padding:7px 18px;border-radius:20px;border:1px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;font-family:inherit;cursor:pointer;}
+    .ty-legend{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:7px;}
+    .ty-legend-item{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--tx2);}
+    .ty-legend-dot{width:9px;height:9px;border-radius:50%;}
+    @media(max-width:480px){.ty-key{min-width:24px;height:26px;font-size:8px;}.ty-key.ty-space{min-width:90px;}.ty-keyboard{padding:5px 3px;}}
 
-    /* ════ Profielen ════ */
-    .profiel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-    .profiel-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);cursor:pointer;transition:all 0.15s;position:relative;}
-    .profiel-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-    .profiel-card.actief{border-color:var(--accent);background:rgba(124,111,255,0.1);box-shadow:0 0 0 3px rgba(124,111,255,0.2);}
-    .profiel-card.leeg{border-style:dashed;opacity:0.6;}
-    .profiel-card.leeg:hover{opacity:1;}
-    .profiel-avatar{font-size:2.2rem;line-height:1;}
-    .profiel-naam{font-size:13px;font-weight:600;color:var(--tx);text-align:center;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .profiel-badge{font-size:10px;color:var(--tx2);background:var(--surface3);padding:2px 6px;border-radius:8px;}
-    .profiel-actief-badge{position:absolute;top:6px;right:6px;font-size:10px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:8px;font-weight:600;}
-    .profiel-edit-form{background:var(--surface2);border-radius:var(--radius-sm);padding:14px;margin-top:8px;}
-    .profiel-avatar-keuze{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
-    .profiel-avatar-opt{font-size:1.8rem;padding:6px;border-radius:8px;border:2px solid transparent;cursor:pointer;transition:all 0.1s;}
+    /* ════ PROFIEL / ADMIN ════ */
+    .profiel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:8px;}
+    .profiel-card{background:var(--surface2);border-radius:var(--radius-sm);padding:12px 6px 8px;text-align:center;cursor:pointer;border:2px solid transparent;transition:all 0.18s;}
+    .profiel-card:hover{border-color:var(--surface3);}
+    .profiel-card.on{border-color:var(--accent);box-shadow:0 0 12px var(--glow);}
+    .profiel-avatar{font-size:2rem;line-height:1;}
+    .profiel-name{font-size:12px;font-weight:700;color:var(--tx);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .profiel-avatar-keuze{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0;}
+    .profiel-avatar-opt{font-size:1.7rem;padding:5px;border-radius:7px;border:2px solid transparent;cursor:pointer;transition:all 0.1s;}
     .profiel-avatar-opt:hover{background:var(--surface3);}
-    .profiel-avatar-opt.on{border-color:var(--accent);background:rgba(124,111,255,0.12);}
-    .rapport-tabel{width:100%;border-collapse:collapse;font-size:13px;}
-    .rapport-tabel th{background:var(--surface2);color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:7px 10px;text-align:left;border-bottom:1px solid var(--surface3);}
-    .rapport-tabel td{padding:8px 10px;border-bottom:1px solid var(--surface3);color:var(--tx);}
-    .rapport-tabel tr:last-child td{border-bottom:none;}
-    .rapport-stat-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
-    .rapport-stat{flex:1;min-width:80px;background:var(--surface2);border-radius:var(--radius-sm);padding:10px;text-align:center;border:1px solid var(--surface3);}
-    .rapport-stat-num{font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1;}
-    .rapport-stat-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;margin-top:2px;}
-    @media(max-width:480px){.profiel-grid{grid-template-columns:repeat(2,1fr);}}
+    .profiel-avatar-opt.on{border-color:var(--accent);background:rgba(124,111,255,0.1);}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:flex;align-items:center;justify-content:center;z-index:1000;padding:1rem;backdrop-filter:blur(4px);}
+    .modal{background:var(--surface);border-radius:var(--radius);padding:1.4rem;width:100%;max-height:90vh;overflow-y:auto;border:1px solid rgba(255,255,255,0.06);}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+    .modal-title{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--tx);}
+    .modal-close{background:none;border:none;color:var(--tx3);font-size:22px;cursor:pointer;padding:2px 6px;border-radius:6px;transition:color 0.15s;}
+    .modal-close:hover{color:var(--tx);}
+    .admin-section{margin-bottom:0.8rem;}
+    .admin-input{width:100%;padding:9px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;font-family:'Nunito',sans-serif;outline:none;margin-bottom:7px;transition:border-color 0.18s;}
+    .admin-input:focus{border-color:var(--accent);}
+    .pw-input{width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:16px;font-family:'Nunito',sans-serif;outline:none;margin-bottom:7px;transition:border-color 0.18s;}
+    .pw-input:focus{border-color:var(--accent);}
+    .pw-btn{width:100%;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:17px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 4px 14px var(--glow);}
+    .pw-error{color:var(--no);font-size:12px;text-align:center;margin-top:5px;font-weight:600;}
+    .admin-count{font-size:10px;color:var(--tx3);margin-bottom:7px;font-weight:600;}
+    .admin-reset-btn{font-size:11px;padding:5px 11px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--surface3);color:var(--tx3);cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.18s;}
+    .admin-reset-btn:hover{border-color:var(--no);color:var(--no);}
+    .ww-cols{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;}
 
-    /* ════ Foutenrapport ════ */
-    .fr-blok{background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;border:1px solid var(--surface3);}
-    .fr-blok-titel{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:8px;}
+    /* Leerjaar */
+    .leerjaar-selector{display:flex;align-items:center;gap:7px;margin-bottom:11px;flex-wrap:wrap;}
+    .leerjaar-lbl{font-size:12px;color:var(--tx2);font-weight:600;}
+    .leerjaar-btn{padding:5px 14px;border-radius:20px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
+    .leerjaar-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .leerjaar-btn.on{background:var(--accent);border-color:transparent;color:#fff;}
+
+    /* Multiple choice */
+    .mc-option{width:100%;display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);cursor:pointer;text-align:left;font-size:14px;font-family:'Nunito',sans-serif;font-weight:600;transition:all 0.15s;line-height:1.4;}
+    .mc-option:hover:not(:disabled){border-color:var(--accent);background:rgba(124,111,255,0.06);}
+    .mc-option:disabled{cursor:default;}
+    .mc-letter{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;color:var(--accent);background:rgba(124,111,255,0.1);border-radius:7px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .mc-text{flex:1;}
+    .mc-option.mc-correct{border-color:var(--ok);background:rgba(6,214,160,0.1);color:var(--ok);}
+    .mc-option.mc-correct .mc-letter{background:rgba(6,214,160,0.18);color:var(--ok);}
+    .mc-option.mc-wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .mc-option.mc-wrong .mc-letter{background:rgba(255,107,157,0.18);color:var(--no);}
+    body.light .mc-option{background:var(--surface2);border-color:var(--surface3);}
+
+    /* Sticky next */
+    .sticky-next{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:10px 14px;background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);display:flex;gap:9px;align-items:center;justify-content:space-between;box-shadow:0 -4px 18px rgba(0,0,0,0.2);animation:slideUp 0.18s ease;}
+    .sticky-next .t-feedback{margin:0;padding:7px 11px;flex:1;font-size:12px;}
+    .sticky-next .t-next{margin:0;flex-shrink:0;}
+
+    /* ════ FRANS ════ */
+    .fr-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;border:1px solid rgba(255,255,255,0.03);}
+    .fr-tab{flex:1;padding:8px 6px;border-radius:8px;border:none;background:transparent;color:var(--tx2);font-size:13px;font-weight:600;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;text-align:center;white-space:nowrap;}
+    .fr-tab:hover{background:rgba(124,111,255,0.08);color:var(--tx);}
+    .fr-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 2px 8px var(--glow);}
+    @media(max-width:480px){.fr-tab{font-size:11px;padding:7px 3px;}}
     .fr-tabel-wrap{overflow-x:auto;}
     .fr-tabel{width:100%;border-collapse:collapse;font-size:13px;}
-    .fr-tabel th{background:var(--surface3);color:var(--tx2);font-size:11px;text-transform:uppercase;letter-spacing:0.04em;padding:6px 8px;text-align:left;border-bottom:1px solid var(--surface3);}
-    .fr-tabel td{padding:7px 8px;border-bottom:1px solid var(--surface3);color:var(--tx);}
+    .fr-tabel th{padding:8px 11px;text-align:left;font-size:10px;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:0.9px;background:rgba(124,111,255,0.06);border-bottom:1px solid var(--surface3);}
+    .fr-tabel td{padding:8px 11px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;}
     .fr-tabel tr:last-child td{border-bottom:none;}
-    .fr-fout{color:#E05252;font-weight:500;}
-    .fr-juist{color:#27A066;font-weight:500;}
+    .fr-tabel tr:hover td{background:rgba(124,111,255,0.04);}
+    .fr-blok{background:var(--surface2);border-radius:var(--radius-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.04);}
 
-    /* Sticky volgende knop */
-    .sticky-next{position:fixed;bottom:0;left:0;right:0;z-index:500;padding:12px 16px;background:var(--surface);border-top:1px solid var(--surface3);display:flex;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,0.2);animation:slideUp 0.2s ease;}
-    .sticky-next .t-feedback{margin:0;padding:8px 12px;flex:1;font-size:13px;}
-    .sticky-next .t-next{margin:0;flex-shrink:0;}
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
-    .modal{background:var(--surface);border-radius:var(--radius);padding:1.5rem;width:100%;max-width:700px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.08);animation:slideUp 0.25s ease;}
-    .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
-    .modal-title{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .modal-close{background:var(--surface2);border:none;color:var(--tx2);font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-    .modal-close:hover{background:var(--surface3);color:var(--tx);}
-    .admin-tabs{display:flex;gap:6px;margin-bottom:1.2rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
-    .admin-tab{flex:1;font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:8px 4px;text-align:center;transition:all 0.2s;}
-    .admin-tab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
-    .admin-section{margin-bottom:1rem;}
-    .admin-row{display:flex;gap:8px;margin-bottom:6px;align-items:stretch;}
-    .admin-input{flex:1;padding:9px 12px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:13px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;}
-    .admin-input:focus{border-color:var(--accent);}
-    .admin-input.wide{flex:2;}
-    .admin-add-btn{padding:9px 16px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:14px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;white-space:nowrap;transition:opacity 0.2s;}
-    .admin-add-btn:hover{opacity:0.9;}
-    .admin-add-btn.del-btn{background:rgba(255,107,157,0.2);color:var(--no);box-shadow:none;}
-    .admin-add-btn.del-btn:hover{background:rgba(255,107,157,0.35);}
-    .admin-list{max-height:340px;overflow-y:auto;border-radius:var(--radius-sm);border:1px solid var(--surface3);}
-    .admin-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;transition:background 0.15s;}
-    .admin-item:last-child{border-bottom:none;}
-    .admin-item:hover{background:var(--surface2);}
-    .admin-item-text{flex:1;color:var(--tx);min-width:0;}
-    .admin-item-sub{font-size:11px;color:var(--tx3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .admin-item-del{background:none;border:none;color:var(--tx3);font-size:16px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.15s;flex-shrink:0;}
-    .admin-item-del:hover{background:rgba(255,107,157,0.2);color:var(--no);}
-    .admin-item-edit{background:none;border:none;color:var(--tx3);font-size:14px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all 0.15s;flex-shrink:0;}
-    .admin-item-edit:hover{background:rgba(124,111,255,0.2);color:var(--accent);}
-    .pw-input{width:100%;padding:12px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:18px;font-family:'Nunito',sans-serif;outline:none;transition:border-color 0.2s;margin-bottom:10px;text-align:center;letter-spacing:4px;}
-    .pw-input:focus{border-color:var(--accent);}
-    .pw-btn{width:100%;padding:13px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:18px;font-weight:700;font-family:'Fredoka',sans-serif;cursor:pointer;box-shadow:0 4px 16px var(--glow);}
-    .pw-error{color:var(--no);font-size:13px;text-align:center;margin-top:6px;font-weight:600;}
-    .admin-count{font-size:11px;color:var(--tx3);margin-bottom:8px;font-weight:600;}
-    .admin-reset-btn{font-size:12px;padding:6px 12px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--surface3);color:var(--tx3);cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;}
-    .admin-reset-btn:hover{border-color:var(--no);color:var(--no);}
-    .ww-cols{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;}
-
-    /* ── Leerjaar selector ── */
-    .leerjaar-selector{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
-    .leerjaar-lbl{font-size:13px;color:var(--tx2);font-weight:500;}
-    .leerjaar-btn{padding:6px 16px;border-radius:20px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx2);font-size:13px;font-weight:600;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
-    .leerjaar-btn:hover{border-color:var(--accent);color:var(--accent);}
-    .leerjaar-btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
-
-    /* ── Multiple choice ── */
-    .mc-option{width:100%;display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);cursor:pointer;text-align:left;font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;transition:all 0.15s;line-height:1.4;}
-    .mc-option:hover:not(:disabled){border-color:var(--accent);background:var(--surface3);}
-    .mc-option:disabled{cursor:default;}
-    .mc-letter{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--accent);background:rgba(124,111,255,0.12);border-radius:8px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .mc-text{flex:1;}
-    .mc-option.mc-correct{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
-    .mc-option.mc-correct .mc-letter{background:rgba(6,214,160,0.2);color:var(--ok);}
-    .mc-option.mc-wrong{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
-    .mc-option.mc-wrong .mc-letter{background:rgba(255,107,157,0.2);color:var(--no);}
-    body.light .mc-option{background:var(--surface2);border-color:var(--surface3);}
-    body.light .mc-option:hover:not(:disabled){border-color:var(--accent);}
-
-    /* ════ Aardrijkskunde ════ */
-    .aard-subtabs{display:flex;gap:6px;margin-bottom:1rem;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;}
-    .aard-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:9px;background:transparent;color:var(--tx3);cursor:pointer;padding:9px 0;text-align:center;transition:all 0.2s;}
-    .aard-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,0.3);}
-    .aard-search{width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:2px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:15px;font-family:'Nunito',sans-serif;margin-bottom:10px;outline:none;transition:border-color 0.2s;}
+    /* ════ AARDRIJKSKUNDE ════ */
+    .aard-subtabs{display:flex;gap:4px;margin-bottom:0.9rem;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;border:1px solid rgba(255,255,255,0.03);}
+    .aard-subtab{flex:1;font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:8px;background:transparent;color:var(--tx3);cursor:pointer;padding:8px 0;text-align:center;transition:all 0.18s;}
+    .aard-subtab.on{background:var(--surface);color:var(--tx);box-shadow:0 2px 7px rgba(0,0,0,0.25);}
+    .aard-search{width:100%;padding:10px 13px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-size:14px;font-family:'Nunito',sans-serif;margin-bottom:9px;outline:none;transition:border-color 0.18s;}
     .aard-search:focus{border-color:var(--accent);}
     .aard-search::placeholder{color:var(--tx3);}
-    .aard-map-wrap{width:100%;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface2);border:1px solid var(--surface3);margin-bottom:12px;position:relative;}
-    .aard-map-wrap svg{display:block;width:100%;height:auto;}
-    .aard-map-wrap svg path{cursor:pointer;transition:fill 0.18s;stroke:var(--bg);stroke-width:0.5;}
-    .aard-map-wrap svg path:hover{opacity:0.78;}
-    .aard-map-wrap svg path.selected{stroke:var(--accent3);stroke-width:2;}
-    .country-card{background:var(--surface2);border-radius:var(--radius-sm);border:2px solid var(--surface3);padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;transition:border-color 0.2s;animation:slideUp 0.22s ease;}
+    .aard-map-wrap{width:100%;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface2);border:1px solid var(--surface3);margin-bottom:11px;position:relative;}
+    .country-card{background:var(--surface2);border-radius:var(--radius-sm);border:1.5px solid var(--surface3);padding:12px 14px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start;transition:border-color 0.18s;animation:slideUp 0.2s ease;}
     .country-card.highlighted{border-color:var(--accent);}
-    .country-flag{font-size:3rem;line-height:1;flex-shrink:0;}
+    .country-flag{font-size:2.8rem;line-height:1;flex-shrink:0;}
     .country-info{flex:1;min-width:0;}
-    .country-name{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:var(--tx);margin-bottom:2px;}
-    .country-capital{font-size:13px;color:var(--tx2);font-weight:600;margin-bottom:6px;}
+    .country-name{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--tx);margin-bottom:2px;}
+    .country-capital{font-size:12px;color:var(--tx2);font-weight:600;margin-bottom:5px;}
     .country-capital strong{color:var(--accent);}
-    .country-facts{display:flex;gap:8px;flex-wrap:wrap;}
-    .country-fact{font-size:11px;background:var(--surface3);color:var(--tx2);border-radius:8px;padding:3px 8px;font-weight:600;}
-    .quiz-question-card{background:var(--surface2);border-radius:var(--radius);padding:1.2rem;text-align:center;margin-bottom:14px;}
-    .quiz-q-flag{font-size:5rem;margin-bottom:8px;}
-    .quiz-q-text{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:600;color:var(--tx);margin-bottom:4px;}
-    .quiz-q-hint{font-size:12px;color:var(--tx3);}
-    .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-    .quiz-opt{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:600;border:2px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:12px 8px;text-align:center;transition:border-color 0.15s, background 0.15s, color 0.15s;min-height:60px;display:flex;align-items:center;justify-content:center;width:100%;}
-    .quiz-opt:hover:not(:disabled){border-color:var(--accent);background:var(--surface3);}
+    .country-facts{display:flex;gap:6px;flex-wrap:wrap;}
+    .country-fact{font-size:10px;background:var(--surface3);color:var(--tx2);border-radius:7px;padding:3px 8px;font-weight:700;}
+    .quiz-question-card{background:var(--surface2);border-radius:var(--radius);padding:1.1rem;text-align:center;margin-bottom:12px;border:1px solid rgba(255,255,255,0.04);}
+    .quiz-q-flag{font-size:4.5rem;margin-bottom:7px;}
+    .quiz-q-text{font-family:'Fredoka',sans-serif;font-size:19px;font-weight:600;color:var(--tx);margin-bottom:3px;}
+    .quiz-q-hint{font-size:11px;color:var(--tx3);}
+    .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:11px;}
+    .quiz-opt{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);cursor:pointer;padding:11px 7px;text-align:center;transition:border-color 0.13s,background 0.13s,color 0.13s;min-height:56px;display:flex;align-items:center;justify-content:center;width:100%;}
+    .quiz-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(124,111,255,0.06);}
     .quiz-opt:disabled{cursor:default;}
-    .quiz-opt.correct{border-color:var(--ok);background:rgba(6,214,160,0.15);color:var(--ok);}
-    .quiz-opt.wrong{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
-    .quiz-feedback{min-height:24px;text-align:center;font-size:13px;color:var(--tx2);margin-bottom:8px;}
-    .quiz-next-wrap{min-height:54px;}
-    .quiz-score-bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--tx2);margin-bottom:10px;}
-    .quiz-next-btn{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:12px;width:100%;cursor:pointer;box-shadow:0 4px 16px var(--glow);margin-top:6px;}
-    .aard-continent-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
-    .aard-cont-btn{font-family:'Fredoka',sans-serif;font-size:12px;padding:5px 12px;border-radius:20px;border:2px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.15s;font-weight:600;}
-    .aard-cont-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--glow);}
-    .country-list-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .quiz-opt.correct{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
+    .quiz-opt.wrong{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .quiz-feedback{min-height:22px;text-align:center;font-size:12px;color:var(--tx2);margin-bottom:7px;}
+    .quiz-next-wrap{min-height:52px;}
+    .quiz-score-bar{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:var(--tx2);margin-bottom:9px;}
+    .quiz-next-btn{font-family:'Fredoka',sans-serif;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:var(--radius-sm);padding:11px;width:100%;cursor:pointer;box-shadow:0 3px 14px var(--glow);margin-top:5px;}
+    .aard-continent-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px;}
+    .aard-cont-btn{font-family:'Fredoka',sans-serif;font-size:11px;padding:5px 11px;border-radius:20px;border:1.5px solid transparent;background:var(--surface2);color:var(--tx2);cursor:pointer;transition:all 0.15s;font-weight:700;}
+    .aard-cont-btn.on{background:var(--accent);color:#fff;box-shadow:0 2px 7px var(--glow);}
+    .country-list-item{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.13s;border-bottom:1px solid rgba(255,255,255,0.03);}
     .country-list-item:hover{background:var(--surface2);}
     .country-list-item:last-child{border-bottom:none;}
-    .cli-flag{font-size:1.5rem;flex-shrink:0;}
-    .cli-name{font-size:14px;font-weight:700;color:var(--tx);}
-    .cli-cap{font-size:11px;color:var(--tx3);}
-    .aard-quiz-end{text-align:center;padding:1.5rem 1rem;animation:slideUp 0.3s ease;}
-    .aard-quiz-end-emoji{font-size:4rem;margin-bottom:8px;}
-    .aard-quiz-end-title{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+    .cli-flag{font-size:1.4rem;flex-shrink:0;}
+    .cli-name{font-size:13px;font-weight:700;color:var(--tx);}
+    .cli-cap{font-size:10px;color:var(--tx3);}
+    .aard-quiz-end{text-align:center;padding:1.4rem 0.9rem;animation:slideUp 0.28s ease;}
+    .aard-quiz-end-emoji{font-size:3.8rem;margin-bottom:7px;}
+    .aard-quiz-end-title{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px;}
   </style>
 </head>
 <body data-hero="vuur" class="light">
@@ -549,9 +495,22 @@
 
     <!-- Hoofdtabs -->
     <div class="main-tabs">
-      <button class="main-tab on" id="tab-rekenen" onclick="switchMain('rekenen')">🔢 Rekenen</button>
-      <button class="main-tab" id="tab-taal" onclick="switchMain('taal')">📖 Taal</button>
-      <button class="main-tab" id="tab-meetkunde" onclick="switchMain('meetkunde')">📐 Meetkunde</button>
+      <!-- Wiskunde dropdown -->
+      <div class="main-tab-dropdown" id="dd-wiskunde">
+        <button class="main-tab" id="tab-wiskunde" onclick="toggleDropdown('wiskunde')">🔢 Wiskunde ▾</button>
+        <div class="main-tab-menu" id="menu-wiskunde">
+          <button onclick="switchMain('rekenen');closeDropdowns()">🔢 Rekenen</button>
+          <button onclick="switchMain('meetkunde');closeDropdowns()">📐 Meetkunde</button>
+        </div>
+      </div>
+      <!-- Taal dropdown -->
+      <div class="main-tab-dropdown" id="dd-taal">
+        <button class="main-tab" id="tab-taal" onclick="toggleDropdown('taal')">📖 Taal ▾</button>
+        <div class="main-tab-menu" id="menu-taal">
+          <button onclick="switchMain('taal');closeDropdowns()">🇧🇪 Nederlands</button>
+          <button onclick="switchMain('frans');closeDropdowns()">🇫🇷 Frans</button>
+        </div>
+      </div>
       <button class="main-tab" id="tab-typen" onclick="switchMain('typen')">🎹 Typen</button>
       <button class="main-tab" id="tab-aardrijkskunde" onclick="switchMain('aardrijkskunde')">🌍 Wereld</button>
     </div>
@@ -577,6 +536,10 @@
 
     <div id="aardrijkskunde-root" style="display:none;width:100%">
       <div class="panel" id="aard-panel" style="min-height:520px;padding:1rem;"></div>
+    </div>
+
+    <div id="frans-root" style="display:none;width:100%">
+      <div class="panel" id="frans-panel"></div>
     </div>
 
     <div id="taal-root" style="display:none;width:100%">
@@ -673,18 +636,47 @@ function snd(t){
 // NAVIGATION
 // ════════════════════════════════════════════════════════
 let mainSection = 'rekenen';
+function toggleDropdown(naam){
+  const menu = document.getElementById('menu-'+naam);
+  if(!menu) return;
+  const isOpen = menu.classList.contains('open');
+  closeDropdowns();
+  if(!isOpen) menu.classList.add('open');
+}
+function closeDropdowns(){
+  document.querySelectorAll('.main-tab-menu').forEach(m=>m.classList.remove('open'));
+}
+// Sluit dropdowns bij klik buiten
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.main-tab-dropdown')) closeDropdowns();
+});
+
 function switchMain(s){
   mainSection=s;
-  ['rekenen','taal','meetkunde','typen','aardrijkskunde'].forEach(k=>{
+  const allRoots=['rekenen','taal','meetkunde','typen','aardrijkskunde','frans'];
+  allRoots.forEach(k=>{
     const r=document.getElementById(k+'-root');
-    const t=document.getElementById('tab-'+k);
     if(r)r.style.display=k===s?'':'none';
-    if(t)t.classList.toggle('on',k===s);
   });
+  // Dropdown actief-stijl
+  const wiskundeActief = s==='rekenen'||s==='meetkunde';
+  const taalActief = s==='taal'||s==='frans';
+  document.getElementById('tab-wiskunde')?.classList.toggle('on', wiskundeActief);
+  document.getElementById('tab-taal')?.classList.toggle('on', taalActief);
+  document.getElementById('tab-typen')?.classList.toggle('on', s==='typen');
+  document.getElementById('tab-aardrijkskunde')?.classList.toggle('on', s==='aardrijkskunde');
+  // Sub-items actief markeren
+  document.querySelectorAll('.main-tab-menu button').forEach(b=>b.classList.remove('active-sub'));
+  if(s==='rekenen') document.querySelector('#menu-wiskunde button:nth-child(1)')?.classList.add('active-sub');
+  if(s==='meetkunde') document.querySelector('#menu-wiskunde button:nth-child(2)')?.classList.add('active-sub');
+  if(s==='taal') document.querySelector('#menu-taal button:nth-child(1)')?.classList.add('active-sub');
+  if(s==='frans') document.querySelector('#menu-taal button:nth-child(2)')?.classList.add('active-sub');
+  // Init secties
   if(s==='taal') initTaalRoot();
   if(s==='meetkunde') mkTab('theorie');
   if(s==='typen') initTypen();
   if(s==='aardrijkskunde') initAardrijkskunde();
+  if(s==='frans') initFrans();
   removeStickyNext();
 }
 function goHome(){
@@ -3382,6 +3374,653 @@ function renderFoutenTab(){
   });
 
   el.innerHTML = html;
+}
+
+
+// ════════════════════════════════════════════════════════
+// FRANS
+// ════════════════════════════════════════════════════════
+
+// Woordenschat: [Frans, Nederlands, thema, type]
+const FR_WOORDEN = [
+  // Thema 1: De klas
+  ['le crayon','het potlood',1,'woord'],
+  ['le stylo','de pen/balpen',1,'woord'],
+  ['le livre','het boek',1,'woord'],
+  ['le cahier','het schrift',1,'woord'],
+  ['la règle','de liniaal',1,'woord'],
+  ['la gomme','het gummetje',1,'woord'],
+  ['le cartable','de schooltas',1,'woord'],
+  ['la table','de tafel',1,'woord'],
+  ['la chaise','de stoel',1,'woord'],
+  ['le tableau','het bord',1,'woord'],
+  ['la classe','de klas',1,'woord'],
+  ['le professeur','de leraar/juf',1,'woord'],
+  ['l\'élève','de leerling',1,'woord'],
+  ['la porte','de deur',1,'woord'],
+  ['la fenêtre','het raam',1,'woord'],
+  // Thema 2: De familie
+  ['le père','de vader',2,'woord'],
+  ['la mère','de moeder',2,'woord'],
+  ['le frère','de broer',2,'woord'],
+  ['la sœur','de zus',2,'woord'],
+  ['le grand-père','de grootvader/opa',2,'woord'],
+  ['la grand-mère','de grootmoeder/oma',2,'woord'],
+  ['l\'oncle','de oom',2,'woord'],
+  ['la tante','de tante',2,'woord'],
+  ['le cousin','de neef',2,'woord'],
+  ['la cousine','de nicht',2,'woord'],
+  ['le fils','de zoon',2,'woord'],
+  ['la fille','de dochter',2,'woord'],
+  ['le bébé','de baby',2,'woord'],
+  ['les parents','de ouders',2,'woord'],
+  ['la famille','de familie',2,'woord'],
+  // Thema 3: Eten en drinken
+  ['le pain','het brood',3,'woord'],
+  ['le beurre','de boter',3,'woord'],
+  ['le fromage','de kaas',3,'woord'],
+  ['le lait','de melk',3,'woord'],
+  ['l\'eau','het water',3,'woord'],
+  ['le jus d\'orange','het sinaasappelsap',3,'woord'],
+  ['la pomme','de appel',3,'woord'],
+  ['la banane','de banaan',3,'woord'],
+  ['les frites','de frietjes',3,'woord'],
+  ['le chocolat','de chocolade',3,'woord'],
+  ['le gâteau','de taart/cake',3,'woord'],
+  ['le repas','de maaltijd',3,'woord'],
+  ['le petit-déjeuner','het ontbijt',3,'woord'],
+  ['le déjeuner','de lunch/het middagmaal',3,'woord'],
+  ['le dîner','het avondeten/souper',3,'woord'],
+  // Thema 4: Dieren
+  ['le chien','de hond',4,'woord'],
+  ['le chat','de kat',4,'woord'],
+  ['le cheval','het paard',4,'woord'],
+  ['la vache','de koe',4,'woord'],
+  ['le lapin','het konijn',4,'woord'],
+  ['l\'oiseau','de vogel',4,'woord'],
+  ['le poisson','de vis',4,'woord'],
+  ['l\'éléphant','de olifant',4,'woord'],
+  ['le lion','de leeuw',4,'woord'],
+  ['le tigre','de tijger',4,'woord'],
+  ['le singe','de aap',4,'woord'],
+  ['le canard','de eend',4,'woord'],
+  ['la grenouille','de kikker',4,'woord'],
+  ['le cochon','het varken',4,'woord'],
+  ['le mouton','het schaap',4,'woord'],
+  // Thema 5: Kleuren en cijfers
+  ['rouge','rood',5,'woord'],
+  ['bleu','blauw',5,'woord'],
+  ['vert','groen',5,'woord'],
+  ['jaune','geel',5,'woord'],
+  ['orange','oranje',5,'woord'],
+  ['violet','paars',5,'woord'],
+  ['rose','roze',5,'woord'],
+  ['blanc','wit',5,'woord'],
+  ['noir','zwart',5,'woord'],
+  ['gris','grijs',5,'woord'],
+  ['un','één',5,'cijfer'],
+  ['deux','twee',5,'cijfer'],
+  ['trois','drie',5,'cijfer'],
+  ['quatre','vier',5,'cijfer'],
+  ['cinq','vijf',5,'cijfer'],
+  ['six','zes',5,'cijfer'],
+  ['sept','zeven',5,'cijfer'],
+  ['huit','acht',5,'cijfer'],
+  ['neuf','negen',5,'cijfer'],
+  ['dix','tien',5,'cijfer'],
+  ['vingt','twintig',5,'cijfer'],
+  ['cent','honderd',5,'cijfer'],
+  // Thema 6: Lichaam
+  ['la tête','het hoofd',6,'woord'],
+  ['les yeux','de ogen',6,'woord'],
+  ['le nez','de neus',6,'woord'],
+  ['la bouche','de mond',6,'woord'],
+  ['les oreilles','de oren',6,'woord'],
+  ['les cheveux','het haar',6,'woord'],
+  ['le bras','de arm',6,'woord'],
+  ['la main','de hand',6,'woord'],
+  ['les doigts','de vingers',6,'woord'],
+  ['la jambe','het been',6,'woord'],
+  ['le pied','de voet',6,'woord'],
+  ['le ventre','de buik',6,'woord'],
+  ['le dos','de rug',6,'woord'],
+  // Thema 7: Werkwoorden (présent)
+  ['je suis','ik ben',7,'zin'],
+  ['tu es','jij bent',7,'zin'],
+  ['il/elle est','hij/zij is',7,'zin'],
+  ['nous sommes','wij zijn',7,'zin'],
+  ['vous êtes','jullie zijn / u bent',7,'zin'],
+  ['ils/elles sont','zij zijn',7,'zin'],
+  ['j\'ai','ik heb',7,'zin'],
+  ['tu as','jij hebt',7,'zin'],
+  ['il/elle a','hij/zij heeft',7,'zin'],
+  ['nous avons','wij hebben',7,'zin'],
+  ['vous avez','jullie hebben',7,'zin'],
+  ['ils/elles ont','zij hebben',7,'zin'],
+  // Thema 8: Zinnen en uitdrukkingen
+  ['Bonjour !','Goedemorgen! / Hallo!',8,'zin'],
+  ['Bonsoir !','Goedenavond!',8,'zin'],
+  ['Au revoir !','Tot ziens!',8,'zin'],
+  ['Merci !','Dankjewel!',8,'zin'],
+  ['S\'il vous plaît.','Alstublieft. (formeel)',8,'zin'],
+  ['S\'il te plaît.','Alsjeblieft. (informeel)',8,'zin'],
+  ['Excusez-moi.','Excuseer mij. (formeel)',8,'zin'],
+  ['Je m\'appelle...','Ik heet...',8,'zin'],
+  ['Comment tu t\'appelles ?','Hoe heet jij?',8,'zin'],
+  ['Quel âge as-tu ?','Hoe oud ben jij?',8,'zin'],
+  ['J\'ai ... ans.','Ik ben ... jaar.',8,'zin'],
+  ['Où habites-tu ?','Waar woon jij?',8,'zin'],
+  ['J\'habite à...','Ik woon in...',8,'zin'],
+  ['Je ne comprends pas.','Ik begrijp het niet.',8,'zin'],
+  ['Répétez, s\'il vous plaît.','Herhaal alstublieft.',8,'zin'],
+  // Thema 9: Het lichaam (ziektes)
+  ['J\'ai mal à la tête.','Ik heb hoofdpijn.',9,'zin'],
+  ['J\'ai mal au ventre.','Ik heb buikpijn.',9,'zin'],
+  ['J\'ai de la fièvre.','Ik heb koorts.',9,'zin'],
+  ['Je suis fatigué(e).','Ik ben moe.',9,'zin'],
+  ['Je suis malade.','Ik ben ziek.',9,'zin'],
+  ['le médecin','de dokter',9,'woord'],
+  ['la pharmacie','de apotheek',9,'woord'],
+  ['le médicament','het medicijn',9,'woord'],
+  ['l\'hôpital','het ziekenhuis',9,'woord'],
+  // Thema 10: Contact 1 (schoolinhoud)
+  ['à','tot',10,'woord','school'],
+  ['bien','goed',10,'woord','school'],
+  ['ça','het, dat',10,'woord','school'],
+  ['comment','hoe',10,'woord','school'],
+  ['et','en',10,'woord','school'],
+  ['moi','ik, (met)',10,'woord','school'],
+  ['toi','jij, je (met)',10,'woord','school'],
+  ['très','heel, zeer, erg',10,'woord','school'],
+  ['bonjour','goedendag',10,'zin','school'],
+  ['salut','hallo, dag',10,'zin','school'],
+  ['ça va ?','Gaat het?',10,'zin','school'],
+  ['Comment ça va ?','Hoe gaat het?',10,'zin','school'],
+  ['Ça va (très) bien.','Het gaat (heel) goed.',10,'zin','school'],
+  ['À bientôt !','Tot gauw!',10,'zin','school'],
+  ['À demain !','Tot morgen!',10,'zin','school'],
+  ['À ce soir !','Tot vanavond!',10,'zin','school'],
+  ['Au revoir !','Tot ziens!',10,'zin','school'],
+  ['Voilà ...','Daar heb je ... / Daar is/zijn ...',10,'zin','school'],
+  ['oui','ja',10,'woord','school'],
+  ['non','neen',10,'woord','school'],
+];
+
+// Werkwoorden: [infinitief, ik, jij, hij-zij, wij, jullie, zij, vertaling]
+const FR_WERKWOORDEN = [
+  ['être','suis','es','est','sommes','êtes','sont','zijn'],
+  ['avoir','ai','as','a','avons','avez','ont','hebben'],
+  ['aller','vais','vas','va','allons','allez','vont','gaan'],
+  ['faire','fais','fais','fait','faisons','faites','font','doen/maken'],
+  ['parler','parle','parles','parle','parlons','parlez','parlent','spreken'],
+  ['manger','mange','manges','mange','mangeons','mangez','mangent','eten'],
+  ['boire','bois','bois','boit','buvons','buvez','boivent','drinken'],
+  ['venir','viens','viens','vient','venons','venez','viennent','komen'],
+  ['pouvoir','peux','peux','peut','pouvons','pouvez','peuvent','kunnen'],
+  ['vouloir','veux','veux','veut','voulons','voulez','veulent','willen'],
+  ['habiter','habite','habites','habite','habitons','habitez','habitent','wonen'],
+  ['s\'appeler','m\'appelle','t\'appelles','s\'appelle','nous appelons','vous appelez','s\'appellent','heten'],
+  ['aimer','aime','aimes','aime','aimons','aimez','aiment','houden van/graag'],
+  ['regarder','regarde','regardes','regarde','regardons','regardez','regardent','kijken'],
+  ['écouter','écoute','écoutes','écoute','écoutons','écoutez','écoutent','luisteren'],
+  ['jouer','joue','joues','joue','jouons','jouez','jouent','spelen'],
+  ['lire','lis','lis','lit','lisons','lisez','lisent','lezen'],
+  ['écrire','écris','écris','écrit','écrivons','écrivez','écrivent','schrijven'],
+  ['chanter','chante','chantes','chante','chantons','chantez','chantent','zingen'],
+  ['danser','danse','danses','danse','dansons','dansez','dansent','dansen'],
+];
+
+const FR_PROFIELEN = ['je','tu','il/elle','nous','vous','ils/elles'];
+const FR_PROFIEL_NL = ['ik','jij','hij/zij','wij','jullie','zij'];
+const FR_THEMA_NAMEN = {
+  1:'🏫 De klas',
+  2:'👨‍👩‍👧‍👦 Familie',
+  3:'🍕 Eten & drinken',
+  4:'🐱 Dieren',
+  5:'🎨 Kleuren & cijfers',
+  6:'🫀 Lichaam',
+  7:'📝 Werkwoorden zijn/hebben',
+  8:'💬 Zinnen & uitdrukkingen',
+  9:'🏥 Gezondheid',
+  10:'Contact 1',
+  11:'Contact 2',
+  12:'Contact 3',
+  13:'Contact 4',
+  14:'Contact 5',
+};
+
+let frTab='school', frThema=0, frQuizMode='nl→fr', frScore={good:0,bad:0,streak:0}, frAnswered=false, frTotal=0, frCurrent=null, frQueue=[];
+let frWwTab='lijst', frWwQueue=[];
+
+function initFrans(){
+  const panel=document.getElementById('frans-panel');if(!panel)return;
+  panel.innerHTML=`
+    <div class="fr-tabs">
+      <button class="fr-tab on"  id="frt-school"      onclick="frSwitch('school')">📘 School</button>
+      <button class="fr-tab"     id="frt-woordenschat" onclick="frSwitch('woordenschat')">📋 Woordenschat</button>
+      <button class="fr-tab"     id="frt-werkwoorden"  onclick="frSwitch('werkwoorden')">🔤 Werkwoorden</button>
+      <button class="fr-tab"     id="frt-quiz"         onclick="frSwitch('quiz')">🎯 Quiz</button>
+    </div>
+    <div id="fr-content"></div>`;
+  frRender();
+}
+
+function frSwitch(t){
+  frTab=t; frThema=0;
+  ['school','woordenschat','werkwoorden','quiz'].forEach(k=>{
+    const b=document.getElementById('frt-'+k);
+    if(b) b.classList.toggle('on',k===t);
+  });
+  frScore={good:0,bad:0,streak:0}; frTotal=0; frQueue=[];
+  frRender();
+}
+
+function frRender(){
+  if(frTab==='school')        frRenderSchool();
+  else if(frTab==='woordenschat') frRenderWoordenschat();
+  else if(frTab==='werkwoorden')  frRenderWerkwoorden();
+  else                            frRenderQuiz();
+}
+
+// ── Uitspraak ──
+let frAudio=null;
+function frSpreek(tekst){
+  let t=tekst.trim().replace(/[!?.…]+$/,'').replace(/\//g,' ').toLowerCase();
+  if(frAudio){frAudio.pause();frAudio.currentTime=0;}
+  const url=`https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=fr&client=gtx&q=${encodeURIComponent(t)}&ttsspeed=0.8`;
+  frAudio=new Audio(url);
+  frAudio.play().catch(()=>{
+    if(!window.speechSynthesis)return;
+    window.speechSynthesis.cancel();
+    setTimeout(()=>{
+      const u=new SpeechSynthesisUtterance(t);
+      u.lang='fr-FR';u.rate=0.82;
+      const fr=window.speechSynthesis.getVoices().find(v=>v.lang==='fr-FR');
+      if(fr)u.voice=fr;
+      window.speechSynthesis.speak(u);
+    },80);
+  });
+}
+function frSpreekKnop(tekst){
+  const t=tekst.replace(/'/g,"&#39;");
+  return `<button onclick="frSpreek('${t}')" title="Uitspreken" style="background:none;border:none;cursor:pointer;font-size:16px;padding:2px 4px;opacity:0.7;transition:opacity 0.15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">🔊</button>`;
+}
+
+// ── SCHOOL (Contact 1, 2, 3…) ──
+let frSchoolTab='lessen', frSchoolQuizMode='fr→nl', frSchoolQueue=[], frSchoolCurrent=null, frSchoolRevealed=false, frSchoolThema=0;
+
+function frRenderSchool(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const schoolThemas=[...new Set(FR_WOORDEN.filter(w=>w[4]==='school').map(w=>w[2]))].sort((a,b)=>a-b);
+  el.innerHTML=`
+    <div style="display:flex;gap:6px;margin-bottom:14px;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;">
+      <button class="taal-subtab${frSchoolTab==='lessen'?' on':''}" onclick="frSchoolTab='lessen';frRenderSchool()">📖 Lessen</button>
+      <button class="taal-subtab${frSchoolTab==='quiz'?' on':''}" onclick="frSchoolTab='quiz';frSchoolQueue=[];frRenderSchool()">🎯 Quiz</button>
+    </div>
+    <div id="fr-school-inner"></div>`;
+  if(frSchoolTab==='lessen') frRenderSchoolLessen(schoolThemas);
+  else frRenderSchoolQuizSetup(schoolThemas);
+}
+
+function frRenderSchoolLessen(schoolThemas){
+  const el=document.getElementById('fr-school-inner');if(!el)return;
+  let html=`<input class="t-search" type="text" id="fr-school-zoek" placeholder="🔍 Zoek in schoollessen..." autocomplete="off" style="margin-bottom:14px;width:100%;"/>
+    <div id="fr-school-res" style="display:none"></div>
+    <div id="fr-school-inhoud">`;
+  if(!schoolThemas.length){
+    html+=`<p style="text-align:center;color:var(--tx3);padding:2rem;">Nog geen schoollessen toegevoegd.</p>`;
+  } else {
+    schoolThemas.forEach(t=>{
+      const items=FR_WOORDEN.filter(w=>w[2]===t&&w[4]==='school');
+      html+=`<div style="margin-bottom:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <span style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--accent);">${FR_THEMA_NAMEN[t]||'Contact '+t}</span>
+          <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;">${items.length} woorden</span>
+        </div>
+        <div class="fr-blok" style="border:1.5px solid rgba(124,111,255,0.35);border-radius:var(--radius-sm);overflow:hidden;">
+          <table class="fr-tabel">
+            <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
+            <tbody>${items.map(w=>`<tr>
+              <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
+              <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+        </div>
+      </div>`;
+    });
+  }
+  html+=`</div>`;
+  el.innerHTML=html;
+  const inp=document.getElementById('fr-school-zoek');
+  if(inp) inp.addEventListener('input',function(){
+    const q=this.value.toLowerCase();
+    const res=document.getElementById('fr-school-res');
+    const inhoud=document.getElementById('fr-school-inhoud');
+    if(!q){res.style.display='none';inhoud.style.display='';return;}
+    inhoud.style.display='none';res.style.display='';
+    const hits=FR_WOORDEN.filter(w=>w[4]==='school'&&(w[0].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));
+    if(!hits.length){res.innerHTML='<p style="text-align:center;color:var(--tx3);padding:1rem;">Geen resultaten.</p>';return;}
+    res.innerHTML=`<div class="fr-blok"><table class="fr-tabel">
+      <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th>Les</th><th style="width:36px;"></th></tr></thead>
+      <tbody>${hits.map(w=>`<tr>
+        <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
+        <td style="font-size:11px;color:var(--tx2);">${FR_THEMA_NAMEN[w[2]]||'Contact '+w[2]}</td>
+        <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
+      </tr>`).join('')}</tbody>
+    </table></div><p class="t-hint">${hits.length} resultaten</p>`;
+  });
+}
+
+function frRenderSchoolQuizSetup(schoolThemas){
+  const el=document.getElementById('fr-school-inner');if(!el)return;
+  el.innerHTML=`
+    <div style="margin-bottom:16px;">
+      <p class="sec-lbl" style="margin-bottom:8px;">Richting</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="filter-btn${frSchoolQuizMode==='fr→nl'?' on':''}" onclick="frSchoolQuizMode='fr→nl';frRenderSchool()">🇫🇷 → 🇧🇪 Frans → NL</button>
+        <button class="filter-btn${frSchoolQuizMode==='nl→fr'?' on':''}" onclick="frSchoolQuizMode='nl→fr';frRenderSchool()">🇧🇪 → 🇫🇷 NL → Frans</button>
+        <button class="filter-btn${frSchoolQuizMode==='mix'?' on':''}" onclick="frSchoolQuizMode='mix';frRenderSchool()">🔀 Gemengd</button>
+      </div>
+    </div>
+    <div style="margin-bottom:20px;">
+      <p class="sec-lbl" style="margin-bottom:8px;">Les</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="filter-btn${frSchoolThema===0?' on':''}" onclick="frSchoolThema=0;frRenderSchool()">Alle lessen</button>
+        ${schoolThemas.map(t=>`<button class="filter-btn${frSchoolThema===t?' on':''}" onclick="frSchoolThema=${t};frRenderSchool()">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
+      </div>
+    </div>
+    <button class="start-btn" onclick="frStartSchoolQuiz()">▶ Start quiz</button>`;
+}
+
+function frStartSchoolQuiz(){
+  let pool=FR_WOORDEN.filter(w=>w[4]==='school');
+  if(frSchoolThema) pool=pool.filter(w=>w[2]===frSchoolThema);
+  frSchoolQueue=pool.sort(()=>Math.random()-0.5);
+  frSchoolRevealed=false;
+  frSchoolCurrent=null;
+  frSchoolNextQ();
+}
+
+function frSchoolNextQ(){
+  if(!frSchoolQueue.length){
+    const el=document.getElementById('fr-school-inner');
+    if(el) el.innerHTML=`<div style="text-align:center;padding:2rem;">
+      <div style="font-size:4rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--accent);margin-bottom:8px;">Alle woorden gehad!</div>
+      <button class="start-btn" onclick="frStartSchoolQuiz()" style="max-width:300px;margin:0 auto;">🔄 Opnieuw</button>
+    </div>`;
+    return;
+  }
+  frSchoolCurrent=frSchoolQueue.shift();
+  frSchoolRevealed=false;
+  const mode=frSchoolQuizMode==='mix'?(Math.random()<0.5?'fr→nl':'nl→fr'):frSchoolQuizMode;
+  const vraag=mode==='fr→nl'?frSchoolCurrent[0]:frSchoolCurrent[1];
+  const antwoord=mode==='fr→nl'?frSchoolCurrent[1]:frSchoolCurrent[0];
+  const les=FR_THEMA_NAMEN[frSchoolCurrent[2]]||'Contact '+frSchoolCurrent[2];
+  const isFr=mode==='fr→nl';
+
+  const el=document.getElementById('fr-school-inner');
+  if(!el)return;
+  el.innerHTML=`
+    <div style="text-align:center;margin-bottom:8px;">
+      <span style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;">${les} · ${frSchoolQueue.length+1} resterend</span>
+    </div>
+    <div id="fr-sq-card" style="background:var(--surface2);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;margin-bottom:16px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--surface3);cursor:pointer;transition:border-color 0.2s;" onclick="frSchoolReveal()">
+      <div style="font-size:12px;color:var(--tx3);margin-bottom:10px;font-weight:700;">${isFr?'🇫🇷 Vertaal naar Nederlands':'🇧🇪 Vertaal naar Frans'}</div>
+      <div style="font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);margin-bottom:${isFr?'12px':'0'};">${vraag}</div>
+      ${isFr?frSpreekKnop(vraag):''}
+      <div id="fr-sq-timer" style="margin-top:16px;width:100%;"></div>
+      <div id="fr-sq-antwoord" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--surface3);width:100%;">
+        <div style="font-size:12px;color:var(--ok);margin-bottom:6px;font-weight:700;">✓ Antwoord</div>
+        <div style="font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--ok);">${antwoord}</div>
+        ${!isFr?frSpreekKnop(antwoord):''}
+      </div>
+    </div>
+    <div id="fr-sq-knoppen" style="display:none;display:flex;gap:8px;">
+      <button onclick="frSchoolNextQ()" style="flex:1;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">Volgende →</button>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--tx3);margin-top:10px;">Klik op de kaart om het antwoord te zien</p>`;
+
+  frSchoolStartTimer(antwoord, isFr);
+}
+
+let _frSqTimer=null;
+function frSchoolStartTimer(antwoord, isFr){
+  if(_frSqTimer) clearInterval(_frSqTimer);
+  const timerEl=document.getElementById('fr-sq-timer');
+  if(!timerEl)return;
+  let secs=5;
+  timerEl.innerHTML=frTimerRing(secs);
+  _frSqTimer=setInterval(()=>{
+    secs--;
+    const t=document.getElementById('fr-sq-timer');
+    if(!t){clearInterval(_frSqTimer);return;}
+    if(secs<=0){
+      clearInterval(_frSqTimer);
+      frSchoolReveal();
+    } else {
+      t.innerHTML=frTimerRing(secs);
+    }
+  },1000);
+}
+
+function frTimerRing(secs){
+  const pct=(secs/5)*100;
+  const r=22, circ=2*Math.PI*r;
+  const offset=circ*(1-pct/100);
+  return `<div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+    <svg width="56" height="56" style="transform:rotate(-90deg);">
+      <circle cx="28" cy="28" r="${r}" fill="none" stroke="var(--surface3)" stroke-width="4"/>
+      <circle cx="28" cy="28" r="${r}" fill="none" stroke="${secs<=2?'var(--no)':'var(--accent)'}" stroke-width="4"
+        stroke-dasharray="${circ}" stroke-dashoffset="${offset}" style="transition:stroke-dashoffset 0.9s linear;"/>
+    </svg>
+    <span style="font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:${secs<=2?'var(--no)':'var(--accent)'};">${secs}</span>
+  </div>`;
+}
+
+function frSchoolReveal(){
+  if(frSchoolRevealed)return;
+  frSchoolRevealed=true;
+  if(_frSqTimer){clearInterval(_frSqTimer);_frSqTimer=null;}
+  const timer=document.getElementById('fr-sq-timer');
+  if(timer)timer.innerHTML='';
+  const ant=document.getElementById('fr-sq-antwoord');
+  if(ant){ant.style.display='block';ant.style.animation='slideUp 0.25s ease';}
+  const kn=document.getElementById('fr-sq-knoppen');
+  if(kn){kn.style.display='flex';}
+  const hint=document.querySelector('#fr-school-inner p');
+  if(hint)hint.style.display='none';
+}
+
+// ── WOORDENSCHAT (extra thema's, geen school) ──
+function frRenderWoordenschat(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const extraThemas=[...new Set(FR_WOORDEN.filter(w=>w[4]!=='school').map(w=>w[2]))].sort((a,b)=>a-b);
+  const themaBar=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;">
+    <span class="filter-lbl">Thema:</span>
+    <button class="filter-btn${frThema===0?' on':''}" onclick="frThema=0;frRenderWsLijst()">Alle</button>
+    ${extraThemas.map(t=>`<button class="filter-btn${frThema===t?' on':''}" onclick="frThema=${t};frRenderWsLijst()">${FR_THEMA_NAMEN[t]||'T'+t}</button>`).join('')}
+  </div>`;
+  el.innerHTML=themaBar+`
+    <input class="t-search" type="text" id="fr-ws-zoek" placeholder="🔍 Zoek een woord..." autocomplete="off" style="margin-bottom:10px;width:100%;"/>
+    <div id="fr-ws-lijst"></div>`;
+  frRenderWsLijst();
+  const inp=document.getElementById('fr-ws-zoek');
+  if(inp) inp.addEventListener('input',function(){ frRenderWsLijst(this.value); });
+}
+
+function frRenderWsLijst(zoek){
+  const el=document.getElementById('fr-ws-lijst');if(!el)return;
+  const q=(zoek||'').toLowerCase();
+  let pool=FR_WOORDEN.filter(w=>w[4]!=='school');
+  if(frThema) pool=pool.filter(w=>w[2]===frThema);
+  pool=pool.filter(w=>!q||w[0].toLowerCase().includes(q)||w[1].toLowerCase().includes(q));
+  const themas=[...new Set(pool.map(w=>w[2]))].sort((a,b)=>a-b);
+  el.innerHTML=(themas.length?themas.map(t=>{
+    const items=pool.filter(w=>w[2]===t);
+    return `<div style="margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">${FR_THEMA_NAMEN[t]||'Thema '+t}</div>
+      <div class="fr-tabel-wrap" style="border:1px solid var(--surface3);border-radius:var(--radius-sm);overflow:hidden;">
+        <table class="fr-tabel">
+          <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
+          <tbody>${items.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td><td style="text-align:center;">${frSpreekKnop(w[0])}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
+  }).join(''):'<p style="text-align:center;color:var(--tx3);padding:1rem;">Geen resultaten.</p>')+`<p class="t-hint">${pool.length} woorden</p>`;
+}
+
+function frGetPool(){
+  // Quiz gebruikt school + extra; woordenschat heeft eigen pool
+  return frThema===0 ? FR_WOORDEN : FR_WOORDEN.filter(w=>w[2]===frThema);
+}
+
+// ── WERKWOORDEN ──
+function frRenderWerkwoorden(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+      <button class="filter-btn${frWwTab==='lijst'?' on':''}" onclick="frWwTab='lijst';frRenderWerkwoorden()">📋 Lijst</button>
+      <button class="filter-btn${frWwTab==='quiz'?' on':''}" onclick="frWwTab='quiz';frWwQueue=[];frRenderWerkwoorden()">🎯 Oefenen</button>
+    </div>
+    <div id="fr-ww-content"></div>`;
+  if(frWwTab==='lijst') frRenderWwLijst();
+  else frRenderWwQuiz();
+}
+
+function frRenderWwLijst(){
+  const el=document.getElementById('fr-ww-content');if(!el)return;
+  el.innerHTML=`<div class="t-table-wrap"><table class="t-table" style="font-size:13px;">
+    <thead><tr><th>Infinitief</th><th>je</th><th>tu</th><th>il/elle</th><th>nous</th><th>vous</th><th>ils/elles</th><th>🇧🇪</th></tr></thead>
+    <tbody>${FR_WERKWOORDEN.map(w=>`<tr>
+      <td><strong>${w[0]}</strong></td>
+      ${[1,2,3,4,5,6].map(i=>`<td>${w[i]}</td>`).join('')}
+      <td style="color:var(--tx2);font-size:11px;">${w[7]}</td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+function frRenderWwQuiz(){
+  const el=document.getElementById('fr-ww-content');if(!el)return;
+  const combos=[];
+  FR_WERKWOORDEN.forEach((w,wi)=>{[0,1,2,3,4,5].forEach(pi=>combos.push({wi,pi}));});
+  if(frWwQueue.length===0) frWwQueue=[...combos].sort(()=>Math.random()-0.5);
+  const {wi,pi}=frWwQueue.shift();
+  const ww=FR_WERKWOORDEN[wi];
+  const correct=ww[pi+1];
+  el.innerHTML=`
+    <div class="t-quiz-card">
+      <div class="t-quiz-meta"><span class="t-prog" id="fr-ww-prog">Vraag ${++frTotal}</span></div>
+      <div style="text-align:center;margin-bottom:8px;">
+        <div style="font-size:13px;color:var(--tx2);margin-bottom:4px;">Vervoeging van:</div>
+        <div style="font-size:26px;font-weight:700;color:var(--tx);">${ww[0]}</div>
+        <div style="font-size:13px;color:var(--tx2);margin-top:4px;">(= ${ww[7]})</div>
+      </div>
+      <div style="font-size:15px;font-weight:600;color:var(--tx);margin-bottom:14px;text-align:center;">
+        Hoe vervoeg je <em>${ww[0]}</em> voor <strong>${FR_PROFIELEN[pi]}</strong> (${FR_PROFIEL_NL[pi]})?
+      </div>
+      <div class="t-input-wrap">
+        <input class="t-input" id="fr-ww-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ de vervoeging..." style="font-size:16px;"/>
+        <button class="t-submit" onclick="frCheckWw('${correct.replace(/'/g,"\\'")}')">OK</button>
+      </div>
+      <p class="type-hint">Druk Enter om te controleren.</p>
+      <div id="fr-ww-fb"></div>
+    </div>`;
+  const inp=document.getElementById('fr-ww-input');
+  if(inp){inp.focus();inp.addEventListener('keydown',e=>{if(e.key==='Enter')frCheckWw(correct);});}
+}
+
+function frCheckWw(correct){
+  const inp=document.getElementById('fr-ww-input');if(!inp)return;
+  const given=inp.value.trim().toLowerCase();
+  const ok=given===correct.toLowerCase();
+  inp.disabled=true;
+  inp.style.borderColor=ok?'#3B6D11':'#A32D2D';
+  const msg=ok?'Correct! ✓':`Fout. Het juiste antwoord is: <strong>${correct}</strong>`;
+  const fb=document.getElementById('fr-ww-fb');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${ok?'t-fb-ok':'t-fb-no'}" style="margin-top:10px;">${msg}</div>
+    <button class="t-next" style="margin-top:10px;width:100%;" onclick="frRenderWerkwoorden()">Volgende →</button>`;
+  if(ok){frScore.good++;frScore.streak++;}else{frScore.bad++;frScore.streak=0;}
+  trackOefening('frans',ok?1:0,ok?0:1);
+  if(ok)snd('ok');else snd('no');
+}
+
+// ── QUIZ ──
+function frRenderQuiz(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const tot=frScore.good+frScore.bad;
+  el.innerHTML=frThemaBar()+`
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+      <span class="filter-lbl">Richting:</span>
+      <button class="filter-btn${frQuizMode==='nl→fr'?' on':''}" onclick="frQuizMode='nl→fr';frQueue=[];frRenderQuiz()">🇧🇪 → 🇫🇷</button>
+      <button class="filter-btn${frQuizMode==='fr→nl'?' on':''}" onclick="frQuizMode='fr→nl';frQueue=[];frRenderQuiz()">🇫🇷 → 🇧🇪</button>
+      <button class="filter-btn${frQuizMode==='beide'?' on':''}" onclick="frQuizMode='beide';frQueue=[];frRenderQuiz()">🔀 Beide</button>
+    </div>
+    <div class="t-score-row">
+      <div class="t-score-card"><div class="t-score-num" id="frsc-good">${frScore.good}</div><div class="t-score-lbl">Goed</div></div>
+      <div class="t-score-card"><div class="t-score-num" id="frsc-bad">${frScore.bad}</div><div class="t-score-lbl">Fout</div></div>
+      <div class="t-score-card"><div class="t-score-num">${tot>0?Math.round(frScore.good/tot*100)+'%':'—'}</div><div class="t-score-lbl">Score</div></div>
+      <div class="t-score-card t-streak-card"><div class="t-score-num" id="frsc-streak">${frScore.streak}</div><div class="t-score-lbl">🔥 Reeks</div></div>
+    </div>
+    <div class="t-quiz-card" id="fr-quiz-card"></div>`;
+  frLoadQ();
+}
+
+function frLoadQ(){
+  frAnswered=false;
+  removeStickyNext();
+  frTotal++;
+  const card=document.getElementById('fr-quiz-card');if(!card)return;
+  const pool=frGetPool();
+  if(pool.length<4){
+    card.innerHTML='<p style="text-align:center;color:var(--tx2);padding:1rem;">Te weinig woorden in dit thema voor een quiz (min. 4).</p>';
+    return;
+  }
+  if(frQueue.length===0) frQueue=[...pool].sort(()=>Math.random()-0.5);
+  const item=frQueue.shift();
+  frCurrent=item;
+  const dir=frQuizMode==='beide'?(Math.random()<0.5?'nl→fr':'fr→nl'):frQuizMode;
+  const vraagTekst=dir==='nl→fr'?item[1]:item[0];
+  const correctTekst=dir==='nl→fr'?item[0]:item[1];
+  const wrongPool=pool.filter(w=>w!==item);
+  const wrongs=[...wrongPool].sort(()=>Math.random()-0.5).slice(0,3).map(w=>dir==='nl→fr'?w[0]:w[1]);
+  const opties=[correctTekst,...wrongs].sort(()=>Math.random()-0.5);
+
+  card.innerHTML=`
+    <div class="t-quiz-meta"><span class="t-prog">Vraag ${frTotal}</span><span class="t-dir-badge">${dir==='nl→fr'?'🇧🇪 → 🇫🇷':'🇫🇷 → 🇧🇪'}</span></div>
+    <div style="font-size:13px;color:var(--tx2);margin-bottom:4px;">${FR_THEMA_NAMEN[item[2]]||''}</div>
+    <div class="t-word" style="font-size:22px;margin-bottom:6px;">${vraagTekst}</div>
+    <div class="t-question">Wat is de vertaling?</div>
+    <div class="ak-mc-grid" style="margin-top:12px;">
+      ${opties.map((o,i)=>`<button class="ak-mc-opt" onclick="frCheckQ(this,'${o.replace(/'/g,"\\'")}','${correctTekst.replace(/'/g,"\\'")}')">
+        <span style="font-size:13px;">${o}</span>
+      </button>`).join('')}
+    </div>
+    <div id="fr-q-fb"></div>`;
+}
+
+function frCheckQ(btn,gekozen,correct){
+  if(frAnswered)return;
+  frAnswered=true;
+  const ok=gekozen===correct;
+  document.querySelectorAll('#fr-quiz-card .ak-mc-opt').forEach(b=>{
+    b.disabled=true;
+    const val=b.querySelector('span').textContent.trim();
+    if(val===correct)b.classList.add('ok');
+    else if(b===btn&&!ok)b.classList.add('no');
+    else b.style.opacity='0.4';
+  });
+  if(ok){frScore.good++;frScore.streak++;}else{frScore.bad++;frScore.streak=0;}
+  ['good','bad','streak'].forEach(k=>{const e=document.getElementById('frsc-'+k);if(e)e.textContent=frScore[k];});
+  trackOefening('frans',ok?1:0,ok?0:1);
+  if(!ok)addFout('frans',`${frCurrent[0]} / ${frCurrent[1]}`,gekozen,correct,FR_THEMA_NAMEN[frCurrent[2]]||'');
+  const msgs=['Super! ✓','Goed zo! ✓','Correct! ✓','Bravo! ✓','Parfait! ✓'];
+  const msg=ok?msgs[Math.floor(Math.random()*msgs.length)]:`Fout! Het juiste antwoord is: <strong>${correct}</strong>`;
+  const cls=ok?'t-fb-ok':'t-fb-no';
+  const fb=document.getElementById('fr-q-fb');
+  if(fb)fb.innerHTML=`<div class="t-feedback ${cls}" style="margin-top:10px;">${msg}</div>`;
+  showStickyNext(msg,cls,'frLoadQ');
+  if(ok)snd('ok');else snd('no');
 }
 
 function openFoutenRapport(){
