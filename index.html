@@ -54,9 +54,9 @@
     body.light::before{opacity:0.4;}
     body.light::after{opacity:0.3;}
 
-    body[data-hero="vuur"]{--accent:#FF6B35;--accent2:#FFD166;--glow:rgba(255,107,53,0.3);}
-    body[data-hero="ijs"]{--accent:#38BDF8;--accent2:#A5F3FC;--glow:rgba(56,189,248,0.3);}
-    body[data-hero="bliksem"]{--accent:#FFD166;--accent2:#FF9F1C;--glow:rgba(255,209,102,0.3);}
+    body[data-hero="vuur"]{--accent:#C0392B;--accent2:#E55A00;--glow:rgba(192,57,43,0.3);}
+    body[data-hero="ijs"]{--accent:#0EA5E9;--accent2:#BAE6FD;--glow:rgba(14,165,233,0.3);}
+    body[data-hero="bliksem"]{--accent:#EAB308;--accent2:#EF4444;--glow:rgba(234,179,8,0.3);}
     body[data-hero="ruimte"]{--accent:#818CF8;--accent2:#C4B5FD;--glow:rgba(129,140,248,0.3);}
     body[data-hero="draak"]{--accent:#34D399;--accent2:#6EE7B7;--glow:rgba(52,211,153,0.3);}
     body[data-hero="prinses"]{--accent:#FF6EB4;--accent2:#FFB3D9;--glow:rgba(255,110,180,0.3);}
@@ -77,8 +77,13 @@
     .icon-btn.active{background:var(--accent);color:#fff;}
     .app-header{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem;padding:0 0.1rem;gap:10px;}
     .header-center{flex:1;display:flex;justify-content:center;}
-    .hero-dropdown{font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;background:var(--surface2);color:var(--tx);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);padding:7px 12px;cursor:pointer;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;text-align:center;}
+    .hero-dropdown{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:700;background:rgba(255,255,255,0.06);color:var(--tx);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:6px 12px;cursor:pointer;outline:none;transition:all 0.2s;-webkit-appearance:none;appearance:none;max-width:130px;}
     .hero-dropdown:focus{border-color:var(--accent);}
+    .extra-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--surface3);border-radius:var(--radius-sm);box-shadow:0 8px 24px rgba(0,0,0,0.4);z-index:500;overflow:hidden;min-width:180px;display:none;}
+    .extra-menu.open{display:block;}
+    .extra-menu button{display:flex;align-items:center;gap:10px;width:100%;padding:11px 16px;background:none;border:none;color:var(--tx2);font-size:13px;font-family:'Nunito',sans-serif;font-weight:600;cursor:pointer;text-align:left;transition:background 0.12s;}
+    .extra-menu button:hover{background:var(--surface2);color:var(--tx);}
+    .extra-menu .menu-divider{height:1px;background:var(--surface3);margin:3px 0;}
 
     /* ── Main tabs ── */
     .main-tabs{width:100%;display:flex;gap:4px;margin-bottom:0.8rem;background:var(--surface);border-radius:var(--radius-sm);padding:4px;position:relative;border:1px solid rgba(255,255,255,0.04);}
@@ -474,22 +479,31 @@
         <div class="logo">🎒 Leerheld</div>
         <div class="logo-sub">Leer &amp; oefen elke dag!</div>
       </div>
-      <div class="header-center">
-        <select id="hero-select" class="hero-dropdown" onchange="pickHeroDropdown(this.value)">
-          <option value="vuur">🤜 Vuurheld</option>
-          <option value="ijs">🦙 IJskoning</option>
-          <option value="bliksem">⚡ Bliksem</option>
-          <option value="ruimte">🚀 Ruimterijder</option>
-          <option value="draak">🐉 Dragonkid</option>
-          <option value="prinses">👸 Prinses</option>
-        </select>
-      </div>
-      <div class="header-btns">
-        <button class="icon-btn" id="profiel-btn" onclick="openProfielKeuze()" title="Profiel wisselen" style="font-size:18px;">👤</button>
-        <button class="icon-btn active" id="themebtn" onclick="toggleTheme()" title="Thema">☀️</button>
-        <button class="icon-btn" id="mutebtn" onclick="toggleMute()" title="Geluid">🔊</button>
-        <button class="icon-btn" onclick="openFoutenRapport()" title="Foutenrapport">📊</button>
-        <button class="icon-btn" id="adminbtn" onclick="openAdmin()" title="Beheer">🔒</button>
+
+      <!-- Hero selector: compact pill, niet full-width -->
+      <select id="hero-select" class="hero-dropdown" onchange="pickHeroDropdown(this.value)">
+        <option value="vuur">🔥 Firelord</option>
+        <option value="ijs">❄️ Ice Master</option>
+        <option value="bliksem">⚡ Flash</option>
+        <option value="ruimte">🚀 Space Ranger</option>
+        <option value="draak">🐉 Dragon Kid</option>
+        <option value="prinses">👸 Princess</option>
+      </select>
+
+      <!-- Knoppen: enkel meest gebruikt zichtbaar, rest in ⋯ -->
+      <div class="header-btns" style="flex-shrink:0;">
+        <button class="icon-btn" id="profiel-btn" onclick="openProfielKeuze()" title="Profiel">👤</button>
+        <button class="icon-btn" id="themebtn" onclick="toggleTheme()" title="Thema">🌙</button>
+        <div style="position:relative;">
+          <button class="icon-btn" id="morebtn" onclick="toggleMoreMenu()" title="Meer opties" style="font-size:18px;font-weight:700;">⋯</button>
+          <div class="extra-menu" id="extra-menu">
+            <button onclick="toggleMute();toggleMoreMenu()">🔊 Geluid aan/uit</button>
+            <button onclick="openFoutenRapport();toggleMoreMenu()">📊 Foutenrapport</button>
+            <button onclick="doUpdate();toggleMoreMenu()">🔄 Update app</button>
+            <div class="menu-divider"></div>
+            <button id="adminbtn" onclick="openAdmin();toggleMoreMenu()">🔒 Beheer</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -620,8 +634,44 @@ const AC=window.AudioContext||window.webkitAudioContext;
 let sharedAC=null;
 function getAC(){if(!sharedAC||sharedAC.state==='closed')sharedAC=new AC();if(sharedAC.state==='suspended')sharedAC.resume();return sharedAC;}
 let muted=false;
-function toggleMute(){muted=!muted;const btn=document.getElementById('mutebtn');if(btn){btn.textContent=muted?'🔇':'🔊';btn.classList.toggle('active',muted);}}
-function toggleTheme(){const isLight=document.body.classList.toggle('light');const btn=document.getElementById('themebtn');if(btn){btn.textContent=isLight?'☀️':'🌙';btn.classList.toggle('active',isLight);}}
+function toggleMute(){muted=!muted;const menuBtn=document.querySelector('#extra-menu button');if(menuBtn)menuBtn.textContent=(muted?'🔇':'🔊')+' Geluid aan/uit';}
+function toggleMoreMenu(){
+  const m=document.getElementById('extra-menu');
+  if(m) m.classList.toggle('open');
+}
+// Sluit menu als je erbuiten klikt
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('extra-menu');
+  const btn=document.getElementById('morebtn');
+  if(menu&&btn&&!menu.contains(e.target)&&e.target!==btn&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+
+function toggleTheme(){
+  const isLight=document.body.classList.toggle('light');
+  const btn=document.getElementById('themebtn');
+  if(btn) btn.textContent=isLight?'☀️':'🌙';
+}
+
+async function doUpdate(){
+  const btn=document.getElementById('updatebtn');
+  if(btn){btn.textContent='⏳';btn.style.pointerEvents='none';}
+  try{
+    // Wis alle browser caches
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.map(k=>caches.delete(k)));
+    }
+    // Wis service worker registraties
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r=>r.unregister()));
+    }
+  }catch(e){}
+  // Herlaad zonder cache (hard reload)
+  window.location.href=window.location.href.split('?')[0]+'?v='+Date.now();
+}
 function snd(t){
   if(muted)return;
   try{const a=getAC(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);
@@ -689,9 +739,9 @@ showSetup();
 // REKENEN
 // ════════════════════════════════════════════════════════
 const HEROES=[
-  {id:'vuur',ico:'🤜',name:'Vuurheld'},{id:'ijs',ico:'🦙',name:'IJskoning'},
-  {id:'bliksem',ico:'⚡',name:'Bliksem'},{id:'ruimte',ico:'🚀',name:'Ruimterijder'},
-  {id:'draak',ico:'🐉',name:'Dragonkid'},{id:'prinses',ico:'👸',name:'Prinses'},
+  {id:'vuur',ico:'🔥',name:'Firelord'},{id:'ijs',ico:'❄️',name:'Ice Master'},
+  {id:'bliksem',ico:'⚡',name:'Flash'},{id:'ruimte',ico:'🚀',name:'Space Ranger'},
+  {id:'draak',ico:'🐉',name:'Dragon Kid'},{id:'prinses',ico:'👸',name:'Princess'},
 ];
 function applyTheme(id){document.body.setAttribute('data-hero',id);}
 let cfg={hero:HEROES[0],mode:'normaal',bewerkingen:['keer','plus','min','deel'],count:10,timer:0,cijfers:[0,1,2,3,4,5,6,7,8,9,10]};
@@ -701,16 +751,73 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random
 
 function genSumsForBew(bew,cij,count){
   if(bew==='keer'){
-    const special=[0,1,10],normal=[],specialPool=[];
-    for(const t of cij)for(let x=0;x<=10;x++){if(special.includes(x)||special.includes(t))specialPool.push({b:'keer',v:[t,x]});else normal.push({b:'keer',v:[t,x]});}
-    shuffle(normal);shuffle(specialPool);
-    const usedSpecial={},filtered=[];
-    for(const p of specialPool){const k=special.find(s=>s===p.v[0]||s===p.v[1]);if(k!==undefined&&!usedSpecial[k]){usedSpecial[k]=true;filtered.push(p);}}
-    return shuffle([...normal,...filtered]).slice(0,count);
+    // Triviale vermenigvuldigers: max 1x maal 0, max 1x maal 1, max 1x maal 10
+    const trivial=[0,1,10];
+    const normal=[],trivialPool={};
+    for(const t of cij){
+      for(let x=0;x<=10;x++){
+        const isTrivX=trivial.includes(x), isTrivT=trivial.includes(t);
+        if(isTrivX||isTrivT){
+          // Sla op per triviale factor (niet per paar) zodat we max 1x per factor bewaken
+          const key=trivial.find(s=>s===x||s===t);
+          if(!trivialPool[key]) trivialPool[key]=[];
+          trivialPool[key].push({b:'keer',v:[t,x]});
+        } else {
+          normal.push({b:'keer',v:[t,x]});
+        }
+      }
+    }
+    shuffle(normal);
+    // Kies max 1 per triviale factor
+    const trivFiltered=Object.values(trivialPool).map(arr=>arr[Math.floor(Math.random()*arr.length)]);
+    const pool=shuffle([...normal,...trivFiltered]);
+    // Als pool kleiner dan count: herhaal normale sommen
+    if(pool.length<count){
+      const extra=[];
+      while(pool.length+extra.length<count) extra.push(...shuffle([...normal]));
+      return shuffle([...pool,...extra]).slice(0,count);
+    }
+    return pool.slice(0,count);
   }
-  if(bew==='plus'){const pool=[];for(const t of cij)for(const x of cij)pool.push({b:'plus',v:[t,x,t+x]});return shuffle(pool).slice(0,count);}
-  if(bew==='min'){const pool=[];for(const t of cij)for(const x of cij)if(x<=t)pool.push({b:'min',v:[t,x,t-x]});return shuffle(pool).slice(0,count);}
-  if(bew==='deel'){const pool=[];for(const t of cij)for(let x=1;x<=10;x++)if(t>0)pool.push({b:'deel',v:[t*x,t,x]});return shuffle(pool).slice(0,count);}
+  if(bew==='plus'){
+    const pool=[];
+    for(const t of cij)for(const x of cij)pool.push({b:'plus',v:[t,x,t+x]});
+    if(!pool.length) return [];
+    const out=shuffle(pool);
+    while(out.length<count) out.push(...shuffle(pool));
+    return out.slice(0,count);
+  }
+  if(bew==='min'){
+    const pool=[];
+    for(const t of cij)for(const x of cij)if(x<=t)pool.push({b:'min',v:[t,x,t-x]});
+    if(!pool.length) return [];
+    const out=shuffle(pool);
+    while(out.length<count) out.push(...shuffle(pool));
+    return out.slice(0,count);
+  }
+  if(bew==='deel'){
+    // Triviale delers: max 1x ÷1, max 1x ÷10
+    const trivial=[1,10];
+    const normal=[],trivialPool={};
+    for(const t of cij){
+      if(t===0) continue;
+      for(let x=1;x<=10;x++){
+        const som={b:'deel',v:[t*x,t,x]};
+        if(trivial.includes(t)){
+          if(!trivialPool[t]) trivialPool[t]=[];
+          trivialPool[t].push(som);
+        } else {
+          normal.push(som);
+        }
+      }
+    }
+    shuffle(normal);
+    const trivFiltered=Object.values(trivialPool).map(arr=>arr[Math.floor(Math.random()*arr.length)]);
+    const pool=shuffle([...normal,...trivFiltered]);
+    if(!pool.length) return [];
+    while(pool.length<count) pool.push(...shuffle([...normal,...trivFiltered]));
+    return pool.slice(0,count);
+  }
   return[];
 }
 function genSums(count){
@@ -742,20 +849,20 @@ function showSetup(){
     '<button class="mode-tab'+(cfg.mode==='normaal'?' on':'')+'" onclick="pickMode(\'normaal\',this)">⚡ Normaal</button>'+
     '<button class="mode-tab'+(cfg.mode==='school'?' on':'')+'" onclick="pickMode(\'school\',this)">🏫 School (50)</button>'+
     '</div><div class="divider"></div>'+
+    '<div id="normaalopties" style="'+(cfg.mode==='school'?'display:none':'')+'">'+ 
     '<div class="sec-lbl">Bewerking</div>'+
     '<div class="opt-row" id="bew">'+
     [['keer','×'],['plus','+'],['min','−'],['deel','÷']].map(p=>'<button class="opt-btn bew-btn'+(cfg.bewerkingen.includes(p[0])?' on':'')+'" onclick="toggleBew(\''+p[0]+'\',this)">'+p[1]+'</button>').join('')+
     '</div><div class="divider"></div>'+
     '<div class="sec-lbl">Tafels / Cijfers</div>'+
     '<div class="cijfer-grid">'+[0,1,2,3,4,5,6,7,8,9,10].map(n=>'<button class="cij-btn'+(cfg.cijfers.includes(n)?' on':'')+'" onclick="toggleCijfer('+n+',this)">'+n+'</button>').join('')+'</div>'+
-    '<div id="normaalopties" style="'+(cfg.mode==='school'?'display:none':'')+'">'+ 
     '<div class="divider"></div>'+
     '<div class="sec-lbl">Aantal sommen</div>'+
     '<div class="opt-row" id="cnt">'+[5,10,15,20,25].map(n=>'<button class="opt-btn'+(n===cfg.count?' on':'')+'" onclick="pickCnt('+n+',this)">'+n+'</button>').join('')+'</div>'+
     '<div class="sec-lbl">Tijdlimiet per som</div>'+
     '<div class="opt-row" id="tmr">'+[[0,'Geen'],[5,'5s'],[10,'10s'],[15,'15s'],[30,'30s']].map(p=>'<button class="opt-btn'+(p[0]===cfg.timer?' on':'')+'" onclick="pickTmr('+p[0]+',this)">'+p[1]+'</button>').join('')+'</div>'+
     '</div>'+
-    '<div id="schoolinfo" style="'+(cfg.mode==='normaal'?'display:none':'')+'"><div class="school-info-box"><strong>Schoolmodus:</strong> 50 sommen, 10 minuten. Doel: klaar in 4 minuten!</div></div>'+
+    '<div id="schoolinfo" style="'+(cfg.mode==='normaal'?'display:none':'')+'"><div class="school-info-box"><strong>🏫 Schoolmodus</strong><br>50 sommen × en ÷ (tafels 1–10).<br>Doel: klaar in 4 minuten!</div></div>'+
     '<button class="start-btn" onclick="startGame()">🚀 Starten!</button>'+
     '</div>';
 }
@@ -767,10 +874,18 @@ function toggleBew(v,el){if(cfg.bewerkingen.includes(v)){if(cfg.bewerkingen.leng
 function pickCnt(v,el){cfg.count=v;document.querySelectorAll('#cnt .opt-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
 function pickTmr(v,el){cfg.timer=v;document.querySelectorAll('#tmr .opt-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
 function toggleCijfer(n,el){if(cfg.cijfers.includes(n)){if(cfg.cijfers.length===1)return;cfg.cijfers=cfg.cijfers.filter(x=>x!==n);el.classList.remove('on');}else{cfg.cijfers.push(n);el.classList.add('on');}}
-
 function startGame(){
-  const count=cfg.mode==='school'?50:cfg.count;
-  st.sums=genSums(count);st.cur=0;st.score=0;st.res=[];st.streak=0;st.maxStreak=0;st.schoolElapsed=0;
+  let count=cfg.mode==='school'?50:cfg.count;
+  let sums;
+  if(cfg.mode==='school'){
+    const schoolCij=[1,2,3,4,5,6,7,8,9,10];
+    const keer=genSumsForBew('keer',schoolCij,25);
+    const deel=genSumsForBew('deel',schoolCij,25);
+    sums=shuffle([...keer,...deel]).slice(0,50);
+  } else {
+    sums=genSums(count);
+  }
+  st.sums=sums;st.cur=0;st.score=0;st.res=[];st.streak=0;st.maxStreak=0;st.schoolElapsed=0;st.wrongAnswers=[];
   if(cfg.mode==='school'){st.schoolStart=Date.now();showQ();startSchoolTimer();}else{showQ();}
 }
 function startSchoolTimer(){
@@ -3154,12 +3269,12 @@ function renderProfielKeuze(){
 function toonNieuwProfielForm(){
   const el = document.getElementById('nieuw-profiel-form'); if(!el) return;
   const HEROES_KEUZE = [
-    {id:'vuur',ico:'🤜',name:'Vuurheld'},
-    {id:'ijs',ico:'🦙',name:'IJskoning'},
-    {id:'bliksem',ico:'⚡',name:'Bliksem'},
-    {id:'ruimte',ico:'🚀',name:'Ruimterijder'},
-    {id:'draak',ico:'🐉',name:'Dragonkid'},
-    {id:'prinses',ico:'👸',name:'Prinses'},
+    {id:'vuur',ico:'🔥',name:'Firelord'},
+    {id:'ijs',ico:'❄️',name:'Ice Master'},
+    {id:'bliksem',ico:'⚡',name:'Flash'},
+    {id:'ruimte',ico:'🚀',name:'Space Ranger'},
+    {id:'draak',ico:'🐉',name:'Dragon Kid'},
+    {id:'prinses',ico:'👸',name:'Princess'},
   ];
   el.innerHTML=`
     <div class="profiel-edit-form">
