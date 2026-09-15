@@ -102,6 +102,8 @@
     .panel{background:var(--surface);border-radius:var(--radius);padding:1.2rem;width:100%;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.04);min-height:460px;animation:slideUp 0.22s ease;}
     @keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
     @keyframes popIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+    @keyframes starPop{0%{transform:scale(0) rotate(-30deg);}70%{transform:scale(1.3) rotate(5deg);}100%{transform:scale(1) rotate(0);}}
+    @keyframes btnPulse{0%,100%{box-shadow:0 4px 14px var(--glow);}50%{box-shadow:0 4px 24px var(--glow),0 0 0 6px rgba(124,111,255,0.15);}}
 
     .sec-lbl{font-family:'Fredoka',sans-serif;font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px;margin-top:4px;}
     .divider{height:1px;background:rgba(255,255,255,0.05);margin:1rem 0;}
@@ -3662,6 +3664,7 @@ const FR_WOORDEN = [
 ];
 
 // Werkwoorden: [infinitief, ik, jij, hij-zij, wij, jullie, zij, vertaling]
+// ── FR_WERKWOORDEN: legacy (achterwaarts compatibel) ──
 const FR_WERKWOORDEN = [
   ['être','suis','es','est','sommes','êtes','sont','zijn'],
   ['avoir','ai','as','a','avons','avez','ont','hebben'],
@@ -3674,7 +3677,7 @@ const FR_WERKWOORDEN = [
   ['pouvoir','peux','peux','peut','pouvons','pouvez','peuvent','kunnen'],
   ['vouloir','veux','veux','veut','voulons','voulez','veulent','willen'],
   ['habiter','habite','habites','habite','habitons','habitez','habitent','wonen'],
-  ['s\'appeler','m\'appelle','t\'appelles','s\'appelle','nous appelons','vous appelez','s\'appellent','heten'],
+  ["s'appeler","m'appelle","t'appelles","s'appelle","nous appelons","vous appelez","s'appellent",'heten'],
   ['aimer','aime','aimes','aime','aimons','aimez','aiment','houden van/graag'],
   ['regarder','regarde','regardes','regarde','regardons','regardez','regardent','kijken'],
   ['écouter','écoute','écoutes','écoute','écoutons','écoutez','écoutent','luisteren'],
@@ -3685,6 +3688,451 @@ const FR_WERKWOORDEN = [
   ['danser','danse','danses','danse','dansons','dansez','dansent','dansen'],
 ];
 
+
+// ════════════════════════════════════════════════════════
+// FR WERKWOORDEN MISSIESYSTEEM
+// ════════════════════════════════════════════════════════
+// Voeg nieuwe werkwoorden toe in FR_WW_DATA hieronder.
+// De 5 hoofdstukken worden automatisch gegenereerd.
+const FR_WW_BUILTIN = [
+  {id:'etre',inf:'être',nl:'zijn',ico:'✨',
+    v:{je:'suis',tu:'es',il:'est',nous:'sommes',vous:'êtes',ils:'sont'},
+    z:{je:'Je ___ content(e).',tu:'Tu ___ mon ami(e).',il:'Il ___ professeur.',nous:'Nous ___ en classe.',vous:'Vous ___ gentils.',ils:'Ils ___ grands.'}},
+  {id:'avoir',inf:'avoir',nl:'hebben',ico:'💪',
+    v:{je:'ai',tu:'as',il:'a',nous:'avons',vous:'avez',ils:'ont'},
+    z:{je:"J'___ un chien.",tu:'Tu ___ un vélo.',il:'Il ___ faim.',nous:'Nous ___ un chat.',vous:'Vous ___ une maison.',ils:'Ils ___ des amis.'}},
+  {id:'aller',inf:'aller',nl:'gaan',ico:'🚀',
+    v:{je:'vais',tu:'vas',il:'va',nous:'allons',vous:'allez',ils:'vont'},
+    z:{je:"J'___ à l'école.",tu:'Tu ___ au cinéma.',il:'Il ___ au parc.',nous:'Nous ___ à la piscine.',vous:'Vous ___ en ville.',ils:'Ils ___ à la plage.'}},
+  {id:'faire',inf:'faire',nl:'doen/maken',ico:'🔨',
+    v:{je:'fais',tu:'fais',il:'fait',nous:'faisons',vous:'faites',ils:'font'},
+    z:{je:'Je ___ mes devoirs.',tu:'Tu ___ du sport.',il:'Il ___ beau.',nous:'Nous ___ une pizza.',vous:'Vous ___ du vélo.',ils:'Ils ___ la fête.'}},
+  {id:'parler',inf:'parler',nl:'spreken',ico:'💬',
+    v:{je:'parle',tu:'parles',il:'parle',nous:'parlons',vous:'parlez',ils:'parlent'},
+    z:{je:'Je ___ français.',tu:'Tu ___ trop vite.',il:'Il ___ avec sa mère.',nous:'Nous ___ anglais.',vous:'Vous ___ bien.',ils:'Ils ___ ensemble.'}},
+  {id:'manger',inf:'manger',nl:'eten',ico:'🍕',
+    v:{je:'mange',tu:'manges',il:'mange',nous:'mangeons',vous:'mangez',ils:'mangent'},
+    z:{je:'Je ___ une pomme.',tu:'Tu ___ une pizza.',il:'Il ___ une glace.',nous:'Nous ___ ensemble.',vous:'Vous ___ trop vite.',ils:'Ils ___ au restaurant.'}},
+  {id:'boire',inf:'boire',nl:'drinken',ico:'🥤',
+    v:{je:'bois',tu:'bois',il:'boit',nous:'buvons',vous:'buvez',ils:'boivent'},
+    z:{je:"J'___ de l'eau.",tu:'Tu ___ un jus.',il:'Il ___ du lait.',nous:'Nous ___ du café.',vous:'Vous ___ du thé.',ils:'Ils ___ de la limonade.'}},
+  {id:'venir',inf:'venir',nl:'komen',ico:'👋',
+    v:{je:'viens',tu:'viens',il:'vient',nous:'venons',vous:'venez',ils:'viennent'},
+    z:{je:'Je ___ chez toi.',tu:'Tu ___ demain.',il:'Il ___ à la fête.',nous:'Nous ___ en bus.',vous:'Vous ___ avec nous.',ils:'Ils ___ de Paris.'}},
+  {id:'pouvoir',inf:'pouvoir',nl:'kunnen',ico:'💡',
+    v:{je:'peux',tu:'peux',il:'peut',nous:'pouvons',vous:'pouvez',ils:'peuvent'},
+    z:{je:'Je ___ venir.',tu:'Tu ___ dormir.',il:'Il ___ nager.',nous:'Nous ___ jouer.',vous:'Vous ___ partir.',ils:'Ils ___ chanter.'}},
+  {id:'vouloir',inf:'vouloir',nl:'willen',ico:'⭐',
+    v:{je:'veux',tu:'veux',il:'veut',nous:'voulons',vous:'voulez',ils:'veulent'},
+    z:{je:'Je ___ une glace.',tu:'Tu ___ jouer.',il:'Il ___ dormir.',nous:'Nous ___ partir.',vous:'Vous ___ manger.',ils:'Ils ___ gagner.'}},
+  {id:'habiter',inf:'habiter',nl:'wonen',ico:'🏠',
+    v:{je:'habite',tu:'habites',il:'habite',nous:'habitons',vous:'habitez',ils:'habitent'},
+    z:{je:"J'___ à Bruxelles.",tu:'Tu ___ en ville.',il:'Il ___ ici.',nous:'Nous ___ ensemble.',vous:'Vous ___ loin.',ils:'Ils ___ au bord de la mer.'}},
+  {id:'aimer',inf:'aimer',nl:'houden van',ico:'❤️',
+    v:{je:'aime',tu:'aimes',il:'aime',nous:'aimons',vous:'aimez',ils:'aiment'},
+    z:{je:"J'___ le chocolat.",tu:'Tu ___ les chats.',il:'Il ___ le football.',nous:'Nous ___ la musique.',vous:'Vous ___ voyager.',ils:'Ils ___ jouer.'}},
+  {id:'jouer',inf:'jouer',nl:'spelen',ico:'🎮',
+    v:{je:'joue',tu:'joues',il:'joue',nous:'jouons',vous:'jouez',ils:'jouent'},
+    z:{je:'Je ___ au foot.',tu:'Tu ___ bien.',il:"Il ___ avec ses amis.",nous:'Nous ___ ensemble.',vous:'Vous ___ au tennis.',ils:'Ils ___ dans le jardin.'}},
+  {id:'lire',inf:'lire',nl:'lezen',ico:'📚',
+    v:{je:'lis',tu:'lis',il:'lit',nous:'lisons',vous:'lisez',ils:'lisent'},
+    z:{je:'Je ___ un livre.',tu:'Tu ___ vite.',il:'Il ___ le journal.',nous:'Nous ___ ensemble.',vous:'Vous ___ beaucoup.',ils:'Ils ___ une BD.'}},
+  {id:'ecrire',inf:'écrire',nl:'schrijven',ico:'✏️',
+    v:{je:'écris',tu:'écris',il:'écrit',nous:'écrivons',vous:'écrivez',ils:'écrivent'},
+    z:{je:"J'___ une lettre.",tu:'Tu ___ bien.',il:'Il ___ son nom.',nous:'Nous ___ une histoire.',vous:'Vous ___ beaucoup.',ils:'Ils ___ en silence.'}},
+  {id:'chanter',inf:'chanter',nl:'zingen',ico:'🎵',
+    v:{je:'chante',tu:'chantes',il:'chante',nous:'chantons',vous:'chantez',ils:'chantent'},
+    z:{je:'Je ___ une chanson.',tu:'Tu ___ faux.',il:'Il ___ bien.',nous:'Nous ___ ensemble.',vous:'Vous ___ fort.',ils:'Ils ___ en choeur.'}},
+];
+
+function getFrWwMissies(){
+  const extra = (() => { try{ return JSON.parse(localStorage.getItem('fr_ww_extra')||'[]'); }catch(e){ return []; } })();
+  return [...FR_WW_BUILTIN, ...extra];
+}
+function saveFrWwExtra(){
+  const builtinIds = FR_WW_BUILTIN.map(w=>w.id);
+  const extra = getFrWwMissies().filter(w=>!builtinIds.includes(w.id));
+  localStorage.setItem('fr_ww_extra', JSON.stringify(extra));
+}
+
+// Voortgang per profiel
+function getFrProg(wwId){
+  const pid = (huidigProfiel||{id:'x'}).id;
+  try{ return JSON.parse(localStorage.getItem('frp_'+pid+'_'+wwId))||{xp:0,h1:0,h2:0,h3:0,h4:0,boss:0,fouten:{}}; }
+  catch(e){ return {xp:0,h1:0,h2:0,h3:0,h4:0,boss:0,fouten:{}}; }
+}
+function saveFrProg(wwId,data){
+  const pid = (huidigProfiel||{id:'x'}).id;
+  localStorage.setItem('frp_'+pid+'_'+wwId, JSON.stringify(data));
+}
+function markHoofdstuk(wwId, hk){
+  const p=getFrProg(wwId);
+  p['h'+hk]=(p['h'+hk]||0)+1;
+  saveFrProg(wwId,p);
+}
+function addFrXP(wwId, xp){
+  const p=getFrProg(wwId); p.xp=(p.xp||0)+xp; saveFrProg(wwId,p);
+  trackOefening('fr-werkwoord',xp>0?1:0,0);
+  // XP popup
+  const div=document.createElement('div');
+  div.innerHTML='+'+xp+' XP ⭐';
+  div.style.cssText='position:fixed;top:40%;left:50%;transform:translate(-50%,-50%) scale(0.5);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-family:Fredoka,sans-serif;font-size:26px;font-weight:700;padding:10px 24px;border-radius:20px;z-index:9000;pointer-events:none;transition:all 0.6s cubic-bezier(.17,.67,.35,1.3);opacity:0;';
+  document.body.appendChild(div);
+  setTimeout(()=>{div.style.transform='translate(-50%,-80%) scale(1)';div.style.opacity='1';},10);
+  setTimeout(()=>{div.style.opacity='0';div.style.transform='translate(-50%,-120%) scale(0.8)';},900);
+  setTimeout(()=>div.remove(),1500);
+}
+function addFrFout(wwId, sleutel){
+  const p=getFrProg(wwId);
+  p.fouten=p.fouten||{};
+  p.fouten[sleutel]=(p.fouten[sleutel]||0)+1;
+  saveFrProg(wwId,p);
+}
+function getFrStreakKey(){ return 'fr_streak_'+(huidigProfiel||{id:'x'}).id; }
+function getFrStreak(){ try{ return parseInt(localStorage.getItem(getFrStreakKey())||'0'); }catch(e){ return 0; } }
+function addFrStreak(ok){
+  let s=getFrStreak(); if(ok){s++;}else{s=0;} localStorage.setItem(getFrStreakKey(),s);
+  return s;
+}
+
+// ════ MISSIE OVERZICHT ════
+let frMissieState = {ww:null, hk:null, queue:[], idx:0, score:0, streak:0};
+
+function frRenderWerkwoorden(){
+  const el=document.getElementById('fr-content'); if(!el)return;
+  if(frMissieState.ww && frMissieState.hk){
+    frRenderHoofdstuk();
+  } else if(frMissieState.ww){
+    frRenderWwDetail(frMissieState.ww);
+  } else {
+    frRenderMissieOverzicht();
+  }
+}
+
+function frRenderMissieOverzicht(){
+  const el=document.getElementById('fr-content'); if(!el)return;
+  const wwList=getFrWwMissies();
+  el.innerHTML=`
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--tx);margin-bottom:4px;">🎯 Werkwoorden Missies</div>
+      <div style="font-size:12px;color:var(--tx3);">Kies een werkwoord om te leren</div>
+    </div>
+    <div id="fr-missie-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;">
+      ${wwList.map(ww=>{
+        const p=getFrProg(ww.id);
+        const xp=p.xp||0;
+        const sterren=[p.h1?1:0,p.h2>=3?1:0,p.h3>=3?1:0,p.h4>=3?1:0,p.boss>=1?1:0].reduce((a,b)=>a+b,0);
+        const klaar=sterren>=5;
+        return `<button onclick="frOpenWw('${ww.id}')" style="background:${klaar?'linear-gradient(135deg,rgba(6,214,160,0.15),rgba(6,214,160,0.05))':'var(--surface2)'};border:1.5px solid ${klaar?'var(--ok)':'var(--surface3)'};border-radius:var(--radius-sm);padding:12px 10px;text-align:center;cursor:pointer;transition:all 0.18s;position:relative;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='${klaar?'var(--ok)':'var(--surface3)'}'">
+          <div style="font-size:24px;margin-bottom:4px;">${ww.ico}</div>
+          <div style="font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;color:var(--tx);">${ww.inf}</div>
+          <div style="font-size:10px;color:var(--tx3);margin-bottom:6px;">${ww.nl}</div>
+          <div style="font-size:13px;">${'⭐'.repeat(sterren)}${'☆'.repeat(6-sterren)}</div>
+          ${xp>0?`<div style="font-size:9px;color:var(--accent);font-weight:700;margin-top:3px;">${xp} XP</div>`:''}
+          ${klaar?'<div style="position:absolute;top:4px;right:6px;font-size:14px;">🏆</div>':''}
+        </button>`;
+      }).join('')}
+    </div>
+    <div style="margin-top:10px;text-align:center;">
+      <button onclick="frMissieState={ww:null,hk:null,queue:[],idx:0,score:0,streak:0};frSwitch('lijst')" style="background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;text-decoration:underline;">📋 Bekijk alle werkwoorden als lijst</button>
+    </div>`;
+}
+
+function frOpenWw(id){
+  frMissieState={ww:id,hk:null,queue:[],idx:0,score:0,streak:0};
+  frRenderWwDetail(id);
+}
+
+function frRenderWwDetail(id){
+  const el=document.getElementById('fr-content'); if(!el)return;
+  const ww=getFrWwMissies().find(w=>w.id===id); if(!ww)return;
+  const p=getFrProg(id);
+  const keys=['je','tu','il','nous','vous','ils'];
+  const labels=['je','tu','il/elle','nous','vous','ils/elles'];
+  const hks=[
+    {n:1,label:'👀 Ontdekken',desc:'Leer de vormen kennen',done:p.h1>=1},
+    {n:2,label:'🎯 Herkennen',desc:'Meerkeuze-vragen',done:p.h2>=3},
+    {n:3,label:'✏️ Invullen',desc:'Typ de juiste vorm in',done:p.h3>=3},
+    {n:4,label:'🔤 Vertalen',desc:'NL → Frans',done:p.h4>=3},
+    {n:5,label:'✍️ Schrijven',desc:'Kopieer en leer de spelling',done:p.h5>=1},
+    {n:6,label:'👹 Eindbaas',desc:'Alles door elkaar!',done:p.boss>=1},
+  ];
+  const sterren=hks.filter(h=>h.done).length;
+  el.innerHTML=`
+    <button onclick="frMissieState.ww=null;frMissieState.hk=null;frRenderMissieOverzicht()" style="background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;margin-bottom:12px;padding:0;">← Terug</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;background:var(--surface2);border-radius:var(--radius-sm);padding:14px;border:1px solid rgba(255,255,255,0.04);">
+      <div style="font-size:36px;">${ww.ico}</div>
+      <div>
+        <div style="font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700;color:var(--tx);">${ww.inf}</div>
+        <div style="font-size:13px;color:var(--tx2);">= <strong>${ww.nl}</strong></div>
+        <div style="font-size:14px;margin-top:4px;">${'⭐'.repeat(sterren)}${'☆'.repeat(6-sterren)} <span style="font-size:11px;color:var(--accent);font-weight:700;">${p.xp||0} XP</span></div>
+      </div>
+    </div>
+    <!-- Vormen tabel -->
+    <div style="background:var(--surface2);border-radius:var(--radius-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.04);margin-bottom:16px;">
+      ${keys.map((k,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:${i<5?'1px solid rgba(255,255,255,0.03)':'none'};">
+        <span style="font-size:12px;color:var(--tx3);font-weight:700;min-width:80px;">${labels[i]}</span>
+        <span style="font-size:15px;font-weight:700;color:var(--tx);flex:1;">${ww.v[k]}</span>
+      </div>`).join('')}
+    </div>
+    <!-- Hoofdstukken -->
+    <div style="font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Hoofdstukken</div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      ${hks.map((h,i)=>{
+        const locked = i>0 && !hks[i-1].done;
+        return `<button onclick="${locked?'':'frStartHoofdstuk('+h.n+')'}" style="display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:var(--radius-sm);background:${h.done?'rgba(6,214,160,0.08)':'var(--surface2)'};border:1.5px solid ${h.done?'var(--ok)':locked?'rgba(255,255,255,0.04)':'var(--surface3)'};cursor:${locked?'default':'pointer'};opacity:${locked?0.5:1};transition:all 0.15s;text-align:left;width:100%;" ${!locked?'onmouseover="this.style.borderColor=\'var(--accent)\'" onmouseout="this.style.borderColor=\''+(h.done?'var(--ok)':'var(--surface3)')+'\';"':''}>
+          <div style="font-size:20px;">${h.done?'✅':locked?'🔒':['👀','🎯','✏️','🔤','✍️','👹'][i]}</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:700;color:${locked?'var(--tx3)':'var(--tx)'};">${h.label}</div>
+            <div style="font-size:11px;color:var(--tx3);">${h.desc}</div>
+          </div>
+          ${h.done?'<div style="color:var(--ok);font-size:13px;font-weight:700;">⭐</div>':(!locked)?'<div style="color:var(--accent);font-size:12px;">▶</div>':''}
+        </button>`;
+      }).join('')}
+    </div>`;
+}
+
+function frStartHoofdstuk(n){
+  frMissieState.hk=n;
+  frMissieState.queue=[];
+  frMissieState.idx=0;
+  frMissieState.score=0;
+  frMissieState.streak=0;
+  const ww=getFrWwMissies().find(w=>w.id===frMissieState.ww);
+  if(!ww)return;
+  const keys=['je','tu','il','nous','vous','ils'];
+  // Bouw queue op basis van type hoofdstuk
+  if(n===1){
+    // Ontdekken: toon gewoon de kaartjes
+    frRenderHoofdstuk();
+    return;
+  }
+  if(n===2){
+    // Herkennen: meerkeuze, 6 vragen (1 per persoon), elke fout-vorm 2x herhalen
+    const p=getFrProg(frMissieState.ww);
+    const fouten=p.fouten||{};
+    let q=keys.map(k=>({type:'mc',sleutel:k,vraag:ww.z&&ww.z[k]?ww.z[k]:`${k==='il'?'Il':'je'===k?'Je':k.charAt(0).toUpperCase()+k.slice(1)} ___ (${ww.inf})`,correct:ww.v[k]}));
+    // Voeg foute vormen dubbel toe
+    const extra=[];
+    for(const k of keys){ if((fouten[k]||0)>=2) extra.push(q.find(x=>x.sleutel===k)); }
+    frMissieState.queue=shuffle([...q,...extra.filter(Boolean)]);
+  }
+  if(n===3){
+    // Invullen: typ de vorm
+    const p=getFrProg(frMissieState.ww);
+    const fouten=p.fouten||{};
+    let q=keys.map(k=>({type:'invul',sleutel:k,vraag:ww.z&&ww.z[k]?ww.z[k]:`___ (${k}, ${ww.inf})`,correct:ww.v[k]}));
+    const extra=[];
+    for(const k of keys){ if((fouten[k]||0)>=2) extra.push(q.find(x=>x.sleutel===k)); }
+    frMissieState.queue=shuffle([...q,...extra.filter(Boolean)]);
+  }
+  if(n===4){
+    // Vertalen: NL persoon → FR
+    const nlLabels={je:'ik',tu:'jij',il:'hij/zij',nous:'wij',vous:'jullie',ils:'zij'};
+    frMissieState.queue=shuffle(keys.map(k=>({type:'vertaal',sleutel:k,vraag:`"${nlLabels[k]} ${ww.nl}" in het Frans?`,correct:ww.v[k],hint:`${k} ...`})));
+  }
+  if(n===5){
+    // Schrijven: toon de vorm, laat het kind die overtypen (letter voor letter)
+    frMissieState.queue=shuffle(keys.map(k=>({type:'schrijf',sleutel:k,correct:ww.v[k],context:`${k==='il'?'il/elle':k==='ils'?'ils/elles':k} ${ww.inf}`})));
+  }
+  if(n===6){
+    // Eindbaas: mix van alles, 12 vragen
+    const nlLabels={je:'ik',tu:'jij',il:'hij/zij',nous:'wij',vous:'jullie',ils:'zij'};
+    const alle=[];
+    for(const k of keys){
+      alle.push({type:'mc',sleutel:k,vraag:ww.z&&ww.z[k]?ww.z[k]:`${k} ___ (${ww.inf})`,correct:ww.v[k]});
+      alle.push({type:'invul',sleutel:k,vraag:ww.z&&ww.z[k]?ww.z[k]:`___ (${k}, ${ww.inf})`,correct:ww.v[k]});
+      alle.push({type:'vertaal',sleutel:k,vraag:`"${nlLabels[k]} ${ww.nl}"`,correct:ww.v[k]});
+      alle.push({type:'schrijf',sleutel:k,correct:ww.v[k],context:`${k==='il'?'il/elle':k==='ils'?'ils/elles':k} ${ww.inf}`});
+    }
+    frMissieState.queue=shuffle(alle).slice(0,12);
+  }
+  frRenderHoofdstuk();
+}
+
+function frRenderHoofdstuk(){
+  const el=document.getElementById('fr-content'); if(!el)return;
+  const n=frMissieState.hk;
+  const ww=getFrWwMissies().find(w=>w.id===frMissieState.ww); if(!ww)return;
+
+  if(n===1){
+    // Ontdekken: toon alle vormen op kaartjes
+    const keys=['je','tu','il','nous','vous','ils'];
+    const labels=['je','tu','il/elle','nous','vous','ils/elles'];
+    const nlLabels=['ik','jij','hij/zij','wij','jullie','zij'];
+    el.innerHTML=`
+      <button onclick="frMissieState.hk=null;frRenderWwDetail('${ww.id}')" style="background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;gap:4px;padding:0;">← ${ww.ico} ${ww.inf}</button>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:28px;margin-bottom:4px;">👀</div>
+        <div style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--tx);">Ontdekken</div>
+        <div style="font-size:12px;color:var(--tx3);">${ww.ico} ${ww.inf} = ${ww.nl}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+        ${keys.map((k,i)=>`
+          <div style="display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:var(--radius-sm);padding:11px 14px;border:1px solid rgba(255,255,255,0.04);">
+            <div style="min-width:70px;font-size:11px;color:var(--tx3);font-weight:700;">${nlLabels[i]}</div>
+            <div style="flex:1;">
+              <span style="font-size:13px;color:var(--tx3);">${labels[i]} </span>
+              <span style="font-size:17px;font-weight:700;color:var(--accent);">${ww.v[k]}</span>
+              ${ww.z&&ww.z[k]?`<div style="font-size:11px;color:var(--tx3);margin-top:2px;font-style:italic;">${ww.z[k].replace('___',ww.v[k])}</div>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+      <button onclick="frAfrondHoofdstuk(1)" style="width:100%;padding:13px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 14px var(--glow);">
+        Ik ken ze! Verder → 🚀
+      </button>`;
+    return;
+  }
+
+  // Vragen-hoofdstukken 2-5
+  const q=frMissieState.queue;
+  const idx=frMissieState.idx;
+  if(idx>=q.length){
+    frAfrondHoofdstuk(n);
+    return;
+  }
+  const vraag=q[idx];
+  const prog=Math.round((idx/q.length)*100);
+
+  let vraagHTML='';
+  if(vraag.type==='mc'){
+    // Genereer 3 verkeerde antwoorden
+    const allVormen=getFrWwMissies().flatMap(w=>Object.values(w.v));
+    const wrong=[...new Set(allVormen.filter(v=>v!==vraag.correct))].sort(()=>Math.random()-0.5).slice(0,3);
+    const opts=shuffle([vraag.correct,...wrong]);
+    vraagHTML=`
+      <div style="font-size:14px;font-weight:600;color:var(--tx);margin-bottom:14px;line-height:1.5;text-align:center;">
+        ${vraag.vraag.replace('___','<span style="color:var(--accent);font-weight:900;">___</span>')}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="fr-mc-opts">
+        ${opts.map((o,i)=>`<button onclick="frCheckMC('${o}','${vraag.correct}','${vraag.sleutel}')" class="fr-mc-opt" style="padding:13px 10px;border-radius:var(--radius-sm);background:var(--surface);border:1.5px solid var(--surface3);font-size:16px;font-weight:700;color:var(--tx);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="if(!this.dataset.answered)this.style.borderColor='var(--surface3)'">${o}</button>`).join('')}
+      </div>`;
+  } else {
+    // Invullen of vertalen
+    vraagHTML=`
+      <div style="font-size:14px;font-weight:600;color:var(--tx);margin-bottom:14px;line-height:1.5;text-align:center;">
+        ${vraag.vraag.replace('___','<span style="border-bottom:2px solid var(--accent);padding:0 8px;color:var(--accent);">___</span>')}
+      </div>
+      <div class="t-input-wrap" style="margin-bottom:8px;">
+        <input class="t-input" id="fr-hk-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier..." style="font-size:17px;"/>
+        <button class="t-submit" onclick="frCheckInvul('${vraag.correct}','${vraag.sleutel}')">OK</button>
+      </div>
+      ${vraag.hint?`<div style="font-size:11px;color:var(--tx3);text-align:center;">💡 ${vraag.hint}</div>`:''}`;
+  }
+
+  el.innerHTML=`
+    <button onclick="frMissieState.hk=null;frRenderWwDetail('${ww.id}')" style="background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;gap:4px;padding:0;">← ${ww.ico} ${ww.inf}</button>
+    <!-- Voortgang -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <span style="font-size:11px;color:var(--tx3);font-weight:700;">Vraag ${idx+1}/${q.length}</span>
+      <span style="font-size:11px;color:var(--ok);font-weight:700;">✓ ${frMissieState.score} · 🔥 ${frMissieState.streak}</span>
+    </div>
+    <div style="height:5px;background:var(--surface3);border-radius:3px;margin-bottom:14px;overflow:hidden;">
+      <div style="height:100%;width:${prog}%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width 0.3s;"></div>
+    </div>
+    <!-- Vraag kaart -->
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:1.2rem;margin-bottom:12px;border:1px solid rgba(255,255,255,0.04);">
+      <div style="text-align:center;margin-bottom:12px;">
+        <span style="font-size:10px;font-weight:800;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;">${['','👀 Ontdekken','🎯 Herkennen','✏️ Invullen','🔤 Vertalen','👹 Eindbaas'][n]}</span>
+      </div>
+      ${vraagHTML}
+    </div>
+    <div id="fr-hk-fb"></div>`;
+
+  if(vraag.type!=='mc'){
+    const inp=document.getElementById('fr-hk-input');
+    if(inp){inp.focus();inp.addEventListener('keydown',e=>{if(e.key==='Enter')frCheckInvul(vraag.correct,vraag.sleutel);});}
+  }
+}
+
+function frCheckMC(gekozen, correct, sleutel){
+  const ok = gekozen===correct;
+  // Markeer knoppen
+  document.querySelectorAll('.fr-mc-opt').forEach(btn=>{
+    btn.disabled=true; btn.dataset.answered='1';
+    if(btn.textContent===correct) btn.style.cssText+=';background:rgba(6,214,160,0.15);border-color:var(--ok);color:var(--ok);';
+    else if(btn.textContent===gekozen&&!ok) btn.style.cssText+=';background:rgba(255,107,157,0.1);border-color:var(--no);color:var(--no);';
+    btn.onmouseover=null;
+  });
+  frAfhandelAntwoord(ok, correct, sleutel);
+}
+
+function frCheckInvul(correct, sleutel){
+  const inp=document.getElementById('fr-hk-input'); if(!inp)return;
+  const given=inp.value.trim().toLowerCase().normalize('NFC');
+  const correctN=correct.toLowerCase().normalize('NFC');
+  const ok=given===correctN;
+  inp.disabled=true;
+  inp.style.borderColor=ok?'var(--ok)':'var(--no)';
+  inp.style.background=ok?'rgba(6,214,160,0.08)':'rgba(255,107,157,0.08)';
+  inp.style.color=ok?'var(--ok)':'var(--no)';
+  frAfhandelAntwoord(ok, correct, sleutel);
+}
+
+function frAfhandelAntwoord(ok, correct, sleutel){
+  if(ok){ frMissieState.score++; frMissieState.streak++; }
+  else { frMissieState.streak=0; addFrFout(frMissieState.ww, sleutel); }
+  const streak=frMissieState.streak;
+  const xp=ok?(streak>=3?20:10):0;
+  if(ok) addFrXP(frMissieState.ww, xp);
+  snd(ok?'ok':'no');
+
+  const fb=document.getElementById('fr-hk-fb');
+  if(fb){
+    let msg='';
+    if(ok){
+      const msgs=['Super! 🎉','Top! ⭐','Bravo! 🏆','Geweldig! 🔥','Correct! ✅'];
+      msg=msgs[Math.floor(Math.random()*msgs.length)];
+      if(streak>=3) msg+=' 🔥🔥🔥 Streak x'+streak+'!';
+    } else {
+      msg=`❌ Het juiste antwoord is: <strong style="color:var(--ok);">${correct}</strong>`;
+    }
+    fb.innerHTML=`
+      <div class="t-feedback ${ok?'t-fb-ok':'t-fb-no'}" style="margin-bottom:10px;">${msg}</div>
+      <button onclick="frVolgendeVraag()" class="t-next" style="width:100%;">
+        ${frMissieState.idx+1>=frMissieState.queue.length?'🏁 Afronden':'Volgende →'}
+      </button>`;
+  }
+  trackOefening('fr-werkwoord',ok?1:0,ok?0:1);
+}
+
+function frVolgendeVraag(){
+  frMissieState.idx++;
+  frRenderHoofdstuk();
+}
+
+function frAfrondHoofdstuk(n){
+  const el=document.getElementById('fr-content'); if(!el)return;
+  const ww=getFrWwMissies().find(w=>w.id===frMissieState.ww); if(!ww)return;
+  const score=frMissieState.score;
+  const total=frMissieState.queue.length||(n===1?1:6);
+  const pct=n===1?100:Math.round(score/total*100);
+  const ster=pct>=80||n===1;
+  markHoofdstuk(frMissieState.ww, n===5?'boss':n);
+  const xp=n===5?50:20;
+  if(ster) addFrXP(frMissieState.ww, xp);
+  if(ster) boom();
+
+  const p=getFrProg(frMissieState.ww);
+  const sterren=[p.h1>=1,p.h2>=3,p.h3>=3,p.h4>=3,p.h5>=1,p.boss>=1].filter(Boolean).length;
+
+  el.innerHTML=`
+    <div style="text-align:center;padding:1.5rem 0;">
+      <div style="font-size:4rem;margin-bottom:8px;">${ster?'🏆':'💪'}</div>
+      <div style="font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;">
+        ${ster?'Geweldig!':'Goed geprobeerd!'}
+      </div>
+      ${n>1?`<div style="font-size:15px;color:var(--tx2);margin-bottom:8px;">${score}/${total} goed (${pct}%)</div>`:''}
+      <div style="font-size:20px;margin-bottom:16px;">${'⭐'.repeat(sterren)}${'☆'.repeat(6-sterren)}</div>
+      ${ster?`<div style="background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.3);border-radius:var(--radius-sm);padding:10px;margin-bottom:16px;font-size:13px;color:var(--accent);font-weight:700;">+${xp} XP verdiend!</div>`:''}
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        ${n<5&&ster?`<button onclick="frStartHoofdstuk(${n+1})" style="padding:13px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:#fff;cursor:pointer;">Naar hoofdstuk ${n+1} →</button>`:''}
+        ${!ster?`<button onclick="frStartHoofdstuk(${n})" style="padding:13px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:#fff;cursor:pointer;">🔄 Opnieuw proberen</button>`:''}
+        <button onclick="frMissieState.hk=null;frRenderWwDetail('${ww.id}')" style="padding:11px;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--surface3);font-size:15px;font-weight:600;color:var(--tx);cursor:pointer;">← Terug naar ${ww.inf}</button>
+        <button onclick="frMissieState.ww=null;frMissieState.hk=null;frRenderMissieOverzicht()" style="padding:9px;border-radius:var(--radius-sm);background:none;border:none;font-size:13px;color:var(--tx3);cursor:pointer;text-decoration:underline;">Alle werkwoorden</button>
+      </div>
+    </div>`;
+}
 const FR_PROFIELEN = ['je','tu','il/elle','nous','vous','ils/elles'];
 const FR_PROFIEL_NL = ['ik','jij','hij/zij','wij','jullie','zij'];
 const FR_THEMA_NAMEN = {
@@ -3794,10 +4242,10 @@ function frRenderSchoolLessen(schoolThemas){
         </div>
         <div class="fr-blok" style="border:1.5px solid rgba(124,111,255,0.35);border-radius:var(--radius-sm);overflow:hidden;">
           <table class="fr-tabel">
-            <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
+            <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th></tr></thead>
             <tbody>${items.map(w=>`<tr>
               <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
-              <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
+              
             </tr>`).join('')}</tbody>
           </table>
         </div>
@@ -3816,11 +4264,11 @@ function frRenderSchoolLessen(schoolThemas){
     const hits=FR_WOORDEN.filter(w=>w[4]==='school'&&(w[0].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));
     if(!hits.length){res.innerHTML='<p style="text-align:center;color:var(--tx3);padding:1rem;">Geen resultaten.</p>';return;}
     res.innerHTML=`<div class="fr-blok"><table class="fr-tabel">
-      <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th>Les</th><th style="width:36px;"></th></tr></thead>
+      <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th>Les</th></tr></thead>
       <tbody>${hits.map(w=>`<tr>
         <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
         <td style="font-size:11px;color:var(--tx2);">${FR_THEMA_NAMEN[w[2]]||'Contact '+w[2]}</td>
-        <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
+        
       </tr>`).join('')}</tbody>
     </table></div><p class="t-hint">${hits.length} resultaten</p>`;
   });
@@ -3883,12 +4331,12 @@ function frSchoolNextQ(){
     <div id="fr-sq-card" style="background:var(--surface2);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;margin-bottom:16px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--surface3);cursor:pointer;transition:border-color 0.2s;" onclick="frSchoolReveal()">
       <div style="font-size:12px;color:var(--tx3);margin-bottom:10px;font-weight:700;">${isFr?'🇫🇷 Vertaal naar Nederlands':'🇧🇪 Vertaal naar Frans'}</div>
       <div style="font-family:'Fredoka',sans-serif;font-size:36px;font-weight:700;color:var(--tx);margin-bottom:${isFr?'12px':'0'};">${vraag}</div>
-      ${isFr?frSpreekKnop(vraag):''}
+
       <div id="fr-sq-timer" style="margin-top:16px;width:100%;"></div>
       <div id="fr-sq-antwoord" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--surface3);width:100%;">
         <div style="font-size:12px;color:var(--ok);margin-bottom:6px;font-weight:700;">✓ Antwoord</div>
         <div style="font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--ok);">${antwoord}</div>
-        ${!isFr?frSpreekKnop(antwoord):''}
+
       </div>
     </div>
     <div id="fr-sq-knoppen" style="display:none;display:flex;gap:8px;">
@@ -3977,8 +4425,8 @@ function frRenderWsLijst(zoek){
       <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">${FR_THEMA_NAMEN[t]||'Thema '+t}</div>
       <div class="fr-tabel-wrap" style="border:1px solid var(--surface3);border-radius:var(--radius-sm);overflow:hidden;">
         <table class="fr-tabel">
-          <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
-          <tbody>${items.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td><td style="text-align:center;">${frSpreekKnop(w[0])}</td></tr>`).join('')}</tbody>
+          <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th></tr></thead>
+          <tbody>${items.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`).join('')}</tbody>
         </table>
       </div>
     </div>`;
@@ -4197,7 +4645,8 @@ function renderAdminPanel(){
   document.getElementById('admin-modal-body').innerHTML=`
     <div class="admin-tabs">
       <button class="admin-tab ${adminTab==='rapport'?'on':''}" onclick="switchAdminTab('rapport')">📊 Rapport</button>
-      <button class="admin-tab ${adminTab==='ww'?'on':''}" onclick="switchAdminTab('ww')">🔤 Werkwoorden</button>
+      <button class="admin-tab ${adminTab==='ww'?'on':''}" onclick="switchAdminTab('ww')">🔤 Werkwoorden NL</button>
+      <button class="admin-tab ${adminTab==='frww'?'on':''}" onclick="switchAdminTab('frww')">🇫🇷 Werkwoorden FR</button>
       <button class="admin-tab ${adminTab==='woorden'?'on':''}" onclick="switchAdminTab('woorden')">📚 Woordenschat</button>
       <button class="admin-tab ${adminTab==='zegswijzen'?'on':''}" onclick="switchAdminTab('zegswijzen')">💬 Zegswijzen</button>
       <button class="admin-tab ${adminTab==='instellingen'?'on':''}" onclick="switchAdminTab('instellingen')">🔧 Instellingen</button>
@@ -4213,6 +4662,7 @@ function renderAdminTab(){
     const el=document.getElementById('admin-tab-content');if(!el)return;
     if(adminTab==='rapport')renderProfielRapport(el);
     else if(adminTab==='ww')renderAdminWW(el);
+    else if(adminTab==='frww')renderAdminFrWW(el);
     else if(adminTab==='woorden')renderAdminWoorden(el);
     else if(adminTab==='zegswijzen')renderAdminZegswijzen(el);
     else if(adminTab==='instellingen')renderAdminInstellingen(el);
@@ -4316,6 +4766,109 @@ function adminResetWW(){
 }
 
 // ── Woordenschat beheer ──
+function renderAdminFrWW(el){
+  const builtinIds = FR_WW_BUILTIN.map(w=>w.id);
+  const custom = getFrWwMissies().filter(w=>!builtinIds.includes(w.id));
+  const all = getFrWwMissies();
+
+  el.innerHTML=`
+    <div class="sec-lbl" style="margin-bottom:8px;">🇫🇷 Frans werkwoord toevoegen</div>
+    <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid rgba(255,255,255,0.04);margin-bottom:14px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div>
+          <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:4px;">INFINITIEF</div>
+          <input class="admin-input" id="frww-inf" placeholder="bijv. partir" style="margin-bottom:0;"/>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:4px;">BETEKENIS (NL)</div>
+          <input class="admin-input" id="frww-nl" placeholder="bijv. vertrekken" style="margin-bottom:0;"/>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div>
+          <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:4px;">ICOON (emoji)</div>
+          <input class="admin-input" id="frww-ico" placeholder="bijv. ✈️" style="margin-bottom:0;"/>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:4px;">ID (uniek, geen spaties)</div>
+          <input class="admin-input" id="frww-id" placeholder="bijv. partir" style="margin-bottom:0;"/>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:6px;margin-top:4px;">VERVOEGINGEN</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+        ${[['je','je / j\''],['tu','tu'],['il','il / elle'],['nous','nous'],['vous','vous'],['ils','ils / elles']].map(([k,l])=>`
+          <div>
+            <div style="font-size:9px;color:var(--tx3);font-weight:700;margin-bottom:3px;">${l.toUpperCase()}</div>
+            <input class="admin-input" id="frww-${k}" placeholder="${k}..." style="margin-bottom:0;font-size:14px;"/>
+          </div>`).join('')}
+      </div>
+      <div style="font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:6px;">VOORBEELDZINNEN (optioneel) — gebruik ___ voor de blanco</div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px;">
+        ${['je','tu','il','nous','vous','ils'].map(k=>`
+          <input class="admin-input" id="frww-z-${k}" placeholder="${k}: bijv. Je ___ demain." style="margin-bottom:0;font-size:12px;"/>`).join('')}
+      </div>
+      <button onclick="adminAddFrWW()" class="pw-btn" style="margin-bottom:4px;">➕ Werkwoord toevoegen</button>
+      <div id="frww-msg" style="font-size:12px;text-align:center;min-height:18px;margin-top:4px;"></div>
+    </div>
+
+    <div class="sec-lbl" style="margin-bottom:8px;">Ingebouwde werkwoorden (${builtinIds.length})</div>
+    <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:10px;border:1px solid rgba(255,255,255,0.04);margin-bottom:12px;">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        ${FR_WW_BUILTIN.map(w=>`<span style="background:var(--surface3);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--tx2);">${w.ico} ${w.inf}</span>`).join('')}
+      </div>
+    </div>
+
+    ${custom.length>0?`
+    <div class="sec-lbl" style="margin-bottom:8px;">Zelf toegevoegd (${custom.length})</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      ${custom.map(w=>`
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;border:1px solid rgba(255,255,255,0.04);">
+          <span style="font-size:18px;">${w.ico}</span>
+          <div style="flex:1;">
+            <strong style="color:var(--tx);">${w.inf}</strong>
+            <span style="color:var(--tx3);font-size:12px;"> = ${w.nl}</span>
+            <div style="font-size:11px;color:var(--tx3);margin-top:2px;">
+              je ${w.v.je} · tu ${w.v.tu} · il ${w.v.il} · nous ${w.v.nous} · vous ${w.v.vous} · ils ${w.v.ils}
+            </div>
+          </div>
+          <button onclick="adminDelFrWW('${w.id}')" style="background:rgba(255,107,157,0.1);border:1px solid rgba(255,107,157,0.3);color:var(--no);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">✕</button>
+        </div>`).join('')}
+    </div>`:`<p style="color:var(--tx3);font-size:12px;text-align:center;padding:10px;">Nog geen eigen werkwoorden toegevoegd.</p>`}`;
+}
+
+function adminAddFrWW(){
+  const get = id => (document.getElementById(id)||{value:''}).value.trim();
+  const inf=get('frww-inf'), nl=get('frww-nl'), ico=get('frww-ico')||'📝';
+  let id=get('frww-id')||inf.replace(/[^a-z]/gi,'').toLowerCase();
+  const v={je:get('frww-je'),tu:get('frww-tu'),il:get('frww-il'),nous:get('frww-nous'),vous:get('frww-vous'),ils:get('frww-ils')};
+  const z={};
+  ['je','tu','il','nous','vous','ils'].forEach(k=>{const val=get('frww-z-'+k);if(val)z[k]=val;});
+  const msg=document.getElementById('frww-msg');
+  if(!inf||!nl||!v.je||!v.tu||!v.il||!v.nous||!v.vous||!v.ils){
+    if(msg){msg.style.color='var(--no)';msg.textContent='Vul alle verplichte velden in!';}
+    return;
+  }
+  const builtinIds=FR_WW_BUILTIN.map(w=>w.id);
+  if(builtinIds.includes(id)||getFrWwMissies().find(w=>w.id===id)){
+    id=id+'_'+Date.now();
+  }
+  const nieuw={id,inf,nl,ico,v,z};
+  const extra=(()=>{try{return JSON.parse(localStorage.getItem('fr_ww_extra')||'[]');}catch(e){return[];}})();
+  extra.push(nieuw);
+  localStorage.setItem('fr_ww_extra',JSON.stringify(extra));
+  if(msg){msg.style.color='var(--ok)';msg.textContent=`✓ "${inf}" toegevoegd!`;}
+  // Reset form
+  ['inf','nl','ico','id','je','tu','il','nous','vous','ils'].forEach(k=>{const el=document.getElementById('frww-'+k);if(el)el.value='';});
+  ['je','tu','il','nous','vous','ils'].forEach(k=>{const el=document.getElementById('frww-z-'+k);if(el)el.value='';});
+  setTimeout(()=>renderAdminTab(),1200);
+}
+
+function adminDelFrWW(id){
+  const extra=(()=>{try{return JSON.parse(localStorage.getItem('fr_ww_extra')||'[]');}catch(e){return[];}})();
+  localStorage.setItem('fr_ww_extra',JSON.stringify(extra.filter(w=>w.id!==id)));
+  renderAdminTab();
+}
+
 function renderAdminWoorden(el){
   el.innerHTML=`
     <p class="admin-count">${WOORDEN.length} woorden in de lijst</p>
