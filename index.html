@@ -3772,6 +3772,36 @@ const FR_WOORDEN = [
   ['Voilà ...','Daar heb je ... / Daar is/zijn ...',10,'zin','school'],
   ['oui','ja',10,'woord','school'],
   ['non','neen',10,'woord','school'],
+  // Thema 11: Contact 2 (schoolinhoud)
+  ['l\'école','de school',11,'woord','school'],
+  ['la gare','het station',11,'woord','school'],
+  ['le magasin','de winkel',11,'woord','school'],
+  ['aller','gaan',11,'woord','school'],
+  ['à (au)','naar',11,'woord','school'],
+  ['alors','dan',11,'woord','school'],
+  ['avec','met',11,'woord','school'],
+  ['de','van',11,'woord','school'],
+  ['déjà','(nu) al',11,'woord','school'],
+  ['là','daar, er',11,'woord','school'],
+  ['le, la, (l\')','lidwoorden: de, het',11,'woord','school'],
+  ['où','waar',11,'woord','school'],
+  ['je','ik',11,'woord','school'],
+  ['tu','jij, je',11,'woord','school'],
+  ['il','hij',11,'woord','school'],
+  ['elle','zij, ze',11,'woord','school'],
+  ['nous','wij, we',11,'woord','school'],
+  ['vous','jullie, u',11,'woord','school'],
+  ['ils','zij, ze',11,'woord','school'],
+  ['elles','zij, ze',11,'woord','school'],
+  ['Tu vas où ?','Waar ga je naartoe?',11,'zin','school'],
+  ['Je vais à la gare.','Ik ga naar het station.',11,'zin','school'],
+  ['Il va où ?','Waar gaat hij naartoe?',11,'zin','school'],
+  ['Il va à la maison.','Hij gaat naar huis.',11,'zin','school'],
+  ['Où ça ?','Waar?',11,'zin','school'],
+  ['Elles vont où ?','Waar gaan ze naartoe?',11,'zin','school'],
+  ['Elles vont au magasin.','Ze gaan naar de winkel.',11,'zin','school'],
+  ['Vous allez où ?','Waar gaan jullie naartoe?',11,'zin','school'],
+  ['Nous allons à l\'école.','Wij gaan naar school.',11,'zin','school'],
 ];
 
 // Werkwoorden: [infinitief, ik, jij, hij-zij, wij, jullie, zij, vertaling]
@@ -3875,7 +3905,7 @@ function frSpreekKnop(tekst){
 }
 
 // ── SCHOOL (Contact 1, 2, 3…) ──
-let frSchoolTab='lessen', frSchoolQuizMode='fr→nl', frSchoolQueue=[], frSchoolCurrent=null, frSchoolRevealed=false, frSchoolThema=0;
+let frSchoolTab='lessen', frSchoolQuizMode='fr→nl', frSchoolQueue=[], frSchoolCurrent=null, frSchoolRevealed=false, frSchoolThema=0, frSchoolLessenThema=0;
 
 function frRenderSchool(){
   const el=document.getElementById('fr-content');if(!el)return;
@@ -3892,13 +3922,19 @@ function frRenderSchool(){
 
 function frRenderSchoolLessen(schoolThemas){
   const el=document.getElementById('fr-school-inner');if(!el)return;
-  let html=`<input class="t-search" type="text" id="fr-school-zoek" placeholder="🔍 Zoek in schoollessen..." autocomplete="off" style="margin-bottom:14px;width:100%;"/>
+  if(!schoolThemas.includes(frSchoolLessenThema)) frSchoolLessenThema=0;
+  let html=`<input class="t-search" type="text" id="fr-school-zoek" placeholder="🔍 Zoek in schoollessen..." autocomplete="off" style="margin-bottom:10px;width:100%;"/>
     <div id="fr-school-res" style="display:none"></div>
     <div id="fr-school-inhoud">`;
   if(!schoolThemas.length){
     html+=`<p style="text-align:center;color:var(--tx3);padding:2rem;">Nog geen schoollessen toegevoegd.</p>`;
   } else {
-    schoolThemas.forEach(t=>{
+    html+=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+      <button class="filter-btn${frSchoolLessenThema===0?' on':''}" onclick="frSchoolLessenThema=0;frRenderSchoolLessen(${JSON.stringify(schoolThemas)})">Alle lessen</button>
+      ${schoolThemas.map(t=>`<button class="filter-btn${frSchoolLessenThema===t?' on':''}" onclick="frSchoolLessenThema=${t};frRenderSchoolLessen(${JSON.stringify(schoolThemas)})">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
+    </div>`;
+    const teTonen=frSchoolLessenThema?schoolThemas.filter(t=>t===frSchoolLessenThema):schoolThemas;
+    teTonen.forEach(t=>{
       const items=FR_WOORDEN.filter(w=>w[2]===t&&w[4]==='school');
       html+=`<div style="margin-bottom:22px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
