@@ -466,6 +466,40 @@
     .sticky-next .t-feedback{margin:0;padding:7px 11px;flex:1;font-size:12px;}
     .sticky-next .t-next{margin:0;flex-shrink:0;}
 
+    /* ════ FRANS - EENVOUDIGE NAVIGATIE ════ */
+    .fr-home-intro{text-align:center;margin:4px 0 18px;}
+    .fr-home-title{font-family:'Fredoka',sans-serif;font-size:30px;font-weight:700;color:var(--tx);}
+    .fr-home-sub{font-size:13px;color:var(--tx2);margin-top:3px;}
+    .fr-home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .fr-home-card{border:1.5px solid var(--surface3);border-radius:var(--radius);background:var(--surface2);color:var(--tx);padding:18px 12px;text-align:center;cursor:pointer;transition:all .18s;min-height:165px;}
+    .fr-home-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 5px 16px var(--glow);}
+    .fr-home-icon{font-size:38px;line-height:1;margin-bottom:10px;}
+    .fr-home-card-title{font-family:'Fredoka',sans-serif;font-size:19px;font-weight:700;margin-bottom:6px;}
+    .fr-home-card-text{font-size:11px;color:var(--tx2);line-height:1.45;}
+    .fr-back-btn{border:none;background:transparent;color:var(--tx2);font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;cursor:pointer;padding:3px 0 10px;}
+    .fr-back-btn:hover{color:var(--accent);}
+    .fr-page-title{font-family:'Fredoka',sans-serif;font-size:25px;font-weight:700;color:var(--tx);margin-bottom:3px;}
+    .fr-page-sub{font-size:12px;color:var(--tx2);margin-bottom:14px;}
+    .fr-exercise-list{display:flex;flex-direction:column;gap:8px;}
+    .fr-exercise-card{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);text-align:left;cursor:pointer;transition:all .16s;}
+    .fr-exercise-card:hover{border-color:var(--accent);background:rgba(124,111,255,.06);}
+    .fr-toets-inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    .fr-toets-item{background:var(--surface);border:1px solid var(--surface3);border-radius:var(--radius-sm);padding:10px;}
+    .fr-toets-item .t-quiz-meta{margin-bottom:6px;}
+    .fr-toets-item .t-input{width:100%;}
+    .fr-ww-empty{padding:22px 16px;text-align:center;color:var(--tx2);background:var(--surface2);border:1px dashed var(--border);border-radius:var(--radius-sm);margin-bottom:14px}.fr-ww-selected{margin-bottom:18px;border:1.5px solid rgba(124,111,255,.35);border-radius:var(--radius);overflow:hidden;background:var(--surface)}.fr-ww-selected-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;background:var(--surface2);border-bottom:1px solid var(--border)}.fr-ww-selected-title{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;color:var(--accent)}.fr-ww-selected-nl{font-size:15px;font-weight:700;color:var(--tx2);text-align:right}.fr-ww-selected-note{padding:9px 18px;font-size:12px;color:var(--tx2);border-bottom:1px solid var(--border)}
+.fr-toets-paper{max-width:900px;margin:14px auto;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px 32px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.fr-toets-paper-head{text-align:center;border-bottom:2px solid var(--tx);padding-bottom:16px;margin-bottom:16px}.fr-toets-paper-title{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;letter-spacing:.3px}.fr-toets-paper-sub{font-size:12px;color:var(--tx2);margin-top:4px}.fr-toets-student{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:12px 0 20px;font-size:13px}.fr-toets-line{border-bottom:1px solid var(--tx3);display:inline-block;min-width:150px;margin-left:6px;height:18px}.fr-toets-instructions{border:1px solid var(--border);padding:11px 13px;margin-bottom:18px;font-size:12px;background:var(--surface2)}.fr-toets-question{padding:12px 0 14px;border-bottom:1px solid var(--border)}.fr-toets-question:last-child{border-bottom:0}.fr-toets-qnum{font-weight:700;margin-right:8px}.fr-toets-prompt{font-weight:700;font-size:16px}.fr-toets-answer-line{margin-top:9px;border-bottom:1px solid var(--tx3);min-height:28px}.fr-toets-paper .t-input{border:0;border-bottom:1.5px solid var(--tx3);border-radius:0;background:transparent;padding:5px 2px;font-size:15px;box-shadow:none}.fr-toets-paper .t-input:focus{border-bottom-color:var(--accent);outline:none}.fr-toets-paper .fr-toets-result{margin-top:18px}.fr-toets-paper .fr-inv-res{border-top:2px solid var(--tx);border-radius:0;background:transparent;padding:16px 0}.fr-toets-paper .ak-mc-grid{margin-top:10px}.fr-toets-paper .fr-toets-item{border-bottom:1px solid var(--border);padding:12px 0}.fr-toets-paper .fr-toets-item:last-child{border-bottom:0}
+.fr-toets-item .t-feedback{font-size:11px;padding:7px 9px;margin-top:6px;}
+    @media(max-width:600px){.fr-toets-inv-grid{grid-template-columns:1fr;}}
+    .fr-exercise-icon{font-size:27px;flex:0 0 36px;text-align:center;}
+    .fr-exercise-info{flex:1;display:flex;flex-direction:column;gap:2px;}
+    .fr-exercise-info strong{font-family:'Fredoka',sans-serif;font-size:16px;}
+    .fr-exercise-info small{font-size:11px;color:var(--tx2);}
+    .fr-arrow{font-size:20px;color:var(--tx3);}
+    .fr-secondary-btn{width:100%;margin-top:12px;padding:9px;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx2);font-family:'Fredoka',sans-serif;font-weight:600;cursor:pointer;}
+    .fr-secondary-btn:hover{border-color:var(--accent);color:var(--accent);}
+    @media(max-width:600px){.fr-home-grid{grid-template-columns:1fr;}.fr-home-card{min-height:auto;display:flex;align-items:center;text-align:left;gap:12px;padding:14px;}.fr-home-icon{margin:0;font-size:30px;flex:0 0 38px;}.fr-home-card-title{margin-bottom:2px;}.fr-home-card-text{font-size:10px;}.fr-home-card:has(.fr-home-icon){text-align:left;}}
+
     /* ════ FRANS ════ */
     .fr-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;background:var(--surface2);border-radius:var(--radius-sm);padding:3px;border:1px solid rgba(255,255,255,0.03);}
     .fr-tab{flex:1;padding:8px 6px;border-radius:8px;border:none;background:transparent;color:var(--tx2);font-size:13px;font-weight:600;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;text-align:center;white-space:nowrap;}
@@ -576,6 +610,31 @@
     /* Frans: werkwoord-selector */
     .fr-ww-select{width:100%;font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;padding:10px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);outline:none;transition:border-color 0.18s;}
     .fr-ww-select:focus{border-color:var(--accent);}
+
+    /* ════ FRANS: INVULTABEL ════ */
+    .fr-inv-wrap{border:1px solid var(--surface3);border-radius:var(--radius-sm);overflow:hidden;background:var(--surface2);}
+    .fr-inv-tabel{width:100%;border-collapse:collapse;font-size:13px;}
+    .fr-inv-tabel th{padding:8px 10px;text-align:left;font-size:10px;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:0.9px;background:rgba(124,111,255,0.06);border-bottom:1px solid var(--surface3);}
+    .fr-inv-tabel td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle;}
+    .fr-inv-tabel tr:last-child td{border-bottom:none;}
+    .fr-inv-nr{width:26px;text-align:center;color:var(--tx3);font-size:11px;font-weight:800;}
+    .fr-inv-gegeven{font-weight:700;color:var(--tx);}
+    .fr-inv-input{width:100%;padding:8px 10px;border-radius:var(--radius-xs);border:1.5px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:14px;font-family:'Nunito',sans-serif;font-weight:600;outline:none;transition:border-color 0.15s,background 0.15s;}
+    .fr-inv-input:focus{border-color:var(--accent);}
+    .fr-inv-input::placeholder{color:var(--tx3);font-weight:400;}
+    .fr-inv-input.ok{border-color:var(--ok);background:rgba(6,214,160,0.12);color:var(--ok);}
+    .fr-inv-input.bijna{border-color:var(--accent3);background:rgba(255,209,102,0.14);}
+    .fr-inv-input.no{border-color:var(--no);background:rgba(255,107,157,0.1);color:var(--no);}
+    .fr-inv-status{width:26px;text-align:center;font-size:15px;}
+    .fr-inv-juist{font-size:11px;font-weight:800;color:var(--ok);margin-top:3px;}
+    .fr-inv-btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+    .fr-inv-btn{flex:1 1 110px;padding:11px 8px;border-radius:var(--radius-sm);border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);font-family:'Fredoka',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+    .fr-inv-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .fr-inv-btn.prim{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 3px 12px var(--glow);}
+    .fr-inv-btn.prim:hover{color:#fff;}
+    .fr-inv-res{margin-top:12px;border-radius:var(--radius-sm);padding:12px 14px;text-align:center;background:var(--surface2);border:1.5px solid var(--surface3);animation:slideUp 0.2s ease;}
+    .fr-inv-res-score{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:var(--accent);}
+    .fr-inv-res-sub{font-size:12px;color:var(--tx2);margin-top:2px;font-weight:600;}
   </style>
 </head>
 <body data-hero="vuur" class="light">
@@ -3852,57 +3911,126 @@ let frWwTab='lijst', frWwQueue=[];
 
 function initFrans(){
   const panel=document.getElementById('frans-panel');if(!panel)return;
-  panel.innerHTML=`
-    <div class="fr-tabs">
-      <button class="fr-tab on"  id="frt-school"      onclick="frSwitch('school')">📘 School</button>
-      <button class="fr-tab"     id="frt-woordenschat" onclick="frSwitch('woordenschat')">📋 Woordenschat</button>
-      <button class="fr-tab"     id="frt-werkwoorden"  onclick="frSwitch('werkwoorden')">🔤 Werkwoorden</button>
-      <button class="fr-tab"     id="frt-quiz"         onclick="frSwitch('quiz')">🎯 Quiz</button>
-    </div>
-    <div id="fr-content"></div>`;
+  panel.innerHTML='<div id="fr-content"></div>';
+  frTab='home';
   frRender();
 }
 
 function frSwitch(t){
   frTab=t; frThema=0;
-  ['school','woordenschat','werkwoorden','quiz'].forEach(k=>{
-    const b=document.getElementById('frt-'+k);
-    if(b) b.classList.toggle('on',k===t);
-  });
   frScore={good:0,bad:0,streak:0}; frTotal=0; frQueue=[];
+  frInvRows=[]; frInvChecked=false;
   frRender();
 }
 
 function frRender(){
-  if(frTab==='school')        frRenderSchool();
-  else if(frTab==='woordenschat') frRenderWoordenschat();
-  else if(frTab==='werkwoorden')  frRenderWerkwoorden();
-  else                            frRenderQuiz();
+  if(frTab==='home')              frRenderHome();
+  else if(frTab==='school')       frRenderSchool();
+  else if(frTab==='werkwoorden')  frRenderWerkwoordenSimple();
+  else if(frTab==='oefeningen')   frRenderOefeningen();
+  else if(frTab==='werkwoord-oefenen') frRenderWwQuizStandalone();
+  else if(frTab==='werkwoord-invullen') frRenderWwInvulStandalone();
+    else if(frTab==='werkwoord-kiezen') frRenderWwKiezen();
+  else if(frTab==='quiz')         frRenderQuiz();
+    else if(frTab==='toets')        frRenderToets();
+  else if(frTab==='invullen')     frRenderInvullen();
+}
+
+function frRenderWwQuizStandalone(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frSwitch('oefeningen')">← Oefeningen</button>
+    <div class="fr-page-title">🔤 Vervoegingen</div>
+    <div id="fr-ww-content"></div>`;
+  frWwTab='quiz';
+  frRenderWwQuiz();
+}
+
+function frRenderWwInvulStandalone(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">✍️ Werkwoorden</div>
+    <p class="fr-page-sub">Kies een werkwoord en vul de vervoegingen in voor je, tu, il/elle, nous, vous en ils/elles.</p>
+    <div id="fr-ww-content"></div>`;
+  frWwInvVerbs=[];
+  frRenderWwInvul();
+}
+
+function frBackHome(){
+  if(_frSqTimer){clearInterval(_frSqTimer);_frSqTimer=null;}
+  frTab='home';
+  frRender();
+}
+
+function frRenderHome(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <div class="fr-home-intro">
+      <div class="fr-home-title">🇫🇷 Frans</div>
+      <div class="fr-home-sub">Wat wil je vandaag oefenen?</div>
+    </div>
+
+    <div class="fr-home-grid">
+      <button class="fr-home-card" onclick="frSwitch('school')">
+        <div class="fr-home-icon">📚</div>
+        <div class="fr-home-card-title">Thema's</div>
+        <div class="fr-home-card-text">Bekijk alle woorden per Contact-thema.</div>
+      </button>
+
+      <button class="fr-home-card" onclick="frSwitch('werkwoorden')">
+        <div class="fr-home-icon">🔤</div>
+        <div class="fr-home-card-title">Werkwoorden</div>
+        <div class="fr-home-card-text">Bekijk de werkwoorden die je moet kennen.</div>
+      </button>
+
+      <button class="fr-home-card" onclick="frSwitch('oefeningen')">
+        <div class="fr-home-icon">🎯</div>
+        <div class="fr-home-card-title">Oefeningen</div>
+        <div class="fr-home-card-text">Kies een invuloefening, vervoegingen of quiz.</div>
+      </button>
+    </div>`;
+}
+
+function frRenderOefeningen(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">🎯 Oefeningen</div>
+    <div class="fr-exercise-list">
+
+      <button class="fr-exercise-card" onclick="frSwitch('invullen')">
+        <span class="fr-exercise-icon">✍️</span>
+        <span class="fr-exercise-info">
+          <strong>Invuloefening</strong>
+          <small>Vertaal de woorden en vul het antwoord in.</small>
+        </span>
+        <span class="fr-arrow">→</span>
+      </button>
+
+      <button class="fr-exercise-card" onclick="frSwitch('werkwoord-invullen')">
+        <span class="fr-exercise-icon">✍️</span>
+        <span class="fr-exercise-info">
+          <strong>Werkwoorden</strong>
+          <small>Vul de vervoeging in: je, tu, il/elle, nous, vous, ils/elles.</small>
+        </span>
+        <span class="fr-arrow">→</span>
+      </button>
+
+      <button class="fr-exercise-card" onclick="frSwitch('toets')">
+        <span class="fr-exercise-icon">📝</span>
+        <span class="fr-exercise-info">
+          <strong>Kleine toets</strong>
+          <small>Kies één of meerdere Contact-thema's en maak een korte toets.</small>
+        </span>
+        <span class="fr-arrow">→</span>
+      </button>
+    </div>`;
 }
 
 // ── Uitspraak ──
-let frAudio=null;
-function frSpreek(tekst){
-  let t=tekst.trim().replace(/[!?.…]+$/,'').replace(/\//g,' ').toLowerCase();
-  if(frAudio){frAudio.pause();frAudio.currentTime=0;}
-  const url=`https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=fr&client=gtx&q=${encodeURIComponent(t)}&ttsspeed=0.8`;
-  frAudio=new Audio(url);
-  frAudio.play().catch(()=>{
-    if(!window.speechSynthesis)return;
-    window.speechSynthesis.cancel();
-    setTimeout(()=>{
-      const u=new SpeechSynthesisUtterance(t);
-      u.lang='fr-FR';u.rate=0.82;
-      const fr=window.speechSynthesis.getVoices().find(v=>v.lang==='fr-FR');
-      if(fr)u.voice=fr;
-      window.speechSynthesis.speak(u);
-    },80);
-  });
-}
-function frSpreekKnop(tekst){
-  const t=tekst.replace(/'/g,"&#39;");
-  return `<button onclick="frSpreek('${t}')" title="Uitspreken" style="background:none;border:none;cursor:pointer;font-size:16px;padding:2px 4px;opacity:0.7;transition:opacity 0.15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">🔊</button>`;
-}
+// Audio is bewust uitgeschakeld in de Franse oefeningen.
+function frSpreekKnop(tekst){ return ''; }
 
 // ── SCHOOL (Contact 1, 2, 3…) ──
 let frSchoolTab='lessen', frSchoolQuizMode='fr→nl', frSchoolQueue=[], frSchoolCurrent=null, frSchoolRevealed=false, frSchoolThema=0, frSchoolLessenThema=0;
@@ -3911,68 +4039,36 @@ function frRenderSchool(){
   const el=document.getElementById('fr-content');if(!el)return;
   const schoolThemas=[...new Set(FR_WOORDEN.filter(w=>w[4]==='school').map(w=>w[2]))].sort((a,b)=>a-b);
   el.innerHTML=`
-    <div style="display:flex;gap:6px;margin-bottom:14px;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;">
-      <button class="taal-subtab${frSchoolTab==='lessen'?' on':''}" onclick="frSchoolTab='lessen';frRenderSchool()">📖 Lessen</button>
-      <button class="taal-subtab${frSchoolTab==='quiz'?' on':''}" onclick="frSchoolTab='quiz';frSchoolQueue=[];frRenderSchool()">🎯 Quiz</button>
-    </div>
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">📚 Thema's</div>
+    <p class="fr-page-sub">Kies een Contact-thema om alle woorden te bekijken.</p>
     <div id="fr-school-inner"></div>`;
-  if(frSchoolTab==='lessen') frRenderSchoolLessen(schoolThemas);
-  else frRenderSchoolQuizSetup(schoolThemas);
+  frSchoolLessenThema=0;
+  frRenderSchoolLessen(schoolThemas);
 }
 
 function frRenderSchoolLessen(schoolThemas){
   const el=document.getElementById('fr-school-inner');if(!el)return;
-  if(!schoolThemas.includes(frSchoolLessenThema)) frSchoolLessenThema=0;
-  let html=`<input class="t-search" type="text" id="fr-school-zoek" placeholder="🔍 Zoek in schoollessen..." autocomplete="off" style="margin-bottom:10px;width:100%;"/>
-    <div id="fr-school-res" style="display:none"></div>
-    <div id="fr-school-inhoud">`;
   if(!schoolThemas.length){
-    html+=`<p style="text-align:center;color:var(--tx3);padding:2rem;">Nog geen schoollessen toegevoegd.</p>`;
-  } else {
-    html+=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
-      <button class="filter-btn${frSchoolLessenThema===0?' on':''}" onclick="frSchoolLessenThema=0;frRenderSchoolLessen(${JSON.stringify(schoolThemas)})">Alle lessen</button>
-      ${schoolThemas.map(t=>`<button class="filter-btn${frSchoolLessenThema===t?' on':''}" onclick="frSchoolLessenThema=${t};frRenderSchoolLessen(${JSON.stringify(schoolThemas)})">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
-    </div>`;
-    const teTonen=frSchoolLessenThema?schoolThemas.filter(t=>t===frSchoolLessenThema):schoolThemas;
-    teTonen.forEach(t=>{
-      const items=FR_WOORDEN.filter(w=>w[2]===t&&w[4]==='school');
-      html+=`<div style="margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <span style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--accent);">${FR_THEMA_NAMEN[t]||'Contact '+t}</span>
-          <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;">${items.length} woorden</span>
-        </div>
-        <div class="fr-blok" style="border:1.5px solid rgba(124,111,255,0.35);border-radius:var(--radius-sm);overflow:hidden;">
-          <table class="fr-tabel">
-            <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
-            <tbody>${items.map(w=>`<tr>
-              <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
-              <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
-            </tr>`).join('')}</tbody>
-          </table>
-        </div>
-      </div>`;
-    });
+    el.innerHTML='<p style="text-align:center;color:var(--tx3);padding:2rem;">Nog geen schoollessen toegevoegd.</p>';
+    return;
   }
-  html+=`</div>`;
-  el.innerHTML=html;
-  const inp=document.getElementById('fr-school-zoek');
-  if(inp) inp.addEventListener('input',function(){
-    const q=this.value.toLowerCase();
-    const res=document.getElementById('fr-school-res');
-    const inhoud=document.getElementById('fr-school-inhoud');
-    if(!q){res.style.display='none';inhoud.style.display='';return;}
-    inhoud.style.display='none';res.style.display='';
-    const hits=FR_WOORDEN.filter(w=>w[4]==='school'&&(w[0].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));
-    if(!hits.length){res.innerHTML='<p style="text-align:center;color:var(--tx3);padding:1rem;">Geen resultaten.</p>';return;}
-    res.innerHTML=`<div class="fr-blok"><table class="fr-tabel">
-      <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th>Les</th><th style="width:36px;"></th></tr></thead>
-      <tbody>${hits.map(w=>`<tr>
-        <td><strong>${w[0]}</strong></td><td>${w[1]}</td>
-        <td style="font-size:11px;color:var(--tx2);">${FR_THEMA_NAMEN[w[2]]||'Contact '+w[2]}</td>
-        <td style="text-align:center;">${frSpreekKnop(w[0])}</td>
-      </tr>`).join('')}</tbody>
-    </table></div><p class="t-hint">${hits.length} resultaten</p>`;
+  let html='';
+  schoolThemas.forEach(t=>{
+    const items=FR_WOORDEN.filter(w=>w[2]===t&&w[4]==='school');
+    html+=`<div style="margin-bottom:22px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--accent);">${FR_THEMA_NAMEN[t]||'Contact '+t}</span>
+      </div>
+      <div class="fr-blok" style="border:1.5px solid rgba(124,111,255,0.35);border-radius:var(--radius-sm);overflow:hidden;">
+        <table class="fr-tabel">
+          <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th></tr></thead>
+          <tbody>${items.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`;
   });
+  el.innerHTML=html;
 }
 
 function frRenderSchoolQuizSetup(schoolThemas){
@@ -4096,59 +4192,83 @@ function frSchoolReveal(){
   if(hint)hint.style.display='none';
 }
 
-// ── WOORDENSCHAT (extra thema's, geen school) ──
-function frRenderWoordenschat(){
-  const el=document.getElementById('fr-content');if(!el)return;
-  const extraThemas=[...new Set(FR_WOORDEN.filter(w=>w[4]!=='school').map(w=>w[2]))].sort((a,b)=>a-b);
-  const themaBar=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;">
-    <span class="filter-lbl">Thema:</span>
-    <button class="filter-btn${frThema===0?' on':''}" onclick="frThema=0;frRenderWsLijst()">Alle</button>
-    ${extraThemas.map(t=>`<button class="filter-btn${frThema===t?' on':''}" onclick="frThema=${t};frRenderWsLijst()">${FR_THEMA_NAMEN[t]||'T'+t}</button>`).join('')}
-  </div>`;
-  el.innerHTML=themaBar+`
-    <input class="t-search" type="text" id="fr-ws-zoek" placeholder="🔍 Zoek een woord..." autocomplete="off" style="margin-bottom:10px;width:100%;"/>
-    <div id="fr-ws-lijst"></div>`;
-  frRenderWsLijst();
-  const inp=document.getElementById('fr-ws-zoek');
-  if(inp) inp.addEventListener('input',function(){ frRenderWsLijst(this.value); });
+function frSchoolWoorden(){
+  return FR_WOORDEN.filter(w=>w[4]==='school');
 }
-
-function frRenderWsLijst(zoek){
-  const el=document.getElementById('fr-ws-lijst');if(!el)return;
-  const q=(zoek||'').toLowerCase();
-  let pool=FR_WOORDEN.filter(w=>w[4]!=='school');
-  if(frThema) pool=pool.filter(w=>w[2]===frThema);
-  pool=pool.filter(w=>!q||w[0].toLowerCase().includes(q)||w[1].toLowerCase().includes(q));
-  const themas=[...new Set(pool.map(w=>w[2]))].sort((a,b)=>a-b);
-  el.innerHTML=(themas.length?themas.map(t=>{
-    const items=pool.filter(w=>w[2]===t);
-    return `<div style="margin-bottom:14px;">
-      <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">${FR_THEMA_NAMEN[t]||'Thema '+t}</div>
-      <div class="fr-tabel-wrap" style="border:1px solid var(--surface3);border-radius:var(--radius-sm);overflow:hidden;">
-        <table class="fr-tabel">
-          <thead><tr><th>🇫🇷 Frans</th><th>🇧🇪 Nederlands</th><th style="width:36px;"></th></tr></thead>
-          <tbody>${items.map(w=>`<tr><td><strong>${w[0]}</strong></td><td>${w[1]}</td><td style="text-align:center;">${frSpreekKnop(w[0])}</td></tr>`).join('')}</tbody>
-        </table>
-      </div>
-    </div>`;
-  }).join(''):'<p style="text-align:center;color:var(--tx3);padding:1rem;">Geen resultaten.</p>')+`<p class="t-hint">${pool.length} woorden</p>`;
+function frSchoolThemas(){
+  return [...new Set(frSchoolWoorden().map(w=>w[2]))].sort((a,b)=>a-b);
 }
-
 function frGetPool(){
-  // Quiz gebruikt school + extra; woordenschat heeft eigen pool
-  return frThema===0 ? FR_WOORDEN : FR_WOORDEN.filter(w=>w[2]===frThema);
+  const pool=frSchoolWoorden();
+  return frThema===0 ? pool : pool.filter(w=>w[2]===frThema);
 }
 
 // ── WERKWOORDEN ──
+let frWwSimpleKeuze='';
+
+function frRenderWerkwoordenSimple(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const gekozen=frWwSimpleKeuze!=='' ? FR_WERKWOORDEN[parseInt(frWwSimpleKeuze,10)] : null;
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">🔤 Werkwoorden</div>
+    <p class="fr-page-sub">Kies eerst één werkwoord. Daarna krijg je de vervoeging overzichtelijk te zien.</p>
+
+    <div class="fr-blok" style="padding:14px;margin-bottom:14px;">
+      <label style="font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Kies een werkwoord</label>
+      <select class="fr-ww-select" id="fr-simple-ww-select" onchange="frWwSimpleKies(this.value)">
+        <option value="">Kies een werkwoord…</option>
+        ${FR_WERKWOORDEN.map((w,i)=>`<option value="${i}"${frWwSimpleKeuze===String(i)?' selected':''}>${frInvEsc(w[0])} — ${frInvEsc(w[7])}</option>`).join('')}
+      </select>
+    </div>
+
+    ${gekozen ? `
+      <div class="fr-ww-selected" style="margin-bottom:16px;">
+        <div class="fr-ww-selected-head" style="align-items:flex-start;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">Gekozen werkwoord</div>
+            <div class="fr-ww-selected-title" style="font-size:32px;">${frInvEsc(gekozen[0])}</div>
+          </div>
+          <div class="fr-ww-selected-nl" style="font-size:17px;padding-top:17px;">${frInvEsc(gekozen[7])}</div>
+        </div>
+        <div style="padding:12px 18px 4px;font-size:12px;color:var(--tx2);">Vervoeging in de tegenwoordige tijd</div>
+        <div class="fr-inv-wrap" style="margin:0 14px 14px;">
+          <table class="fr-inv-tabel">
+            <thead><tr><th style="width:28%;">Persoon</th><th>Franse vervoeging</th><th style="width:28%;">Nederlands</th></tr></thead>
+            <tbody>
+              ${FR_PROFIELEN.map((pro,pi)=>`<tr>
+                <td class="fr-inv-gegeven"><strong>${pro}</strong><div style="font-size:10px;color:var(--tx3);font-weight:600;">${FR_PROFIEL_NL[pi]}</div></td>
+                <td style="font-size:16px;font-weight:700;">${frInvEsc(gekozen[pi+1])}</td>
+                <td style="color:var(--tx2);font-size:13px;">${frInvEsc(FR_PROFIEL_NL[pi])}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 16px;">
+          <button class="fr-inv-btn prim" onclick="frWwInvKeuze='${frWwSimpleKeuze}';frWwInvVerbs=[parseInt('${frWwSimpleKeuze}',10)];frSwitch('werkwoord-invullen')">✍️ Oefenen met invullen</button>
+        </div>
+      </div>` : `
+      <div class="fr-ww-empty">👆 Kies hierboven een werkwoord om de vervoegingen te bekijken.</div>`}
+
+    <div class="fr-secondary-btn" style="margin-top:6px;cursor:pointer;" onclick="frSwitch('oefeningen')">← Naar oefeningen</div>`;
+}
+
+function frWwSimpleKies(v){
+  frWwSimpleKeuze=String(v||'');
+  frRenderWerkwoordenSimple();
+}
+
 function frRenderWerkwoorden(){
   const el=document.getElementById('fr-content');if(!el)return;
   el.innerHTML=`
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
       <button class="filter-btn${frWwTab==='lijst'?' on':''}" onclick="frWwTab='lijst';frRenderWerkwoorden()">📋 Lijst</button>
       <button class="filter-btn${frWwTab==='quiz'?' on':''}" onclick="frWwTab='quiz';frWwQueue=[];frRenderWerkwoorden()">🎯 Oefenen</button>
+      <button class="filter-btn${frWwTab==='invul'?' on':''}" onclick="frWwTab='invul';frRenderWerkwoorden()">✍️ Invultabel</button>
     </div>
     <div id="fr-ww-content"></div>`;
   if(frWwTab==='lijst') frRenderWwLijst();
+  else if(frWwTab==='invul') frRenderWwInvul();
   else frRenderWwQuiz();
 }
 
@@ -4236,9 +4356,563 @@ function frCheckWw(correct){
   if(ok)snd('ok');else snd('no');
 }
 
+// ── WERKWOORDEN: INVULTABEL ──
+let frWwInvKeuze='', frWwInvVerbs=[];
+
+function frWwInvNieuw(){
+  if(!frWwInvKeuze){
+    frWwInvVerbs=[];
+  } else {
+    frWwInvVerbs=[parseInt(frWwInvKeuze,10)];
+  }
+  frRenderWwInvul();
+}
+
+function frWwInvKies(v){
+  frWwInvKeuze=String(v||'');
+  frWwInvVerbs=frWwInvKeuze ? [parseInt(frWwInvKeuze,10)] : [];
+  frRenderWwInvul();
+}
+
+function frRenderWwInvul(){
+  const el=document.getElementById('fr-ww-content');if(!el)return;
+  el.innerHTML=`
+    <div style="margin-bottom:12px;">
+      <label style="font-size:11px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Kies het werkwoord</label>
+      <select class="fr-ww-select" id="fr-wwinv-select" onchange="frWwInvKies(this.value)">
+        <option value=""${!frWwInvKeuze?' selected':''}>Kies een werkwoord…</option>
+        ${FR_WERKWOORDEN.map((w,i)=>`<option value="${i}"${frWwInvKeuze===String(i)?' selected':''}>${frInvEsc(w[0])} (${frInvEsc(w[7])})</option>`).join('')}
+      </select>
+    </div>
+    ${!frWwInvVerbs.length?`<div class="fr-ww-empty">Kies hierboven eerst het werkwoord dat je wilt oefenen.</div>`:''}
+    ${frWwInvVerbs.map(vi=>{
+      const w=FR_WERKWOORDEN[vi];
+      return `<div class="fr-ww-selected">
+        <div class="fr-ww-selected-head">
+          <div class="fr-ww-selected-title">${frInvEsc(w[0])}</div>
+          <div class="fr-ww-selected-nl">${frInvEsc(w[7])}</div>
+        </div>
+        <div class="fr-ww-selected-note">Vervoeg <strong>${frInvEsc(w[0])}</strong> in alle personen.</div>
+        <div class="fr-inv-wrap">
+          <table class="fr-inv-tabel">
+            <thead><tr><th style="width:34%;">Persoon</th><th>🇫🇷 Vervoeging</th><th class="fr-inv-status"></th></tr></thead>
+            <tbody>
+              ${FR_PROFIELEN.map((pro,pi)=>`<tr>
+                <td class="fr-inv-gegeven">${pro}<div style="font-size:10px;color:var(--tx3);font-weight:600;">${FR_PROFIEL_NL[pi]}</div></td>
+                <td>
+                  <input class="fr-inv-input" id="fr-wwinv-i${vi}-${pi}" autocomplete="off" autocorrect="off"
+                    autocapitalize="off" spellcheck="false" placeholder="…" />
+                  <div id="fr-wwinv-j${vi}-${pi}"></div>
+                </td>
+                <td class="fr-inv-status" id="fr-wwinv-s${vi}-${pi}"></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>`;
+    }).join('')}
+    <div class="fr-inv-btns">
+      <button class="fr-inv-btn prim" onclick="frWwInvCheck()">✅ Controleer</button>
+      <button class="fr-inv-btn" onclick="frWwInvToon()">👁️ Antwoorden</button>
+      <button class="fr-inv-btn" onclick="frWwInvWis()">🧹 Wissen</button>
+      <button class="fr-inv-btn" onclick="frWwInvNieuw()">🔄 Nieuwe lijst</button>
+      <button class="fr-inv-btn" onclick="frWwInvPrint()">🖨️ Print blanco</button>
+    </div>
+    <p class="t-hint">Je mag het voornaamwoord meetypen ("je suis") of alleen de vervoeging ("suis") · Enter = volgende vakje</p>
+    <div id="fr-wwinv-res"></div>`;
+
+  // Enter-navigatie over alle vakjes heen
+  const alle=[];
+  frWwInvVerbs.forEach(vi=>FR_PROFIELEN.forEach((p,pi)=>alle.push('fr-wwinv-i'+vi+'-'+pi)));
+  alle.forEach((id,n)=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    inp.addEventListener('keydown',e=>{
+      if(e.key!=='Enter')return;
+      e.preventDefault();
+      const volg=document.getElementById(alle[n+1]);
+      if(volg) volg.focus(); else frWwInvCheck();
+    });
+    inp.addEventListener('input',()=>{
+      inp.classList.remove('ok','bijna','no');
+      const s=document.getElementById(id.replace('fr-wwinv-i','fr-wwinv-s'));if(s)s.textContent='';
+      const j=document.getElementById(id.replace('fr-wwinv-i','fr-wwinv-j'));if(j)j.innerHTML='';
+    });
+  });
+  const eerste=document.getElementById(alle[0]);
+  if(eerste) eerste.focus({preventScroll:true});
+}
+
+// Voornaamwoord vooraan mag weg ("je suis" = "suis")
+function frWwInvKaal(tekst){
+  let t=frInvNorm(tekst);
+  t=t.replace(/^(je |j'|tu |il |elle |on |nous |vous |ils |elles )/,'').trim();
+  return t;
+}
+function frWwInvBeoordeel(gegeven,correct){
+  if(!frInvNorm(gegeven)) return 'leeg';
+  const kandidaten=[frInvNorm(gegeven),frWwInvKaal(gegeven)];
+  const juist=[frInvNorm(correct),frWwInvKaal(correct)];
+  if(kandidaten.some(k=>juist.includes(k))) return 'ok';
+  if(kandidaten.some(k=>juist.some(j=>frInvStrip(k)===frInvStrip(j)))) return 'bijna';
+  return 'no';
+}
+
+function frWwInvCheck(){
+  let goed=0,bijna=0,fout=0,tot=0;
+  frWwInvVerbs.forEach(vi=>{
+    const w=FR_WERKWOORDEN[vi];
+    FR_PROFIELEN.forEach((pro,pi)=>{
+      const inp=document.getElementById('fr-wwinv-i'+vi+'-'+pi);if(!inp)return;
+      const st=document.getElementById('fr-wwinv-s'+vi+'-'+pi);
+      const ju=document.getElementById('fr-wwinv-j'+vi+'-'+pi);
+      const correct=w[pi+1];
+      const res=frWwInvBeoordeel(inp.value,correct);
+      tot++;
+      inp.classList.remove('ok','bijna','no');
+      if(res==='ok'){
+        goed++; inp.classList.add('ok');
+        if(st)st.textContent='✓'; if(ju)ju.innerHTML='';
+      } else if(res==='bijna'){
+        bijna++; inp.classList.add('bijna');
+        if(st)st.textContent='≈';
+        if(ju)ju.innerHTML=`<div class="fr-inv-juist" style="color:var(--accent3);">Let op de accenten: ${frInvEsc(correct)}</div>`;
+      } else {
+        fout++; inp.classList.add('no');
+        if(st)st.textContent='✗';
+        if(ju)ju.innerHTML=`<div class="fr-inv-juist">${frInvEsc(correct)}</div>`;
+        addFout('frans',`${w[0]} — ${pro}`,(inp.value.trim()||'(leeg)'),correct,'Werkwoorden');
+      }
+    });
+  });
+  const pct=tot?Math.round(goed/tot*100):0;
+  frScore.good+=goed; frScore.bad+=fout+bijna;
+  trackOefening('frans',goed,fout+bijna);
+  const res=document.getElementById('fr-wwinv-res');
+  if(res) res.innerHTML=`<div class="fr-inv-res">
+    <div style="font-size:2rem;margin-bottom:4px;">${pct>=90?'🏆':pct>=70?'👏':pct>=50?'💪':'📚'}</div>
+    <div class="fr-inv-res-score">${goed} / ${tot} · ${pct}%</div>
+    <div class="fr-inv-res-sub">${goed} juist${bijna?` · ${bijna} bijna (accent)`:''}${fout?` · ${fout} fout`:''}</div>
+  </div>`;
+  if(fout+bijna===0) snd('ok'); else snd('no');
+}
+
+function frWwInvToon(){
+  frWwInvVerbs.forEach(vi=>{
+    const w=FR_WERKWOORDEN[vi];
+    FR_PROFIELEN.forEach((pro,pi)=>{
+      const inp=document.getElementById('fr-wwinv-i'+vi+'-'+pi);if(!inp)return;
+      if(!inp.value.trim()){
+        inp.value=w[pi+1];
+        inp.classList.remove('ok','no'); inp.classList.add('bijna');
+        const st=document.getElementById('fr-wwinv-s'+vi+'-'+pi); if(st)st.textContent='👁️';
+      }
+    });
+  });
+}
+
+function frWwInvWis(){
+  frWwInvVerbs.forEach(vi=>{
+    FR_PROFIELEN.forEach((pro,pi)=>{
+      const inp=document.getElementById('fr-wwinv-i'+vi+'-'+pi);if(!inp)return;
+      inp.value=''; inp.classList.remove('ok','bijna','no');
+      const st=document.getElementById('fr-wwinv-s'+vi+'-'+pi); if(st)st.textContent='';
+      const ju=document.getElementById('fr-wwinv-j'+vi+'-'+pi); if(ju)ju.innerHTML='';
+    });
+  });
+  const res=document.getElementById('fr-wwinv-res'); if(res)res.innerHTML='';
+}
+
+function frWwInvPrint(){
+  if(!frWwInvVerbs.length)return;
+  const blokken=frWwInvVerbs.map(vi=>{
+    const w=FR_WERKWOORDEN[vi];
+    return `<h2>${frInvEsc(w[0])} <span class="nl">= ${frInvEsc(w[7])}</span></h2>
+      <table><thead><tr><th style="width:34%;">Persoon</th><th>Vervoeging</th></tr></thead><tbody>
+      ${FR_PROFIELEN.map((pro,pi)=>`<tr><td>${pro} <span class="nl">(${FR_PROFIEL_NL[pi]})</span></td><td class="leeg"></td></tr>`).join('')}
+      </tbody></table>`;
+  }).join('');
+  const html=`<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>Frans — werkwoorden invullen</title>
+    <style>
+      body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:26px;}
+      h1{font-size:18px;margin:0 0 2px;}
+      h2{font-size:15px;margin:18px 0 5px;}
+      .nl{font-size:11px;color:#555;font-weight:normal;}
+      .naam{font-size:12px;margin-bottom:10px;}
+      table{width:100%;border-collapse:collapse;font-size:14px;page-break-inside:avoid;}
+      th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.6px;border-bottom:2px solid #111;padding:5px 7px;}
+      td{border-bottom:1px solid #bbb;padding:9px 7px;}
+      td.leeg{width:55%;}
+      @media print{body{margin:12mm;} button{display:none;}}
+    </style></head><body>
+    <h1>Frans — werkwoorden vervoegen</h1>
+    <div class="naam">Naam: ______________________________    Datum: ____________</div>
+    ${blokken}
+    <button onclick="window.print()" style="margin-top:18px;padding:9px 16px;font-size:14px;cursor:pointer;">🖨️ Afdrukken</button>
+    </body></html>`;
+  const win=window.open('','_blank');
+  if(!win){alert('Sta pop-ups toe om de blanco tabel te kunnen afdrukken.');return;}
+  win.document.write(html); win.document.close();
+}
+
+// ── INVULLEN (blanco tabel: NL zien, Frans aanvullen) ──
+let frInvThema=0, frInvRichting='nl→fr', frInvAantal=0, frInvRows=[], frInvChecked=false;
+
+function frInvNorm(s){
+  return (s||'').toLowerCase().trim().replace(/\s+/g,' ').replace(/[.!?;:,]+$/,'').replace(/[’`´]/g,"'");
+}
+function frInvStrip(s){
+  return frInvNorm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/œ/g,'oe').replace(/æ/g,'ae').replace(/ç/g,'c');
+}
+function frInvVarianten(s){
+  const heel=frInvNorm(s);
+  const delen=String(s).split('/').map(x=>frInvNorm(x)).filter(Boolean);
+  return [...new Set([heel,...delen])];
+}
+function frInvEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function frInvSet(wat,val){
+  if(wat==='thema') frInvThema=val;
+  else if(wat==='richting') frInvRichting=val;
+  else if(wat==='aantal') frInvAantal=val;
+  frInvNieuw(true);
+}
+
+function frRenderInvullen(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const themas=frSchoolThemas();
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">✍️ Invuloefening</div>
+    <p class="fr-page-sub">Kies een Contact-thema en oefen de volledige lijst.</p>
+    <p class="sec-lbl">Contact / thema</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+      <button class="filter-btn${frInvThema===0?' on':''}" onclick="frInvSet('thema',0)">🔀 Alles</button>
+      ${themas.map(t=>`<button class="filter-btn${frInvThema===t?' on':''}" onclick="frInvSet('thema',${t})">${frInvEsc(FR_THEMA_NAMEN[t]||'Thema '+t)}</button>`).join('')}
+    </div>
+    <p class="sec-lbl">Richting</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+      <button class="filter-btn${frInvRichting==='nl→fr'?' on':''}" onclick="frInvSet('richting','nl→fr')">🇧🇪 → 🇫🇷 Frans invullen</button>
+      <button class="filter-btn${frInvRichting==='fr→nl'?' on':''}" onclick="frInvSet('richting','fr→nl')">🇫🇷 → 🇧🇪 Nederlands invullen</button>
+    </div>
+    <div id="fr-inv-inner"></div>`;
+  if(!frInvRows.length) frInvNieuw();
+  else frInvTabel();
+}
+
+function frInvNieuw(behoudScroll){
+  let pool=frSchoolWoorden();
+  if(frInvThema) pool=pool.filter(w=>w[2]===frInvThema);
+  pool=pool.sort(()=>Math.random()-0.5);
+  if(frInvAantal>0) pool=pool.slice(0,frInvAantal);
+  frInvRows=pool.map(w=>({
+    vraag:   frInvRichting==='nl→fr'?w[1]:w[0],
+    antwoord:frInvRichting==='nl→fr'?w[0]:w[1],
+    fr:w[0], nl:w[1], thema:w[2]
+  }));
+  frInvChecked=false;
+  frInvTabel();
+  if(!behoudScroll){/* niks */}
+}
+
+function frInvTabel(){
+  const el=document.getElementById('fr-inv-inner');if(!el)return;
+  if(!frInvRows.length){
+    el.innerHTML='<p style="text-align:center;color:var(--tx3);padding:1.4rem;">Geen woorden in deze selectie.</p>';
+    return;
+  }
+  const naarFr=frInvRichting==='nl→fr';
+  el.innerHTML=`
+    <div class="fr-inv-wrap">
+      <table class="fr-inv-tabel">
+        <thead><tr>
+          <th class="fr-inv-nr">#</th>
+          <th>${naarFr?'🇧🇪 Nederlands':'🇫🇷 Frans'}</th>
+          <th>${naarFr?'🇫🇷 Vul het Frans in':'🇧🇪 Vul het Nederlands in'}</th>
+          <th class="fr-inv-status"></th>
+        </tr></thead>
+        <tbody>
+          ${frInvRows.map((r,i)=>`<tr>
+            <td class="fr-inv-nr">${i+1}</td>
+            <td class="fr-inv-gegeven">${frInvEsc(r.vraag)}${naarFr?'':' '+frSpreekKnop(r.fr)}</td>
+            <td>
+              <input class="fr-inv-input" id="fr-inv-i${i}" data-idx="${i}" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false" placeholder="…" />
+              <div id="fr-inv-j${i}"></div>
+            </td>
+            <td class="fr-inv-status" id="fr-inv-s${i}"></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="fr-inv-btns">
+      <button class="fr-inv-btn prim" onclick="frInvCheck()">✅ Controleer</button>
+      <button class="fr-inv-btn" onclick="frInvToon()">👁️ Antwoorden</button>
+      <button class="fr-inv-btn" onclick="frInvWis()">🧹 Wissen</button>
+      <button class="fr-inv-btn" onclick="frInvNieuw()">🔄 Nieuwe lijst</button>
+      <button class="fr-inv-btn" onclick="frInvPrint()">🖨️ Print blanco</button>
+    </div>
+    <p class="t-hint">Enter = naar het volgende vakje</p>
+    <div id="fr-inv-res"></div>`;
+
+  frInvRows.forEach((r,i)=>{
+    const inp=document.getElementById('fr-inv-i'+i);
+    if(!inp)return;
+    inp.addEventListener('keydown',e=>{
+      if(e.key!=='Enter')return;
+      e.preventDefault();
+      const volgende=document.getElementById('fr-inv-i'+(i+1));
+      if(volgende) volgende.focus();
+      else frInvCheck();
+    });
+    inp.addEventListener('input',()=>{
+      inp.classList.remove('ok','bijna','no');
+      const s=document.getElementById('fr-inv-s'+i); if(s)s.textContent='';
+      const j=document.getElementById('fr-inv-j'+i); if(j)j.innerHTML='';
+    });
+  });
+  const eerste=document.getElementById('fr-inv-i0');
+  if(eerste && frInvRows.length<=30) eerste.focus({preventScroll:true});
+}
+
+function frInvBeoordeel(gegeven,antwoord){
+  const g=frInvNorm(gegeven);
+  if(!g) return 'leeg';
+  const varianten=frInvVarianten(antwoord);
+  if(varianten.includes(g)) return 'ok';
+  const gs=frInvStrip(gegeven);
+  if(varianten.some(v=>frInvStrip(v)===gs)) return 'bijna';
+  return 'no';
+}
+
+function frInvCheck(){
+  let goed=0,bijna=0,fout=0;
+  frInvRows.forEach((r,i)=>{
+    const inp=document.getElementById('fr-inv-i'+i);if(!inp)return;
+    const st=document.getElementById('fr-inv-s'+i);
+    const ju=document.getElementById('fr-inv-j'+i);
+    const res=frInvBeoordeel(inp.value,r.antwoord);
+    inp.classList.remove('ok','bijna','no');
+    if(res==='ok'){
+      goed++; inp.classList.add('ok');
+      if(st)st.textContent='✓'; if(ju)ju.innerHTML='';
+    } else if(res==='bijna'){
+      bijna++; inp.classList.add('bijna');
+      if(st)st.textContent='≈';
+      if(ju)ju.innerHTML=`<div class="fr-inv-juist" style="color:var(--accent3);">Let op de accenten: ${frInvEsc(r.antwoord)}</div>`;
+    } else {
+      fout++; inp.classList.add('no');
+      if(st)st.textContent='✗';
+      if(ju)ju.innerHTML=`<div class="fr-inv-juist">${frInvEsc(r.antwoord)}</div>`;
+      addFout('frans',`${r.fr} / ${r.nl}`,(inp.value.trim()||'(leeg)'),r.antwoord,FR_THEMA_NAMEN[r.thema]||'');
+    }
+  });
+  frInvChecked=true;
+  const tot=frInvRows.length;
+  const pct=tot?Math.round(goed/tot*100):0;
+  frScore.good+=goed; frScore.bad+=fout+bijna;
+  trackOefening('frans',goed,fout+bijna);
+  const res=document.getElementById('fr-inv-res');
+  if(res) res.innerHTML=`<div class="fr-inv-res">
+    <div style="font-size:2rem;margin-bottom:4px;">${pct>=90?'🏆':pct>=70?'👏':pct>=50?'💪':'📚'}</div>
+    <div class="fr-inv-res-score">${goed} / ${tot} · ${pct}%</div>
+    <div class="fr-inv-res-sub">${goed} juist${bijna?` · ${bijna} bijna (accent)`:''}${fout?` · ${fout} fout`:''}</div>
+    ${(fout+bijna)?`<button class="fr-inv-btn prim" style="margin-top:10px;max-width:260px;" onclick="frInvOpnieuwFouten()">🔁 Enkel de fouten opnieuw</button>`:''}
+  </div>`;
+  if(fout+bijna===0) snd('ok'); else snd('no');
+}
+
+function frInvOpnieuwFouten(){
+  const teHerhalen=[];
+  frInvRows.forEach((r,i)=>{
+    const inp=document.getElementById('fr-inv-i'+i);if(!inp)return;
+    if(frInvBeoordeel(inp.value,r.antwoord)!=='ok') teHerhalen.push(r);
+  });
+  if(!teHerhalen.length)return;
+  frInvRows=teHerhalen.sort(()=>Math.random()-0.5);
+  frInvChecked=false;
+  frInvTabel();
+}
+
+function frInvToon(){
+  frInvRows.forEach((r,i)=>{
+    const inp=document.getElementById('fr-inv-i'+i);if(!inp)return;
+    if(!inp.value.trim()){
+      inp.value=r.antwoord;
+      inp.classList.remove('ok','bijna','no');
+      inp.classList.add('bijna');
+      const st=document.getElementById('fr-inv-s'+i); if(st)st.textContent='👁️';
+    }
+  });
+}
+
+function frInvWis(){
+  frInvRows.forEach((r,i)=>{
+    const inp=document.getElementById('fr-inv-i'+i);if(!inp)return;
+    inp.value=''; inp.classList.remove('ok','bijna','no');
+    const st=document.getElementById('fr-inv-s'+i); if(st)st.textContent='';
+    const ju=document.getElementById('fr-inv-j'+i); if(ju)ju.innerHTML='';
+  });
+  frInvChecked=false;
+  const res=document.getElementById('fr-inv-res'); if(res)res.innerHTML='';
+  const eerste=document.getElementById('fr-inv-i0'); if(eerste)eerste.focus();
+}
+
+function frInvPrint(){
+  if(!frInvRows.length)return;
+  const naarFr=frInvRichting==='nl→fr';
+  const titel=`Frans — ${frInvThema?(FR_THEMA_NAMEN[frInvThema]||'Thema '+frInvThema):'alle thema\'s'}`;
+  const rijen=frInvRows.map((r,i)=>`<tr><td class="nr">${i+1}</td><td>${frInvEsc(r.vraag)}</td><td class="leeg"></td></tr>`).join('');
+  const html=`<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>${frInvEsc(titel)}</title>
+    <style>
+      body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:26px;}
+      h1{font-size:18px;margin:0 0 2px;}
+      .sub{font-size:12px;color:#555;margin-bottom:14px;}
+      .naam{font-size:12px;margin-bottom:16px;}
+      table{width:100%;border-collapse:collapse;font-size:14px;}
+      th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.6px;border-bottom:2px solid #111;padding:5px 7px;}
+      td{border-bottom:1px solid #bbb;padding:9px 7px;}
+      td.nr{width:26px;color:#888;font-size:11px;text-align:center;}
+      td.leeg{width:45%;}
+      @media print{body{margin:12mm;} button{display:none;}}
+    </style></head><body>
+    <h1>${frInvEsc(titel)}</h1>
+    <div class="sub">${naarFr?'Vul het Franse woord in.':'Vul het Nederlandse woord in.'} — ${frInvRows.length} woorden</div>
+    <div class="naam">Naam: ______________________________    Datum: ____________    Score: ______ / ${frInvRows.length}</div>
+    <table><thead><tr><th></th><th>${naarFr?'Nederlands':'Frans'}</th><th>${naarFr?'Frans':'Nederlands'}</th></tr></thead>
+    <tbody>${rijen}</tbody></table>
+    <button onclick="window.print()" style="margin-top:18px;padding:9px 16px;font-size:14px;cursor:pointer;">🖨️ Afdrukken</button>
+    </body></html>`;
+  const w=window.open('','_blank');
+  if(!w){alert('Sta pop-ups toe om de blanco lijst te kunnen afdrukken.');return;}
+  w.document.write(html); w.document.close();
+}
+
+// ── WERKWOORD KIEZEN ──
+function frRenderWwKiezen(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const verbs=Array.isArray(FR_WERKWOORDEN)?FR_WERKWOORDEN:[];
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">🔤 Kies een werkwoord</div>
+    <p class="fr-page-sub">Kies één werkwoord om de vervoegingen te oefenen.</p>
+    <div class="fr-exercise-list">${verbs.map((v,i)=>`<button class="fr-exercise-card" onclick="frStartWwGekozen(${i})"><span class="fr-exercise-icon">🔤</span><span class="fr-exercise-info"><strong>${v[0]}</strong><small>${v[7]||''}</small></span><span class="fr-arrow">→</span></button>`).join('')}</div>`;
+}
+// ── KLEINE TOETS ──
+let frToetsThemas=new Set(), frToetsType='invullen', frToetsRows=[];
+function frRenderToets(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const themas=frSchoolThemas();
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">📝 Kleine toets</div>
+    <p class="fr-page-sub">Kies één of meerdere Contact-thema's. Alle vragen staan op één pagina.</p>
+    <div class="fr-blok" style="padding:14px;margin-bottom:12px;">
+      <div style="font-weight:700;margin-bottom:10px;">Contact-thema's</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${themas.map(t=>`<button class="filter-btn${frToetsThemas.has(t)?' on':''}" onclick="frToetsToggle(${t})">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
+      </div>
+    </div>
+    <div class="fr-blok" style="padding:14px;margin-bottom:14px;">
+      <div style="font-weight:700;margin-bottom:10px;">Soort toets</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <button class="filter-btn${frToetsType==='invullen'?' on':''}" onclick="frToetsType='invullen';frRenderToets()">✍️ Invullen</button>
+        <button class="filter-btn${frToetsType==='meerkeuze'?' on':''}" onclick="frToetsType='meerkeuze';frRenderToets()">🔤 Meerkeuze</button>
+      </div>
+    </div>
+    <button class="start-btn" onclick="frStartToets()">▶ Start toets</button>
+    <div id="fr-toets-content"></div>`;
+}
+function frToetsToggle(t){
+  if(frToetsThemas.has(t))frToetsThemas.delete(t);else frToetsThemas.add(t);
+  frRenderToets();
+}
+function frStartToets(){
+  if(!frToetsThemas.size)return;
+  const pool=FR_WOORDEN.filter(w=>frToetsThemas.has(w[2])&&w[4]==='school');
+  if(!pool.length)return;
+  frToetsRows=pool.slice().sort(()=>Math.random()-.5).slice(0,10);
+  const el=document.getElementById('fr-toets-content');if(!el)return;
+  if(frToetsType==='invullen') frRenderToetsInvullen(el,pool);
+  else frRenderToetsMeerkeuze(el,pool);
+}
+function frRenderToetsInvullen(el,pool){
+  const rows=frToetsRows;
+  el.innerHTML=`<div class="fr-toets-paper">
+    <div class="fr-toets-paper-head">
+      <div class="fr-toets-paper-title">FRANS — KLEINE TOETS</div>
+      <div class="fr-toets-paper-sub">Woordenschat · ${rows.length} vragen</div>
+    </div>
+    <div class="fr-toets-student">
+      <div>Naam:<span class="fr-toets-line"></span></div>
+      <div>Datum:<span class="fr-toets-line"></span></div>
+    </div>
+    <div class="fr-toets-instructions"><strong>Instructies:</strong> Vertaal elk woord. Schrijf je antwoord op de lijn. Let goed op spelling en Franse accenten. Alle vragen staan op deze toets.</div>
+    <div>
+      ${rows.map((w,i)=>{const nlNaarFr=i%2===0;return `<div class="fr-toets-question">
+        <div><span class="fr-toets-qnum">${i+1}.</span><span class="t-quiz-meta" style="display:inline-block;margin-right:8px;">${nlNaarFr?'Nederlands → Frans':'Frans → Nederlands'}</span></div>
+        <div class="fr-toets-prompt">${frInvEsc(nlNaarFr?w[1]:w[0])}</div>
+        <input class="t-input fr-toets-input" id="fr-toets-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Antwoord…">
+        <div id="fr-toets-fb${i}"></div>
+      </div>`;}).join('')}
+    </div>
+    <button class="start-btn" style="margin-top:18px;" onclick="frCheckToetsInvullen()">✅ Toets inleveren</button>
+    <div id="fr-toets-result" class="fr-toets-result"></div>
+  </div>`;
+  const first=document.getElementById('fr-toets-i0');if(first)first.focus({preventScroll:true});
+}
+function frCheckToetsInvullen(){
+  let goed=0,bijna=0,fout=0;
+  frToetsRows.forEach((w,i)=>{
+    const nlNaarFr=i%2===0, correct=nlNaarFr?w[0]:w[1];
+    const inp=document.getElementById('fr-toets-i'+i);if(!inp)return;
+    const res=frInvBeoordeel(inp.value,correct);
+    inp.classList.remove('correct','wrong');
+    if(res==='ok'){goed++;inp.classList.add('correct');}
+    else if(res==='bijna'){bijna++;inp.classList.add('wrong');}
+    else {fout++;inp.classList.add('wrong');}
+    const fb=document.getElementById('fr-toets-fb'+i);
+    if(fb)fb.innerHTML=res==='ok'?'<div class="t-feedback t-fb-ok">✓ Goed</div>':`<div class="t-feedback ${res==='bijna'?'t-fb-bijna':'t-fb-no'}">${res==='bijna'?'≈ Bijna — let op de accenten':'✗ Juiste antwoord: <strong>'+frInvEsc(correct)+'</strong>'}</div>`;
+  });
+  const tot=frToetsRows.length,pct=tot?Math.round(goed/tot*100):0;
+  frScore.good+=goed;frScore.bad+=fout+bijna;trackOefening('frans',goed,fout+bijna);
+  const r=document.getElementById('fr-toets-result');
+  if(r)r.innerHTML=`<div class="fr-inv-res"><div class="fr-inv-res-score">${goed} / ${tot} · ${pct}%</div><div class="fr-inv-res-sub">${goed} juist${bijna?` · ${bijna} bijna`:''}${fout?` · ${fout} fout`:''}</div><button class="fr-inv-btn prim" style="margin-top:10px;" onclick="frStartToets()">🔄 Nieuwe toets</button></div>`;
+  if(fout+bijna===0)snd('ok');else snd('no');
+}
+function frRenderToetsMeerkeuze(el,pool){
+  const rows=frToetsRows;
+  el.innerHTML=`<div class="fr-toets-paper">
+    <div class="fr-toets-paper-head">
+      <div class="fr-toets-paper-title">FRANS — KLEINE TOETS</div>
+      <div class="fr-toets-paper-sub">Meerkeuze · ${rows.length} vragen</div>
+    </div>
+    <div class="fr-toets-student"><div>Naam:<span class="fr-toets-line"></span></div><div>Datum:<span class="fr-toets-line"></span></div></div>
+    <div class="fr-toets-instructions"><strong>Instructies:</strong> Kies bij elke vraag het juiste antwoord in de andere taal.</div>
+    <div class="fr-toets-inv-grid">
+      ${rows.map((w,i)=>{const frNaarNl=i%2===0;const correct=frNaarNl?w[1]:w[0];const vraag=frNaarNl?w[0]:w[1];const opts=[correct,...pool.filter(x=>x!==w).sort(()=>Math.random()-.5).slice(0,3).map(x=>frNaarNl?x[1]:x[0])].sort(()=>Math.random()-.5);return `<div class="fr-toets-item">
+        <div class="t-quiz-meta"><span>Vraag ${i+1}</span><span class="t-dir-badge">${frNaarNl?'🇫🇷 → 🇧🇪':'🇧🇪 → 🇫🇷'}</span></div>
+        <div class="t-word" style="font-size:21px;">${frInvEsc(vraag)}</div>
+        <div class="ak-mc-grid">${opts.map(o=>`<button class="ak-mc-opt" onclick="frToetsMcAnswer(this,${i},${JSON.stringify(o)},${JSON.stringify(correct)})"><span style="font-size:13px;">${frInvEsc(o)}</span></button>`).join('')}</div>
+        <div id="fr-toets-mc-fb${i}"></div>
+      </div>`;}).join('')}
+    </div>
+    <div id="fr-toets-mc-result" class="fr-toets-result"></div>
+  </div>`;
+  window.frToetsMcGood=0;window.frToetsMcDone=new Set();
+}
+function frToetsMcAnswer(btn,i,ans,correct){
+  if(window.frToetsMcDone.has(i))return;
+  window.frToetsMcDone.add(i);
+  const ok=ans===correct;if(ok)window.frToetsMcGood++;
+  const card=btn.closest('.fr-toets-item');card.querySelectorAll('.ak-mc-opt').forEach(b=>{b.disabled=true;const v=b.querySelector('span').textContent.trim();if(v===correct)b.classList.add('ok');else if(b===btn&&!ok)b.classList.add('no');else b.style.opacity='.4';});
+  const fb=document.getElementById('fr-toets-mc-fb'+i);if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed</div>':`<div class="t-feedback t-fb-no">✗ Juiste antwoord: <strong>${frInvEsc(correct)}</strong></div>`;
+  if(window.frToetsMcDone.size===frToetsRows.length){const pct=Math.round(window.frToetsMcGood/frToetsRows.length*100);const r=document.getElementById('fr-toets-mc-result');if(r)r.innerHTML=`<div class="fr-inv-res"><div class="fr-inv-res-score">${window.frToetsMcGood} / ${frToetsRows.length} · ${pct}%</div><button class="fr-inv-btn prim" style="margin-top:10px;" onclick="frStartToets()">🔄 Nieuwe toets</button></div>`;}
+}
+
 // ── QUIZ ──
 function frThemaBar(){
-  const themas=[...new Set(FR_WOORDEN.map(w=>w[2]))].sort((a,b)=>a-b);
+  const themas=frSchoolThemas();
   return `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
     <button class="filter-btn${frThema===0?' on':''}" onclick="frThema=0;frQueue=[];frRenderQuiz()">🔀 Alle thema's</button>
     ${themas.map(t=>`<button class="filter-btn${frThema===t?' on':''}" onclick="frThema=${t};frQueue=[];frRenderQuiz()">${(FR_THEMA_NAMEN[t]||'Thema '+t)}</button>`).join('')}
@@ -4732,7 +5406,8 @@ function renderFrWoordenList(id){
   const el=document.getElementById('fw-list');if(!el)return;
   const q=(document.getElementById('fw-search')||{value:''}).value||'';
   const items=FR_WOORDEN.filter(w=>w[2]===id&&w[4]==='school'&&(!q||w[0].toLowerCase().includes(q.toLowerCase())||w[1].toLowerCase().includes(q.toLowerCase())));
-  el.innerHTML=`<div style="padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--surface3);"><input class="admin-input" id="fw-search" placeholder="🔍 Zoeken..." style="width:100%;padding:6px 10px;margin-bottom:0;" value="${q}" oninput="renderFrWoordenList(${id})" /></div>`+
+  el.innerHTML=`<div style="padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--surface3);">
+</div>`+
     (items.length?items.map(r=>{
       const realIdx=FR_WOORDEN.indexOf(r);
       return `<div class="admin-item" id="fw-item-${realIdx}">
