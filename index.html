@@ -5547,7 +5547,7 @@ function frMisRenderMC(el,item){
     ${frMisVoortgangBalk()}
     <div class="t-quiz-meta">${FR_WERKWOORDEN[vi][0]} — welke vorm past hier?</div>
     <div class="t-word" style="font-size:22px;">${frMisOnderwerpTekst(vi,pi)} ______.</div>
-    <div class="ak-mc-grid">${opties.map(o=>`<button class="ak-mc-opt" onclick="frMisMcAntwoord(this,${JSON.stringify(o)})">${frInvEsc(o)}</button>`).join('')}</div>
+    <div class="ak-mc-grid">${opties.map(o=>`<button class="ak-mc-opt" onclick="frMisMcAntwoord(this,'${o.replace(/'/g,"\\'")}')">${frInvEsc(o)}</button>`).join('')}</div>
     <div id="fr-mis-fb"></div>`;
 }
 function frMisMcAntwoord(btn,ans){
