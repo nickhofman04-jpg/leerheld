@@ -98,6 +98,28 @@
     .main-tab-menu button.active-sub{color:var(--accent);background:rgba(124,111,255,0.08);}
     @media(max-width:480px){.main-tab-dropdown .main-tab{font-size:12px;padding:9px 2px;}.main-tab{font-size:12px;padding:9px 0;}}
 
+    /* ── Home / Startpagina ── */
+    .home-panel{background:var(--surface);border-radius:var(--radius);padding:2.2rem 1.4rem 2rem;width:100%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.04);animation:slideUp 0.22s ease;}
+    .home-hero-emoji{font-size:54px;line-height:1;margin-bottom:0.4rem;}
+    .home-title{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:700;color:var(--tx);margin-bottom:4px;letter-spacing:0.2px;}
+    .home-subtitle{font-size:15px;font-weight:700;color:var(--tx2);margin-bottom:1.6rem;}
+    .subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media(max-width:560px){.subject-grid{grid-template-columns:repeat(2,1fr);}}
+    .subject-card{position:relative;overflow:hidden;border:1.5px solid var(--surface3);border-radius:var(--radius);background:var(--surface2);color:var(--tx);padding:1.4rem 0.8rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;min-height:158px;justify-content:center;transition:transform 0.16s ease,box-shadow 0.16s ease,border-color 0.16s ease;}
+    .subject-card:hover{transform:translateY(-3px);border-color:var(--sc-c1,var(--accent));box-shadow:0 8px 20px rgba(0,0,0,0.22);}
+    .subject-card:active{transform:scale(0.97);}
+    .subject-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--sc-c1),var(--sc-c2));}
+    .subject-card .sc-badge{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;line-height:1;margin-bottom:6px;background:linear-gradient(135deg,var(--sc-c1),var(--sc-c2));box-shadow:0 4px 12px rgba(0,0,0,0.18);}
+    .subject-card .sc-name{font-family:'Fredoka',sans-serif;font-weight:700;font-size:16px;color:var(--tx);}
+    .subject-card .sc-desc{font-size:10.5px;color:var(--tx2);line-height:1.4;}
+    .sc-rekenen{--sc-c1:#7C6FFF;--sc-c2:#5B4FE0;}
+    .sc-meetkunde{--sc-c1:#06D6A0;--sc-c2:#049C74;}
+    .sc-taal{--sc-c1:#FF6B9D;--sc-c2:#E0407A;}
+    .sc-frans{--sc-c1:#4D9DE0;--sc-c2:#2E6FB0;}
+    .sc-typen{--sc-c1:#FFD166;--sc-c2:#DE9E00;}
+    .sc-wereld{--sc-c1:#818CF8;--sc-c2:#5B5FE0;}
+    @media(max-width:560px){.subject-card{min-height:140px;padding:1.1rem 0.5rem 1rem;}.subject-card .sc-badge{width:44px;height:44px;font-size:22px;}}
+
     /* ── Panel ── */
     .panel{background:var(--surface);border-radius:var(--radius);padding:1.2rem;width:100%;position:relative;box-shadow:0 4px 24px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.04);min-height:460px;animation:slideUp 0.22s ease;}
     @keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
@@ -299,6 +321,87 @@
     .mk-voorbeeld{font-size:11px;color:var(--tx2);}
     .mk-mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
     @media(max-width:480px){.mk-grid{grid-template-columns:1fr 1fr;}.mk-mc-grid{grid-template-columns:1fr 1fr;}}
+    .mk-card-clickable{cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;}
+    .mk-card-clickable:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
+    .mk-card-clickable:active{transform:scale(0.97);}
+    .mk-detail-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;flex-wrap:wrap;}
+    .mk-detail-svg{flex-shrink:0;background:var(--surface2);border-radius:var(--radius-sm);padding:8px;}
+    .mk-detail-titel{font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;color:var(--tx);}
+    .mk-detail-kenmerken{list-style:none;padding:0;margin:0 0 22px;font-size:13px;color:var(--tx2);line-height:1.9;}
+    .mk-detail-kenmerken li::before{content:'• ';color:var(--accent);font-weight:700;}
+    .mk-sim-box{background:var(--surface2);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;}
+    .mk-sim-box .mk-sim-subtitel{font-family:'Fredoka',sans-serif;font-size:13px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px;}
+    .mk-sim-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:10px;}
+    .mk-sim-label{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:0.4px;}
+    .mk-sim-input{padding:9px 11px;border-radius:var(--radius-xs);border:1.5px solid var(--surface3);background:var(--surface);color:var(--tx);font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;outline:none;transition:border-color .15s;}
+    .mk-sim-input:focus{border-color:var(--accent);}
+    .mk-sim-result-card{background:var(--surface);border:1px solid var(--surface3);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;}
+    .mk-sim-result-label{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;}
+    .mk-sim-result-calc{font-family:monospace;font-size:13px;color:var(--tx2);margin-bottom:3px;}
+    .mk-sim-result-answer{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:var(--ok);}
+    .mk-sim-result-missing{font-size:12px;color:var(--tx3);font-style:italic;}
+    /* ── Werkwoorden spiekkaart (uitleg) ── */
+    .ww-uitleg-card{background:var(--surface2);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:12px;border-left:5px solid var(--accent);}
+    .ww-uitleg-card.c-groen{border-left-color:#22C55E;}
+    .ww-uitleg-card.c-blauw{border-left-color:#3B82F6;}
+    .ww-uitleg-card.c-geel{border-left-color:#EAB308;}
+    .ww-uitleg-card.c-oranje{border-left-color:#F97316;}
+    .ww-uitleg-card.c-rood{border-left-color:#EF4444;}
+    .ww-uitleg-card.c-paars{border-left-color:#A855F7;}
+    .ww-uitleg-card.c-bruin{border-left-color:#B45309;}
+    .ww-uitleg-titel{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--tx);margin-bottom:6px;}
+    .ww-uitleg-tekst{font-size:13px;color:var(--tx2);line-height:1.7;}
+    .ww-uitleg-tekst strong{color:var(--tx);}
+    .ww-uitleg-voorbeeld{background:var(--surface);border-radius:var(--radius-xs);padding:8px 10px;margin-top:8px;font-size:13px;color:var(--tx);line-height:1.6;}
+    .ww-uitleg-trucje{margin-top:8px;font-size:12px;color:var(--accent3);font-weight:700;}
+    .ww-uitleg-tabel{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+    .ww-uitleg-tabel th{text-align:left;padding:6px 8px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tx3);border-bottom:1px solid var(--surface3);}
+    .ww-uitleg-tabel td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .ww-uitleg-samenvat{background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:var(--radius);padding:18px;color:#fff;margin:20px 0;text-align:center;}
+    .ww-uitleg-samenvat .regel{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:700;margin:6px 0;}
+    .ww-uitleg-samenvat .voorbeeld-titel{font-size:12px;opacity:0.85;margin-top:12px;text-transform:uppercase;letter-spacing:0.6px;}
+    .ww-uitleg-samenvat .voorbeeld-regel{font-family:'Fredoka',sans-serif;font-size:14px;margin-top:4px;}
+    .ww-uitleg-voorbeeldzin{background:var(--surface2);border-radius:var(--radius-sm);padding:16px;margin-top:16px;}
+    .ww-uitleg-voorbeeldzin .zin{font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;color:var(--accent);margin-bottom:10px;}
+    .ww-uitleg-voorbeeldzin ul{list-style:none;padding:0;margin:0;font-size:13px;color:var(--tx2);line-height:2;}
+    .ww-uitleg-ezel{background:var(--surface2);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:13px;line-height:2.1;color:var(--tx2);}
+    .ww-uitleg-ezel strong{color:var(--tx);}
+    /* ── Missies ── */
+    .mis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+    .mis-card{position:relative;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);padding:14px 10px;text-align:center;cursor:pointer;transition:all .16s;}
+    .mis-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 5px 14px var(--glow);}
+    .mis-card.compleet{border-color:#FFD166;background:rgba(255,209,102,0.08);}
+    .mis-trofee{position:absolute;top:6px;right:8px;font-size:16px;}
+    .mis-card-naam{font-family:'Fredoka',sans-serif;font-size:17px;font-weight:700;}
+    .mis-card-vert{font-size:11px;color:var(--tx2);margin:2px 0 8px;}
+    .mis-sterren{font-size:12px;letter-spacing:1px;}
+    .mis-sterren span{opacity:0.25;}
+    .mis-sterren span.on{opacity:1;}
+    .mis-hoofdstukken{display:flex;flex-direction:column;gap:8px;}
+    .mis-hoofdstuk{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;border:1.5px solid var(--surface3);border-radius:var(--radius-sm);background:var(--surface2);color:var(--tx);text-align:left;cursor:pointer;transition:all .16s;}
+    .mis-hoofdstuk:hover:not(:disabled){border-color:var(--accent);background:rgba(124,111,255,.06);}
+    .mis-hoofdstuk.done{border-color:var(--ok);background:rgba(6,214,160,0.07);}
+    .mis-hoofdstuk.locked{opacity:0.5;cursor:not-allowed;}
+    .mis-hs-icoon{font-size:24px;flex:0 0 30px;text-align:center;}
+    .mis-hs-info{flex:1;display:flex;flex-direction:column;}
+    .mis-hs-info strong{font-family:'Fredoka',sans-serif;font-size:15px;}
+    .mis-hs-info small{font-size:11px;color:var(--tx2);}
+    .mis-hs-status{font-size:16px;}
+    .mis-letterblokjes{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;}
+    .mis-letter{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:32px;padding:0 3px;border-radius:6px;font-family:monospace;font-size:16px;font-weight:700;background:var(--surface2);border:1.5px solid var(--surface3);color:var(--tx3);}
+    .mis-letter.ok{border-color:var(--ok);background:rgba(6,214,160,0.14);color:var(--ok);}
+    .mis-letter.no{border-color:var(--no);background:rgba(255,107,157,0.12);color:var(--no);}
+    .mis-letter.leeg{color:var(--tx3);}
+    .fr-accent-bar{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+    .fr-accent-btn{font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;padding:6px 10px;border-radius:6px;border:1.5px solid var(--surface3);background:var(--surface2);color:var(--tx);cursor:pointer;}
+    .fr-accent-btn:hover{border-color:var(--accent);}
+    /* ── Flashcards ── */
+    .fc-scene{perspective:1000px;cursor:pointer;}
+    .fc-card{position:relative;width:100%;min-height:180px;transform-style:preserve-3d;transition:transform .45s;}
+    .fc-card.flipped{transform:rotateY(180deg);}
+    .fc-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;border-radius:var(--radius);backface-visibility:hidden;font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;}
+    .fc-front{background:var(--surface2);border:1.5px solid var(--surface3);color:var(--tx);}
+    .fc-back{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;transform:rotateY(180deg);}
 
     /* ════ TYPEN ════ */
     .ty-lesson-grid{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
@@ -491,6 +594,8 @@
 .fr-toets-paper{max-width:900px;margin:14px auto;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px 32px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.fr-toets-paper-head{text-align:center;border-bottom:2px solid var(--tx);padding-bottom:16px;margin-bottom:16px}.fr-toets-paper-title{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:700;letter-spacing:.3px}.fr-toets-paper-sub{font-size:12px;color:var(--tx2);margin-top:4px}.fr-toets-student{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:12px 0 20px;font-size:13px}.fr-toets-line{border-bottom:1px solid var(--tx3);display:inline-block;min-width:150px;margin-left:6px;height:18px}.fr-toets-instructions{border:1px solid var(--border);padding:11px 13px;margin-bottom:18px;font-size:12px;background:var(--surface2)}.fr-toets-question{padding:12px 0 14px;border-bottom:1px solid var(--border)}.fr-toets-question:last-child{border-bottom:0}.fr-toets-qnum{font-weight:700;margin-right:8px}.fr-toets-prompt{font-weight:700;font-size:16px}.fr-toets-answer-line{margin-top:9px;border-bottom:1px solid var(--tx3);min-height:28px}.fr-toets-paper .t-input{border:0;border-bottom:1.5px solid var(--tx3);border-radius:0;background:transparent;padding:5px 2px;font-size:15px;box-shadow:none}.fr-toets-paper .t-input:focus{border-bottom-color:var(--accent);outline:none}.fr-toets-paper .fr-toets-result{margin-top:18px}.fr-toets-paper .fr-inv-res{border-top:2px solid var(--tx);border-radius:0;background:transparent;padding:16px 0}.fr-toets-paper .ak-mc-grid{margin-top:10px}.fr-toets-paper .fr-toets-item{border-bottom:1px solid var(--border);padding:12px 0}.fr-toets-paper .fr-toets-item:last-child{border-bottom:0}
 .fr-toets-item .t-feedback{font-size:11px;padding:7px 9px;margin-top:6px;}
     @media(max-width:600px){.fr-toets-inv-grid{grid-template-columns:1fr;}}
+    .fr-toets-section-title{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;color:var(--tx);margin:22px 0 10px;padding-top:14px;border-top:2px solid var(--border);}
+    .fr-toets-paper .fr-toets-section-title:first-of-type{border-top:none;padding-top:0;margin-top:8px;}
     .fr-exercise-icon{font-size:27px;flex:0 0 36px;text-align:center;}
     .fr-exercise-info{flex:1;display:flex;flex-direction:column;gap:2px;}
     .fr-exercise-info strong{font-family:'Fredoka',sans-serif;font-size:16px;}
@@ -674,7 +779,7 @@
     </div>
 
     <!-- Hoofdtabs -->
-    <div class="main-tabs">
+    <div class="main-tabs" id="main-tabs-row" style="display:none">
       <!-- Wiskunde dropdown -->
       <div class="main-tab-dropdown" id="dd-wiskunde">
         <button class="main-tab" id="tab-wiskunde" onclick="toggleDropdown('wiskunde')">🔢 Wiskunde ▾</button>
@@ -695,7 +800,35 @@
       <button class="main-tab" id="tab-aardrijkskunde" onclick="switchMain('aardrijkskunde')">🌍 Wereld</button>
     </div>
 
-    <div id="rekenen-root" style="width:100%">
+    <div id="home-root" style="width:100%">
+      <div class="home-panel">
+        <div class="home-hero-emoji" id="home-hero-emoji">🔥</div>
+        <div class="home-title">Welkom, <span id="home-welcome-naam">superheld</span>! 🎉</div>
+        <div class="home-subtitle">Wat wil je doen vandaag?</div>
+        <div class="subject-grid">
+          <button class="subject-card sc-rekenen" onclick="switchMain('rekenen')">
+            <span class="sc-badge">🔢</span><span class="sc-name">Rekenen</span><span class="sc-desc">Optellen, aftrekken, keren en delen</span>
+          </button>
+          <button class="subject-card sc-meetkunde" onclick="switchMain('meetkunde')">
+            <span class="sc-badge">📐</span><span class="sc-name">Meetkunde</span><span class="sc-desc">Figuren, omtrek en oppervlakte</span>
+          </button>
+          <button class="subject-card sc-taal" onclick="switchMain('taal')">
+            <span class="sc-badge">🇧🇪</span><span class="sc-name">Nederlands</span><span class="sc-desc">Werkwoorden, woorden en zegswijzen</span>
+          </button>
+          <button class="subject-card sc-frans" onclick="switchMain('frans')">
+            <span class="sc-badge">🇫🇷</span><span class="sc-name">Frans</span><span class="sc-desc">Missies, flashcards en woordjes</span>
+          </button>
+          <button class="subject-card sc-typen" onclick="switchMain('typen')">
+            <span class="sc-badge">🎹</span><span class="sc-name">Typen</span><span class="sc-desc">Blind leren typen op je toetsenbord</span>
+          </button>
+          <button class="subject-card sc-wereld" onclick="switchMain('aardrijkskunde')">
+            <span class="sc-badge">🌍</span><span class="sc-name">Wereld</span><span class="sc-desc">Landen, hoofdsteden en de wereldkaart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="rekenen-root" style="display:none;width:100%">
       <div id="screen"></div>
     </div>
 
@@ -869,11 +1002,12 @@ document.addEventListener('click', e=>{
 
 function switchMain(s){
   mainSection=s;
-  const allRoots=['rekenen','taal','meetkunde','typen','aardrijkskunde','frans'];
+  const allRoots=['home','rekenen','taal','meetkunde','typen','aardrijkskunde','frans'];
   allRoots.forEach(k=>{
     const r=document.getElementById(k+'-root');
     if(r)r.style.display=k===s?'':'none';
   });
+  if(s==='home'){ renderHome(); removeStickyNext(); return; }
   // Dropdown actief-stijl
   const wiskundeActief = s==='rekenen'||s==='meetkunde';
   const taalActief = s==='taal'||s==='frans';
@@ -888,6 +1022,7 @@ function switchMain(s){
   if(s==='taal') document.querySelector('#menu-taal button:nth-child(1)')?.classList.add('active-sub');
   if(s==='frans') document.querySelector('#menu-taal button:nth-child(2)')?.classList.add('active-sub');
   // Init secties
+  if(s==='rekenen') showSetup();
   if(s==='taal') initTaalRoot();
   if(s==='meetkunde') mkTab('theorie');
   if(s==='typen') initTypen();
@@ -898,7 +1033,14 @@ function switchMain(s){
 function goHome(){
   clearTimeout(st.autoT);clearInterval(st.schoolInterval);
   loadData();
-showSetup();
+  switchMain('home');
+}
+function renderHome(){
+  const naam = (typeof huidigProfiel!=='undefined' && huidigProfiel && huidigProfiel.naam) ? huidigProfiel.naam : (cfg.hero && cfg.hero.name) || 'superheld';
+  const naamEl = document.getElementById('home-welcome-naam');
+  if(naamEl) naamEl.textContent = naam;
+  const icoEl = document.getElementById('home-hero-emoji');
+  if(icoEl) icoEl.textContent = (cfg.hero && cfg.hero.ico) || '🎒';
 }
 
 // ════════════════════════════════════════════════════════
@@ -1034,7 +1176,7 @@ function showSetup(){
 }
 
 function pickHero(id,el){cfg.hero=HEROES.find(h=>h.id===id);applyTheme(id);document.querySelectorAll('.hcard').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
-function pickHeroDropdown(id){cfg.hero=HEROES.find(h=>h.id===id)||HEROES[0];applyTheme(cfg.hero.id);const sel=document.getElementById('hero-select');if(sel)sel.value=cfg.hero.id;}
+function pickHeroDropdown(id){cfg.hero=HEROES.find(h=>h.id===id)||HEROES[0];applyTheme(cfg.hero.id);const sel=document.getElementById('hero-select');if(sel)sel.value=cfg.hero.id;if(mainSection==='home')renderHome();}
 function pickMode(v,el){cfg.mode=v;document.querySelectorAll('.mode-tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');const no=document.getElementById('normaalopties'),si=document.getElementById('schoolinfo');if(no)no.style.display=v==='school'?'none':'';if(si)si.style.display=v==='school'?'':'none';}
 function toggleBew(v,el){if(cfg.bewerkingen.includes(v)){if(cfg.bewerkingen.length===1)return;cfg.bewerkingen=cfg.bewerkingen.filter(x=>x!==v);el.classList.remove('on');}else{cfg.bewerkingen.push(v);el.classList.add('on');}}
 function pickCnt(v,el){cfg.count=v;document.querySelectorAll('#cnt .opt-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
@@ -1596,7 +1738,7 @@ let wwMode = 'lijst'; // 'lijst' | 'quiz' | 'invul'
 
 function setWwMode(m){
   wwMode = m;
-  ['lijst','quiz','invul'].forEach((k,i)=>{
+  ['lijst','quiz','invul','uitleg'].forEach((k,i)=>{
     const b=document.querySelectorAll('#taal-tabel-tab .ww-mode-btn')[i];
     if(b)b.classList.toggle('on',k===m);
   });
@@ -1605,10 +1747,11 @@ function setWwMode(m){
 
 function renderTaalTabel(){
   document.getElementById('taal-tabel-tab').innerHTML=`
-    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap;">
       <button class="filter-btn ww-mode-btn ${wwMode==='lijst'?'on':''}" onclick="setWwMode('lijst')">📋 Lijst</button>
       <button class="filter-btn ww-mode-btn ${wwMode==='quiz'?'on':''}" onclick="setWwMode('quiz')">🎯 Quiz</button>
       <button class="filter-btn ww-mode-btn ${wwMode==='invul'?'on':''}" onclick="setWwMode('invul')">📝 Invuloefening</button>
+      <button class="filter-btn ww-mode-btn ${wwMode==='uitleg'?'on':''}" onclick="setWwMode('uitleg')">🧠 Uitleg</button>
     </div>
     <div id="ww-content"></div>`;
   renderWwContent();
@@ -1618,18 +1761,106 @@ function renderWwContent(){
   const el=document.getElementById('ww-content');if(!el)return;
   if(wwMode==='lijst') renderWwLijst(el);
   else if(wwMode==='quiz') renderWwQuiz(el);
+  else if(wwMode==='uitleg') renderWwUitleg(el);
   else renderWwInvul(el);
+}
+
+function renderWwUitleg(el){
+  el.innerHTML=`
+    <div class="fr-page-title" style="font-size:21px;">📚 Werkwoorden — spiekkaart</div>
+    <p class="fr-page-sub">Alles wat je moet weten over onderwerp, persoonsvorm, infinitief en stam.</p>
+
+    <div class="ww-uitleg-card c-groen">
+      <div class="ww-uitleg-titel">🟢 1. Het onderwerp</div>
+      <div class="ww-uitleg-tekst">Het <strong>onderwerp</strong> vertelt <strong>wie of wat iets doet</strong>.<br>👉 Vraag: <strong>Wie of wat + werkwoord?</strong></div>
+      <div class="ww-uitleg-voorbeeld"><strong>De hond</strong> blaft.<br>Wie blaft? → <strong>de hond</strong> = onderwerp</div>
+    </div>
+
+    <div class="ww-uitleg-card c-blauw">
+      <div class="ww-uitleg-titel">🔵 2. De persoonsvorm (pv)</div>
+      <div class="ww-uitleg-tekst">De <strong>persoonsvorm</strong> is het werkwoord dat verandert als je de <strong>tijd verandert</strong>.</div>
+      <div class="ww-uitleg-voorbeeld">Ik <strong>loop</strong> naar school.<br>Gisteren <strong>liep</strong> ik naar school.<br>loop → liep, dus <strong>loop</strong> is de persoonsvorm.</div>
+      <div class="ww-uitleg-trucje">💡 Trucje: zet de zin in een andere tijd.</div>
+    </div>
+
+    <div class="ww-uitleg-card c-geel">
+      <div class="ww-uitleg-titel">🟡 3. Het infinitief</div>
+      <div class="ww-uitleg-tekst">Het <strong>infinitief</strong> is de <strong>hele vorm van het werkwoord</strong>: lopen, spelen, werken, fietsen, gaan …</div>
+      <div class="ww-uitleg-trucje">💡 Vaak kun je er <strong>te</strong> voor zetten: te lopen — te spelen — te werken.</div>
+    </div>
+
+    <div class="ww-uitleg-card c-oranje">
+      <div class="ww-uitleg-titel">🟠 4. De stam</div>
+      <div class="ww-uitleg-tekst">De <strong>stam</strong> is meestal het infinitief <strong>zonder -en</strong>.</div>
+      <table class="ww-uitleg-tabel">
+        <thead><tr><th>Infinitief</th><th>Stam</th></tr></thead>
+        <tbody>
+          <tr><td>lopen</td><td><strong>loop</strong></td></tr>
+          <tr><td>spelen</td><td><strong>speel</strong></td></tr>
+          <tr><td>werken</td><td><strong>werk</strong></td></tr>
+          <tr><td>fietsen</td><td><strong>fiets</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fr-page-title" style="font-size:18px;margin-top:22px;">👤 Personen</div>
+
+    <div class="ww-uitleg-card c-rood">
+      <div class="ww-uitleg-titel">🔴 5. 1e persoon enkelvoud</div>
+      <div class="ww-uitleg-tekst"><strong>1e persoon = IK</strong></div>
+      <div class="ww-uitleg-voorbeeld">👉 Ik <strong>loop</strong>.<br>👉 Ik <strong>speel</strong>.<br>👉 Ik <strong>werk</strong>.</div>
+      <div class="ww-uitleg-trucje">IK → meestal de stam</div>
+    </div>
+
+    <div class="ww-uitleg-card c-paars">
+      <div class="ww-uitleg-titel">🟣 6. 2e &amp; 3e persoon enkelvoud</div>
+      <div class="ww-uitleg-tekst"><strong>2e persoon = JIJ/JE</strong> — 👉 Jij <strong>loopt</strong>.<br><strong>3e persoon = HIJ/ZIJ/HET</strong> — 👉 Hij/Zij/Het <strong>loopt</strong>.</div>
+      <div class="ww-uitleg-trucje">💡 IK → loop · JIJ → loopt · HIJ/ZIJ/HET → loopt</div>
+    </div>
+
+    <div class="ww-uitleg-card c-bruin">
+      <div class="ww-uitleg-titel">🟤 7. Meervoud</div>
+      <div class="ww-uitleg-tekst">Meervoud betekent dat het over <strong>meer dan één persoon</strong> gaat: wij, jullie, zij.</div>
+      <div class="ww-uitleg-voorbeeld">👉 Wij <strong>lopen</strong>.<br>👉 Jullie <strong>lopen</strong>.<br>👉 Zij <strong>lopen</strong>.</div>
+      <div class="ww-uitleg-trucje">💡 Meestal gebruik je het hele infinitief: loop → lopen</div>
+    </div>
+
+    <div class="ww-uitleg-samenvat">
+      <div style="font-size:22px;">⭐</div>
+      <div class="regel">IK → STAM</div>
+      <div class="regel">JIJ/HIJ/ZIJ → STAM + T</div>
+      <div class="regel">WIJ/JULLIE/ZIJ → INFINITIEF</div>
+      <div class="voorbeeld-titel">Voorbeeld: spelen</div>
+      <div class="voorbeeld-regel">Ik speel · Jij speelt · Hij speelt · Wij spelen · Jullie spelen · Zij spelen</div>
+    </div>
+
+    <div class="ww-uitleg-voorbeeldzin">
+      <div class="fr-page-title" style="font-size:15px;margin-bottom:8px;">🧠 Alles in één zin</div>
+      <div class="zin">Ayden speelt voetbal.</div>
+      <ul>
+        <li>👤 <strong>Onderwerp:</strong> Ayden</li>
+        <li>🔵 <strong>Persoonsvorm:</strong> speelt</li>
+        <li>🟡 <strong>Infinitief:</strong> spelen</li>
+        <li>🟠 <strong>Stam:</strong> speel</li>
+        <li>🟣 <strong>Persoon:</strong> 3e persoon enkelvoud</li>
+      </ul>
+    </div>
+
+    <div class="ww-uitleg-ezel">
+      🎯 <strong>Ezelsbruggetje</strong><br>
+      Wie doet iets? → onderwerp<br>
+      Verander de tijd! → persoonsvorm<br>
+      Hele werkwoord? → infinitief<br>
+      Zonder -en? → stam<br>
+      IK? → stam<br>
+      JIJ/HIJ/ZIJ? → stam + t<br>
+      WIJ/JULLIE/ZIJ? → infinitief
+    </div>`;
 }
 
 function renderWwLijst(el){
   el.innerHTML=`
     <input class="t-search" type="text" id="t-search" placeholder="🔍 Zoek een werkwoord..." value="" autocomplete="off" />
-    <div class="filter-row">
-      <span class="filter-lbl">Filter:</span>
-      <button class="filter-btn ${taalFilter==='all'?'on':''}" id="tf-all" onclick="setTaalFilter('all')">Alle</button>
-      <button class="filter-btn ${taalFilter==='onr'?'on':''}" id="tf-onr" onclick="setTaalFilter('onr')">Onregelmatig</button>
-      <button class="filter-btn ${taalFilter==='reg'?'on':''}" id="tf-reg" onclick="setTaalFilter('reg')">Regelmatig</button>
-    </div>
     <div class="t-table-wrap">
       <table class="t-table">
         <thead><tr><th>Infinitief</th><th>Stam</th><th>VT (ik)</th><th>Voltooid deelwoord</th></tr></thead>
@@ -2339,6 +2570,7 @@ let mkQueue = []; // anti-herhaling wachtrij
 
 function mkTab(t){
   mkCurrentTab = t;
+  mkFiguurId = null;
   ['theorie','oefeningen'].forEach(k=>{
     const b=document.getElementById('mkt-'+k);
     if(b)b.classList.toggle('on',k===t);
@@ -2346,9 +2578,145 @@ function mkTab(t){
   renderMkContent();
 }
 
+let mkFiguurId = null;
+function openMkFiguur(id){ mkFiguurId=id; renderMkContent(); }
+function closeMkFiguur(){ mkFiguurId=null; renderMkContent(); }
+
+function mkFmt(n){
+  if(n===null||n===undefined||!isFinite(n)) return '–';
+  let s=n.toFixed(2);
+  s=s.replace(/0+$/,'').replace(/\.$/,'');
+  return s.replace('.',',');
+}
+
+const MK_FIGUREN = {
+  vierkant:{
+    naam:'Vierkant',
+    svg:'<svg viewBox="0 0 120 100" width="90" height="75"><rect x="10" y="10" width="80" height="80" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>',
+    kenmerken:['4 gelijke zijden','4 rechte hoeken (90°)','Tegenoverliggende zijden evenwijdig'],
+    inputs:[{key:'zijde',label:'Zijde (cm)'}],
+    omtrek:{uitleg:'Alle 4 zijden van een vierkant zijn even lang. Daarom neem je de zijde gewoon 4 keer.',formule:'Omtrek = 4 × zijde',velden:['zijde'],bereken:v=>({expr:`4 × ${mkFmt(v.zijde)}`,res:4*v.zijde})},
+    oppervlakte:{uitleg:'De oppervlakte van een vierkant bereken je door de zijde met zichzelf te vermenigvuldigen.',formule:'Oppervlakte = zijde × zijde',velden:['zijde'],bereken:v=>({expr:`${mkFmt(v.zijde)} × ${mkFmt(v.zijde)}`,res:v.zijde*v.zijde})}
+  },
+  rechthoek:{
+    naam:'Rechthoek',
+    svg:'<svg viewBox="0 0 140 100" width="105" height="75"><rect x="5" y="20" width="125" height="60" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>',
+    kenmerken:['2 paar gelijke zijden','4 rechte hoeken (90°)','Tegenoverliggende zijden evenwijdig'],
+    inputs:[{key:'lengte',label:'Lengte (cm)'},{key:'breedte',label:'Breedte (cm)'}],
+    omtrek:{uitleg:'Tel de lengte en de breedte op, en neem dat resultaat 2 keer (want er zijn telkens 2 gelijke zijden).',formule:'Omtrek = 2 × (lengte + breedte)',velden:['lengte','breedte'],bereken:v=>({expr:`2 × (${mkFmt(v.lengte)} + ${mkFmt(v.breedte)})`,res:2*(v.lengte+v.breedte)})},
+    oppervlakte:{uitleg:'Vermenigvuldig de lengte met de breedte.',formule:'Oppervlakte = lengte × breedte',velden:['lengte','breedte'],bereken:v=>({expr:`${mkFmt(v.lengte)} × ${mkFmt(v.breedte)}`,res:v.lengte*v.breedte})}
+  },
+  driehoek:{
+    naam:'Driehoek',
+    svg:'<svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,95 5,95" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>',
+    kenmerken:['3 zijden, 3 hoeken','Som van hoeken = 180°','Gelijkzijdig, gelijkbenig of ongelijkzijdig'],
+    inputs:[{key:'z1',label:'Zijde 1 (cm)'},{key:'z2',label:'Zijde 2 (cm)'},{key:'z3',label:'Zijde 3 (cm)'},{key:'grondlijn',label:'Grondlijn (cm)'},{key:'hoogte',label:'Hoogte (cm)'}],
+    omtrek:{uitleg:'Tel de lengtes van de 3 zijden bij elkaar op.',formule:'Omtrek = z1 + z2 + z3',velden:['z1','z2','z3'],bereken:v=>({expr:`${mkFmt(v.z1)} + ${mkFmt(v.z2)} + ${mkFmt(v.z3)}`,res:v.z1+v.z2+v.z3})},
+    oppervlakte:{uitleg:'Vermenigvuldig de grondlijn met de hoogte en deel dat door 2.',formule:'Oppervlakte = (grondlijn × hoogte) ÷ 2',velden:['grondlijn','hoogte'],bereken:v=>({expr:`(${mkFmt(v.grondlijn)} × ${mkFmt(v.hoogte)}) ÷ 2`,res:(v.grondlijn*v.hoogte)/2})}
+  },
+  cirkel:{
+    naam:'Cirkel',
+    svg:'<svg viewBox="0 0 120 100" width="90" height="75"><circle cx="60" cy="50" r="45" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/><line x1="60" y1="50" x2="105" y2="50" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4"/><text x="80" y="44" font-size="11" fill="var(--tx2)">r</text></svg>',
+    kenmerken:['Geen hoeken of zijden','Middelpunt, straal (r), middellijn (2r)','Omtrek = 2 × π × r ≈ 6,28 × r'],
+    inputs:[{key:'straal',label:'Straal r (cm)'}],
+    omtrek:{uitleg:'Vermenigvuldig de straal met 2 en met π (ongeveer 3,14).',formule:'Omtrek = 2 × π × r',velden:['straal'],bereken:v=>({expr:`2 × 3,14 × ${mkFmt(v.straal)}`,res:2*Math.PI*v.straal})},
+    oppervlakte:{uitleg:'Vermenigvuldig π (ongeveer 3,14) met de straal in het kwadraat (straal × straal).',formule:'Oppervlakte = π × r²',velden:['straal'],bereken:v=>({expr:`3,14 × ${mkFmt(v.straal)}²`,res:Math.PI*v.straal*v.straal})}
+  },
+  ruit:{
+    naam:'Ruit',
+    svg:'<svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,50 60,95 5,50" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>',
+    kenmerken:['4 gelijke zijden','Geen rechte hoeken','Diagonalen staan loodrecht op elkaar'],
+    inputs:[{key:'zijde',label:'Zijde (cm)'},{key:'d1',label:'Diagonaal 1 (cm)'},{key:'d2',label:'Diagonaal 2 (cm)'}],
+    omtrek:{uitleg:'Alle 4 zijden van een ruit zijn even lang. Neem de zijde dus 4 keer.',formule:'Omtrek = 4 × zijde',velden:['zijde'],bereken:v=>({expr:`4 × ${mkFmt(v.zijde)}`,res:4*v.zijde})},
+    oppervlakte:{uitleg:'Vermenigvuldig de twee diagonalen met elkaar en deel dat door 2.',formule:'Oppervlakte = (d1 × d2) ÷ 2',velden:['d1','d2'],bereken:v=>({expr:`(${mkFmt(v.d1)} × ${mkFmt(v.d2)}) ÷ 2`,res:(v.d1*v.d2)/2})}
+  },
+  trapezium:{
+    naam:'Trapezium',
+    svg:'<svg viewBox="0 0 140 100" width="105" height="75"><polygon points="25,90 115,90 100,10 40,10" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>',
+    kenmerken:['4 zijden, 2 evenwijdige zijden','Geen gelijke zijden (meestal)','Basis boven en onder zijn evenwijdig'],
+    inputs:[{key:'b1',label:'Basis boven (cm)'},{key:'b2',label:'Basis onder (cm)'},{key:'z1',label:'Schuine zijde 1 (cm)'},{key:'z2',label:'Schuine zijde 2 (cm)'},{key:'hoogte',label:'Hoogte (cm)'}],
+    omtrek:{uitleg:'Tel alle 4 zijden bij elkaar op: de basis boven, de basis onder en de twee schuine zijden.',formule:'Omtrek = b1 + b2 + z1 + z2',velden:['b1','b2','z1','z2'],bereken:v=>({expr:`${mkFmt(v.b1)} + ${mkFmt(v.b2)} + ${mkFmt(v.z1)} + ${mkFmt(v.z2)}`,res:v.b1+v.b2+v.z1+v.z2})},
+    oppervlakte:{uitleg:'Tel de twee evenwijdige zijden (basis boven en onder) op, vermenigvuldig met de hoogte en deel door 2.',formule:'Oppervlakte = (b1 + b2) × hoogte ÷ 2',velden:['b1','b2','hoogte'],bereken:v=>({expr:`(${mkFmt(v.b1)} + ${mkFmt(v.b2)}) × ${mkFmt(v.hoogte)} ÷ 2`,res:(v.b1+v.b2)*v.hoogte/2})}
+  },
+  zeshoek:{
+    naam:'Zeshoek',
+    svg:'<svg viewBox="0 0 120 110" width="90" height="82"><polygon points="60,5 110,32 110,78 60,105 10,78 10,32" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>',
+    kenmerken:['6 gelijke zijden','6 gelijke hoeken van 120°','Zoals honingraten van bijen'],
+    inputs:[{key:'zijde',label:'Zijde (cm)'}],
+    omtrek:{uitleg:'Een regelmatige zeshoek heeft 6 gelijke zijden. Neem de zijde dus 6 keer.',formule:'Omtrek = 6 × zijde',velden:['zijde'],bereken:v=>({expr:`6 × ${mkFmt(v.zijde)}`,res:6*v.zijde})},
+    oppervlakte:null
+  },
+  vijfhoek:{
+    naam:'Vijfhoek',
+    svg:'<svg viewBox="0 0 120 115" width="90" height="86"><polygon points="60,5 108,38 90,95 30,95 12,38" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>',
+    kenmerken:['5 gelijke zijden','5 gelijke hoeken van 108°','Zoals een ster zonder punten'],
+    inputs:[{key:'zijde',label:'Zijde (cm)'}],
+    omtrek:{uitleg:'Een regelmatige vijfhoek heeft 5 gelijke zijden. Neem de zijde dus 5 keer.',formule:'Omtrek = 5 × zijde',velden:['zijde'],bereken:v=>({expr:`5 × ${mkFmt(v.zijde)}`,res:5*v.zijde})},
+    oppervlakte:null
+  }
+};
+
+function renderMkFiguurDetail(el){
+  const fig=MK_FIGUREN[mkFiguurId];
+  if(!fig){ mkFiguurId=null; renderMkTheorie(el); return; }
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="closeMkFiguur()">← Figuren</button>
+    <div class="mk-detail-head">
+      <div class="mk-detail-svg">${fig.svg}</div>
+      <h2 class="mk-detail-titel">${fig.naam}</h2>
+    </div>
+    <h3 class="mk-sectie-titel">Kenmerken</h3>
+    <ul class="mk-detail-kenmerken">${fig.kenmerken.map(k=>`<li>${k}</li>`).join('')}</ul>
+
+    <h3 class="mk-sectie-titel">📏 Omtrek</h3>
+    <p class="mk-uitleg">${fig.omtrek.uitleg}</p>
+    <div class="mk-formule" style="font-size:14px;margin-bottom:18px;">${fig.omtrek.formule}</div>
+
+    ${fig.oppervlakte?`
+    <h3 class="mk-sectie-titel">⬛ Oppervlakte</h3>
+    <p class="mk-uitleg">${fig.oppervlakte.uitleg}</p>
+    <div class="mk-formule" style="font-size:14px;margin-bottom:18px;">${fig.oppervlakte.formule}</div>` : ''}
+
+    <h3 class="mk-sectie-titel">🧮 Simulatie — vul de gegevens van je figuur in</h3>
+    <div class="mk-sim-box">
+      <div class="mk-sim-fields">
+        ${fig.inputs.map(inp=>`<label class="mk-sim-label">${inp.label}<input type="number" step="any" inputmode="decimal" class="mk-sim-input" id="mk-sim-${inp.key}"></label>`).join('')}
+      </div>
+      <button class="start-btn" onclick="berekenMkFiguur()">🧮 Bereken</button>
+    </div>
+    <div id="mk-sim-result"></div>`;
+}
+
+function berekenMkFiguur(){
+  const fig=MK_FIGUREN[mkFiguurId];if(!fig)return;
+  const vals={};
+  fig.inputs.forEach(inp=>{
+    const el=document.getElementById('mk-sim-'+inp.key);
+    vals[inp.key]=el&&el.value!==''?parseFloat(el.value.replace(',','.')):NaN;
+  });
+  const res=document.getElementById('mk-sim-result');if(!res)return;
+  const blokken=[];
+  [['omtrek','📏 Omtrek'],['oppervlakte','⬛ Oppervlakte']].forEach(([key,label])=>{
+    const f=fig[key];
+    if(!f)return;
+    const compleet=f.velden.every(k=>!isNaN(vals[k]));
+    if(!compleet){
+      blokken.push(`<div class="mk-sim-result-card"><div class="mk-sim-result-label">${label}</div><div class="mk-sim-result-missing">Vul alle gegevens hierboven in om de ${key} te berekenen.</div></div>`);
+      return;
+    }
+    const uitkomst=f.bereken(vals);
+    blokken.push(`<div class="mk-sim-result-card"><div class="mk-sim-result-label">${label}</div><div class="mk-sim-result-calc">${uitkomst.expr} =</div><div class="mk-sim-result-answer">${mkFmt(uitkomst.res)} ${key==='omtrek'?'cm':'cm²'}</div></div>`);
+  });
+  res.innerHTML=blokken.join('');
+  snd('tap');
+}
+
 function renderMkContent(){
   const el=document.getElementById('mk-content');if(!el)return;
-  if(mkCurrentTab==='theorie') renderMkTheorie(el);
+  if(mkCurrentTab==='theorie'){
+    if(mkFiguurId) renderMkFiguurDetail(el);
+    else renderMkTheorie(el);
+  }
   else renderMkOefeningen(el);
 }
 
@@ -2371,7 +2739,7 @@ function renderMkTheorie(el){
       <h3 class="mk-sectie-titel">📐 Vlakke figuren</h3>
       <div class="mk-grid">
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('vierkant')">
           <svg viewBox="0 0 120 100" width="90" height="75"><rect x="10" y="10" width="80" height="80" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>
           <div class="mk-card-naam">Vierkant</div>
           <ul class="mk-card-info">
@@ -2381,7 +2749,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('rechthoek')">
           <svg viewBox="0 0 140 100" width="105" height="75"><rect x="5" y="20" width="125" height="60" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5" rx="2"/></svg>
           <div class="mk-card-naam">Rechthoek</div>
           <ul class="mk-card-info">
@@ -2391,7 +2759,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('driehoek')">
           <svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,95 5,95" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
           <div class="mk-card-naam">Driehoek</div>
           <ul class="mk-card-info">
@@ -2401,7 +2769,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('cirkel')">
           <svg viewBox="0 0 120 100" width="90" height="75"><circle cx="60" cy="50" r="45" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/><line x1="60" y1="50" x2="105" y2="50" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4"/><text x="80" y="44" font-size="11" fill="var(--tx2)">r</text></svg>
           <div class="mk-card-naam">Cirkel</div>
           <ul class="mk-card-info">
@@ -2411,7 +2779,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('ruit')">
           <svg viewBox="0 0 120 100" width="90" height="75"><polygon points="60,5 115,50 60,95 5,50" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
           <div class="mk-card-naam">Ruit</div>
           <ul class="mk-card-info">
@@ -2421,7 +2789,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('trapezium')">
           <svg viewBox="0 0 140 100" width="105" height="75"><polygon points="25,90 115,90 100,10 40,10" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
           <div class="mk-card-naam">Trapezium</div>
           <ul class="mk-card-info">
@@ -2431,7 +2799,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('zeshoek')">
           <svg viewBox="0 0 120 110" width="90" height="82"><polygon points="60,5 110,32 110,78 60,105 10,78 10,32" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
           <div class="mk-card-naam">Zeshoek</div>
           <ul class="mk-card-info">
@@ -2441,7 +2809,7 @@ function renderMkTheorie(el){
           </ul>
         </div>
 
-        <div class="mk-card">
+        <div class="mk-card mk-card-clickable" onclick="openMkFiguur('vijfhoek')">
           <svg viewBox="0 0 120 115" width="90" height="86"><polygon points="60,5 108,38 90,95 30,95 12,38" fill="var(--accent)" fill-opacity="0.2" stroke="var(--accent)" stroke-width="2.5"/></svg>
           <div class="mk-card-naam">Vijfhoek</div>
           <ul class="mk-card-info">
@@ -3501,6 +3869,7 @@ function kiesProfiel(id){
     if(sel) sel.value = p.thema;
     cfg.hero = HEROES.find(h=>h.id===p.thema)||HEROES[0];
   }
+  if(mainSection==='home') renderHome();
   closeProfiel();
 }
 
@@ -3920,6 +4289,8 @@ function frSwitch(t){
   frTab=t; frThema=0;
   frScore={good:0,bad:0,streak:0}; frTotal=0; frQueue=[];
   frInvRows=[]; frInvChecked=false;
+  frWwSimpleKeuze='';
+  if(t==='flashcards'){ frFcThema=0; frFcQueue=[]; frFcIndex=0; frFcOmgedraaid=false; }
   frRender();
 }
 
@@ -3934,6 +4305,8 @@ function frRender(){
   else if(frTab==='quiz')         frRenderQuiz();
     else if(frTab==='toets')        frRenderToets();
   else if(frTab==='invullen')     frRenderInvullen();
+  else if(frTab==='missies')      frRenderMissies();
+  else if(frTab==='flashcards')   frRenderFlashcards();
 }
 
 function frRenderWwQuizStandalone(){
@@ -3953,7 +4326,6 @@ function frRenderWwInvulStandalone(){
     <div class="fr-page-title">✍️ Werkwoorden</div>
     <p class="fr-page-sub">Kies een werkwoord en vul de vervoegingen in voor je, tu, il/elle, nous, vous en ils/elles.</p>
     <div id="fr-ww-content"></div>`;
-  frWwInvVerbs=[];
   frRenderWwInvul();
 }
 
@@ -3988,6 +4360,18 @@ function frRenderHome(){
         <div class="fr-home-icon">🎯</div>
         <div class="fr-home-card-title">Oefeningen</div>
         <div class="fr-home-card-text">Kies een invuloefening, vervoegingen of quiz.</div>
+      </button>
+
+      <button class="fr-home-card" onclick="frMissiesTab()">
+        <div class="fr-home-icon">🎮</div>
+        <div class="fr-home-card-title">Missies</div>
+        <div class="fr-home-card-text">Doorloop 6 hoofdstukken per werkwoord en versla de eindbaas.</div>
+      </button>
+
+      <button class="fr-home-card" onclick="frSwitch('flashcards')">
+        <div class="fr-home-icon">🗂️</div>
+        <div class="fr-home-card-title">Flashcards</div>
+        <div class="fr-home-card-text">Draai de kaartjes om en oefen alle woorden per thema.</div>
       </button>
     </div>`;
 }
@@ -4799,25 +5183,18 @@ function frRenderWwKiezen(){
     <div class="fr-exercise-list">${verbs.map((v,i)=>`<button class="fr-exercise-card" onclick="frStartWwGekozen(${i})"><span class="fr-exercise-icon">🔤</span><span class="fr-exercise-info"><strong>${v[0]}</strong><small>${v[7]||''}</small></span><span class="fr-arrow">→</span></button>`).join('')}</div>`;
 }
 // ── KLEINE TOETS ──
-let frToetsThemas=new Set(), frToetsType='invullen', frToetsRows=[];
+let frToetsThemas=new Set(), frToetsData=null;
 function frRenderToets(){
   const el=document.getElementById('fr-content');if(!el)return;
   const themas=frSchoolThemas();
   el.innerHTML=`
     <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
     <div class="fr-page-title">📝 Kleine toets</div>
-    <p class="fr-page-sub">Kies één of meerdere Contact-thema's. Alle vragen staan op één pagina.</p>
-    <div class="fr-blok" style="padding:14px;margin-bottom:12px;">
+    <p class="fr-page-sub">Kies één of meerdere Contact-thema's. De toets combineert woordjes, zinnen en werkwoordvervoegingen.</p>
+    <div class="fr-blok" style="padding:14px;margin-bottom:14px;">
       <div style="font-weight:700;margin-bottom:10px;">Contact-thema's</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
         ${themas.map(t=>`<button class="filter-btn${frToetsThemas.has(t)?' on':''}" onclick="frToetsToggle(${t})">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
-      </div>
-    </div>
-    <div class="fr-blok" style="padding:14px;margin-bottom:14px;">
-      <div style="font-weight:700;margin-bottom:10px;">Soort toets</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        <button class="filter-btn${frToetsType==='invullen'?' on':''}" onclick="frToetsType='invullen';frRenderToets()">✍️ Invullen</button>
-        <button class="filter-btn${frToetsType==='meerkeuze'?' on':''}" onclick="frToetsType='meerkeuze';frRenderToets()">🔤 Meerkeuze</button>
       </div>
     </div>
     <button class="start-btn" onclick="frStartToets()">▶ Start toets</button>
@@ -4827,88 +5204,539 @@ function frToetsToggle(t){
   if(frToetsThemas.has(t))frToetsThemas.delete(t);else frToetsThemas.add(t);
   frRenderToets();
 }
+function frToetsRandInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function frToetsShuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+
 function frStartToets(){
   if(!frToetsThemas.size)return;
-  const pool=FR_WOORDEN.filter(w=>frToetsThemas.has(w[2])&&w[4]==='school');
-  if(!pool.length)return;
-  frToetsRows=pool.slice().sort(()=>Math.random()-.5).slice(0,10);
-  const el=document.getElementById('fr-toets-content');if(!el)return;
-  if(frToetsType==='invullen') frRenderToetsInvullen(el,pool);
-  else frRenderToetsMeerkeuze(el,pool);
+  const woordPool=frToetsShuffle(FR_WOORDEN.filter(w=>frToetsThemas.has(w[2])&&w[4]==='school'&&w[3]==='woord'));
+  const el=document.getElementById('fr-toets-content');
+  if(!woordPool.length){
+    if(el) el.innerHTML='<p style="color:var(--tx2);padding:14px 2px;font-size:13px;">Dit thema bevat geen losse woorden. Kies (ook) een ander Contact-thema voor de woordvragen.</p>';
+    return;
+  }
+  const n1=Math.min(woordPool.length, frToetsRandInt(5,10));
+  const w1=woordPool.slice(0,n1);
+  const rest=woordPool.slice(n1);
+  const bron2=rest.length?rest:frToetsShuffle(woordPool);
+  const n2=Math.min(bron2.length, frToetsRandInt(5,10));
+  const w2=bron2.slice(0,n2);
+
+  const zinPool=frToetsShuffle(FR_WOORDEN.filter(w=>w[3]==='zin'&&w[4]==='school'));
+  const zinnen=zinPool.slice(0, Math.min(zinPool.length, frToetsRandInt(3,5)));
+
+  const verbIdx=frToetsRandInt(0,FR_WERKWOORDEN.length-1);
+  const verbSentCount=frToetsRandInt(4,6);
+  const verbSentences=[];
+  for(let i=0;i<verbSentCount;i++) verbSentences.push({p:frToetsRandInt(0,5), v:frToetsRandInt(0,FR_WERKWOORDEN.length-1)});
+
+  frToetsData={w1,w2,zinnen,verbIdx,verbSentences};
+  frRenderToetsPaper();
 }
-function frRenderToetsInvullen(el,pool){
-  const rows=frToetsRows;
+
+function frRenderToetsPaper(){
+  const el=document.getElementById('fr-toets-content');if(!el)return;
+  const d=frToetsData;if(!d)return;
+  const verb=FR_WERKWOORDEN[d.verbIdx];
+  const totaal=d.w1.length+d.w2.length+d.zinnen.length+FR_PROFIELEN.length+d.verbSentences.length;
   el.innerHTML=`<div class="fr-toets-paper">
     <div class="fr-toets-paper-head">
       <div class="fr-toets-paper-title">FRANS — KLEINE TOETS</div>
-      <div class="fr-toets-paper-sub">Woordenschat · ${rows.length} vragen</div>
+      <div class="fr-toets-paper-sub">${totaal} vragen</div>
     </div>
     <div class="fr-toets-student">
       <div>Naam:<span class="fr-toets-line"></span></div>
       <div>Datum:<span class="fr-toets-line"></span></div>
     </div>
-    <div class="fr-toets-instructions"><strong>Instructies:</strong> Vertaal elk woord. Schrijf je antwoord op de lijn. Let goed op spelling en Franse accenten. Alle vragen staan op deze toets.</div>
-    <div>
-      ${rows.map((w,i)=>{const nlNaarFr=i%2===0;return `<div class="fr-toets-question">
-        <div><span class="fr-toets-qnum">${i+1}.</span><span class="t-quiz-meta" style="display:inline-block;margin-right:8px;">${nlNaarFr?'Nederlands → Frans':'Frans → Nederlands'}</span></div>
-        <div class="fr-toets-prompt">${frInvEsc(nlNaarFr?w[1]:w[0])}</div>
-        <input class="t-input fr-toets-input" id="fr-toets-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Antwoord…">
-        <div id="fr-toets-fb${i}"></div>
-      </div>`;}).join('')}
+    <div class="fr-toets-instructions"><strong>Instructies:</strong> Schrijf je antwoord telkens op de lijn. Let goed op spelling en Franse accenten.</div>
+
+    <div class="fr-toets-section-title">1. Vertaal de volgende woorden naar het Nederlands</div>
+    <div>${d.w1.map((w,i)=>`<div class="fr-toets-question">
+        <div><span class="fr-toets-qnum">${i+1}.</span><span class="fr-toets-prompt">${frInvEsc(w[0])}</span></div>
+        <input class="t-input fr-toets-input" id="fr-t1-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Antwoord…">
+        <div id="fr-t1-fb${i}"></div>
+      </div>`).join('')}</div>
+
+    <div class="fr-toets-section-title">2. Vertaal de volgende woorden naar het Frans</div>
+    <div>${d.w2.map((w,i)=>`<div class="fr-toets-question">
+        <div><span class="fr-toets-qnum">${i+1}.</span><span class="fr-toets-prompt">${frInvEsc(w[1])}</span></div>
+        <input class="t-input fr-toets-input" id="fr-t2-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Antwoord…">
+        <div id="fr-t2-fb${i}"></div>
+      </div>`).join('')}</div>
+
+    ${d.zinnen.length?`
+    <div class="fr-toets-section-title">3. Vertaal de volgende zinnen naar het Frans</div>
+    <div>${d.zinnen.map((w,i)=>`<div class="fr-toets-question">
+        <div><span class="fr-toets-qnum">${i+1}.</span><span class="fr-toets-prompt" style="font-size:15px;">${frInvEsc(w[1])}</span></div>
+        <input class="t-input fr-toets-input" id="fr-t3-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Franse zin…">
+        <div id="fr-t3-fb${i}"></div>
+      </div>`).join('')}</div>` : ''}
+
+    <div class="fr-toets-section-title">4. Geef de vervoeging van het werkwoord <em>${frInvEsc(verb[0])}</em> <span style="font-weight:400;color:var(--tx2);">(${frInvEsc(verb[7])})</span></div>
+    <div class="fr-inv-wrap" style="margin-bottom:18px;">
+      <table class="fr-inv-tabel">
+        <thead><tr><th style="width:34%;">Persoon</th><th>Vervoeging</th></tr></thead>
+        <tbody>
+          ${FR_PROFIELEN.map((pro,pi)=>`<tr>
+            <td><strong>${pro}</strong><div style="font-size:10px;color:var(--tx3);font-weight:600;">${FR_PROFIEL_NL[pi]}</div></td>
+            <td><input class="fr-inv-input" id="fr-t4-i${pi}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="…"></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
     </div>
-    <button class="start-btn" style="margin-top:18px;" onclick="frCheckToetsInvullen()">✅ Toets inleveren</button>
+
+    <div class="fr-toets-section-title">5. Vul de juiste vervoeging in</div>
+    <div>${d.verbSentences.map((s,i)=>{
+        const vrow=FR_WERKWOORDEN[s.v];
+        return `<div class="fr-toets-question">
+        <div><span class="fr-toets-qnum">${i+1}.</span><span class="fr-toets-prompt">${FR_PROFIELEN[s.p]} ______ <span style="font-weight:400;color:var(--tx2);">(${frInvEsc(vrow[0])})</span></span></div>
+        <input class="t-input fr-toets-input" id="fr-t5-i${i}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Vervoeging…">
+        <div id="fr-t5-fb${i}"></div>
+      </div>`;}).join('')}</div>
+
+    <button class="start-btn" style="margin-top:18px;" onclick="frCheckToets()">✅ Toets inleveren</button>
     <div id="fr-toets-result" class="fr-toets-result"></div>
   </div>`;
-  const first=document.getElementById('fr-toets-i0');if(first)first.focus({preventScroll:true});
+  const first=document.getElementById('fr-t1-i0');if(first)first.focus({preventScroll:true});
 }
-function frCheckToetsInvullen(){
-  let goed=0,bijna=0,fout=0;
-  frToetsRows.forEach((w,i)=>{
-    const nlNaarFr=i%2===0, correct=nlNaarFr?w[0]:w[1];
-    const inp=document.getElementById('fr-toets-i'+i);if(!inp)return;
+
+function frCheckToets(){
+  const d=frToetsData;if(!d)return;
+  let goed=0,bijna=0,fout=0,totaal=0;
+  function beoordeel(id,fbId,correct){
+    totaal++;
+    const inp=document.getElementById(id);if(!inp)return;
     const res=frInvBeoordeel(inp.value,correct);
-    inp.classList.remove('correct','wrong');
-    if(res==='ok'){goed++;inp.classList.add('correct');}
-    else if(res==='bijna'){bijna++;inp.classList.add('wrong');}
-    else {fout++;inp.classList.add('wrong');}
-    const fb=document.getElementById('fr-toets-fb'+i);
-    if(fb)fb.innerHTML=res==='ok'?'<div class="t-feedback t-fb-ok">✓ Goed</div>':`<div class="t-feedback ${res==='bijna'?'t-fb-bijna':'t-fb-no'}">${res==='bijna'?'≈ Bijna — let op de accenten':'✗ Juiste antwoord: <strong>'+frInvEsc(correct)+'</strong>'}</div>`;
+    inp.classList.remove('ok','bijna','no');
+    const fb=fbId?document.getElementById(fbId):null;
+    if(res==='ok'){goed++;inp.classList.add('ok');if(fb)fb.innerHTML='<div class="t-feedback t-fb-ok">✓ Goed</div>';}
+    else if(res==='bijna'){bijna++;inp.classList.add('bijna');if(fb)fb.innerHTML=`<div class="t-feedback t-fb-bijna">≈ Bijna — juist: <strong>${frInvEsc(correct)}</strong></div>`;}
+    else{fout++;inp.classList.add('no');if(fb)fb.innerHTML=`<div class="t-feedback t-fb-no">✗ Juist: <strong>${frInvEsc(correct)}</strong></div>`;}
+  }
+  d.w1.forEach((w,i)=>beoordeel('fr-t1-i'+i,'fr-t1-fb'+i,w[1]));
+  d.w2.forEach((w,i)=>beoordeel('fr-t2-i'+i,'fr-t2-fb'+i,w[0]));
+  d.zinnen.forEach((w,i)=>beoordeel('fr-t3-i'+i,'fr-t3-fb'+i,w[0]));
+  const verb=FR_WERKWOORDEN[d.verbIdx];
+  FR_PROFIELEN.forEach((_,pi)=>beoordeel('fr-t4-i'+pi,null,verb[pi+1]));
+  d.verbSentences.forEach((s,i)=>{
+    const vrow=FR_WERKWOORDEN[s.v];
+    beoordeel('fr-t5-i'+i,'fr-t5-fb'+i,vrow[s.p+1]);
   });
-  const tot=frToetsRows.length,pct=tot?Math.round(goed/tot*100):0;
+  const pct=totaal?Math.round(goed/totaal*100):0;
   frScore.good+=goed;frScore.bad+=fout+bijna;trackOefening('frans',goed,fout+bijna);
   const r=document.getElementById('fr-toets-result');
-  if(r)r.innerHTML=`<div class="fr-inv-res"><div class="fr-inv-res-score">${goed} / ${tot} · ${pct}%</div><div class="fr-inv-res-sub">${goed} juist${bijna?` · ${bijna} bijna`:''}${fout?` · ${fout} fout`:''}</div><button class="fr-inv-btn prim" style="margin-top:10px;" onclick="frStartToets()">🔄 Nieuwe toets</button></div>`;
+  if(r){
+    r.innerHTML=`<div class="fr-inv-res">
+      <div style="font-size:2rem;margin-bottom:4px;">${pct>=90?'🏆':pct>=70?'👏':pct>=50?'💪':'📚'}</div>
+      <div class="fr-inv-res-score">${goed} / ${totaal} · ${pct}%</div>
+      <div class="fr-inv-res-sub">${goed} juist${bijna?` · ${bijna} bijna`:''}${fout?` · ${fout} fout`:''}</div>
+      <button class="fr-inv-btn prim" style="margin-top:10px;" onclick="frStartToets()">🔄 Nieuwe toets</button>
+    </div>`;
+    r.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
   if(fout+bijna===0)snd('ok');else snd('no');
 }
-function frRenderToetsMeerkeuze(el,pool){
-  const rows=frToetsRows;
-  el.innerHTML=`<div class="fr-toets-paper">
-    <div class="fr-toets-paper-head">
-      <div class="fr-toets-paper-title">FRANS — KLEINE TOETS</div>
-      <div class="fr-toets-paper-sub">Meerkeuze · ${rows.length} vragen</div>
-    </div>
-    <div class="fr-toets-student"><div>Naam:<span class="fr-toets-line"></span></div><div>Datum:<span class="fr-toets-line"></span></div></div>
-    <div class="fr-toets-instructions"><strong>Instructies:</strong> Kies bij elke vraag het juiste antwoord in de andere taal.</div>
-    <div class="fr-toets-inv-grid">
-      ${rows.map((w,i)=>{const frNaarNl=i%2===0;const correct=frNaarNl?w[1]:w[0];const vraag=frNaarNl?w[0]:w[1];const opts=[correct,...pool.filter(x=>x!==w).sort(()=>Math.random()-.5).slice(0,3).map(x=>frNaarNl?x[1]:x[0])].sort(()=>Math.random()-.5);return `<div class="fr-toets-item">
-        <div class="t-quiz-meta"><span>Vraag ${i+1}</span><span class="t-dir-badge">${frNaarNl?'🇫🇷 → 🇧🇪':'🇧🇪 → 🇫🇷'}</span></div>
-        <div class="t-word" style="font-size:21px;">${frInvEsc(vraag)}</div>
-        <div class="ak-mc-grid">${opts.map(o=>`<button class="ak-mc-opt" onclick="frToetsMcAnswer(this,${i},${JSON.stringify(o)},${JSON.stringify(correct)})"><span style="font-size:13px;">${frInvEsc(o)}</span></button>`).join('')}</div>
-        <div id="fr-toets-mc-fb${i}"></div>
-      </div>`;}).join('')}
-    </div>
-    <div id="fr-toets-mc-result" class="fr-toets-result"></div>
-  </div>`;
-  window.frToetsMcGood=0;window.frToetsMcDone=new Set();
+
+// ══════════════════════════════════════════════════
+// ── MISSIES (werkwoorden-avontuur per werkwoord) ──
+// ══════════════════════════════════════════════════
+const FR_MIS_HOOFDSTUKKEN = [
+  {key:'ontdekken', naam:'Ontdekken', icoon:'👀', xp:10, uitleg:'Bekijk alle vervoegingen met een voorbeeldzin.'},
+  {key:'herkennen', naam:'Herkennen', icoon:'🎯', xp:15, uitleg:'Kies de juiste vervoeging uit 4 opties.'},
+  {key:'invullen', naam:'Invullen', icoon:'✏️', xp:20, uitleg:'Typ zelf de juiste vervoeging.'},
+  {key:'vertalen', naam:'Vertalen', icoon:'🔤', xp:20, uitleg:'Vertaal van het Nederlands naar het Frans.'},
+  {key:'schrijven', naam:'Schrijven', icoon:'✍️', xp:25, uitleg:'Schrijf de volledige vorm helemaal zelf.'},
+  {key:'eindbaas', naam:'Eindbaas', icoon:'👹', xp:40, uitleg:'Alles door elkaar — 12 vragen.'},
+];
+// ik-vorm, jij-vorm, hij/zij-vorm van de Nederlandse vertaling (meervoud = infinitief zelf)
+const FR_MIS_NL_VERVOEGING = [
+  {ik:'ben',jij:'bent',hz:'is',mv:'zijn'},
+  {ik:'heb',jij:'hebt',hz:'heeft',mv:'hebben'},
+  {ik:'ga',jij:'gaat',hz:'gaat',mv:'gaan'},
+  {ik:'doe',jij:'doet',hz:'doet',mv:'doen'},
+  {ik:'spreek',jij:'spreekt',hz:'spreekt',mv:'spreken'},
+  {ik:'eet',jij:'eet',hz:'eet',mv:'eten'},
+  {ik:'drink',jij:'drinkt',hz:'drinkt',mv:'drinken'},
+  {ik:'kom',jij:'komt',hz:'komt',mv:'komen'},
+  {ik:'kan',jij:'kan',hz:'kan',mv:'kunnen'},
+  {ik:'wil',jij:'wilt',hz:'wil',mv:'willen'},
+  {ik:'woon',jij:'woont',hz:'woont',mv:'wonen'},
+  {ik:'heet',jij:'heet',hz:'heet',mv:'heten'},
+  {ik:'hou van',jij:'houdt van',hz:'houdt van',mv:'houden van'},
+  {ik:'kijk',jij:'kijkt',hz:'kijkt',mv:'kijken'},
+  {ik:'luister',jij:'luistert',hz:'luistert',mv:'luisteren'},
+  {ik:'speel',jij:'speelt',hz:'speelt',mv:'spelen'},
+  {ik:'lees',jij:'leest',hz:'leest',mv:'lezen'},
+  {ik:'schrijf',jij:'schrijft',hz:'schrijft',mv:'schrijven'},
+  {ik:'zing',jij:'zingt',hz:'zingt',mv:'zingen'},
+  {ik:'dans',jij:'danst',hz:'danst',mv:'dansen'},
+];
+
+function frMisOpslagSleutel(){ return 'lh_fr_missies_'+(huidigProfiel?huidigProfiel.id:'gast'); }
+function frMisGetData(){ try{return JSON.parse(localStorage.getItem(frMisOpslagSleutel())||'{}');}catch(e){return{};} }
+function frMisSaveData(d){ localStorage.setItem(frMisOpslagSleutel(), JSON.stringify(d)); }
+function frMisVoortgang(vi){
+  const d=frMisGetData();
+  return d[vi] || {chapters:[false,false,false,false,false,false], xp:0};
 }
-function frToetsMcAnswer(btn,i,ans,correct){
-  if(window.frToetsMcDone.has(i))return;
-  window.frToetsMcDone.add(i);
-  const ok=ans===correct;if(ok)window.frToetsMcGood++;
-  const card=btn.closest('.fr-toets-item');card.querySelectorAll('.ak-mc-opt').forEach(b=>{b.disabled=true;const v=b.querySelector('span').textContent.trim();if(v===correct)b.classList.add('ok');else if(b===btn&&!ok)b.classList.add('no');else b.style.opacity='.4';});
-  const fb=document.getElementById('fr-toets-mc-fb'+i);if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed</div>':`<div class="t-feedback t-fb-no">✗ Juiste antwoord: <strong>${frInvEsc(correct)}</strong></div>`;
-  if(window.frToetsMcDone.size===frToetsRows.length){const pct=Math.round(window.frToetsMcGood/frToetsRows.length*100);const r=document.getElementById('fr-toets-mc-result');if(r)r.innerHTML=`<div class="fr-inv-res"><div class="fr-inv-res-score">${window.frToetsMcGood} / ${frToetsRows.length} · ${pct}%</div><button class="fr-inv-btn prim" style="margin-top:10px;" onclick="frStartToets()">🔄 Nieuwe toets</button></div>`;}
+function frMisMarkDone(vi,chIdx){
+  const d=frMisGetData();
+  const vg=d[vi] || {chapters:[false,false,false,false,false,false], xp:0};
+  if(!vg.chapters[chIdx]){ vg.chapters[chIdx]=true; vg.xp=(vg.xp||0)+FR_MIS_HOOFDSTUKKEN[chIdx].xp; }
+  d[vi]=vg;
+  frMisSaveData(d);
 }
+
+// Basiszin-opbouw (houdt rekening met werkwoorden zoals s'appeler waar het onderwerp al in de vorm zit)
+function frMisFrase(vi,pi){
+  const ww=FR_WERKWOORDEN[vi], vorm=ww[pi+1], pron=FR_PROFIELEN[pi];
+  const kort=pron.split('/')[0].toLowerCase();
+  if(vorm.toLowerCase().startsWith(kort+' ')) return vorm;
+  return `${pron} ${vorm}`;
+}
+function frMisZin(vi,pi){ const f=frMisFrase(vi,pi); return f.charAt(0).toUpperCase()+f.slice(1)+'.'; }
+function frMisOnderwerpTekst(vi,pi){
+  const ww=FR_WERKWOORDEN[vi], vorm=ww[pi+1], pron=FR_PROFIELEN[pi];
+  const kort=pron.split('/')[0].toLowerCase();
+  let subj = vorm.toLowerCase().startsWith(kort+' ') ? vorm.split(' ')[0] : pron;
+  return subj.charAt(0).toUpperCase()+subj.slice(1);
+}
+function frMisNlZin(vi,pi){
+  const nl=FR_MIS_NL_VERVOEGING[vi];
+  const vorm = pi===0?nl.ik : pi===1?nl.jij : pi===2?nl.hz : nl.mv;
+  return `${FR_PROFIEL_NL[pi]} ${vorm}`;
+}
+function frMisMcOpties(vi,pi){
+  const ww=FR_WERKWOORDEN[vi], correct=ww[pi+1];
+  let pool=[...new Set([1,2,3,4,5,6].map(k=>ww[k]).filter(v=>v.toLowerCase()!==correct.toLowerCase()))];
+  pool=frToetsShuffle(pool);
+  let pogingen=0;
+  while(pool.length<3 && pogingen<40){
+    pogingen++;
+    const rv=FR_WERKWOORDEN[frToetsRandInt(0,FR_WERKWOORDEN.length-1)];
+    const rf=rv[frToetsRandInt(1,6)];
+    if(rf.toLowerCase()!==correct.toLowerCase() && !pool.some(p=>p.toLowerCase()===rf.toLowerCase())) pool.push(rf);
+  }
+  return frToetsShuffle([correct,...pool.slice(0,3)]);
+}
+function frInsertAccent(ch,inputId){
+  const inp=document.getElementById(inputId);if(!inp)return;
+  const start=inp.selectionStart!=null?inp.selectionStart:inp.value.length;
+  const end=inp.selectionEnd!=null?inp.selectionEnd:inp.value.length;
+  inp.value=inp.value.slice(0,start)+ch+inp.value.slice(end);
+  const pos=start+ch.length;
+  inp.focus(); inp.setSelectionRange(pos,pos);
+  inp.dispatchEvent(new Event('input',{bubbles:true}));
+}
+function frAccentBar(inputId){
+  return `<div class="fr-accent-bar">${['é','è','ê','à','ù','ç','œ','â','î','ô'].map(c=>`<button type="button" class="fr-accent-btn" onmousedown="event.preventDefault()" onclick="frInsertAccent('${c}','${inputId}')">${c}</button>`).join('')}</div>`;
+}
+
+// ── State ──
+let frMisView='overview', frMisVi=0, frMisChapterKey='', frMisQueue=[], frMisMastered=new Set(), frMisTotal=0, frMisGoed=0, frMisFout=0;
+
+function frMissiesTab(){ frTab='missies'; frMisView='overview'; frRender(); }
+function frRenderMissies(){
+  if(frMisView==='detail') frRenderMissieDetail();
+  else if(frMisView==='chapter') frMisRenderNext();
+  else frRenderMissiesOverview();
+}
+function frRenderMissiesOverview(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">🎮 Missies</div>
+    <p class="fr-page-sub">Kies een werkwoord en doorloop alle hoofdstukken om het onder de knie te krijgen.</p>
+    <div class="mis-grid">
+      ${FR_WERKWOORDEN.map((ww,vi)=>{
+        const vg=frMisVoortgang(vi);
+        const sterren=vg.chapters.filter(Boolean).length;
+        const compleet=sterren===6;
+        return `<button class="mis-card${compleet?' compleet':''}" onclick="frOpenMissie(${vi})">
+          ${compleet?'<div class="mis-trofee">🏆</div>':''}
+          <div class="mis-card-naam">${ww[0]}</div>
+          <div class="mis-card-vert">${ww[7]||''}</div>
+          <div class="mis-sterren">${Array.from({length:6}).map((_,i)=>`<span class="${i<sterren?'on':''}">⭐</span>`).join('')}</div>
+        </button>`;
+      }).join('')}
+    </div>`;
+}
+function frOpenMissie(vi){ frMisVi=vi; frMisView='detail'; frRenderMissies(); }
+function frBackMissiesOverview(){ frMisView='overview'; frRenderMissies(); }
+function frRenderMissieDetail(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const ww=FR_WERKWOORDEN[frMisVi];
+  const vg=frMisVoortgang(frMisVi);
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackMissiesOverview()">← Missies</button>
+    <div class="fr-page-title">${ww[0]} <span style="font-weight:400;color:var(--tx2);font-size:16px;">(${ww[7]||''})</span></div>
+    <p class="fr-page-sub">${vg.xp||0} XP verdiend op dit werkwoord.</p>
+    <div class="mis-hoofdstukken">
+      ${FR_MIS_HOOFDSTUKKEN.map((h,i)=>{
+        const done=vg.chapters[i];
+        const locked=i>0 && !vg.chapters[i-1];
+        return `<button class="mis-hoofdstuk${done?' done':''}${locked?' locked':''}" ${locked?'disabled':''} onclick="frOpenChapter('${h.key}')">
+          <span class="mis-hs-icoon">${locked?'🔒':h.icoon}</span>
+          <span class="mis-hs-info"><strong>${h.naam}</strong><small>${h.uitleg}</small></span>
+          <span class="mis-hs-status">${done?'✅':locked?'':'▶'}</span>
+        </button>`;
+      }).join('')}
+    </div>`;
+}
+
+function frOpenChapter(key){
+  frMisChapterKey=key; frMisView='chapter';
+  const basisItems=[0,1,2,3,4,5].map(pi=>({id:pi,pi}));
+  if(key==='ontdekken'){ frRenderMissies(); return; }
+  if(key==='eindbaas'){
+    const types=['mc','invullen','vertalen','schrijven'];
+    const items=Array.from({length:12}).map((_,i)=>({id:i,pi:frToetsRandInt(0,5),type:types[frToetsRandInt(0,types.length-1)]}));
+    frMisStart(items); return;
+  }
+  frMisStart(basisItems);
+}
+function frMisStart(items){
+  frMisQueue=frToetsShuffle(items);
+  frMisMastered=new Set(); frMisTotal=items.length; frMisGoed=0; frMisFout=0;
+  frMisRenderNext();
+}
+function frMisChapterIdx(){ return FR_MIS_HOOFDSTUKKEN.findIndex(h=>h.key===frMisChapterKey); }
+function frMisVoortgangBalk(){
+  const pct=frMisTotal?Math.round(frMisMastered.size/frMisTotal*100):0;
+  return `<div class="tbar-wrap"><div class="tbar" style="width:${pct}%"></div></div><div style="font-size:11px;color:var(--tx2);margin-bottom:10px;">${frMisMastered.size} / ${frMisTotal} onder de knie</div>`;
+}
+function frMisBackBtn(){
+  const h=FR_MIS_HOOFDSTUKKEN.find(x=>x.key===frMisChapterKey);
+  return `<button class="fr-back-btn" onclick="frMisView='detail';frRenderMissies();">← ${FR_WERKWOORDEN[frMisVi][0]}</button>
+    <div class="fr-page-title" style="font-size:19px;">${h.icoon} ${h.naam}</div>`;
+}
+
+function frMisRenderNext(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  if(frMisChapterKey==='ontdekken'){ frMisRenderOntdekken(el); return; }
+  if(!frMisQueue.length){ frMisRenderVoltooid(el); return; }
+  const item=frMisQueue[0];
+  const type=frMisChapterKey==='eindbaas'?item.type:frMisChapterKey==='herkennen'?'mc':frMisChapterKey==='invullen'?'invullen':frMisChapterKey==='vertalen'?'vertalen':'schrijven';
+  if(type==='mc') frMisRenderMC(el,item);
+  else if(type==='invullen') frMisRenderInvullen(el,item);
+  else if(type==='vertalen') frMisRenderVertalen(el,item);
+  else frMisRenderSchrijven(el,item);
+}
+
+function frMisRenderOntdekken(el){
+  const vi=frMisVi, ww=FR_WERKWOORDEN[vi];
+  el.innerHTML=`${frMisBackBtn()}
+    <p class="fr-page-sub">Bekijk alle vervoegingen en de voorbeeldzinnen. Klik daarna op "Ik ken ze!".</p>
+    <table class="ww-uitleg-tabel">
+      <thead><tr><th>Persoon</th><th>Vervoeging</th><th>Voorbeeldzin</th></tr></thead>
+      <tbody>
+        ${FR_PROFIELEN.map((pro,pi)=>`<tr>
+          <td><strong>${pro}</strong><div style="font-size:10px;color:var(--tx3);font-weight:600;">${FR_PROFIEL_NL[pi]}</div></td>
+          <td><strong>${frInvEsc(ww[pi+1])}</strong></td>
+          <td style="color:var(--tx2);">${frInvEsc(frMisZin(vi,pi))}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <button class="start-btn" style="margin-top:16px;" onclick="frMisMarkDone(${vi},0);frMisView='detail';frRenderMissies();">✅ Ik ken ze!</button>`;
+}
+
+function frMisRenderMC(el,item){
+  const vi=frMisVi, pi=item.pi;
+  const opties=frMisMcOpties(vi,pi);
+  el.innerHTML=`${frMisBackBtn()}
+    ${frMisVoortgangBalk()}
+    <div class="t-quiz-meta">${FR_WERKWOORDEN[vi][0]} — welke vorm past hier?</div>
+    <div class="t-word" style="font-size:22px;">${frMisOnderwerpTekst(vi,pi)} ______.</div>
+    <div class="ak-mc-grid">${opties.map(o=>`<button class="ak-mc-opt" onclick="frMisMcAntwoord(this,${JSON.stringify(o)})">${frInvEsc(o)}</button>`).join('')}</div>
+    <div id="fr-mis-fb"></div>`;
+}
+function frMisMcAntwoord(btn,ans){
+  const item=frMisQueue[0], vi=frMisVi, correct=FR_WERKWOORDEN[vi][item.pi+1];
+  const ok=ans.toLowerCase()===correct.toLowerCase();
+  document.querySelectorAll('#fr-content .ak-mc-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.trim().toLowerCase()===correct.toLowerCase())b.classList.add('ok');
+    else if(b===btn)b.classList.add('no');
+  });
+  const fb=document.getElementById('fr-mis-fb');
+  if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed!</div>':`<div class="t-feedback t-fb-no">✗ Juist: <strong>${frInvEsc(correct)}</strong></div>`;
+  snd(ok?'ok':'no');
+  setTimeout(()=>frMisAnswerResult(item,ok),900);
+}
+
+function frMisRenderInvullen(el,item){
+  const vi=frMisVi, pi=item.pi;
+  el.innerHTML=`${frMisBackBtn()}
+    ${frMisVoortgangBalk()}
+    <div class="t-quiz-meta">${FR_WERKWOORDEN[vi][0]} — vul de juiste vorm in</div>
+    <div class="t-word" style="font-size:22px;">${frMisOnderwerpTekst(vi,pi)} ______.</div>
+    <input class="t-input" id="fr-mis-inp" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier…" onkeydown="if(event.key==='Enter')frMisInvullenCheck()">
+    ${frAccentBar('fr-mis-inp')}
+    <button class="t-submit" style="margin-top:8px;" onclick="frMisInvullenCheck()">Controleer</button>
+    <div id="fr-mis-fb"></div>`;
+  const inp=document.getElementById('fr-mis-inp');if(inp)inp.focus();
+}
+function frMisInvullenCheck(){
+  const item=frMisQueue[0], vi=frMisVi, correct=FR_WERKWOORDEN[vi][item.pi+1];
+  const inp=document.getElementById('fr-mis-inp');if(!inp)return;
+  const res=frInvBeoordeel(inp.value,correct);
+  const ok=res==='ok';
+  inp.disabled=true;
+  const fb=document.getElementById('fr-mis-fb');
+  if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed!</div>':res==='bijna'?`<div class="t-feedback t-fb-bijna">≈ Bijna — juist: <strong>${frInvEsc(correct)}</strong></div>`:`<div class="t-feedback t-fb-no">✗ Juist: <strong>${frInvEsc(correct)}</strong></div>`;
+  snd(ok?'ok':'no');
+  setTimeout(()=>frMisAnswerResult(item,ok),900);
+}
+
+function frMisRenderVertalen(el,item){
+  const vi=frMisVi, pi=item.pi;
+  el.innerHTML=`${frMisBackBtn()}
+    ${frMisVoortgangBalk()}
+    <div class="t-quiz-meta">Vertaal naar het Frans</div>
+    <div class="t-word" style="font-size:22px;">${frInvEsc(frMisNlZin(vi,pi))}</div>
+    <input class="t-input" id="fr-mis-inp" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ de Franse vorm…" onkeydown="if(event.key==='Enter')frMisVertalenCheck()">
+    ${frAccentBar('fr-mis-inp')}
+    <button class="t-submit" style="margin-top:8px;" onclick="frMisVertalenCheck()">Controleer</button>
+    <div id="fr-mis-fb"></div>`;
+  const inp=document.getElementById('fr-mis-inp');if(inp)inp.focus();
+}
+function frMisVertalenCheck(){
+  const item=frMisQueue[0], vi=frMisVi, pi=item.pi, correct=frMisFrase(vi,pi);
+  const inp=document.getElementById('fr-mis-inp');if(!inp)return;
+  const res=frInvBeoordeel(inp.value,correct);
+  const ok=res==='ok';
+  inp.disabled=true;
+  const fb=document.getElementById('fr-mis-fb');
+  if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed!</div>':res==='bijna'?`<div class="t-feedback t-fb-bijna">≈ Bijna — juist: <strong>${frInvEsc(correct)}</strong></div>`:`<div class="t-feedback t-fb-no">✗ Juist: <strong>${frInvEsc(correct)}</strong></div>`;
+  snd(ok?'ok':'no');
+  setTimeout(()=>frMisAnswerResult(item,ok),900);
+}
+
+function frMisRenderSchrijven(el,item){
+  const vi=frMisVi, pi=item.pi, ww=FR_WERKWOORDEN[vi];
+  el.innerHTML=`${frMisBackBtn()}
+    ${frMisVoortgangBalk()}
+    <div class="t-quiz-meta">Schrijf de volledige vorm</div>
+    <div class="t-word" style="font-size:22px;">${FR_PROFIELEN[pi]} <span style="font-weight:400;color:var(--tx2);">(${frInvEsc(ww[0])})</span></div>
+    <div class="mis-letterblokjes" id="fr-mis-letters"></div>
+    <input class="t-input" id="fr-mis-inp" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Typ hier…" oninput="frMisSchrijfInput()" onkeydown="if(event.key==='Enter')frMisSchrijfCheck()">
+    ${frAccentBar('fr-mis-inp')}
+    <button class="t-submit" style="margin-top:8px;" onclick="frMisSchrijfCheck()">Controleer</button>
+    <div id="fr-mis-fb"></div>`;
+  frMisSchrijfInput();
+  const inp=document.getElementById('fr-mis-inp');if(inp)inp.focus();
+}
+function frMisSchrijfInput(){
+  const item=frMisQueue[0];if(!item)return;
+  const target=FR_WERKWOORDEN[frMisVi][item.pi+1];
+  const inp=document.getElementById('fr-mis-inp');
+  const val=inp?inp.value:'';
+  const lettersEl=document.getElementById('fr-mis-letters');if(!lettersEl)return;
+  let html='';
+  for(let i=0;i<target.length;i++){
+    if(i<val.length){
+      const juist=val[i].toLowerCase()===target[i].toLowerCase();
+      html+=`<span class="mis-letter ${juist?'ok':'no'}">${frInvEsc(val[i])}</span>`;
+    } else html+=`<span class="mis-letter leeg">•</span>`;
+  }
+  lettersEl.innerHTML=html;
+}
+function frMisSchrijfCheck(){
+  const item=frMisQueue[0], vi=frMisVi, correct=FR_WERKWOORDEN[vi][item.pi+1];
+  const inp=document.getElementById('fr-mis-inp');if(!inp)return;
+  const res=frInvBeoordeel(inp.value,correct);
+  const ok=res==='ok';
+  inp.disabled=true;
+  const fb=document.getElementById('fr-mis-fb');
+  if(fb)fb.innerHTML=ok?'<div class="t-feedback t-fb-ok">✓ Goed!</div>':res==='bijna'?`<div class="t-feedback t-fb-bijna">≈ Bijna — juist: <strong>${frInvEsc(correct)}</strong></div>`:`<div class="t-feedback t-fb-no">✗ Juist: <strong>${frInvEsc(correct)}</strong></div>`;
+  snd(ok?'ok':'no');
+  setTimeout(()=>frMisAnswerResult(item,ok),900);
+}
+
+function frMisAnswerResult(item,ok){
+  if(ok){ frMisGoed++; frMisMastered.add(item.id); frMisQueue.shift(); }
+  else{ frMisFout++; frMisQueue.shift(); frMisQueue.splice(Math.min(frMisQueue.length,2),0,item); }
+  frMisRenderNext();
+}
+function frMisRenderVoltooid(el){
+  const idx=frMisChapterIdx();
+  frMisMarkDone(frMisVi,idx);
+  trackOefening('frans',frMisGoed,frMisFout);
+  const laatste=idx===FR_MIS_HOOFDSTUKKEN.length-1;
+  el.innerHTML=`${frMisBackBtn()}
+    <div class="fr-inv-res" style="text-align:center;padding:26px 14px;">
+      <div style="font-size:2.4rem;margin-bottom:6px;">${laatste?'🏆':'🎉'}</div>
+      <div class="fr-inv-res-score">${laatste?'Missie voltooid!':'Hoofdstuk voltooid!'}</div>
+      <div class="fr-inv-res-sub">+${FR_MIS_HOOFDSTUKKEN[idx].xp} XP · ${frMisGoed} goed${frMisFout?` · ${frMisFout} fout`:''}</div>
+      <button class="fr-inv-btn prim" style="margin-top:12px;" onclick="frMisView='detail';frRenderMissies();">→ Verder</button>
+    </div>`;
+  snd(laatste?'streak':'ok');
+}
+
+// ══════════════════════════════════════════════════
+// ── FLASHCARDS (per Contact-thema) ──
+// ══════════════════════════════════════════════════
+let frFcThema=0, frFcRichting='fr-nl', frFcQueue=[], frFcIndex=0, frFcOmgedraaid=false;
+function frRenderFlashcards(){
+  const el=document.getElementById('fr-content');if(!el)return;
+  const themas=frSchoolThemas();
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="frBackHome()">← Frans</button>
+    <div class="fr-page-title">🗂️ Flashcards</div>
+    <p class="fr-page-sub">Kies een Contact-thema en overloop alle woordkaartjes.</p>
+    <div class="fr-blok" style="padding:14px;margin-bottom:12px;">
+      <div style="font-weight:700;margin-bottom:10px;">Contact-thema</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${themas.map(t=>`<button class="filter-btn${frFcThema===t?' on':''}" onclick="frFcThema=${t};frRenderFlashcards()">${FR_THEMA_NAMEN[t]||'Contact '+t}</button>`).join('')}
+      </div>
+    </div>
+    <div class="fr-blok" style="padding:14px;margin-bottom:14px;">
+      <div style="font-weight:700;margin-bottom:10px;">Richting</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <button class="filter-btn${frFcRichting==='fr-nl'?' on':''}" onclick="frFcRichting='fr-nl';frRenderFlashcards()">🇫🇷 → 🇧🇪</button>
+        <button class="filter-btn${frFcRichting==='nl-fr'?' on':''}" onclick="frFcRichting='nl-fr';frRenderFlashcards()">🇧🇪 → 🇫🇷</button>
+      </div>
+    </div>
+    <button class="start-btn" onclick="frStartFlashcards()" ${frFcThema?'':'disabled'}>▶ Start flashcards</button>
+    <div id="fr-fc-content"></div>`;
+}
+function frStartFlashcards(){
+  if(!frFcThema)return;
+  frFcQueue=frToetsShuffle(FR_WOORDEN.filter(w=>w[2]===frFcThema&&w[4]==='school'));
+  frFcIndex=0; frFcOmgedraaid=false;
+  frRenderFlashcardsCard();
+}
+function frRenderFlashcardsCard(){
+  const el=document.getElementById('fr-fc-content');if(!el)return;
+  if(!frFcQueue.length){ el.innerHTML='<p style="color:var(--tx2);padding:10px 2px;font-size:13px;">Dit thema heeft geen woorden.</p>'; return; }
+  if(frFcIndex>=frFcQueue.length){
+    el.innerHTML=`<div class="fr-inv-res" style="text-align:center;padding:26px 14px;">
+      <div style="font-size:2.2rem;margin-bottom:6px;">🎉</div>
+      <div class="fr-inv-res-score">Klaar!</div>
+      <div class="fr-inv-res-sub">Je hebt alle ${frFcQueue.length} woordjes gezien.</div>
+      <button class="fr-inv-btn prim" style="margin-top:12px;" onclick="frStartFlashcards()">🔄 Opnieuw</button>
+    </div>`;
+    return;
+  }
+  const w=frFcQueue[frFcIndex];
+  const voorFr=frFcRichting==='fr-nl';
+  const voor=voorFr?w[0]:w[1], achter=voorFr?w[1]:w[0];
+  el.innerHTML=`
+    <div style="font-size:12px;color:var(--tx2);margin-bottom:8px;text-align:center;">Kaart ${frFcIndex+1} / ${frFcQueue.length}</div>
+    <div class="fc-scene" onclick="frFcOmgedraaid=!frFcOmgedraaid;frRenderFlashcardsCard();">
+      <div class="fc-card ${frFcOmgedraaid?'flipped':''}">
+        <div class="fc-face fc-front">${frInvEsc(voor)}</div>
+        <div class="fc-face fc-back">${frInvEsc(achter)}</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--tx3);text-align:center;margin:6px 0 14px;">Tik op de kaart om te draaien</div>
+    <div style="display:flex;gap:8px;">
+      <button class="fr-exercise-card" style="flex:1;justify-content:center;" onclick="frFcVorige()">◀ Vorige</button>
+      <button class="fr-exercise-card" style="flex:1;justify-content:center;" onclick="frFcVolgende()">Volgende ▶</button>
+    </div>`;
+}
+function frFcVolgende(){ frFcIndex++; frFcOmgedraaid=false; frRenderFlashcardsCard(); }
+function frFcVorige(){ if(frFcIndex>0){frFcIndex--; frFcOmgedraaid=false; frRenderFlashcardsCard();} }
 
 // ── QUIZ ──
 function frThemaBar(){
@@ -5931,7 +6759,36 @@ function _featureKey(feature) {
   return isNaN(n) ? null : String(n);
 }
 
+// Frans-Guyana zit in de world-atlas data samen met Frankrijk in één geometrie
+// (zelfde land-feature). We splitsen de westelijke ring(en, lon < -20) er apart
+// uit zodat Frans-Guyana zijn eigen Zuid-Amerika-kleur krijgt i.p.v. die van Frankrijk.
+const GUF_SENTINEL = '__GUF__';
+function splitFranceGuyane(features) {
+  const n2i = getNumToIso3();
+  const out = [];
+  for (const f of features) {
+    const key = _featureKey(f);
+    const iso3 = key ? n2i[key] : null;
+    if (iso3 === 'FRA' && f.geometry && f.geometry.type === 'MultiPolygon') {
+      const guyaneRings = [], franceRings = [];
+      f.geometry.coordinates.forEach(polygon => {
+        const outer = polygon[0] || [];
+        const west = outer.length ? Math.min(...outer.map(c => c[0])) : 0;
+        (west < -20 ? guyaneRings : franceRings).push(polygon);
+      });
+      if (guyaneRings.length && franceRings.length) {
+        out.push({ type:'Feature', id:f.id, properties:f.properties, geometry:{ type:'MultiPolygon', coordinates:franceRings } });
+        out.push({ type:'Feature', id:GUF_SENTINEL, properties:f.properties, geometry:{ type:'MultiPolygon', coordinates:guyaneRings } });
+        continue;
+      }
+    }
+    out.push(f);
+  }
+  return out;
+}
+
 function getLid(feature) {
+  if (feature && feature.id === GUF_SENTINEL) return 'GUF';
   const key = _featureKey(feature);
   if (!key) return null;
   const entry = getNumToColorMap()[key];
@@ -5939,6 +6796,11 @@ function getLid(feature) {
 }
 
 function getCountryFill(feature) {
+  if (feature && feature.id === GUF_SENTINEL) {
+    if (aardState.selected === 'GUF') return '#FFD166';
+    const land = LANDEN.find(l => l.id === 'GUF');
+    return (land && CONT_COLORS[land.cont]) || '#FF9F1C';
+  }
   const key = _featureKey(feature);
   if (!key) return '#2a3a5c';
   const entry = getNumToColorMap()[key];
@@ -5986,6 +6848,7 @@ function initInteractiveMap() {
     .then(r => r.json())
     .then(world => {
       const countries = topojson.feature(world, world.objects.countries);
+      countries.features = splitFranceGuyane(countries.features);
 
       g.selectAll('path.country')
         .data(countries.features)
@@ -6011,13 +6874,10 @@ function initInteractiveMap() {
               let displayCapital = land.capital;
               if (lid === 'FR') {
                 try {
-                  // Use bounding box west longitude to detect overseas territories
+                  // Use bounding box west longitude to detect remaining overseas territories
                   const bounds = d3.geoBounds(d);
                   const westLon = bounds[0][0]; // westernmost point
-                  if (westLon < -20) {
-                    displayName = 'Frans-Guyana 🇬🇫';
-                    displayCapital = 'Cayenne';
-                  } else if (westLon > 40) {
+                  if (westLon > 40) {
                     displayName = 'Frans overzees gebied 🇫🇷';
                     displayCapital = '(Indische Oceaan)';
                   }
@@ -6052,14 +6912,6 @@ function initInteractiveMap() {
               const cardEl = document.getElementById('aard-country-card');
               if (cardEl) cardEl.innerHTML = '<p style="text-align:center;color:var(--tx3);font-size:13px;padding:12px;">📍 Dit land staat nog niet in onze lijst. Probeer een gekleurd land!</p>';
               return;
-            }
-            // For France overseas territories, show GUF instead
-            if (lid === 'FR') {
-              try {
-                const bounds = d3.geoBounds(d);
-                const westLon = bounds[0][0];
-                if (westLon < -20) lid = 'GUF'; // Frans-Guyana
-              } catch(e) {}
             }
             aardState.selected = lid;
             aardState.zoek = '';
@@ -6412,11 +7264,9 @@ function renderQuizMiniMap(highlightId) {
     const projection = d3.geoNaturalEarth1().scale(W/6.5).translate([W/2, H/2]);
     const path = d3.geoPath().projection(projection);
     const g = svg.append('g');
-    const countries = topojson.feature(world, world.objects.countries);
-    const targetFeature = countries.features.find(f => {
-      const iso3 = getNumToIso3()[String(parseInt(f.id,10))];
-      return iso3 ? ISO_TO_LEERHELD[iso3] === highlightId : false;
-    });
+    const countries = { features: splitFranceGuyane(topojson.feature(world, world.objects.countries).features) };
+    const quizLid = f => f.id===GUF_SENTINEL ? 'GUF' : (() => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return iso3?ISO_TO_LEERHELD[iso3]:null; })();
+    const targetFeature = countries.features.find(f => quizLid(f) === highlightId);
     if (targetFeature) {
       const [[x0,y0],[x1,y1]] = path.bounds(targetFeature);
       const dx = x1-x0, dy = y1-y0;
@@ -6425,10 +7275,10 @@ function renderQuizMiniMap(highlightId) {
     }
     g.selectAll('path').data(countries.features).enter().append('path')
       .attr('d', path)
-      .attr('fill', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'#FFD166':'#2a3a5c'; })
+      .attr('fill', f => quizLid(f)===highlightId?'#FFD166':'#2a3a5c')
       .attr('stroke','#0a1525').attr('stroke-width',0.4)
-      .attr('class', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'qhl':''; })
-      .attr('filter', f => { const iso3=getNumToIso3()[String(parseInt(f.id,10))]; return (iso3&&ISO_TO_LEERHELD[iso3]===highlightId)?'url(#qglow)':''; });
+      .attr('class', f => quizLid(f)===highlightId?'qhl':'')
+      .attr('filter', f => quizLid(f)===highlightId?'url(#qglow)':'');
   };
 
   if (_worldDataCache) { drawMap(_worldDataCache); return; }
@@ -6537,7 +7387,7 @@ function adminLogout(){adminUnlocked=false;closeAdmin();}
 // ════════════════════════════════════════════════════════
 loadData();
 initProfiel();
-showSetup();
+switchMain('home');
 </script>
   <script>
     if('serviceWorker' in navigator){
