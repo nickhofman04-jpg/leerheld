@@ -5434,8 +5434,10 @@ function frMisVoortgang(vi){
 function frMisMarkDone(vi,chIdx){
   const d=frMisGetData();
   const vg=d[vi] || {chapters:[false,false,false,false,false,false], xp:0};
-  if(!vg.chapters[chIdx]){
-    vg.chapters[chIdx]=true;
+  const alGedaanEerder=vg.chapters[chIdx];
+  vg.chapters[chIdx]=true;
+  // "Ontdekken" (chIdx 0) geeft maar één keer XP — de rest mag je blijven oefenen voor telkens opnieuw XP.
+  if(chIdx!==0 || !alGedaanEerder){
     vg.xp=(vg.xp||0)+FR_MIS_HOOFDSTUKKEN[chIdx].xp;
     radAddXp(FR_MIS_HOOFDSTUKKEN[chIdx].xp);
   }
