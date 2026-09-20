@@ -118,6 +118,7 @@
     .sc-frans{--sc-c1:#4D9DE0;--sc-c2:#2E6FB0;}
     .sc-typen{--sc-c1:#FFD166;--sc-c2:#DE9E00;}
     .sc-wereld{--sc-c1:#818CF8;--sc-c2:#5B5FE0;}
+    .sc-rad{--sc-c1:#FFD166;--sc-c2:#F0A500;}
     @media(max-width:560px){.subject-card{min-height:140px;padding:1.1rem 0.5rem 1rem;}.subject-card .sc-badge{width:44px;height:44px;font-size:22px;}}
 
     /* ── Panel ── */
@@ -402,6 +403,29 @@
     .fc-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;border-radius:var(--radius);backface-visibility:hidden;font-family:'Fredoka',sans-serif;font-size:24px;font-weight:700;}
     .fc-front{background:var(--surface2);border:1.5px solid var(--surface3);color:var(--tx);}
     .fc-back{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;transform:rotateY(180deg);}
+    /* ── Beloningsrad ── */
+    .rad-wheel-outer{position:relative;width:240px;height:240px;margin:6px auto 16px;}
+    .rad-ptr{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:18px solid var(--accent3);z-index:3;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));}
+    .rad-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent3),#F0A500);display:flex;align-items:center;justify-content:center;font-size:18px;z-index:2;box-shadow:0 3px 10px rgba(0,0,0,.35);}
+    svg.rad-wheel{width:100%;height:100%;display:block;transition:transform 4.2s cubic-bezier(.14,.85,.15,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.3));}
+    .rad-result-card{display:none;text-align:center;padding:20px 16px;background:linear-gradient(160deg,var(--surface2),var(--surface));border:1.5px solid var(--accent3);border-radius:var(--radius);margin-top:16px;}
+    .rad-result-card.show{display:block;animation:radpop .35s cubic-bezier(.2,1.4,.4,1);}
+    @keyframes radpop{from{transform:scale(.85);opacity:0;}to{transform:scale(1);opacity:1;}}
+    .rad-result-emoji{font-size:40px;margin-bottom:4px;}
+    .rad-result-label{font-size:11px;color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:.6px;}
+    .rad-result-naam{font-family:'Fredoka',sans-serif;font-weight:700;font-size:18px;margin:4px 0;color:var(--tx);}
+    .rad-result-sub{font-size:12px;color:var(--tx2);line-height:1.6;}
+    .rad-log-list{display:flex;flex-direction:column;gap:8px;}
+    .rad-log-item{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--surface3);border-radius:var(--radius-sm);padding:10px 12px;}
+    .rad-log-item.done{opacity:.5;}
+    .rad-log-emoji{font-size:19px;flex:0 0 auto;}
+    .rad-log-info{flex:1;min-width:0;font-size:13px;color:var(--tx);}
+    .rad-log-info small{font-size:10.5px;color:var(--tx3);font-weight:600;}
+    .rad-log-check{flex:0 0 auto;width:26px;height:26px;border-radius:8px;border:1.5px solid var(--surface3);background:var(--surface);color:var(--tx);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+    .rad-log-check.on{background:var(--ok);border-color:var(--ok);color:#fff;}
+    .rad-confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+    .rad-confetti span{position:absolute;top:-16px;border-radius:2px;opacity:.95;animation:radfall linear forwards;}
+    @keyframes radfall{to{transform:translateY(110vh) rotate(var(--rot));opacity:0.4;}}
 
     /* ════ TYPEN ════ */
     .ty-lesson-grid{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
@@ -824,6 +848,10 @@
           <button class="subject-card sc-wereld" onclick="switchMain('aardrijkskunde')">
             <span class="sc-badge">🌍</span><span class="sc-name">Wereld</span><span class="sc-desc">Landen, hoofdsteden en de wereldkaart</span>
           </button>
+          <button class="subject-card sc-rad" onclick="switchMain('rad')" style="position:relative;">
+            <span id="home-rad-badge" style="display:none;position:absolute;top:8px;right:10px;background:var(--sc-c1);color:#1a1330;font-family:'Fredoka',sans-serif;font-weight:700;font-size:11px;padding:2px 7px;border-radius:999px;"></span>
+            <span class="sc-badge">🎡</span><span class="sc-name">Beloningsrad</span><span class="sc-desc">Verdien beurten met Frans en Rekenen</span>
+          </button>
         </div>
       </div>
     </div>
@@ -853,6 +881,10 @@
 
     <div id="frans-root" style="display:none;width:100%">
       <div class="panel" id="frans-panel"></div>
+    </div>
+
+    <div id="rad-root" style="display:none;width:100%">
+      <div class="panel" id="rad-content"></div>
     </div>
 
     <div id="taal-root" style="display:none;width:100%">
@@ -1002,7 +1034,7 @@ document.addEventListener('click', e=>{
 
 function switchMain(s){
   mainSection=s;
-  const allRoots=['home','rekenen','taal','meetkunde','typen','aardrijkskunde','frans'];
+  const allRoots=['home','rekenen','taal','meetkunde','typen','aardrijkskunde','frans','rad'];
   allRoots.forEach(k=>{
     const r=document.getElementById(k+'-root');
     if(r)r.style.display=k===s?'':'none';
@@ -1028,6 +1060,7 @@ function switchMain(s){
   if(s==='typen') initTypen();
   if(s==='aardrijkskunde') initAardrijkskunde();
   if(s==='frans') initFrans();
+  if(s==='rad') renderRad();
   removeStickyNext();
 }
 function goHome(){
@@ -1041,6 +1074,12 @@ function renderHome(){
   if(naamEl) naamEl.textContent = naam;
   const icoEl = document.getElementById('home-hero-emoji');
   if(icoEl) icoEl.textContent = (cfg.hero && cfg.hero.ico) || '🎒';
+  const radBadge = document.getElementById('home-rad-badge');
+  if(radBadge){
+    const spins = (typeof radGetData==='function') ? radGetData().spins : 0;
+    radBadge.style.display = spins>0 ? '' : 'none';
+    radBadge.textContent = spins;
+  }
 }
 
 // ════════════════════════════════════════════════════════
@@ -1311,11 +1350,13 @@ function showEnd(){
     const msg=s===t&&underDoel?'Perfect held! 🏆':s===t?'Alle 50 gedaan!':s/t>=0.7?'Super gedaan!':'Blijf oefenen!';
     const stars=s===t&&underDoel?'⭐⭐⭐':s===t?'⭐⭐☆':s/t>=0.6?'⭐☆☆':'☆☆☆';
     if(s===t)boom();
+    if(typeof radAddXp==='function') radAddXp(30);
     endHtml='<div class="hero-avatar">'+cfg.hero.ico+'</div><div class="end-title">'+msg+'</div><div class="stars-row">'+stars+'</div>'+
       '<div class="score-card-end"><div class="score-line">⏱️ Tijd</div><span class="score-big">'+timeStr+'</span>'+
       '<div class="score-line" style="margin-top:8px">'+(underDoel?'✅ Doel gehaald!':'❌ Doel nog niet gehaald (4:00)')+'</div></div>'+
       '<div class="score-card-end"><div class="score-line">Score</div><span class="score-big">'+s+'/'+t+' ('+pct+'%)</span>'+
-      '<div class="score-line" style="margin-top:6px">🔥 Langste reeks: '+st.maxStreak+'</div></div>';
+      '<div class="score-line" style="margin-top:6px">🔥 Langste reeks: '+st.maxStreak+'</div></div>'+
+      '<div style="margin-top:10px;font-family:\'Fredoka\',sans-serif;font-weight:700;font-size:13px;color:var(--accent3);">🎡 +30 XP voor het beloningsrad</div>';
   }else{
     const msg=s===t?'Perfect score!':s/t>=0.7?'Super gedaan!':s/t>=0.4?'Goed bezig!':'Blijf oefenen!';
     const stars=s/t>=0.9?'⭐⭐⭐':s/t>=0.6?'⭐⭐☆':'⭐☆☆';
@@ -4290,7 +4331,7 @@ function frSwitch(t){
   frScore={good:0,bad:0,streak:0}; frTotal=0; frQueue=[];
   frInvRows=[]; frInvChecked=false;
   frWwSimpleKeuze='';
-  if(t==='flashcards'){ frFcThema=0; frFcQueue=[]; frFcIndex=0; frFcOmgedraaid=false; }
+  if(t==='flashcards'){ frFcThema=0; frFcQueue=[]; frFcIndex=0; frFcOmgedraaid=false; frFcXpGegeven=false; }
   frRender();
 }
 
@@ -4337,6 +4378,7 @@ function frBackHome(){
 
 function frRenderHome(){
   const el=document.getElementById('fr-content');if(!el)return;
+  const radSpins=radGetData().spins;
   el.innerHTML=`
     <div class="fr-home-intro">
       <div class="fr-home-title">🇫🇷 Frans</div>
@@ -4372,6 +4414,13 @@ function frRenderHome(){
         <div class="fr-home-icon">🗂️</div>
         <div class="fr-home-card-title">Flashcards</div>
         <div class="fr-home-card-text">Draai de kaartjes om en oefen alle woorden per thema.</div>
+      </button>
+
+      <button class="fr-home-card" onclick="switchMain('rad')" style="position:relative;">
+        ${radSpins>0?`<div style="position:absolute;top:8px;right:10px;background:var(--accent3);color:#1a1330;font-family:'Fredoka',sans-serif;font-weight:700;font-size:11px;padding:2px 7px;border-radius:999px;">${radSpins}</div>`:''}
+        <div class="fr-home-icon">🎡</div>
+        <div class="fr-home-card-title">Beloningsrad</div>
+        <div class="fr-home-card-text">Verdien beurten met je missies en draai voor een beloning.</div>
       </button>
     </div>`;
 }
@@ -4871,6 +4920,7 @@ function frWwInvCheck(){
   const pct=tot?Math.round(goed/tot*100):0;
   frScore.good+=goed; frScore.bad+=fout+bijna;
   trackOefening('frans',goed,fout+bijna);
+  if(typeof radAddXp==='function' && tot>0) radAddXp(Math.min(30, tot*2));
   const res=document.getElementById('fr-wwinv-res');
   if(res) res.innerHTML=`<div class="fr-inv-res">
     <div style="font-size:2rem;margin-bottom:4px;">${pct>=90?'🏆':pct>=70?'👏':pct>=50?'💪':'📚'}</div>
@@ -5096,6 +5146,7 @@ function frInvCheck(){
   const pct=tot?Math.round(goed/tot*100):0;
   frScore.good+=goed; frScore.bad+=fout+bijna;
   trackOefening('frans',goed,fout+bijna);
+  if(typeof radAddXp==='function' && tot>0) radAddXp(Math.min(30, tot*2));
   const res=document.getElementById('fr-inv-res');
   if(res) res.innerHTML=`<div class="fr-inv-res">
     <div style="font-size:2rem;margin-bottom:4px;">${pct>=90?'🏆':pct>=70?'👏':pct>=50?'💪':'📚'}</div>
@@ -5324,6 +5375,7 @@ function frCheckToets(){
   });
   const pct=totaal?Math.round(goed/totaal*100):0;
   frScore.good+=goed;frScore.bad+=fout+bijna;trackOefening('frans',goed,fout+bijna);
+  if(typeof radAddXp==='function' && totaal>0) radAddXp(40);
   const r=document.getElementById('fr-toets-result');
   if(r){
     r.innerHTML=`<div class="fr-inv-res">
@@ -5382,7 +5434,11 @@ function frMisVoortgang(vi){
 function frMisMarkDone(vi,chIdx){
   const d=frMisGetData();
   const vg=d[vi] || {chapters:[false,false,false,false,false,false], xp:0};
-  if(!vg.chapters[chIdx]){ vg.chapters[chIdx]=true; vg.xp=(vg.xp||0)+FR_MIS_HOOFDSTUKKEN[chIdx].xp; }
+  if(!vg.chapters[chIdx]){
+    vg.chapters[chIdx]=true;
+    vg.xp=(vg.xp||0)+FR_MIS_HOOFDSTUKKEN[chIdx].xp;
+    radAddXp(FR_MIS_HOOFDSTUKKEN[chIdx].xp);
+  }
   d[vi]=vg;
   frMisSaveData(d);
 }
@@ -5676,7 +5732,7 @@ function frMisRenderVoltooid(el){
 // ══════════════════════════════════════════════════
 // ── FLASHCARDS (per Contact-thema) ──
 // ══════════════════════════════════════════════════
-let frFcThema=0, frFcRichting='fr-nl', frFcQueue=[], frFcIndex=0, frFcOmgedraaid=false;
+let frFcThema=0, frFcRichting='fr-nl', frFcQueue=[], frFcIndex=0, frFcOmgedraaid=false, frFcXpGegeven=false;
 function frRenderFlashcards(){
   const el=document.getElementById('fr-content');if(!el)return;
   const themas=frSchoolThemas();
@@ -5703,13 +5759,14 @@ function frRenderFlashcards(){
 function frStartFlashcards(){
   if(!frFcThema)return;
   frFcQueue=frToetsShuffle(FR_WOORDEN.filter(w=>w[2]===frFcThema&&w[4]==='school'));
-  frFcIndex=0; frFcOmgedraaid=false;
+  frFcIndex=0; frFcOmgedraaid=false; frFcXpGegeven=false;
   frRenderFlashcardsCard();
 }
 function frRenderFlashcardsCard(){
   const el=document.getElementById('fr-fc-content');if(!el)return;
   if(!frFcQueue.length){ el.innerHTML='<p style="color:var(--tx2);padding:10px 2px;font-size:13px;">Dit thema heeft geen woorden.</p>'; return; }
   if(frFcIndex>=frFcQueue.length){
+    if(!frFcXpGegeven){ frFcXpGegeven=true; if(typeof radAddXp==='function') radAddXp(15); }
     el.innerHTML=`<div class="fr-inv-res" style="text-align:center;padding:26px 14px;">
       <div style="font-size:2.2rem;margin-bottom:6px;">🎉</div>
       <div class="fr-inv-res-score">Klaar!</div>
@@ -5737,6 +5794,174 @@ function frRenderFlashcardsCard(){
 }
 function frFcVolgende(){ frFcIndex++; frFcOmgedraaid=false; frRenderFlashcardsCard(); }
 function frFcVorige(){ if(frFcIndex>0){frFcIndex--; frFcOmgedraaid=false; frRenderFlashcardsCard();} }
+
+// ══════════════════════════════════════════════════
+// ── BELONINGSRAD (inspanning, niet resultaat) ──
+// ══════════════════════════════════════════════════
+const RAD_PRIJZEN = [
+  {naam:'Een snoepje', emoji:'🍬', sub:'Kies er zelf één uit.'},
+  {naam:'15 minuutjes schermtijd', emoji:'📺', sub:'Bovenop je gewone tijd.'},
+  {naam:'10 minuutjes later naar bed', emoji:'🌙', sub:'Vraag het aan mama of papa.'},
+  {naam:'Kies je favoriete hapje bij de volgende aperitief', emoji:'🥨', sub:'Bij de volgende aperitief kies jij het lekkers.'},
+  {naam:'2 liedjes kiezen in de auto', emoji:'🎵', sub:'Jij bepaalt de muziek voor 2 nummers.'},
+];
+const RAD_KLEUREN = ['#FF6B9D','#4D9DE0','#FFD166','#F97316','#7C6FFF'];
+
+function radOpslagSleutel(){ return 'lh_rad_'+(huidigProfiel?huidigProfiel.id:'gast'); }
+function radGetData(){
+  try{
+    const d=JSON.parse(localStorage.getItem(radOpslagSleutel())||'{}');
+    return {xp:d.xp||0, spins:d.spins||0, log:d.log||[]};
+  }catch(e){ return {xp:0,spins:0,log:[]}; }
+}
+function radSaveData(d){ localStorage.setItem(radOpslagSleutel(), JSON.stringify(d)); }
+function radAddXp(n){
+  const d=radGetData();
+  d.xp += n;
+  while(d.xp>=100){ d.xp-=100; d.spins++; }
+  radSaveData(d);
+}
+
+let radRotatie=0, radSpinning=false;
+
+function renderRad(){
+  const el=document.getElementById('rad-content');if(!el)return;
+  const d=radGetData();
+  el.innerHTML=`
+    <button class="fr-back-btn" onclick="goHome()">← Terug</button>
+    <div class="fr-page-title">🎡 Beloningsrad</div>
+    <p class="fr-page-sub">Voor je inspanning bij Frans en Rekenen — niet voor je score.</p>
+
+    <div class="fr-blok" style="padding:16px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:12px;color:var(--tx2);font-weight:700;">Voortgang naar volgende beurt</span>
+        <span style="font-family:'Fredoka',sans-serif;font-weight:700;color:var(--accent3);">${d.xp} / 100 XP</span>
+      </div>
+      <div class="tbar-wrap"><div class="tbar" style="width:${d.xp}%"></div></div>
+      <div style="text-align:center;font-family:'Fredoka',sans-serif;font-weight:700;color:var(--tx2);margin-top:8px;">🎟️ Beurten klaar: <span style="color:var(--accent3);font-size:17px;">${d.spins}</span></div>
+    </div>
+
+    <div class="rad-wheel-outer">
+      <div class="rad-ptr"></div>
+      <svg class="rad-wheel" id="rad-wheel" viewBox="0 0 300 300"></svg>
+      <div class="rad-hub">🎁</div>
+    </div>
+    <div style="text-align:center;">
+      <button class="start-btn" id="rad-spin-btn" onclick="radSpin()" ${d.spins<=0?'disabled':''}>Draai het rad!</button>
+      <div id="rad-hint" style="font-size:11.5px;color:var(--tx3);margin-top:8px;">${d.spins>0?(d.spins===1?'Je hebt 1 beurt klaarliggen!':'Je hebt '+d.spins+' beurten klaarliggen!'):'Verdien XP bij Frans-missies of een Rekenen-schooltoets.'}</div>
+    </div>
+    <div class="rad-result-card" id="rad-result"></div>
+
+    <h3 class="mk-sectie-titel" style="margin-top:26px;">📋 Verdiende beloningen</h3>
+    <div id="rad-log"></div>`;
+  radBuildWheel();
+  radRenderLog();
+}
+
+function radBuildWheel(){
+  const svg=document.getElementById('rad-wheel');if(!svg)return;
+  const n=RAD_PRIJZEN.length, cx=150, cy=150, r=148, step=360/n;
+  let html='';
+  RAD_PRIJZEN.forEach((p,i)=>{
+    const a0=(i*step-90)*Math.PI/180, a1=((i+1)*step-90)*Math.PI/180;
+    const x0=cx+r*Math.cos(a0), y0=cy+r*Math.sin(a0);
+    const x1=cx+r*Math.cos(a1), y1=cy+r*Math.sin(a1);
+    html+=`<path d="M${cx},${cy} L${x0.toFixed(2)},${y0.toFixed(2)} A${r},${r} 0 0,1 ${x1.toFixed(2)},${y1.toFixed(2)} Z" fill="${RAD_KLEUREN[i%RAD_KLEUREN.length]}" stroke="#12162A" stroke-width="2"/>`;
+    const amid=(a0+a1)/2, tx=cx+(r*0.66)*Math.cos(amid), ty=cy+(r*0.66)*Math.sin(amid);
+    const rotDeg=i*step+step/2;
+    html+=`<text x="${tx.toFixed(2)}" y="${ty.toFixed(2)}" font-size="30" text-anchor="middle" dominant-baseline="middle" transform="rotate(${rotDeg.toFixed(1)} ${tx.toFixed(2)} ${ty.toFixed(2)})">${p.emoji}</text>`;
+  });
+  svg.innerHTML=html;
+  svg.style.transform=`rotate(${radRotatie}deg)`;
+}
+
+function radSpin(){
+  if(radSpinning)return;
+  const d=radGetData();
+  if(d.spins<=0)return;
+  radSpinning=true;
+  d.spins--; radSaveData(d);
+  const btn=document.getElementById('rad-spin-btn'); if(btn)btn.disabled=true;
+  const rc=document.getElementById('rad-result'); if(rc){rc.classList.remove('show'); rc.innerHTML='';}
+
+  const n=RAD_PRIJZEN.length, step=360/n;
+  const idx=frToetsRandInt(0,n-1);
+  const targetMid=idx*step+step/2;
+  const extra=5+frToetsRandInt(0,2);
+  radRotatie = radRotatie - (radRotatie%360) + 360*extra + (360-targetMid);
+  const svg=document.getElementById('rad-wheel');
+  if(svg) svg.style.transform=`rotate(${radRotatie}deg)`;
+
+  setTimeout(()=>{
+    radSpinning=false;
+    radToonResultaat(RAD_PRIJZEN[idx]);
+  },4300);
+}
+
+function radNu(){
+  const dt=new Date();
+  return dt.toLocaleDateString('nl-BE',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'});
+}
+
+function radToonResultaat(prijs){
+  const d=radGetData();
+  const item={naam:prijs.naam, emoji:prijs.emoji, sub:prijs.sub, tijd:radNu(), id:Date.now(), done:false};
+  d.log.unshift(item);
+  if(d.log.length>30) d.log=d.log.slice(0,30);
+  radSaveData(d);
+  const rc=document.getElementById('rad-result');
+  if(rc){
+    rc.innerHTML=`<div class="rad-result-emoji">${prijs.emoji}</div>
+      <div class="rad-result-label">Jij wint</div>
+      <div class="rad-result-naam">${frInvEsc(prijs.naam)}</div>
+      <div class="rad-result-sub">${frInvEsc(prijs.sub)}</div>`;
+    rc.classList.add('show');
+  }
+  radVerversStatus();
+  radRenderLog();
+  radConfetti();
+  snd('streak');
+}
+
+function radVerversStatus(){
+  const d=radGetData();
+  const btn=document.getElementById('rad-spin-btn');
+  if(btn) btn.disabled = d.spins<=0;
+  const hint=document.getElementById('rad-hint');
+  if(hint) hint.textContent = d.spins>0?(d.spins===1?'Je hebt 1 beurt klaarliggen!':'Je hebt '+d.spins+' beurten klaarliggen!'):'Verdien eerst 100 XP in de missies.';
+}
+
+function radRenderLog(){
+  const el=document.getElementById('rad-log');if(!el)return;
+  const d=radGetData();
+  if(!d.log.length){ el.innerHTML='<p style="color:var(--tx3);font-size:12.5px;text-align:center;padding:10px 0;">Nog niets verdiend — draai het rad hierboven.</p>'; return; }
+  el.innerHTML=`<div class="rad-log-list">${d.log.map(item=>`
+    <div class="rad-log-item ${item.done?'done':''}">
+      <span class="rad-log-emoji">${item.emoji}</span>
+      <span class="rad-log-info"><strong>${frInvEsc(item.naam)}</strong><br><small>${item.tijd}</small></span>
+      <button class="rad-log-check ${item.done?'on':''}" onclick="radToggleLog(${item.id})">${item.done?'✓':''}</button>
+    </div>`).join('')}</div>`;
+}
+function radToggleLog(id){
+  const d=radGetData();
+  const it=d.log.find(x=>x.id===id);
+  if(it){ it.done=!it.done; radSaveData(d); radRenderLog(); }
+}
+
+function radConfetti(){
+  const wrap=document.createElement('div');
+  wrap.className='rad-confetti';
+  const kleuren=RAD_KLEUREN;
+  let pieces='';
+  for(let i=0;i<50;i++){
+    const left=Math.random()*100, size=6+Math.random()*7, dur=2.1+Math.random()*1.5, delay=Math.random()*0.35;
+    const rot=(Math.random()*720-360)+'deg', col=kleuren[Math.floor(Math.random()*kleuren.length)];
+    pieces+=`<span style="left:${left}%;width:${size}px;height:${(size*0.4).toFixed(1)}px;background:${col};--rot:${rot};animation-duration:${dur}s;animation-delay:${delay}s;"></span>`;
+  }
+  wrap.innerHTML=pieces;
+  document.body.appendChild(wrap);
+  setTimeout(()=>wrap.remove(),4200);
+}
 
 // ── QUIZ ──
 function frThemaBar(){
